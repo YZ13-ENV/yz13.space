@@ -33,12 +33,12 @@ const GreetingSection = () => {
         playsInline
         loop
       />
-      <ContentWrapper>
+      <ContentWrapper className="px-0 py-24 md:py-44 md:px-12 sm:px-6">
         <div className='container flex flex-col w-full h-full gap-8 mx-auto'>
           <div className='space-y-6 w-fit h-fit'>
             <div className='w-full space-y-2'>
               <h1 className='text-5xl font-semibold md:text-7xl text-muted-foreground'>Welcome.</h1>
-              <p className='text-5xl font-semibold md:text-7xl'>Check. Projects.</p>
+              <p className='text-5xl font-semibold md:text-7xl'>Check Projects.</p>
             </div>
             <div className='flex flex-row gap-2'>
 

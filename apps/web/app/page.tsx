@@ -2,6 +2,7 @@
 import { getProjects } from '@/api/projects'
 import { HomeHeader } from '@/components/entities/header'
 import { Footer } from '@/components/shared/footer'
+import { switcher_delay } from '@/const/default-settings'
 import { Project } from '@/types'
 import { AppsGrid } from './_components/apps-grid'
 import { ProjectSection } from './_components/widgets/project/ui/project-section'
@@ -18,7 +19,7 @@ export default async function Home() {
       <div className="relative w-full min-h-screen -top-16">
         <SectionSwitcher
           className="h-[80dvh]"
-          delay={10_000}
+          delay={switcher_delay}
           sections={sections}
         />
         <AppsGrid className='min-h-[30dvh] py-6' projects={projects} />

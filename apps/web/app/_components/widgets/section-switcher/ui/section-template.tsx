@@ -35,7 +35,7 @@ const SectionOverlay = () => {
 const SectionBackgroundBlur = () => {
   return <div className='z-[-2] w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-background backdrop-blur-xl' />
 }
-const ContentWrapper = ({ children }: { children?: ReactNode }) => {
-  return <div className="relative w-full px-0 py-24 md:py-36 h-full md:px-12 sm:px-6">{children}</div>
+const ContentWrapper = ({ children, className = "" }: { className?: string, children?: ReactNode }) => {
+  return <div className={cn("relative w-full h-full", className)}>{children}</div>
 }
 export { ContentWrapper, SectionBackground, SectionBackgroundBlur, SectionOverlay, SectionWrapper, Video }
