@@ -1,16 +1,20 @@
 "use server";
 
+import { Project } from "@/types";
 import { createClient } from "@/utils/supabase/server";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
-const getProjects = async () => {
+const getProjects = async (): Promise<PostgrestSingleResponse<Project[]>> => {
   const cookie = cookies();
   const client = createClient(cookie);
   const all = await client.from("projects").select();
   return all;
 };
 
-const getProject = async (id: number) => {
+const getProject = async (
+  id: number
+): Promise<PostgrestSingleResponse<Project[]>> => {
   const cookie = cookies();
   const client = createClient(cookie);
   const filtered = await client
@@ -20,7 +24,9 @@ const getProject = async (id: number) => {
   return filtered;
 };
 
-const getProjectBlocks = async (id: number) => {
+const getProjectBlocks = async (
+  id: number
+): Promise<PostgrestSingleResponse<any[]>> => {
   const cookie = cookies();
   const client = createClient(cookie);
   const filtered = await client

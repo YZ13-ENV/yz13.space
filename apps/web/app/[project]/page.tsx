@@ -26,11 +26,11 @@ const page = async ({ params }: Props) => {
   const id = parseInt(params.project)
   const { data } = await getProject(id)
   const projects = await getProjects()
-  const project: Project | null = data ? data[0] : null
+  const project: Project | null = data ? data[0] || null : null
   const projectBlocks = await getProjectBlocks(id)
   const blocks: Block[] = projectBlocks.data ? projectBlocks.data : []
   const createdAt = project ? dayjs(project.created_at) : undefined
-  const all_without_current = projects.data ? projects.data.filter(pr => pr.projectId !== id) : []
+  const all_without_current = projects.data ? projects.data.filter(pr => parseInt(pr.id) !== id) : []
   const random = parseInt(randomNumber(0, all_without_current.length - 1).toFixed(0))
   const randomProject = all_without_current[random]
   if (!project) return null
@@ -140,7 +140,7 @@ const page = async ({ params }: Props) => {
           </div>
         </div>
       </div>
-      <ProjectSection project={randomProject} />
+      {randomProject && <ProjectSection project={randomProject} />}
       <Footer />
     </>
   )
