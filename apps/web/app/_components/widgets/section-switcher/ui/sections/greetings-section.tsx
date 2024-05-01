@@ -1,8 +1,7 @@
 "use client"
 import { useInViewport } from "ahooks"
-import Image from "next/image"
 import { ElementRef, useEffect, useRef, useState } from "react"
-import { ContentWrapper } from "../section-template"
+import { ContentWrapper, Video } from "../section-template"
 
 const GreetingSection = () => {
   const ref = useRef<ElementRef<"video">>(null)
@@ -22,12 +21,21 @@ const GreetingSection = () => {
   }, [ref, play, setPlay, typeof document])
   return (
     <>
-      <Image
+      <Video
+        ref={ref}
+        src={"/section-backgrounds/background-13.webm"}
+        controls={false}
+        muted
+        autoPlay
+        playsInline
+        loop
+      />
+      {/* <Image
         src={"/section-backgrounds/background-13.gif"}
         fill
         alt="background"
         className="object-cover z-[-3] aspect-[4/3]"
-      />
+      /> */}
       <ContentWrapper className="px-0 py-24 md:py-48">
         <div className='container flex flex-col w-full h-full gap-8 mx-auto'>
           <div className='space-y-6 w-full h-full flex flex-col items-center justify-center'>
