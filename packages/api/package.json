@@ -1,0 +1,9 @@
+{
+  "name": "@repo/api",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {},
+  "dependencies": {
+    "@repo/typescript-config": "workspace:*"
+  }
+}

@@ -4,6 +4,7 @@ import { cn } from "@repo/ui/cn"
 import { useInterval } from "ahooks"
 import { ReactNode, useEffect, useState } from "react"
 import { Section, useSwitcherController } from "../store/switcher-controller"
+import { SectionBackgroundBlur, SectionOverlay } from "./section-template"
 
 
 type Props = {
@@ -57,6 +58,8 @@ const SectionSwitcher = ({ className = "", children, sections = [], delay = 5000
                 key={section.id}
                 className="relative w-full h-full p-0 overflow-visible shrink-0 transition-all"
               >
+                <SectionBackgroundBlur />
+                <SectionOverlay />
                 {section.component}
               </CarouselItem>
             )

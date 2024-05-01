@@ -4,7 +4,7 @@ import { useInViewport } from "ahooks"
 import Link from "next/link"
 import { ElementRef, useEffect, useRef, useState } from "react"
 import { BsGrid } from "react-icons/bs"
-import { ContentWrapper, SectionBackgroundBlur, SectionOverlay, Video } from "../section-template"
+import { ContentWrapper, Video } from "../section-template"
 
 const GreetingSection = () => {
   const ref = useRef<ElementRef<"video">>(null)
@@ -33,8 +33,6 @@ const GreetingSection = () => {
         playsInline
         loop
       />
-      <SectionBackgroundBlur />
-      <SectionOverlay />
       <ContentWrapper>
         <div className='container flex flex-col w-full h-full gap-8 mx-auto'>
           <div className='space-y-6 w-fit h-fit'>

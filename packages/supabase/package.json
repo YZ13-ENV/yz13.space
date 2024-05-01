@@ -1,0 +1,16 @@
+{
+  "name": "@repo/supabase",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./client": "./utils/supabase/client.ts",
+    "./middleware": "./utils/supabase/middleware.ts",
+    "./server": "./utils/supabase/server.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.42.5",
+    "next": "14.1.0",
+    "@repo/typescript-config": "workspace:*"
+  }
+}

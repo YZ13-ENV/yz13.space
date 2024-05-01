@@ -5,7 +5,7 @@ import Link from "next/link"
 import { ElementRef, useEffect, useRef, useState } from "react"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { BsGrid } from "react-icons/bs"
-import { ContentWrapper, SectionBackgroundBlur, SectionOverlay, Video } from "../section-template"
+import { ContentWrapper, Video } from "../section-template"
 
 const AboutSection = () => {
   const ref = useRef<ElementRef<"video">>(null)
@@ -34,8 +34,6 @@ const AboutSection = () => {
         playsInline
         loop
       />
-      <SectionBackgroundBlur />
-      <SectionOverlay />
       <ContentWrapper>
         <div className='container flex flex-col w-full gap-8 mx-auto'>
           <div className='space-y-6 w-fit h-fit'>

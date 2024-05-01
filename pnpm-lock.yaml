@@ -26,6 +26,9 @@ importers:
       '@repo/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -103,6 +106,12 @@ importers:
         specifier: ^5
         version: 5.3.3
 
+  packages/api:
+    dependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+
   packages/eslint-config:
     devDependencies:
       '@typescript-eslint/eslint-plugin':
@@ -126,6 +135,21 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
+
+  packages/supabase:
+    dependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@supabase/ssr':
+        specifier: ^0.3.0
+        version: 0.3.0(@supabase/supabase-js@2.43.0)
+      '@supabase/supabase-js':
+        specifier: ^2.42.5
+        version: 2.43.0
+      next:
+        specifier: 14.1.0
+        version: 14.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   packages/tailwind-config:
     dependencies:

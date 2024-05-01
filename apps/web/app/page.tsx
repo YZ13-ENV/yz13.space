@@ -17,7 +17,7 @@ export default async function Home() {
       <HomeHeader />
       <div className="relative w-full min-h-screen -top-16">
         <SectionSwitcher
-          className="h-[70dvh]"
+          className="h-[80dvh]"
           delay={10_000}
           sections={sections}
         />
