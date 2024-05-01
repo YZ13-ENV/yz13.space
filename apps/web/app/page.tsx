@@ -5,7 +5,7 @@ import { Footer } from '@/components/shared/footer'
 import { switcher_delay } from '@/const/default-settings'
 import { Project } from '@/types'
 import { AppsGrid } from './_components/apps-grid'
-import { ProjectSection } from './_components/widgets/project/ui/project-section'
+// import { ProjectSection } from './_components/widgets/project/ui/project-section'
 import { SectionSwitcher, sections } from './_components/widgets/section-switcher'
 
 
@@ -25,10 +25,10 @@ export default async function Home() {
         <AppsGrid className='min-h-[30dvh] py-6' projects={projects} />
         <div className='w-full h-fit'>
           {
-            projects
-              .map((item, i) =>
-                <ProjectSection reverse={i % 2 !== 0} key={item.id} project={item} />
-              )
+            // projects
+            //   .map((item, i) =>
+            //     <ProjectSection reverse={i % 2 !== 0} key={item.id} project={item} />
+            //   )
           }
         </div>
       </div >
