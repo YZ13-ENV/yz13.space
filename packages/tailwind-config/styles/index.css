@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("./vars.css");
+
+@layer base {
+  * {
+    @apply border-border font-text;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headings;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+    cursor: pointer;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    @apply bg-secondary;
+  }
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    display: none;
+  }
+  .no-scrollbar::-webkit-scrollbar-thumb {
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    display: none;
+  }
+}
+
+@layer component {
+  .workspace-grid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(var(--workspace-grid-item), 1fr)
+    );
+    grid-template-rows: repeat(
+      auto-fill,
+      minmax(var(--workspace-grid-item), 1fr)
+    );
+  }
+}

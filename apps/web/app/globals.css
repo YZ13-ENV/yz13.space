@@ -1,0 +1,14 @@
+@tailwind components;
+
+.app-grid {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+.team-avatar-grid {
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+}
+.header {
+  height: var(--header-height);
+}
+.page-wrapper {
+  min-height: var(--page-wrapper-height);
+}
