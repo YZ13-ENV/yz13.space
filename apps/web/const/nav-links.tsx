@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { LuBadgeInfo } from "react-icons/lu";
 import { MdGridView, MdPhone } from "react-icons/md";
 
 type NavLink = {
@@ -18,9 +17,9 @@ export const links: NavLink[] = [
     value: "/contact",
     icon: <MdPhone />
   },
-  {
-    label: "About",
-    value: "/about",
-    icon: <LuBadgeInfo />
-  },
+  // {
+  //   label: "About",
+  //   value: "/about",
+  //   icon: <LuBadgeInfo />
+  // },
 ];

@@ -4,13 +4,14 @@ import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
 import { ReactNode, useState } from "react"
+import { useDate } from "../../date"
 import { useEvents } from "../../events"
 import { EventMark } from "./event"
 
 const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => {
   const [hovered, setHovered] = useState<boolean>(false)
   const date = dayjs().add(ruler, "month")
-  const today = dayjs()
+  const today = useDate(state => state.date)
   const events = useEvents(state => state.events)
   const onlyInRuler = events.filter(event => {
     const event_date = dayjs(event.created_at)
@@ -86,10 +87,10 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
   )
 }
 const Rulers = () => {
+  const today = useDate(state => state.date)
   const months_before = Array.from({ length: 12 }).map((_, i) => -i).reverse()
   const months_after = Array.from({ length: 6 }).map((_, i) => i + 1)
   const rulers = [...months_before, ...months_after].sort((a, b) => a >= b ? 1 : -1)
-  const today = dayjs()
   const key = (ruler: number) => today.add(ruler, "month").format("MMMM-YYYY").toLowerCase()
   const current_day = today.date()
   const left = (current_day / today.daysInMonth()) * 100
