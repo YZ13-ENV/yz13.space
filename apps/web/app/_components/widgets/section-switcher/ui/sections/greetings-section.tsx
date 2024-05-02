@@ -40,7 +40,10 @@ const GreetingSection = () => {
         <div className='container flex flex-col w-full h-full gap-8 mx-auto'>
           <div className='space-y-6 w-full h-full flex flex-col items-center justify-center'>
             <h1 className="text-[20dvw] text-center w-full font-bold">YZ13</h1>
-            <p className="w-full text-xl font-light text-muted-foreground text-center">Frontend developer</p>
+            <div className="space-y-2">
+              <p className="w-full text-xl font-light text-muted-foreground text-center">Frontend developer</p>
+              <p className="w-full font-light text-muted-foreground text-center">Welcome to YZ13 Lab</p>
+            </div>
           </div>
         </div>
       </ContentWrapper>
