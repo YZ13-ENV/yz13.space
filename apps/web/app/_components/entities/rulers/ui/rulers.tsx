@@ -1,13 +1,16 @@
 "use client"
+import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
-import { ReactNode } from "react"
+import { motion } from "framer-motion"
+import { ReactNode, useState } from "react"
 import { useEvents } from "../../events"
 import { EventMark } from "./event"
 
-
 const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => {
+  const [hovered, setHovered] = useState<boolean>(false)
   const date = dayjs().add(ruler, "month")
+  const today = dayjs()
   const events = useEvents(state => state.events)
   const onlyInRuler = events.filter(event => {
     const event_date = dayjs(event.created_at)
@@ -20,17 +23,33 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
   const format = date.format("MMMM")
   const formatWithYear = date.format("MMMM YYYY")
   const lastDay = date.daysInMonth()
+  const isCurrent = ruler === 0
   return (
-    <div id={key} className='relative w-fit gap-8 flex justify-center items-center h-full'>
+    <div
+      id={key}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className='relative w-fit gap-8 flex group justify-center items-center h-full'
+    >
+      {
+        hovered &&
+        <motion.div
+          layoutId="hover-effect"
+          className="w-full h-full absolute rounded-xl left-0 top-0 group-hover:bg-muted/50 transition-colors"
+        />
+      }
       {children}
       {
         !!onlyInRuler.length &&
         onlyInRuler.map(event => {
           const key = event.event_id
-          return <EventMark key={key} event={event} date={date} />
+          return <EventMark key={key} event={event} date={today} />
         })
       }
-      <span className='absolute text-muted-foreground text-xs -bottom-8 z-10'>
+      <span className={cn(
+        isCurrent ? "" : "group-hover:opacity-70 opacity-20",
+        'absolute text-muted-foreground transition-opacity text-xs -bottom-8 z-10'
+      )}>
         {isFirstMonth ? formatWithYear : format}
       </span>
       <div className='relative h-full flex items-center justify-center'>
@@ -58,8 +77,8 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
         <Separator className='h-1/3' orientation="vertical" />
       </div>
       <div className='relative h-full flex items-center justify-center'>
-        <div className='w-5 h-5 flex items-center justify-center -top-6 rounded-md absolute'>
-          <span className="text-xs text-muted-foreground cursor-pointer transition-colors hover:text-accent-foreground">{lastDay}</span>
+        <div className='w-5 h-5 flex items-center justify-center -bottom-6 rounded-md absolute'>
+          <span className="text-xs text-muted-foreground cursor-pointer transition-colors hover:text-accent-foreground">{lastDay}/1</span>
         </div>
         <Separator className='h-full' orientation="vertical" />
       </div>
@@ -73,11 +92,11 @@ const Rulers = () => {
   const today = dayjs()
   const key = (ruler: number) => today.add(ruler, "month").format("MMMM-YYYY").toLowerCase()
   const current_day = today.date()
-  const left = (current_day / today.daysInMonth()) * 100 - 2
+  const left = (current_day / today.daysInMonth()) * 100
   const today_key = today.format("MMMM-YYYY").toLowerCase()
   const Indicator = () => {
     return (
-      <div style={{ left: `${left}%` }} className='absolute z-10 right-1/2 flex items-center justify-center w-[3px] shrink-0 h-full'>
+      <div style={{ left: `${left}%` }} className='absolute z-10 right-1/2 flex items-center justify-center w-[1px] shrink-0 h-full'>
         <div className='w-5 h-5 flex items-center justify-center -top-6 backdrop-blur-sm rounded-md absolute'>
           <span className="text-xs text-accent-foreground">{current_day}</span>
         </div>

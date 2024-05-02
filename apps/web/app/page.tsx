@@ -16,7 +16,7 @@ const page = async () => {
   const events: Readonly<Event[]> = await get("events") || []
   const blobs = await list({ prefix: "backgrounds" })
   const videos: ListBlobResultBlob[] = blobs.blobs
-  const random_index = Math.round(randomNumber(0, videos.length - 1))
+  const random_index = Math.round(randomNumber(0, videos.length - 2))
   const random_video = videos[random_index]
   return (
     <>
