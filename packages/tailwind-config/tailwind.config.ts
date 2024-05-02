@@ -24,6 +24,7 @@ const config = {
         screen: "100dvh",
       },
       fontFamily: {
+        special: "var(--special-font)",
         headings: "var(--headings-font)",
         text: "var(--text-font)",
       },

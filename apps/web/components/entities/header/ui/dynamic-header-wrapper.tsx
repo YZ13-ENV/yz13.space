@@ -27,7 +27,7 @@ const DynamicHeaderWrapper = ({ activeClassName = "", className = "", children, 
   }, [scroll])
   return (
     <header className={cn(
-      "w-full flex sticky header top-0 z-20 items-center justify-between h-16 px-6 md:gap-3 gap-1",
+      "w-full flex sticky top-0 z-20 items-center justify-between h-16 px-6 md:gap-3 gap-1",
       className,
       switched ? activeClassName : ""
     )}>
