@@ -4,7 +4,7 @@ import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
 import { ReactNode, useState } from "react"
-import { useDate } from "../../date/store/date-store"
+import { useDate } from "../../date"
 import { useEvents } from "../../events"
 import { EventMark } from "./event"
 

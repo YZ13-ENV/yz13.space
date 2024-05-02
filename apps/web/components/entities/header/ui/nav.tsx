@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation"
 
 const Nav = () => {
   const pathname = usePathname()
-
   return (
     <>
       <nav className="rounded-full flex border items-center bg-secondary/50 backdrop-blur-sm">

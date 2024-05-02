@@ -13,10 +13,6 @@ const HomeHeader = ({ className = "" }: Props) => {
       activeClassName="backdrop-blur"
     >
       <Link href="/" className='text-2xl font-semibold'>YZ13</Link>
-      <div className="flex items-center gap-3">
-        {/* <Nav /> */}
-
-      </div>
       <User />
     </DynamicHeaderWrapper>
   )
