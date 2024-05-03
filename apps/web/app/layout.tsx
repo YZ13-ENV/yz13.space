@@ -1,3 +1,4 @@
+import { CSPostHogProvider } from "@/utils/posthog/provider";
 import "@repo/tailwind-config/styles";
 import type { Metadata } from "next";
 import { Geologica } from "next/font/google";
@@ -21,9 +22,11 @@ type LayoutProps = Readonly<{
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={`${font.className} ${font.variable}`}>
-      <BodyWrapper>
-        {children}
-      </BodyWrapper>
+      <CSPostHogProvider>
+        <BodyWrapper>
+          {children}
+        </BodyWrapper>
+      </CSPostHogProvider>
     </html>
   );
 }

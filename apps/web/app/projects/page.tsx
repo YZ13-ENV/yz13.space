@@ -8,10 +8,9 @@ import { Separator } from "@repo/ui/separator"
 import { list, ListBlobResultBlob } from "@vercel/blob"
 import { get } from "@vercel/edge-config"
 import { unstable_noStore } from "next/cache"
-import { BiDotsHorizontalRounded, BiGroup, BiRightArrowAlt, BiSearch, BiStar, BiTime } from "react-icons/bi"
+import { BiDotsHorizontalRounded, BiGroup, BiRightArrowAlt, BiSearch, BiShow, BiStar, BiTime } from "react-icons/bi"
 import { BsGithub } from "react-icons/bs"
 import { GrStatusGoodSmall } from "react-icons/gr"
-import { RiUserSmileLine } from "react-icons/ri"
 import { EventsProvider } from "../_components/entities/events"
 import { Event } from "../_components/entities/events/store/events-store"
 import { Rulers } from "../_components/entities/rulers"
@@ -59,8 +58,8 @@ const page = async () => {
           </div>
           <Separator orientation="vertical" />
           <div className="w-1/4 h-full flex hover:bg-muted transition-colors p-1 rounded-md items-center justify-center gap-1">
-            <RiUserSmileLine size={18} />
-            <span className="text-sm">90%</span>
+            <BiShow size={18} />
+            <span className="text-sm">1.1k</span>
           </div>
           <Separator orientation="vertical" />
           <div className="w-1/4 h-full flex hover:bg-muted transition-colors p-1 rounded-md items-center justify-center gap-1">
@@ -68,9 +67,9 @@ const page = async () => {
             <span className="text-sm">10 h.</span>
           </div>
           <Separator orientation="vertical" />
-          <div className="w-1/4 h-full flex bg-green-900/60 transition-colors p-1 rounded-md items-center justify-center gap-1">
-            <GrStatusGoodSmall size={10} className="text-green-600" />
-            <span className="text-sm text-green-600">Good</span>
+          <div className="w-1/4 h-full flex bg-green-900/60 group/status hover:bg-green-600 transition-colors p-1 rounded-md items-center justify-center gap-1">
+            <GrStatusGoodSmall size={10} className="transition-colors text-green-600 group-hover/status:text-accent-foreground" />
+            <span className="transition-colors text-sm text-green-600 group-hover/status:text-accent-foreground">Good</span>
           </div>
         </div>
       </div>

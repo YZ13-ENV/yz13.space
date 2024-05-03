@@ -3,6 +3,7 @@ import { links } from "@/const/nav-links"
 import { Button } from "@repo/ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import posthog from "posthog-js"
 
 const Nav = () => {
   const pathname = usePathname()
@@ -17,7 +18,12 @@ const Nav = () => {
               variant={link.value === pathname ? "default" : "ghost"}
               className="gap-2"
             >
-              <Link href={link.value}>
+              <Link
+                href={link.value}
+                onClick={() => {
+                  posthog.capture('navigate', { path: link.value })
+                }}
+              >
                 {link.icon && link.icon}
                 <span className="md:inline hidden">
                   {link.label}
