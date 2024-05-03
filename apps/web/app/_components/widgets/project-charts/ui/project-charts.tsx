@@ -1,4 +1,5 @@
-import { APIResponse, getList } from "@/utils/posthog/api/insight"
+import { Vitals, getWebVitalsRecords } from "@/api/web-vitals"
+import { uniqBy } from "lodash"
 import { ChartOutput } from "./chart-output"
 import { ChartSelector } from "./chart-selector"
 
@@ -11,9 +12,10 @@ type Props = {
   project_id: string
 }
 const ProjectCharts = async ({ project_id }: Props) => {
-  const insights = await getList(project_id)
+  // const insights = await getList(project_id)
   // const ids = insights.results.map(insight => insight.id)
-  const chart_names: ChartTab[] = insights.results.map(insight => ({ label: insight.name, value: insight.short_id }))
+  const vitals = await getWebVitalsRecords(project_id)
+  const chart_names: ChartTab[] = uniqBy(vitals.data, "name")?.map(insight => ({ label: insight.name, value: insight.name })) || []
   // console.log(insights)
   // console.log(insights)
   // ids.forEach(chart => {
@@ -23,11 +25,11 @@ const ProjectCharts = async ({ project_id }: Props) => {
   // console.log(result?.result)
   // })
   // })
-  const data: APIResponse<any> = insights
+  const data: Vitals[] = vitals.data as Vitals[]
   const charts: ChartTab[] = chart_names
   return (
     <div className="w-full space-y-12">
-      <ChartOutput data={data.results} />
+      <ChartOutput data={data} />
       <ChartSelector charts={charts} />
     </div>
   )

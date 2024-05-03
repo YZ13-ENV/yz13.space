@@ -1,8 +1,9 @@
+import { Vitals } from "@/api/web-vitals";
 import { create } from "zustand";
 
 type Store = {
-  charts: any[];
-  setCharts: (charts: any[]) => void;
+  charts: Vitals[];
+  setCharts: (charts: Vitals[]) => void;
 };
 
 const useCharts = create<Store>((set) => ({
