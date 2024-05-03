@@ -1,3 +1,4 @@
+import { WebVitals } from "@/components/web-vitals";
 import { CSPostHogProvider } from "@/utils/posthog/provider";
 import "@repo/tailwind-config/styles";
 import type { Metadata } from "next";
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: LayoutProps) {
     <html lang="en" className={`${font.className} ${font.variable}`}>
       <CSPostHogProvider>
         <BodyWrapper>
+          <WebVitals />
           {children}
         </BodyWrapper>
       </CSPostHogProvider>
