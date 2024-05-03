@@ -3,7 +3,8 @@ import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
-import { ReactNode, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
+import { useMediaQuery } from "react-responsive"
 import { useDate } from "../../date"
 import { useEvents } from "../../events"
 import { EventMark } from "./event"
@@ -87,14 +88,19 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
   )
 }
 const Rulers = () => {
+  const [ready, setReady] = useState<boolean>(false)
+  const isMobile = useMediaQuery({ query: '(max-width: 1224px)' })
   const today = useDate(state => state.date)
   const months_before = Array.from({ length: 12 }).map((_, i) => -i).reverse()
-  const months_after = Array.from({ length: 6 }).map((_, i) => i + 1)
+  const months_after = Array.from({ length: isMobile ? 2 : 6 }).map((_, i) => i + 1)
   const rulers = [...months_before, ...months_after].sort((a, b) => a >= b ? 1 : -1)
   const key = (ruler: number) => today.add(ruler, "month").format("MMMM-YYYY").toLowerCase()
   const current_day = today.date()
   const left = (current_day / today.daysInMonth()) * 100
   const today_key = today.format("MMMM-YYYY").toLowerCase()
+  useEffect(() => {
+    if (typeof document !== 'undefined') setReady(true)
+  }, [typeof document])
   const Indicator = () => {
     return (
       <div style={{ left: `${left}%` }} className='absolute z-10 right-1/2 flex items-center justify-center w-[1px] shrink-0 h-full'>
@@ -105,9 +111,9 @@ const Rulers = () => {
       </div>
     )
   }
+  if (!ready) return null
   return (
     <div className='w-full px-12 h-36 pt-20 absolute bottom-20 flex items-center justify-end'>
-
       <div className='w-fit flex flex-row items-center h-full'>
         {
           rulers.map(ruler => {

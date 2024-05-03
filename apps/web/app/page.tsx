@@ -1,7 +1,7 @@
 "use server"
-import HomePage from './_components/pages/home'
+import HomePage from './_components/pages/home';
 
-const page = () => {
+const page = async () => {
   return <HomePage />
 }
 export default page
