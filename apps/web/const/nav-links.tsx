@@ -12,6 +12,11 @@ export const links: NavLink[] = [
     value: "/projects",
     icon: <MdGridView />
   },
+  // {
+  //   label: "Feature Flags",
+  //   value: "/feature-flags",
+  //   icon: <BiFlag />
+  // },
   {
     label: "Contact",
     value: "/contact",

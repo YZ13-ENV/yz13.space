@@ -16,11 +16,17 @@ const Footer = () => {
           </div>
         </div>
         <div className='w-full'>
-          <div className='flex flex-col gap-2'>
+          <div className='flex w-fit flex-col gap-2'>
             <span className='text-sm text-muted-foreground'>YZ13</span>
             {
               links.map(link =>
-                <Link href={link.value} key={"footer-" + link.value}>{link.label}</Link>
+                <Link
+                  className="hover:underline text-accent-foreground/80 hover:text-accent-foreground transition-colors"
+                  href={link.value}
+                  key={"footer-" + link.value}
+                >
+                  {link.label}
+                </Link>
               )
             }
           </div>

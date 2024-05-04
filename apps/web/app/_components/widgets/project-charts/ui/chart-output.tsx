@@ -29,7 +29,7 @@ const ChartOutput = ({ data = [] }: Props) => {
     <div className="container">
       <div className="w-full h-[40dvh] flex items-end justify-end">
         {
-          group_keys.map(item => <ChartBar withDate date={item} key={item} percent={group[item]?.length} />)
+          group_keys.map(item => <ChartBar withDate date={dayjs(item).format("D MMMM")} key={item} percent={group[item]?.length} />)
         }
         {/* <ChartBar date="21 April" withDate percent={100} />
         <ChartBar percent={66} />

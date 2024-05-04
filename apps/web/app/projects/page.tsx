@@ -3,9 +3,8 @@ import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
 import { randomNumber } from "@/helpers/random-number"
-import { getProjects as insightsProjects } from "@/utils/posthog/api/insight"
 import { Input } from "@repo/ui/input"
-import { list, ListBlobResultBlob } from "@vercel/blob"
+import { list, ListBlobResult, ListBlobResultBlob } from "@vercel/blob"
 import { get } from "@vercel/edge-config"
 import { unstable_noStore } from "next/cache"
 import { BiSearch } from "react-icons/bi"
@@ -18,20 +17,23 @@ import { SectionBackgroundBlur, SectionOverlay } from "../_components/widgets/se
 
 const page = async () => {
   unstable_noStore()
-  const insights_projects = await insightsProjects()
+  // const insights_projects = await insightsProjects()
   const { data } = await getProjects()
+  const background_mode = await get("background_mode")
+  const isLocalMode = background_mode === "local"
   const events: Readonly<Event[]> = await get("events") || []
-  const blobs = await list({ prefix: "backgrounds" })
+  const blobs: ListBlobResult = isLocalMode ? { blobs: [], hasMore: false } : await list({ prefix: "backgrounds" })
   const videos: ListBlobResultBlob[] = blobs.blobs
   const random_index = Math.round(randomNumber(0, videos.length - 2))
   const random_video = videos[random_index]
+  const local_video = "/background/fallback-background.mp4"
 
   return (
     <>
       <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
       <div className="w-full flex flex-col items-center justify-center relative h-[40dvh]">
         <h1 className="text-7xl leading-tight text-center w-full mb-36 font-bold">Projects</h1>
-        <VideoPlayer src={random_video?.downloadUrl} className='grayscale' />
+        <VideoPlayer src={isLocalMode ? local_video : random_video?.downloadUrl} className='grayscale' />
         <SectionBackgroundBlur />
         <SectionOverlay />
         <EventsProvider events={events as Event[]} />

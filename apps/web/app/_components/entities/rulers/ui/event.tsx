@@ -19,17 +19,17 @@ const EventMark = ({ event, date = dayjs() }: Props) => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div style={{ left: `${left}%` }} className='bottom-[80%] group/event absolute z-10 right-1/2 flex flex-col justify-between items-center w-[1px] shrink-0 h-fit gap-5'>
+          <div style={{ left: `${left}%` }} className='bottom-0 group/event absolute z-10 right-1/2 flex flex-col justify-between items-center w-[1px] shrink-0 h-[175%] gap-5'>
             <div className={cn(
               "w-[21px] rounded-sm absolute h-full cursor-pointer",
               isInPast ? "group-hover/event:bg-primary/10" : "group-hover/event:bg-primary/25"
             )} />
-            <div className='w-5 h-5 flex items-center justify-center cursor-pointer relative rounded-md'>
+            <div className='w-5 h-5 flex items-center justify-center cursor-pointer relative rounded-md mt-0.5'>
               <span className={cn("text-xs", isInPast ? "text-muted-foreground" : "text-accent-foreground")}>{current_day}</span>
             </div>
-            <div className="h-fit flex flex-col relative group-hover/event:bottom-2 bottom-0 transition-all items-center justify-center w-[1px]">
-              <div className={cn("w-[5px] h-[5px] absolute top-0 rounded-full", isInPast ? "bg-muted" : "bg-primary")}></div>
-              <Separator className={cn("h-4 w-full rounded-full", isInPast ? "bg-muted" : "bg-primary")} orientation="vertical" />
+            <div className="h-full flex flex-col relative group-hover/event:bottom-2 bottom-0 transition-all items-center justify-center w-[1px]">
+              <div className={cn("w-[5px] h-[5px] absolute top-0 rounded-full", isInPast ? "group-hover/event:bg-accent-foreground/40 bg-muted" : "bg-primary/60")}></div>
+              <Separator className={cn("h-full w-full rounded-full", isInPast ? "group-hover/event:bg-accent-foreground/40 bg-muted" : "bg-primary/60")} orientation="vertical" />
             </div>
           </div>
         </TooltipTrigger>
