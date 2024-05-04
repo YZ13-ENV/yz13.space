@@ -18,7 +18,7 @@ type Props = {
 }
 const ProjectSection = async ({ project, reverse = false }: Props) => {
   const id = project.id
-  const projectBlocks = await getProjectBlocks(parseInt(id))
+  const projectBlocks = await getProjectBlocks(id)
   const blocks: Block[] = projectBlocks.data ? projectBlocks.data : []
   const onlyMediaBlocks = blocks.filter(block => block.type === "image" || block.type === "video")
   const InfoSection = () => {

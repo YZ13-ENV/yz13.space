@@ -14,7 +14,7 @@ const ChartSelector = ({ charts = [] }: Props) => {
   }, [charts])
   return (
     <div className="container">
-      <div className="w-full rounded-full bg-card h-10 flex items-center justify-center">
+      <div className="w-fit mx-auto rounded-full bg-card h-10 flex items-center justify-center">
         {
           charts.map(
             chart => {
@@ -22,11 +22,11 @@ const ChartSelector = ({ charts = [] }: Props) => {
               return (
                 <Button
                   onClick={() => setSelected(chart.value)}
-                  className="w-full line-clamp-1"
+                  className="w-full"
                   key={chart.value}
                   variant={isSelected ? "default" : "ghost"}
                 >
-                  <span className="line-clamp-1 inline-block w-full">{chart.label}</span>
+                  <span className="inline-block w-full">{chart.label}</span>
                 </Button>
               )
             })
