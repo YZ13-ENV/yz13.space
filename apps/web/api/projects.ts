@@ -13,7 +13,7 @@ const getProjects = async (): Promise<PostgrestSingleResponse<Project[]>> => {
 };
 
 const getProject = async (
-  id: number
+  id: string
 ): Promise<PostgrestSingleResponse<Project[]>> => {
   const cookie = cookies();
   const client = createClient(cookie);
@@ -25,7 +25,7 @@ const getProject = async (
 };
 
 const getProjectBlocks = async (
-  id: number
+  id: string
 ): Promise<PostgrestSingleResponse<any[]>> => {
   const cookie = cookies();
   const client = createClient(cookie);

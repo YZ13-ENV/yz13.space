@@ -1,8 +1,8 @@
+import { getProject } from "@/api/projects"
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
 import { randomNumber } from "@/helpers/random-number"
-import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { list, ListBlobResultBlob } from "@vercel/blob"
 import { get } from "@vercel/edge-config"
@@ -11,6 +11,7 @@ import { EventsProvider } from "../_components/entities/events"
 import { Event } from "../_components/entities/events/store/events-store"
 import { Rulers } from "../_components/entities/rulers"
 import { VideoPlayer } from "../_components/entities/video-player"
+import { ProjectCharts } from "../_components/widgets/project-charts"
 import { SectionBackgroundBlur, SectionOverlay } from "../_components/widgets/section-switcher/ui/section-template"
 
 type Props = {
@@ -19,30 +20,11 @@ type Props = {
   }
 }
 
-const ChartBar = ({ withDate = false, percent = 25, date = "24 April" }: { percent?: number, withDate?: boolean, date?: string }) => {
-  return (
-    <div className="w-fit h-full flex items-end justify-end">
-      <div className={cn(
-        "w-24 group/chart rounded-b-xl transition-colors h-full flex flex-col gap-2 justify-between border-r border-r-transparent",
-        withDate ? "hover:border-muted" : ""
-      )}>
-        <div className="w-full py-2 px-2 flex items-center justify-end">
-          {withDate && <span className="text-sm">{date}</span>}
-        </div>
-        <div className="w-full h-full flex items-end">
-          <div
-            style={{ height: `${percent}%` }}
-            className="w-full h-64 rounded-xl group-hover/chart:bg-muted transition-colors bg-muted/30"
-          />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-
 const page = async ({ params }: Props) => {
   unstable_noStore()
+  const id = params.project
+  const { data } = await getProject(id)
+  const project = data ? data[0] : null
   const events: Readonly<Event[]> = await get("events") || []
   const blobs = await list({ prefix: "backgrounds" })
   const videos: ListBlobResultBlob[] = blobs.blobs
@@ -52,7 +34,7 @@ const page = async ({ params }: Props) => {
     <>
       <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
       <div className="w-full flex flex-col items-center justify-center relative h-[40dvh]">
-        <h1 className="text-7xl leading-tight text-center w-full mb-36 font-bold">{params.project}</h1>
+        <h1 className="text-7xl leading-tight text-center w-full mb-36 font-bold">{project?.name}</h1>
         <VideoPlayer src={random_video?.downloadUrl} className='grayscale' />
         <SectionBackgroundBlur />
         <SectionOverlay />
@@ -62,20 +44,9 @@ const page = async ({ params }: Props) => {
       <div className="w-full flex items-start justify-center h-fit">
         <Nav />
       </div>
+
       <div className="w-full h-fit py-12 space-y-12">
-        <div className="container">
-          <div className="w-full h-[40dvh] flex items-end justify-end">
-            <ChartBar percent={10} />
-            <ChartBar date="21 April" withDate percent={100} />
-            <ChartBar percent={66} />
-            <ChartBar date="23 April" withDate percent={75} />
-            <ChartBar percent={50} />
-            <ChartBar date="25 April" withDate percent={90} />
-            <ChartBar percent={34} />
-            <ChartBar date="27 April" withDate percent={16} />
-            <ChartBar percent={5} />
-          </div>
-        </div>
+        <ProjectCharts project_id={id} />
         <Separator />
         <div className="container">
           <section className="border space-y-4 rounded-3xl w-full h-fit p-4">
