@@ -37,7 +37,7 @@ const ChartOutput = ({ data = [] }: Props) => {
   )
   return (
     <div className="container">
-      <div className="flex flex-col gap-1 justify-center">
+      <div className="flex flex-col justify-center gap-1">
         <h3 className="text-3xl font-bold">{selectedChart}</h3>
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-green-900/50 text-green-600 text-xs">
@@ -61,7 +61,7 @@ const ChartOutput = ({ data = [] }: Props) => {
               const target = group[item]
               const mid = target ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
               const status = metric ? mid <= metric?.good ? "good" : mid > metric?.good && metric.mid >= mid ? "needs-improvement" : "poor" : "poor"
-              const value = target ? String(mid.toFixed(2)) : ""
+              const value = target ? String(mid.toFixed(3)) + " s." : ""
               const percent = ((target?.length || 0) / max) * 100
               if (!target) return <></>
               return <ChartBar

@@ -4,6 +4,7 @@ import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
 import { Button } from "@repo/ui/button"
 import { get } from "@vercel/edge-config"
+import { Metadata } from "next"
 import { unstable_noStore } from "next/cache"
 import Image from "next/image"
 import Link from "next/link"
@@ -15,6 +16,10 @@ import { Event } from "../_components/entities/events/store/events-store"
 import { Rulers } from "../_components/entities/rulers"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
+
+export const metadata: Metadata = {
+  title: "Contact",
+};
 
 const page = async () => {
   unstable_noStore()

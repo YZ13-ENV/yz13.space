@@ -1,7 +1,7 @@
 import { WebVitals } from "@/components/web-vitals";
 import { CSPostHogProvider } from "@/utils/posthog/provider";
 import "@repo/tailwind-config/styles";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geologica } from "next/font/google";
 import { ReactNode } from "react";
 import { BodyWrapper } from "./_components/body-wrapper";
@@ -14,8 +14,14 @@ const font = Geologica({
 
 export const metadata: Metadata = {
   title: "YZ13",
-  description: "Created by Darkmaterial Team",
+  description: "Created by YZ13",
+  authors: { name: "YZ13", url: "https://github.com/yz13-env" },
 };
+
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#000000",
+}
 
 type LayoutProps = Readonly<{
   children?: ReactNode

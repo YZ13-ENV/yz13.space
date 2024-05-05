@@ -1,5 +1,7 @@
+import { getProject } from "@/api/projects"
 import { HomeHeader } from "@/components/entities/header"
 import { Footer } from "@/components/shared/footer"
+import { Metadata, ResolvingMetadata } from "next"
 import { Suspense } from "react"
 import { ProjectCharts } from "../_components/widgets/project-charts"
 import { ProjectBanner } from "./project-banner"
@@ -7,6 +9,26 @@ import { ProjectBanner } from "./project-banner"
 type Props = {
   params: {
     project: string
+  }
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const id = params.project
+
+  const { data } = await getProject(id)
+  const project = data ? data[0] : null
+
+  const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: project?.name,
+    description: project?.description,
+    openGraph: {
+      images: previousImages,
+    },
   }
 }
 
