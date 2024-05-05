@@ -1,11 +1,11 @@
 import { cva } from "class-variance-authority";
 
-const rulers_variants = cva("w-full absolute flex items-center justify-end", {
+const rulers_variants = cva("w-full flex items-center justify-end", {
   variants: {
     size: {
-      sm: "px-12 h-28 pt-16 bottom-14",
-      default: "px-12 h-36 pt-20 bottom-14",
-      lg: "px-12 h-44 pt-24 bottom-14",
+      sm: "px-12 min-h-24 bottom-0",
+      default: "px-12 min-h-36 bottom-0",
+      lg: "px-12 min-h-40 bottom-0",
     },
   },
   defaultVariants: {

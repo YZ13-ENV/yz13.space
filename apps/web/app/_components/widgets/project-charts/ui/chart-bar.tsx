@@ -1,6 +1,13 @@
 import { cn } from "@repo/ui/cn"
 
-const ChartBar = ({ withDate = false, percent = 25, date = "24 April" }: { percent?: number, withDate?: boolean, date?: string }) => {
+type Props = {
+  barClassName?: string
+  value?: string
+  percent?: number
+  withDate?: boolean
+  date?: string
+}
+const ChartBar = ({ barClassName = "", withDate = false, percent = 25, date = "24 April", value = "" }: Props) => {
   return (
     <div className="w-fit h-full flex items-end justify-end">
       <div className={cn(
@@ -14,8 +21,13 @@ const ChartBar = ({ withDate = false, percent = 25, date = "24 April" }: { perce
         <div className="w-full h-full flex items-end">
           <div
             style={{ height: `${percent}%` }}
-            className="w-full h-64 rounded-xl group-hover/chart:bg-muted transition-colors bg-muted/30"
-          />
+            className={cn(
+              "w-full h-64 min-h-5 cursor-pointer rounded-xl transition-colors flex items-center justify-center",
+              barClassName ? barClassName : "group-hover/chart:bg-muted bg-muted/30"
+            )}
+          >
+            <span className="text-xs text-inherit">{value}</span>
+          </div>
         </div>
       </div>
     </div>

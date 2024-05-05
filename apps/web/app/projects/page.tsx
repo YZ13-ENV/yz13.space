@@ -2,9 +2,8 @@ import { getProjects } from "@/api/projects"
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
-import { randomNumber } from "@/helpers/random-number"
+import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
-import { list, ListBlobResult, ListBlobResultBlob } from "@vercel/blob"
 import { get } from "@vercel/edge-config"
 import { unstable_noStore } from "next/cache"
 import { BiSearch } from "react-icons/bi"
@@ -12,35 +11,30 @@ import { EventsProvider } from "../_components/entities/events"
 import { Event } from "../_components/entities/events/store/events-store"
 import { ProjectCard } from "../_components/entities/project"
 import { Rulers } from "../_components/entities/rulers"
-import { VideoPlayer } from "../_components/entities/video-player"
-import { SectionBackgroundBlur, SectionOverlay } from "../_components/widgets/section-switcher/ui/section-template"
+import { Time } from "../_components/time"
+import { Background } from "../_components/widgets/background"
 
 const page = async () => {
   unstable_noStore()
-  // const insights_projects = await insightsProjects()
   const { data } = await getProjects()
-  const background_mode = await get("background_mode")
-  const isLocalMode = background_mode === "local"
   const events: Readonly<Event[]> = await get("events") || []
-  const blobs: ListBlobResult = isLocalMode ? { blobs: [], hasMore: false } : await list({ prefix: "backgrounds" })
-  const videos: ListBlobResultBlob[] = blobs.blobs
-  const random_index = Math.round(randomNumber(0, videos.length - 2))
-  const random_video = videos[random_index]
-  const local_video = "/background/fallback-background.mp4"
 
   return (
     <>
       <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
-      <div className="w-full flex flex-col items-center justify-center relative h-[40dvh]">
-        <h1 className="text-7xl leading-tight text-center w-full mb-36 font-bold">Projects</h1>
-        <VideoPlayer src={isLocalMode ? local_video : random_video?.downloadUrl} className='grayscale' />
-        <SectionBackgroundBlur />
-        <SectionOverlay />
+      <div className="w-full flex flex-col items-center justify-center relative pt-24 min-h-[40dvh]">
+        <div className="w-full mb-20 space-y-6 p-6">
+          <h1 className="text-7xl leading-tight text-center w-full font-bold">Projects</h1>
+          <div className='w-full flex justify-center gap-2'>
+            <Nav />
+            <Button className="hidden rounded-full md:flex bg-muted/50 backdrop-blur-sm border" variant="secondary">
+              <Time format="dd, DD MMMM HH:mm" className="" />
+            </Button>
+          </div>
+        </div>
+        <Background />
         <EventsProvider events={events as Event[]} />
         <Rulers />
-      </div>
-      <div className="w-full flex items-start justify-center h-fit">
-        <Nav />
       </div>
       <div className="relative w-full h-fit py-12">
         <div className="container">

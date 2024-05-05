@@ -2,7 +2,9 @@
 import { Vitals } from "@/api/web-vitals"
 import dayjs from "dayjs"
 import { groupBy, keys } from "lodash"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
+import { TbMathEqualLower, TbMathGreater } from "react-icons/tb"
+import { metrics } from "../const"
 import { useCharts } from "../store/charts-store"
 import { useSelectChart } from "../store/select-chart"
 import { ChartBar } from "./chart-bar"
@@ -13,10 +15,14 @@ type Props = {
 const ChartOutput = ({ data = [] }: Props) => {
   const { charts, setCharts } = useCharts()
   const selectedChart = useSelectChart(state => state.selected)
-  const chart = charts.filter(chart => chart.name === selectedChart)
-  const group = groupBy(charts.map(chart => ({ ...chart, created_at: dayjs(chart.created_at).format("YYYY-MM-DD") })), "created_at")
+  const chart = useMemo(() => { return charts.filter(chart => chart.name === selectedChart) }, [selectedChart, charts])
+  const group = groupBy(chart.map(chart => ({ ...chart, created_at: dayjs(chart.created_at).format("YYYY-MM-DD") })), "created_at")
   const group_keys = keys(group)
-  console.log(group_keys, group)
+  const metric = metrics.find(item => item.name === selectedChart)
+  const grouped_charts = groupBy(charts, "name")
+  const grouped_charts_keys = keys(grouped_charts)
+  const maxCount = Math.max(...grouped_charts_keys.map(key => grouped_charts[key]?.length || 0))
+  const max = Math.round(maxCount * 2)
   useEffect(() => {
     if (data.length !== 0) setCharts(data)
   }, [data])
@@ -27,18 +33,52 @@ const ChartOutput = ({ data = [] }: Props) => {
   )
   return (
     <div className="container">
+      <div className="flex flex-col gap-1 justify-center">
+        <h3 className="text-3xl font-bold">{selectedChart}</h3>
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-green-900/50 text-green-600 text-xs">
+            <TbMathEqualLower size={14} />
+            {metric?.good}
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-yellow-900/50 text-yellow-600 text-xs">
+            <TbMathEqualLower size={14} />
+            {metric?.mid}
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-red-900/50 text-red-600 text-xs">
+            {metric?.poor}
+            <TbMathGreater size={14} />
+          </span>
+        </div>
+      </div>
       <div className="w-full h-[40dvh] flex items-end justify-end">
         {
-          group_keys.map(item => <ChartBar withDate date={dayjs(item).format("D MMMM")} key={item} percent={group[item]?.length} />)
+          group_keys.map(
+            item => {
+              const target = group[item]
+              const mid = target ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
+              const status = metric ? mid <= metric?.good ? "good" : mid > metric?.good && metric.mid >= mid ? "needs-improvement" : "poor" : "poor"
+              const value = target ? String(mid.toFixed(2)) : ""
+              const percent = ((target?.length || 0) / max) * 100
+              if (!target) return <></>
+              return <ChartBar
+                withDate
+                date={`${dayjs(item).format("D MMMM")} (${target.length})`}
+                barClassName={
+                  status === "good"
+                    ? "text-green-600 group-hover/chart:bg-green-900 bg-green-900/30"
+                    : status === "needs-improvement"
+                      ? "text-yellow-600 group-hover/chart:bg-yellow-900 bg-yellow-900/30"
+                      : status === "poor"
+                        ? "text-red-600 group-hover/chart:bg-red-900 bg-red-900/30"
+                        : ""
+                }
+                key={item}
+                percent={percent}
+                value={value}
+              />
+            }
+          )
         }
-        {/* <ChartBar date="21 April" withDate percent={100} />
-        <ChartBar percent={66} />
-        <ChartBar date="23 April" withDate percent={75} />
-        <ChartBar percent={50} />
-        <ChartBar date="25 April" withDate percent={90} />
-        <ChartBar percent={34} />
-        <ChartBar date="27 April" withDate percent={16} />
-        <ChartBar percent={5} /> */}
       </div>
     </div>
   )
