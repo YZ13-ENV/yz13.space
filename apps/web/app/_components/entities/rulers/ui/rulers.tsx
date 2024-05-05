@@ -2,7 +2,8 @@
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { VariantProps } from "class-variance-authority"
-import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
+import { ElementRef, useEffect, useRef, useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import { useDate } from "../../date"
 import { rulers_variants } from "../const"
@@ -11,13 +12,14 @@ import { Ruler } from "./ruler"
 type Props = {
   className?: string
 } & VariantProps<typeof rulers_variants>
-const Rulers = ({ size = "sm", className = "" }: Props) => {
+const Rulers = ({ size = "default", className = "" }: Props) => {
+  const ref = useRef<ElementRef<"div">>(null)
   const [ready, setReady] = useState<boolean>(false)
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
   const isTablet = useMediaQuery({ query: '(max-width: 1280px)' })
   const today = useDate(state => state.date)
-  const months_before = Array.from({ length: 8 }).map((_, i) => -i).reverse()
-  const months_after = Array.from({ length: isTablet && isMobile ? 1 : isTablet ? 3 : 4 }).map((_, i) => i + 1)
+  const months_before = Array.from({ length: 12 }).map((_, i) => -i).reverse()
+  const months_after = Array.from({ length: 6 }).map((_, i) => i + 1)
   const rulers = [...months_before, ...months_after].sort((a, b) => a >= b ? 1 : -1)
   const key = (ruler: number) => today.add(ruler, "month").format("MMMM-YYYY").toLowerCase()
   const current_day = today.date()
@@ -38,8 +40,8 @@ const Rulers = ({ size = "sm", className = "" }: Props) => {
   }
   if (!ready) return null
   return (
-    <div className={cn(rulers_variants({ size, className }))}>
-      <div className='w-fit flex flex-row items-center h-full'>
+    <div ref={ref} className={cn("overflow-x-hidden overflow-y-visible", rulers_variants({ size, className }))}>
+      <motion.div drag="x" dragConstraints={ref} className='w-fit flex flex-row items-center h-fit'>
         {
           rulers.map(ruler => {
             const isInThisMonth = today_key === key(ruler)
@@ -47,7 +49,7 @@ const Rulers = ({ size = "sm", className = "" }: Props) => {
             return <Ruler key={key(ruler)} ruler={ruler}>{isInThisMonth && <Indicator />}</Ruler>
           })
         }
-      </div>
+      </motion.div>
     </div>
   )
 }

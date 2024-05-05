@@ -2,17 +2,17 @@ import { getProject } from "@/api/projects"
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
-import { randomNumber } from "@/helpers/random-number"
-import { Separator } from "@repo/ui/separator"
-import { list, ListBlobResultBlob } from "@vercel/blob"
+import { Button } from "@repo/ui/button"
 import { get } from "@vercel/edge-config"
 import { unstable_noStore } from "next/cache"
+import Link from "next/link"
+import { BiLeftArrowAlt } from "react-icons/bi"
 import { EventsProvider } from "../_components/entities/events"
 import { Event } from "../_components/entities/events/store/events-store"
 import { Rulers } from "../_components/entities/rulers"
-import { VideoPlayer } from "../_components/entities/video-player"
+import { Time } from "../_components/time"
+import { Background } from "../_components/widgets/background"
 import { ProjectCharts } from "../_components/widgets/project-charts"
-import { SectionBackgroundBlur, SectionOverlay } from "../_components/widgets/section-switcher/ui/section-template"
 
 type Props = {
   params: {
@@ -26,29 +26,32 @@ const page = async ({ params }: Props) => {
   const { data } = await getProject(id)
   const project = data ? data[0] : null
   const events: Readonly<Event[]> = await get("events") || []
-  const blobs = await list({ prefix: "backgrounds" })
-  const videos: ListBlobResultBlob[] = blobs.blobs
-  const random_index = Math.round(randomNumber(0, videos.length - 2))
-  const random_video = videos[random_index]
   return (
     <>
       <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
-      <div className="w-full flex flex-col items-center justify-center relative h-[40dvh]">
-        <h1 className="text-7xl leading-tight text-center w-full mb-36 font-bold">{project?.name}</h1>
-        <VideoPlayer src={random_video?.downloadUrl} className='grayscale' />
-        <SectionBackgroundBlur />
-        <SectionOverlay />
+      <div className="w-full flex flex-col items-center justify-center relative pt-24 min-h-[40dvh]">
+        <div className="w-full mb-20 space-y-6 p-6">
+          <h1 className="text-7xl leading-tight text-center w-full font-bold">{project?.name}</h1>
+          <div className='w-full flex justify-center gap-2'>
+            <Button size="icon" asChild className="bg-muted/50 backdrop-blur-sm border" variant="secondary">
+              <Link href="/projects">
+                <BiLeftArrowAlt size={18} />
+              </Link>
+            </Button>
+            <Nav />
+            <Button className="hidden rounded-full md:flex bg-muted/50 backdrop-blur-sm border" variant="secondary">
+              <Time format="dd, DD MMMM HH:mm" className="" />
+            </Button>
+          </div>
+        </div>
+        <Background />
         <EventsProvider events={events as Event[]} />
         <Rulers />
       </div>
-      <div className="w-full flex items-start justify-center h-fit">
-        <Nav />
-      </div>
-
       <div className="w-full h-fit py-12 space-y-12">
         <ProjectCharts project_id={id} />
-        <Separator />
-        <div className="container">
+        {/* <Separator /> */}
+        {/* <div className="container">
           <section className="border space-y-4 rounded-3xl w-full h-fit p-4">
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg">Performance <span className="text-muted-foreground">report</span></h1>
@@ -63,7 +66,7 @@ const page = async ({ params }: Props) => {
               </div>
             </div>
           </section>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>
