@@ -19,6 +19,7 @@ export type DevStack = {
 export type Project = {
   id: string;
   type: "app" | "package";
+  repo_owner?: string;
   repo_id?: string;
   name: string;
   description: string;

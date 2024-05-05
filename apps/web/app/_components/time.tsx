@@ -25,7 +25,7 @@ const Time = forwardRef<HTMLSpanElement, TimeProps>(
       setReady(true)
     }, [])
     if (!ready) return null
-    return <span className={cn("", className)} {...props}>{time.format(format)}</span>
+    return <time className={cn("", className)} {...props}>{time.format(format)}</time>
   })
 Time.displayName = "Time"
 export { Time }

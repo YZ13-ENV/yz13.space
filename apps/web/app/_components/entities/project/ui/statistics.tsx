@@ -1,4 +1,5 @@
 import { Separator } from "@repo/ui/separator"
+import { Suspense } from "react"
 import { BiShow, BiTime } from "react-icons/bi"
 import { StatusStatistic } from "./status-statistic"
 
@@ -19,7 +20,9 @@ const CardStatistics = ({ project_id, created_at }: Props) => {
         <span className="text-sm line-clamp-1">{created_at}</span>
       </div>
       <Separator orientation="vertical" />
-      <StatusStatistic project_id={project_id} />
+      <Suspense fallback={<div className="w-1/3 h-full rounded-md bg-muted animate-pulse" />}>
+        <StatusStatistic project_id={project_id} />
+      </Suspense>
     </div>
   )
 }

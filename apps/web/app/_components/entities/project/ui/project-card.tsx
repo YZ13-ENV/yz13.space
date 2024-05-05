@@ -14,7 +14,8 @@ type Props = {
 dayjs.extend(relativeTime)
 const ProjectCard = ({ project }: Props) => {
   const created_at = dayjs(project.created_at).fromNow(true)
-  const repo = project.repo_id
+  const repo_id = project.repo_id
+  const repo_owner = project.repo_owner
   return (
     <div className="w-full h-fit flex flex-col gap-4 border hover:border-primary transition-colors p-4 cursor-pointer rounded-xl">
       <div className="w-full flex items-center justify-between">
@@ -39,12 +40,13 @@ const ProjectCard = ({ project }: Props) => {
       </div>
       <div className="w-full flex items-center justify-between gap-3">
         {
-          repo
+          repo_owner && repo_id
             ?
-            <span className="inline-flex border items-center w-fit h-fit gap-1 rounded-full bg-muted/50 px-2.5 py-1">
+            <Link target="_blank" translate="yes"
+              href={`https://github.com/${repo_owner}/${repo_id}`} className="inline-flex border items-center w-fit h-fit gap-1 rounded-full bg-muted/50 px-2.5 py-1">
               <BsGithub size={16} className="" />
-              <span className="text-sm">{repo}</span>
-            </span>
+              <span className="text-sm">{repo_owner}/{repo_id}</span>
+            </Link>
             : <span></span>
         }
         <div className="flex items-center gap-2">
