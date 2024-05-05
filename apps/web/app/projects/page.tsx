@@ -1,4 +1,3 @@
-import { getProjects } from "@/api/projects"
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
@@ -6,55 +5,58 @@ import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
 import { get } from "@vercel/edge-config"
 import { unstable_noStore } from "next/cache"
+import { Suspense } from "react"
 import { BiSearch } from "react-icons/bi"
 import { EventsProvider } from "../_components/entities/events"
 import { Event } from "../_components/entities/events/store/events-store"
-import { ProjectCard } from "../_components/entities/project"
 import { Rulers } from "../_components/entities/rulers"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
+import { ProjectsList } from "./projects-list"
 
 const page = async () => {
   unstable_noStore()
-  const { data } = await getProjects()
   const events: Readonly<Event[]> = await get("events") || []
-
   return (
     <>
-      <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
+      <HomeHeader className='fixed top-0 z-20 w-full p-6 h-fit' />
       <div className="w-full flex flex-col items-center justify-center relative pt-24 min-h-[40dvh]">
-        <div className="w-full mb-20 space-y-6 p-6">
-          <h1 className="text-7xl leading-tight text-center w-full font-bold">Projects</h1>
-          <div className='w-full flex justify-center gap-2'>
+        <div className="w-full p-6 mb-20 space-y-6">
+          <h1 className="w-full font-bold leading-tight text-center text-7xl">Projects</h1>
+          <div className='flex justify-center w-full gap-2'>
             <Nav />
-            <Button className="hidden rounded-full md:flex bg-muted/50 backdrop-blur-sm border" variant="secondary">
+            <Button className="border rounded-full bg-muted/50 backdrop-blur-sm" variant="secondary">
               <Time format="dd, DD MMMM HH:mm" className="" />
             </Button>
           </div>
         </div>
-        <Background />
+        <Suspense fallback={<div className="w-full absolute z-[-3] bg-muted animate-pulse" />}>
+          <Background />
+        </Suspense>
         <EventsProvider events={events as Event[]} />
-        <Rulers />
+        <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
+          <Rulers />
+        </Suspense>
       </div>
-      <div className="relative w-full h-fit py-12">
+      <div className="relative w-full py-12 h-fit">
         <div className="container">
-          <div className="w-full relative">
-            <div className="w-12 h-12 flex items-center absolute left-0 justify-center">
+          <div className="relative w-full">
+            <div className="absolute left-0 flex items-center justify-center w-12 h-12">
               <BiSearch size={20} className="text-muted-foreground" />
             </div>
-            <Input className="pl-12 h-12 focus-visible:ring-2 rounded-xl text-base" placeholder="Search projects" />
+            <Input className="h-12 pl-12 text-base focus-visible:ring-2 rounded-xl" placeholder="Search projects" />
           </div>
         </div>
       </div>
-      <div className="relative w-full min-h-screen">
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 auto-rows-auto h-fit gap-6 w-full container">
-          {
-            data &&
-            data.map(
-              pr =>
-                <ProjectCard key={pr.id} project={pr} />
-            )
-          }
+      <div className="relative w-full h-fit">
+        <div className="container grid w-full grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2 auto-rows-auto h-fit">
+          <Suspense fallback={
+            <>
+              <div className="w-full h-36 bg-muted rounded-xl animate-pulse" />
+            </>
+          }>
+            <ProjectsList />
+          </Suspense>
         </div>
       </div>
       <div className="w-full h-36" />
@@ -69,19 +71,19 @@ const page = async () => {
 //   return (
 //     <>
 //       <DefaultHeader trigger={100} />
-//       <div className="page-wrapper w-full -top-16 relative">
+//       <div className="relative w-full page-wrapper -top-16">
 //         <div className="w-full pt-32 bg-card">
 //           <div className="container">
-//             <h1 className="text-7xl font-semibold">Projects</h1>
+//             <h1 className="font-semibold text-7xl">Projects</h1>
 //           </div>
 //         </div>
 //         <div className="w-full py-12 bg-card">
 //           <div className="container space-y-4">
-//             <div className="w-full relative">
-//               <div className="absolute w-16 left-0 h-full flex items-center justify-center">
+//             <div className="relative w-full">
+//               <div className="absolute left-0 flex items-center justify-center w-16 h-full">
 //                 <BiSearch size={24} className="text-muted-foreground" />
 //               </div>
-//               <Input className="pl-14 text-lg focus-visible:ring focus-visible:ring-primary h-14 rounded-2xl" placeholder="Search projects" />
+//               <Input className="text-lg pl-14 focus-visible:ring focus-visible:ring-primary h-14 rounded-2xl" placeholder="Search projects" />
 //             </div>
 //             <Button className="gap-2" variant="secondary">
 //               <MdFilterListAlt size={16} />

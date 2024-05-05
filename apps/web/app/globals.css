@@ -6,6 +6,12 @@
 .team-avatar-grid {
   grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
 }
+.contact-card-grid {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--contact-card-width), 1fr)
+  );
+}
 .header {
   height: var(--header-height);
 }

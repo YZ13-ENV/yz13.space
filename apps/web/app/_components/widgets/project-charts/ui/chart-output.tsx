@@ -2,7 +2,7 @@
 import { Vitals } from "@/api/web-vitals"
 import dayjs from "dayjs"
 import { groupBy, keys } from "lodash"
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { TbMathEqualLower, TbMathGreater } from "react-icons/tb"
 import { metrics } from "../const"
 import { useCharts } from "../store/charts-store"
@@ -23,12 +23,16 @@ const ChartOutput = ({ data = [] }: Props) => {
   const grouped_charts_keys = keys(grouped_charts)
   const maxCount = Math.max(...grouped_charts_keys.map(key => grouped_charts[key]?.length || 0))
   const max = Math.round(maxCount * 2)
+  const [loading, setLoading] = useState<boolean>(true)
   useEffect(() => {
     if (data.length !== 0) setCharts(data)
   }, [data])
-  if (!chart) return (
+  useEffect(() => {
+    if (!!metric) setLoading(false)
+  }, [metric])
+  if (loading) return (
     <div className="container">
-      <div className="w-full h-[40dvh] flex items-end justify-end"></div>
+      <div className="w-full h-[450px] flex items-end rounded-xl bg-muted animate-pulse justify-end"></div>
     </div>
   )
   return (
