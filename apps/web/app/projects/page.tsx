@@ -4,6 +4,7 @@ import { Footer } from "@/components/shared/footer"
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
 import { get } from "@vercel/edge-config"
+import { Metadata } from "next"
 import { unstable_noStore } from "next/cache"
 import { Suspense } from "react"
 import { BiSearch } from "react-icons/bi"
@@ -13,6 +14,11 @@ import { Rulers } from "../_components/entities/rulers"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
 import { ProjectsList } from "./projects-list"
+
+export const metadata: Metadata = {
+  title: "Projects",
+};
+
 
 const page = async () => {
   unstable_noStore()
