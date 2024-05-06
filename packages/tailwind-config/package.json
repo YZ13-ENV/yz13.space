@@ -5,6 +5,7 @@
   "exports": {
     "./styles": "./styles/index.css",
     "./vars": "./styles/vars.css",
+    "./typography": "./styles/typography.css",
     ".": "./tailwind.config.ts"
   },
   "devDependencies": {

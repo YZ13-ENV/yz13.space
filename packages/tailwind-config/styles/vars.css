@@ -2,46 +2,9 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-
-    --radius: 0.5rem;
-
-    --success-primary: 142 76% 36%;
-    --success-primary-foreground: 0 0% 98%;
-
-    --success-secondary: 143 43% 81%;
-    --success-secondary-foreground: 142 76% 36%;
-
     --header-height: 64px;
     --page-wrapper-height: calc(100dvh - var(--header-height));
     --contact-card-width: 280px;
-
     /* new */
 
     --accents-1: #fafafa;
@@ -54,7 +17,7 @@
     --accents-8: #111;
     --yz13-foreground: #000;
     --yz13-background: #fff;
-    --yz13-selection: var(--yz13-cyan);
+    --yz13-selection: var(--yz13-foreground);
 
     /* status color */
     --yz13-success: #0070f3;
@@ -88,43 +51,18 @@
     --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
     --shadow-large: 0 30px 60px rgba(0, 0, 0, 0.12);
     --portal-opacity: 0.25;
+
+    /* layout */
+    --yz13-radius: 10px;
+    --yz13-gap: 16pt;
+    --yz13-gap-negative: -16pt;
+    --yz13-gap-half: 8pt;
+    --yz13-gap-half-negative: -8pt;
+    --yz13-gap-quarter: 4pt;
+    --yz13-gap-quarter-negative: -4pt;
   }
 
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-
-    --success-primary: 142 76% 36%;
-    --success-primary-foreground: 0 0% 98%;
-
-    --success-secondary: 142 76% 36% / 0.3;
-    --success-secondary-foreground: 142 76% 36%;
-
     /* new */
     --accents-1: #111;
     --accents-2: #333;
@@ -136,20 +74,23 @@
     --accents-8: #fafafa;
     --yz13-foreground: #fff;
     --yz13-background: #000;
-    --yz13-selection: var(--yz13-purple);
+    --yz13-selection: var(--yz13-foreground);
+
+    /* accent */
+    --yz13-accent: #456990;
 
     /* status color */
-    --yz13-success: #0070f3;
-    --yz13-success-light: #3291ff;
-    --yz13-success-dark: #0366d6;
+    --yz13-success: #3daa4b;
+    --yz13-success-light: #7cc37d;
+    --yz13-success-dark: #307637;
 
-    --yz13-error: #e00;
-    --yz13-error-light: #ff1a1a;
-    --yz13-error-dark: #c00;
+    --yz13-error: #e71d36;
+    --yz13-error-light: #f0504f;
+    --yz13-error-dark: #db3b40;
 
-    --yz13-warning: #f5a623;
-    --yz13-warning-light: #f7b955;
-    --yz13-warning-dark: #f49b0b;
+    --yz13-warning: #ff9f1c;
+    --yz13-warning-light: #ffad46;
+    --yz13-warning-dark: #d7871d;
 
     /* highlight */
     --yz13-alert: #ff0080;
