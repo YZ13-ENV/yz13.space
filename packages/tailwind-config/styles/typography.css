@@ -1,19 +1,5 @@
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-  text-rendering: geometricPrecision;
-  -webkit-tap-highlight-color: transparent;
-}
-
 html {
   font-size: 16px;
-}
-
-html,
-body {
-  background-color: var(--yz13-background);
-  color: var(--yz13-foreground);
 }
 
 body {
@@ -63,21 +49,6 @@ b {
 
 img {
   max-width: 100%;
-}
-
-a {
-  color: var(--yz13-link-color);
-  text-decoration: none;
-  cursor: pointer;
-  -webkit-box-align: center;
-  align-items: center;
-  font-size: inherit;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-  &:hover {
-    text-decoration: none;
-  }
 }
 
 h1,
@@ -131,33 +102,6 @@ h6 {
   background-color: var(--yz13-selection);
   color: var(--yz13-background);
 }
-
-ul,
-ol {
-  margin: 1rem 0 1rem 0.9375rem;
-  color: var(--yz13-foreground);
-  padding: 0;
-  list-style-type: none;
-}
-
-ol {
-  list-style-type: decimal;
-}
-
-li {
-  margin-bottom: 0.625rem;
-  font-size: 1em;
-  line-height: 1.625em;
-}
-
-ul > li,
-li:before {
-  content: "–";
-  display: inline-block;
-  color: var(--accents-4);
-  position: absolute;
-  margin-left: -0.9375rem;
-}
 code {
   color: var(--yz13-code);
   font-family: var(--font-mono);
@@ -192,10 +136,6 @@ pre > code {
 code > code:before,
 code:after {
   display: none;
-}
-
-hr {
-  border-color: var(--accents-2);
 }
 
 details {

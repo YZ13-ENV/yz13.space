@@ -25,7 +25,7 @@ const Nav = () => {
                 }}
               >
                 {link.icon && link.icon}
-                <span className="md:inline hidden">
+                <span className="md:inline hidden text-inherit">
                   {link.label}
                 </span>
               </Link>

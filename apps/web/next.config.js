@@ -4,7 +4,7 @@ module.exports = {
   experimental: {
     parallelServerCompiles: true,
     swcMinify: true,
-    optimizeCss: true
+    // optimizeCss: true
   },
   compress: true,
   images: {
