@@ -1,5 +1,6 @@
 "use client"
 import { Vitals } from "@/api/web-vitals"
+import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import { groupBy, keys } from "lodash"
 import { useEffect, useMemo, useState } from "react"
@@ -36,7 +37,7 @@ const ChartOutput = ({ data = [] }: Props) => {
     </div>
   )
   return (
-    <div className="container">
+    <div className="container pt-6 pb-10 bg-card rounded-3xl">
       <div className="flex flex-col justify-center gap-1">
         <h3 className="text-3xl font-bold">{selectedChart}</h3>
         <div className="flex items-center gap-2">
@@ -54,35 +55,61 @@ const ChartOutput = ({ data = [] }: Props) => {
           </span>
         </div>
       </div>
-      <div className="w-full h-[40dvh] flex items-end justify-end">
-        {
-          group_keys.map(
-            item => {
-              const target = group[item]
-              const mid = target ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
-              const status = metric ? mid <= metric?.good ? "good" : mid > metric?.good && metric.mid >= mid ? "needs-improvement" : "poor" : "poor"
-              const value = target ? String(mid.toFixed(3)) + " s." : ""
-              const percent = ((target?.length || 0) / max) * 100
-              if (!target) return <></>
-              return <ChartBar
-                withDate
-                date={`${dayjs(item).format("D MMMM")} (${target.length})`}
-                barClassName={
-                  status === "good"
-                    ? "text-green-600 group-hover/chart:bg-green-900 bg-green-900/30"
-                    : status === "needs-improvement"
-                      ? "text-yellow-600 group-hover/chart:bg-yellow-900 bg-yellow-900/30"
-                      : status === "poor"
-                        ? "text-red-600 group-hover/chart:bg-red-900 bg-red-900/30"
-                        : ""
-                }
-                key={item}
-                percent={percent}
-                value={value}
-              />
-            }
-          )
-        }
+      <div className="relative w-full h-fit">
+        <div className="w-full z-10 h-[40dvh] flex pl-16 items-end justify-end">
+          {
+            group_keys.map(
+              item => {
+                const target = group[item]
+                const mid = target ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
+                const status = metric ? mid <= metric?.good ? "good" : mid > metric?.good && metric.mid >= mid ? "needs-improvement" : "poor" : "poor"
+                const value = target ? String(mid.toFixed(3)) + " s." : ""
+                const percent = ((target?.length || 0) / max) * 100
+                if (!target) return <></>
+                return <ChartBar
+                  withDate
+                  date={`${dayjs(item).format("D MMMM")} (${target.length})`}
+                  barClassName={
+                    status === "good"
+                      ? "text-green-600 group-hover/chart:bg-green-900 bg-green-900/30"
+                      : status === "needs-improvement"
+                        ? "text-yellow-600 group-hover/chart:bg-yellow-900 bg-yellow-900/30"
+                        : status === "poor"
+                          ? "text-red-600 group-hover/chart:bg-red-900 bg-red-900/30"
+                          : ""
+                  }
+                  key={item}
+                  percent={percent}
+                  value={value}
+                />
+              }
+            )
+          }
+        </div>
+        <div className="absolute top-0 left-0 z-0 w-full h-full pr-3 pt-11">
+          <div className="relative z-0 w-full h-full">
+            <div className="absolute top-0 left-0 flex items-center w-full gap-2 h-[1px]">
+              <span className="text-sm text-muted-foreground">{max}</span>
+              <Separator className="z-0" />
+            </div>
+            <div className="absolute top-[25%] left-0 flex items-center w-full gap-2 h-[1px]">
+              <span className="text-sm text-muted-foreground">{(max * (3 / 4)).toFixed(0)}</span>
+              <Separator className="z-0" />
+            </div>
+            <div className="absolute top-[50%] left-0 flex items-center w-full gap-2 h-[1px]">
+              <span className="text-sm text-muted-foreground">{(max * (2 / 4)).toFixed(0)}</span>
+              <Separator className="z-0" />
+            </div>
+            <div className="absolute top-[75%] left-0 flex items-center w-full gap-2 h-[1px]">
+              <span className="text-sm text-muted-foreground">{(max * (1 / 4)).toFixed(0)}</span>
+              <Separator className="z-0" />
+            </div>
+            <div className="absolute bottom-0 left-0 flex items-center w-full h-[1px] gap-2">
+              <span className="text-sm text-muted-foreground">0</span>
+              <Separator className="z-0" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

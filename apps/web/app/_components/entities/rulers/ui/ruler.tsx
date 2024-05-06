@@ -1,6 +1,8 @@
+"use client"
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
+import { cubicBezier, motion } from "framer-motion"
 import { ReactNode } from "react"
 import { useDate } from "../../date"
 import { useEvents } from "../../events"
@@ -24,9 +26,17 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
   return (
     <div
       id={key}
-      className='relative w-fit flex flex-col gap-2 group mt-12 justify-center items-center h-20'
+      className='relative flex flex-col items-center justify-end h-20 gap-2 mt-12 w-fit group'
     >
-      <div className="w-full h-full flex gap-8 relative">
+      <motion.div
+        initial={{ height: "10%" }}
+        animate={{ height: "100%" }}
+        transition={{
+          duration: 1,
+          easings: cubicBezier(.17, .67, .83, .67),
+        }}
+        className="relative flex w-full h-full gap-8"
+      >
         {children}
         {
           !!onlyInRuler.length &&
@@ -36,37 +46,37 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
           })
         }
 
-        <div className='relative h-full flex items-end justify-center'>
-          <div className='w-5 h-5 flex items-center justify-center -top-10 rounded-md absolute'>
-            <span className="text-xs text-muted-foreground transition-colors hover:text-accent-foreground"></span>
+        <div className='relative flex items-end justify-center h-full'>
+          <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-10'>
+            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
           </div>
-          <Separator className='h-1/3 opacity-0' orientation="vertical" />
+          <Separator className='opacity-0 h-1/3' orientation="vertical" />
         </div>
-        <div className='relative h-full flex items-end justify-center'>
-          <div className='w-5 h-5 flex items-center justify-center -top-6 rounded-md absolute'>
-            <span className="text-xs text-muted-foreground transition-colors hover:text-accent-foreground"></span>
+        <div className='relative flex items-end justify-center h-full'>
+          <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-6'>
+            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
           </div>
           <Separator className='h-1/3' orientation="vertical" />
         </div>
-        <div className='relative h-full flex items-end justify-center'>
-          <div className='w-5 h-5 flex items-center justify-center -top-10 rounded-md absolute'>
-            <span className="text-xs text-muted-foreground transition-colors hover:text-accent-foreground"></span>
+        <div className='relative flex items-end justify-center h-full'>
+          <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-10'>
+            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
           </div>
           <Separator className='h-2/3' orientation="vertical" />
         </div>
-        <div className='relative h-full flex items-end justify-center'>
-          <div className='w-5 h-5 flex items-center justify-center -top-10 rounded-md absolute'>
-            <span className="text-xs text-muted-foreground transition-colors hover:text-accent-foreground"></span>
+        <div className='relative flex items-end justify-center h-full'>
+          <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-10'>
+            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
           </div>
           <Separator className='h-1/3' orientation="vertical" />
         </div>
-        <div className='relative h-full flex items-end justify-center'>
-          <div className='w-5 h-5 flex items-center justify-center -bottom-6 rounded-md absolute'>
-            <span className="text-xs cursor-pointer transition-colors text-muted-foreground/60">{lastDay}/1</span>
+        <div className='relative flex items-end justify-center h-full'>
+          <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -bottom-6'>
+            <span className="text-xs transition-colors cursor-pointer text-muted-foreground/60">{lastDay}/1</span>
           </div>
           <Separator className='h-full' orientation="vertical" />
         </div>
-      </div>
+      </motion.div>
       <span className={cn(
         'text-muted-foreground transition-opacity text-xs z-10'
       )}>

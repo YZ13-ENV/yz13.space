@@ -1,6 +1,6 @@
 "use client"
 import { VideoPlayer } from "@/app/_components/entities/video-player"
-import { motion } from "framer-motion"
+import { cubicBezier, motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
 type Props = {
@@ -19,8 +19,15 @@ const BackgroundPlayer = ({ fallback, initial }: Props) => {
   }, [runFallback])
   if (!ready) return null
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <VideoPlayer src={background} className='grayscale opacity-50' onError={() => setFallback(true)} />
+    <motion.div
+      initial={{ opacity: 0, zIndex: -3 }}
+      animate={{ opacity: 1, zIndex: -3 }}
+      transition={{
+        duration: 2,
+        easings: cubicBezier(.17, .67, .83, .67),
+      }}
+    >
+      <VideoPlayer src={background} className='opacity-50 grayscale' onError={() => setFallback(true)} />
     </motion.div>
   )
 }
