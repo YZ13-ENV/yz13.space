@@ -41,7 +41,7 @@ const ChartOutput = ({ data = [] }: Props) => {
       <div className="flex flex-col justify-center gap-1">
         <h3 className="text-3xl font-bold">{selectedChart}</h3>
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-green-900/50 text-green-600 text-xs">
+          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-success-secondary text-success-secondary-foreground text-xs">
             <TbMathEqualLower size={14} />
             {metric?.good}
           </span>
@@ -71,7 +71,7 @@ const ChartOutput = ({ data = [] }: Props) => {
                   date={`${dayjs(item).format("D MMMM")} (${target.length})`}
                   barClassName={
                     status === "good"
-                      ? "text-green-600 group-hover/chart:bg-green-900 bg-green-900/30"
+                      ? "text-success-secondary-foreground group-hover/chart:bg-success-primary group-hover/chart:text-success-primary-foreground bg-success-secondary"
                       : status === "needs-improvement"
                         ? "text-yellow-600 group-hover/chart:bg-yellow-900 bg-yellow-900/30"
                         : status === "poor"

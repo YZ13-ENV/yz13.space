@@ -1,12 +1,11 @@
 "use server";
 
+import { DEFAULT_EXPIRE_TIMESTAMP } from "@/cache.json";
 import { Project } from "@/types";
 import { createClient } from "@/utils/supabase/server";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { kv } from "@vercel/kv";
 import { cookies } from "next/headers";
-
-const DEFAULT_EXPIRE_TIMESTAMP = 3600;
 
 const getProjects = async (): Promise<PostgrestSingleResponse<Project[]>> => {
   const key = `project-all`;

@@ -5,10 +5,11 @@ import { ReactNode } from "react"
 
 
 type Props = {
+  theme?: string
   children?: ReactNode
 }
-const BodyWrapper = ({ children }: Props) => {
+const BodyWrapper = ({ children, theme = "" }: Props) => {
   const modal = useProjectModal(state => state.enabled)
-  return <body className={cn("dark", !!modal ? "overflow-hidden" : "")}>{children}</body>
+  return <body id="body" className={cn(theme, !!modal ? "overflow-hidden" : "")}>{children}</body>
 }
 export { BodyWrapper }

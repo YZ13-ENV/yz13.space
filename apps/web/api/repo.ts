@@ -1,7 +1,6 @@
 "use server";
+import { DEFAULT_EXPIRE_TIMESTAMP } from "@/cache.json";
 import { kv } from "@vercel/kv";
-
-const DEFAULT_EXPIRE_TIMESTAMP = 3600;
 
 const getRepoEvents = async (owner: string, id: string) => {
   try {

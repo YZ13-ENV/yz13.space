@@ -1,8 +1,7 @@
+import { DEFAULT_EXPIRE_TIMESTAMP } from "@/cache.json";
 import { Repo } from "@/types/repo";
 import { User } from "@/types/user";
 import { kv } from "@vercel/kv";
-
-const DEFAULT_EXPIRE_TIMESTAMP = 3600;
 
 export const user = {
   get: async (): Promise<User | null> => {
