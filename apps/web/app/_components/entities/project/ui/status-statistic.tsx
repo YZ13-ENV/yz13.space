@@ -1,6 +1,7 @@
 import { getWebVitalsRecords, Vitals } from "@/api/web-vitals"
 import { metrics } from "@/app/_components/widgets/project-charts/const"
 import { cn } from "@repo/ui/cn"
+import dayjs from "dayjs"
 import { groupBy, keys } from "lodash"
 import { GrStatusGoodSmall } from "react-icons/gr"
 
@@ -15,8 +16,13 @@ type PreparedMetric = {
   weight: number;
 }
 const StatusStatistic = async ({ project_id }: Props) => {
+  const today = dayjs()
+  const today_key = today.format("YYYY-MM-DD")
   const vitals = await getWebVitalsRecords(project_id)
-  const charts: Vitals[] = vitals.data as Vitals[]
+  const charts: Vitals[] = (vitals.data as Vitals[]).filter(item => {
+    const item_date_key = dayjs(item.created_at).format("YYYY-MM-DD")
+    return item_date_key === today_key
+  })
   const grouped_charts = groupBy(charts, "name")
   const grouped_charts_keys = keys(grouped_charts)
   const prepared_metrics: PreparedMetric[] = grouped_charts_keys.map(key => {
@@ -41,7 +47,7 @@ const StatusStatistic = async ({ project_id }: Props) => {
   const overall_status_code = overall_status.toLowerCase()
   return (
     <div className={cn(
-      "w-1/3 h-full flex group/status transition-colors p-1 rounded-md items-center justify-center gap-1",
+      "w-1/2 h-full flex group/status transition-colors p-1 rounded-md items-center justify-center gap-1",
       overall_status_code === "good"
         ? "hover:bg-green-600 bg-green-900/30 text-green-600 hover:text-accent-foreground"
         : overall_status_code === "medium"
@@ -51,7 +57,7 @@ const StatusStatistic = async ({ project_id }: Props) => {
             : "hover:bg-secondary bg-secondary/60 text-secondary-foreground hover:text-accent-foreground"
     )}>
       <GrStatusGoodSmall size={10} className="transition-colors text-inherit" />
-      <span className="transition-colors text-sm text-inherit">{overall_status}</span>
+      <span className="text-sm transition-colors text-inherit">{overall_status}</span>
     </div>
   )
 }

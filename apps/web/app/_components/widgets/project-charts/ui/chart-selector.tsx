@@ -1,5 +1,7 @@
 "use client"
 import { Button } from "@repo/ui/button"
+import { cn } from "@repo/ui/cn"
+import { motion } from "framer-motion"
 import { useEffect } from "react"
 import { useSelectChart } from "../store/select-chart"
 import { ChartTab } from "./project-charts"
@@ -14,7 +16,7 @@ const ChartSelector = ({ charts = [] }: Props) => {
   }, [charts])
   return (
     <div className="container">
-      <div className="w-fit mx-auto rounded-full bg-card h-10 flex items-center justify-center">
+      <div className="flex items-center justify-center h-10 mx-auto rounded-full w-fit bg-card">
         {
           charts.map(
             chart => {
@@ -22,11 +24,15 @@ const ChartSelector = ({ charts = [] }: Props) => {
               return (
                 <Button
                   onClick={() => setSelected(chart.value)}
-                  className="w-full"
+                  className="relative w-full"
                   key={chart.value}
-                  variant={isSelected ? "default" : "ghost"}
+                  variant="ghost"
                 >
-                  <span className="inline-block w-full">{chart.label}</span>
+                  <span className={cn("inline-block w-full z-[1]", isSelected ? "text-primary-foreground" : "text-muted-foreground")}>{chart.label}</span>
+                  {
+                    isSelected &&
+                    <motion.span layoutId="chart-selected-indicator" className="absolute w-full h-full rounded-full bg-primary" />
+                  }
                 </Button>
               )
             })

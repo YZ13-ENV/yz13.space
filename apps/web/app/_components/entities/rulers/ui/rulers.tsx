@@ -31,17 +31,17 @@ const Rulers = ({ size = "default", className = "" }: Props) => {
   const Indicator = () => {
     return (
       <div style={{ left: `${left}%` }} className='absolute z-10 right-1/2 flex items-center justify-center w-[1px] shrink-0 h-full'>
-        {/* <div className='w-5 h-5 flex items-center justify-center -top-8 backdrop-blur-sm rounded-md absolute'> */}
+        {/* <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-8 backdrop-blur-sm'> */}
         {/* <span className="text-xs text-accent-foreground">{current_day}</span> */}
         {/* </div> */}
-        <Separator className='h-full w-full rounded-full bg-primary' orientation="vertical" />
+        <Separator className='w-full h-full rounded-full bg-primary' orientation="vertical" />
       </div>
     )
   }
-  if (!ready) return null
+  if (!ready) return <div ref={ref} className={cn("overflow-x-hidden bg-muted animate-pulse overflow-y-visible", rulers_variants({ size, className }))} />
   return (
     <div ref={ref} className={cn("overflow-x-hidden overflow-y-visible", rulers_variants({ size, className }))}>
-      <motion.div drag="x" dragConstraints={ref} className='w-fit flex flex-row items-center h-fit'>
+      <motion.div drag="x" dragConstraints={ref} className='flex flex-row items-center w-fit h-fit'>
         {
           rulers.map(ruler => {
             const isInThisMonth = today_key === key(ruler)

@@ -1,12 +1,23 @@
 import { Repo } from "@/types/repo";
 import { User } from "@/types/user";
+import { kv } from "@vercel/kv";
+
+const DEFAULT_EXPIRE_TIMESTAMP = 3600;
 
 export const user = {
   get: async (): Promise<User | null> => {
     try {
+      const key = `YZ13-ENV`;
+      const cached = await kv.get<User | null>(key);
+      if (cached) return cached;
       const url = "https://api.github.com/users/yz13-env";
       const res = await fetch(url, { method: "GET" });
-      if (res.ok) return await res.json();
+      if (res.ok) {
+        const json = await res.json();
+        if (json)
+          kv.set(key, json, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+        return json;
+      }
       return null;
     } catch (e) {
       process.env.NODE_ENV === "development" && console.log(e);

@@ -44,25 +44,27 @@ const page = async () => {
           <Rulers />
         </Suspense>
       </div>
-      <div className="relative w-full py-12 h-fit">
-        <div className="container">
-          <div className="relative w-full">
-            <div className="absolute left-0 flex items-center justify-center w-12 h-12">
-              <BiSearch size={20} className="text-muted-foreground" />
+      <div className="w-full h-fit">
+        <div className="relative w-full py-12 h-fit">
+          <div className="container">
+            <div className="relative w-full">
+              <div className="absolute left-0 flex items-center justify-center w-12 h-12">
+                <BiSearch size={20} className="text-muted-foreground" />
+              </div>
+              <Input className="h-12 pl-12 text-base bg-background focus-visible:ring-2 rounded-xl" placeholder="Search projects" />
             </div>
-            <Input className="h-12 pl-12 text-base focus-visible:ring-2 rounded-xl" placeholder="Search projects" />
           </div>
         </div>
-      </div>
-      <div className="relative w-full h-fit">
-        <div className="container grid w-full grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2 auto-rows-auto h-fit">
-          <Suspense fallback={
-            <>
-              <div className="w-full h-36 bg-muted rounded-xl animate-pulse" />
-            </>
-          }>
-            <ProjectsList />
-          </Suspense>
+        <div className="relative w-full h-fit">
+          <div className="container grid w-full grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2 auto-rows-auto h-fit">
+            <Suspense fallback={
+              <>
+                <div className="w-full h-36 bg-muted rounded-xl animate-pulse" />
+              </>
+            }>
+              <ProjectsList />
+            </Suspense>
+          </div>
         </div>
       </div>
       <div className="w-full h-36" />

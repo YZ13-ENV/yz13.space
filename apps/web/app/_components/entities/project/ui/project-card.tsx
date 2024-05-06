@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { BsGithub } from "react-icons/bs"
+import { MdOpenInNew } from "react-icons/md"
 import { CardStatistics } from "./statistics"
 
 type Props = {
@@ -17,10 +18,10 @@ const ProjectCard = ({ project }: Props) => {
   const repo_id = project.repo_id
   const repo_owner = project.repo_owner
   return (
-    <div className="w-full h-fit flex flex-col gap-4 border hover:border-primary transition-colors p-4 cursor-pointer rounded-xl">
-      <div className="w-full flex items-center justify-between">
+    <div className="flex flex-col w-full gap-4 p-4 transition-colors border cursor-pointer h-fit bg-background hover:border-primary rounded-xl">
+      <div className="flex items-center justify-between w-full">
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 aspect-square rounded-full overflow-hidden relative">
+          <div className="relative overflow-hidden rounded-full w-9 h-9 aspect-square">
             {
               project.icon
                 ? <Image src={project.icon} fill className="p-1" alt="project-icon" />
@@ -29,7 +30,10 @@ const ProjectCard = ({ project }: Props) => {
           </div>
           <div className="flex flex-col justify-center">
             <span className="text-base">{project.name}</span>
-            <span className="text-muted-foreground text-sm">{project.link}</span>
+            <Link href={project.link} className="inline-flex items-center gap-2 text-sm text-muted-foreground group/project-link hover:underline">
+              <span>{project.link}</span>
+              <MdOpenInNew size={14} className="hidden group-hover/project-link:block" />
+            </Link>
           </div>
         </div>
         <Button size="icon" variant="ghost" className="text-muted-foreground" asChild>
@@ -38,7 +42,7 @@ const ProjectCard = ({ project }: Props) => {
           </Link>
         </Button>
       </div>
-      <div className="w-full flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between w-full gap-3">
         {
           repo_owner && repo_id
             ?
