@@ -13,8 +13,7 @@ export const user = {
       const res = await fetch(url, { method: "GET" });
       if (res.ok) {
         const json = await res.json();
-        if (json)
-          kv.set(key, json, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+        if (json) kv.set(key, json, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
         return json;
       }
       return null;

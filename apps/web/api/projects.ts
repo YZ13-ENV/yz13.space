@@ -14,7 +14,7 @@ const getProjects = async (): Promise<PostgrestSingleResponse<Project[]>> => {
   const cookie = cookies();
   const client = createClient(cookie);
   const all = await client.from("projects").select();
-  if (all) kv.set(key, all, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+  if (all) kv.set(key, all, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
   return all;
 };
 
@@ -31,7 +31,7 @@ const getProject = async (
     .select()
     .filter("id", "eq", id);
   if (filtered)
-    kv.set(key, filtered, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+    kv.set(key, filtered, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
   return filtered;
 };
 
@@ -48,7 +48,7 @@ const getProjectBlocks = async (
     .select()
     .filter("project_id", "eq", id);
   if (filtered)
-    kv.set(key, filtered, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+    kv.set(key, filtered, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
   return filtered;
 };
 
