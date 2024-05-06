@@ -1,7 +1,6 @@
 "use server";
+import { DEFAULT_EXPIRE_TIMESTAMP } from "@/cache.json";
 import { kv } from "@vercel/kv";
-
-const DEFAULT_EXPIRE_TIMESTAMP = 3600;
 
 const getRepoEvents = async (owner: string, id: string) => {
   try {
@@ -12,7 +11,7 @@ const getRepoEvents = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+      if (json) kv.set(key, json, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
       return json;
     }
     return [];
@@ -30,7 +29,7 @@ const getRepoDeployments = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+      if (json) kv.set(key, json, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
       return json;
     }
     return [];
@@ -48,7 +47,7 @@ const getRepoLanguages = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+      if (json) kv.set(key, json, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
       return json;
     }
     return null;
@@ -67,7 +66,7 @@ const getRepoCommits = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, exat: DEFAULT_EXPIRE_TIMESTAMP });
+      if (json) kv.set(key, json, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
       return json;
     }
     return [];
