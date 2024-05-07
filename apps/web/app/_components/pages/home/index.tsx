@@ -24,13 +24,13 @@ const HomePage = async () => {
         <div className='w-full h-[70%] flex flex-col items-center justify-center gap-6'>
           <h1 className="text-[15dvw] leading-tight text-center w-full font-bold">YZ13</h1>
           <div className="space-y-2">
-            <p className="w-full text-xl font-light text-muted-foreground text-center">Welcome to <span className='font-medium text-accent-foreground'>YZ13 LAB</span></p>
+            <p className="w-full text-xl font-light text-secondary text-center">Welcome to <span className='font-medium text-foreground'>YZ13 LAB</span></p>
           </div>
         </div>
         <div className="w-full h-[30%] py-6 flex flex-col justify-between">
           <div className='w-full flex justify-center gap-2'>
             <Nav />
-            <Button className="rounded-full bg-muted/50 backdrop-blur-sm border" variant="secondary">
+            <Button className="rounded-full bg-background border" variant="secondary">
               <Time format="dd, DD MMMM HH:mm" className="" />
             </Button>
           </div>

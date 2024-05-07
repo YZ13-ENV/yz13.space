@@ -30,10 +30,10 @@ const SectionBackground = ({ src }: { src: string }) => {
   />
 }
 const SectionOverlay = () => {
-  return <div className="absolute z-[-1] left-0 top-0 w-full h-full bg-gradient-to-r from-background via-transparent to-background" />
+  return <div className="absolute z-[-1] left-0 top-0 w-full h-full bg-gradient-to-r from-background/60 via-transparent to-background/60" />
 }
 const SectionBackgroundBlur = () => {
-  return <div className='z-[-2] w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-background backdrop-blur-xl' />
+  return <div className='z-[-2] w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-background backdrop-blur-3xl' />
 }
 const ContentWrapper = ({ children, className = "" }: { className?: string, children?: ReactNode }) => {
   return <div className={cn("relative w-full h-full", className)}>{children}</div>
