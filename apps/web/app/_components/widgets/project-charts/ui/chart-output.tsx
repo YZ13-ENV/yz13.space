@@ -41,15 +41,15 @@ const ChartOutput = ({ data = [] }: Props) => {
       <div className="flex flex-col justify-center gap-1">
         <h3 className="text-3xl font-bold">{selectedChart}</h3>
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-success-dark text-foreground text-xs">
+          <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 bg-success text-foreground text-xs">
             <TbMathEqualLower size={14} />
             {metric?.good}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-warning-dark text-foreground text-xs">
+          <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 bg-warning text-foreground text-xs">
             <TbMathEqualLower size={14} />
             {metric?.mid}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-sm px-2 py-0.5 bg-error-dark text-foreground text-xs">
+          <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 bg-error text-foreground text-xs">
             {metric?.poor}
             <TbMathGreater size={14} />
           </span>
@@ -71,7 +71,7 @@ const ChartOutput = ({ data = [] }: Props) => {
                   date={`${dayjs(item).format("D MMMM")} (${target.length})`}
                   barClassName={
                     status === "good"
-                      ? "text-foreground bg-success-dark"
+                      ? "text-foreground bg-success"
                       : status === "needs-improvement"
                         ? "text-foreground bg-warning"
                         : status === "poor"

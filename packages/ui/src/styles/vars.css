@@ -1,0 +1,118 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    --header-height: 64px;
+    --page-wrapper-height: calc(100dvh - var(--header-height));
+    --contact-card-width: 280px;
+    /* new */
+
+    --accents-1: 0 0% 98%;
+    --accents-2: 0 0% 92%;
+    --accents-3: 0 0% 60%;
+    --accents-4: 0 0% 53%;
+    --accents-5: 0 0% 40%;
+    --accents-6: 0 0% 27%;
+    --accents-7: 0 0% 20%;
+    --accents-8: 0 0% 7%;
+    --yz13-foreground: 0 0% 0%;
+    --yz13-background: 0 0% 100%;
+    --yz13-selection: var(--yz13-foreground);
+    --yz13-border: var(--accents-2);
+    /* accent */
+    --yz13-accent: #456990;
+
+    /* status color */
+    --yz13-success: 128 47% 45%;
+    --yz13-success-light: 121 37% 63%;
+    --yz13-success-dark: 126 42% 33%;
+
+    --yz13-error: 353 81% 51%;
+    --yz13-error-light: 0 84% 63%;
+    --yz13-error-dark: 358 69% 55%;
+
+    --yz13-warning: 35 100% 55%;
+    --yz13-warning-light: 33 100% 64%;
+    --yz13-warning-dark: 34 76% 48%;
+
+    /* highlight */
+    --yz13-alert: #ff0080;
+    --yz13-purple: #f81ce5;
+    --yz13-cyan: #79ffe1;
+    --yz13-violet: #7928ca;
+    /*component expressiveness*/
+
+    --yz13-link-color: var(--yz13-success);
+    --yz13-link-style: none;
+    --yz13-secondary: var(--accents-5);
+    --yz13-code: var(--yz13-purple);
+    --dropdown-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.02);
+    --dropdown-triangle-stroke: #fff;
+    --scroller-start: rgba(255, 255, 255, 1);
+    --scroller-end: rgba(255, 255, 255, 0);
+    --shadow-small: 0 5px 10px rgba(0, 0, 0, 0.12);
+    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --shadow-large: 0 30px 60px rgba(0, 0, 0, 0.12);
+    --portal-opacity: 0.25;
+
+    /* layout */
+    --yz13-radius: 10px;
+    --yz13-gap: 16pt;
+    --yz13-gap-negative: -16pt;
+    --yz13-gap-half: 8pt;
+    --yz13-gap-half-negative: -8pt;
+    --yz13-gap-quarter: 4pt;
+    --yz13-gap-quarter-negative: -4pt;
+  }
+
+  .dark {
+    /* new */
+    --accents-1: 0 0% 7%;
+    --accents-2: 0 0% 20%;
+    --accents-3: 0 0% 27%;
+    --accents-4: 0 0% 40%;
+    --accents-5: 0 0% 53%;
+    --accents-6: 0 0% 60%;
+    --accents-7: 0 0% 92%;
+    --accents-8: 0 0% 98%;
+    --yz13-foreground: 0 0% 100%;
+    --yz13-background: 0 0% 0%;
+    --yz13-selection: hsl(var(--yz13-foreground));
+    --yz13-border: var(--accents-3);
+    /* accent */
+    --yz13-accent: #456990;
+
+    /* status color */
+    --yz13-success: 128 47% 45%;
+    --yz13-success-light: 121 37% 63%;
+    --yz13-success-dark: 126 42% 33%;
+
+    --yz13-error: 353 81% 51%;
+    --yz13-error-light: 0 84% 63%;
+    --yz13-error-dark: 358 69% 55%;
+
+    --yz13-warning: 35 100% 55%;
+    --yz13-warning-light: 33 100% 64%;
+    --yz13-warning-dark: 34 76% 48%;
+
+    /* highlight */
+    --yz13-alert: #ff0080;
+    --yz13-purple: #f81ce5;
+    --yz13-cyan: #79ffe1;
+    --yz13-violet: #7928ca;
+
+    /* component expressiveness */
+    --yz13-link-color: hsl(var(--yz13-foreground));
+    --yz13-link-style: underline;
+    --yz13-secondary: var(--accents-5);
+    --yz13-code: var(--yz13-cyan);
+    --dropdown-box-shadow: 0 0 0 1px #333;
+    --dropdown-triangle-stroke: #333;
+    --scroller-start: rgba(0, 0, 0, 0.3);
+    --scroller-end: rgba(255, 255, 255, 0);
+    --shadow-small: 0 0 0 1px #333;
+    --shadow-medium: 0 0 0 1px #333;
+    --shadow-large: 0 0 0 1px #333;
+    --portal-opacity: 0.75;
+  }
+}

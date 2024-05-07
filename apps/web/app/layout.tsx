@@ -1,10 +1,10 @@
 import { ThemeWrapper } from "@/components/entities/theme-observer";
 import { WebVitals } from "@/components/web-vitals";
 import { CSPostHogProvider } from "@/utils/posthog/provider";
-import "@repo/tailwind-config/styles";
-import "@repo/tailwind-config/typography";
-import "@repo/tailwind-config/vars";
 import { cn } from "@repo/ui/cn";
+import "@repo/ui/css";
+import "@repo/ui/css/typography";
+import "@repo/ui/css/vars";
 import type { Metadata, Viewport } from "next";
 import { Geologica } from "next/font/google";
 import localFont from "next/font/local";

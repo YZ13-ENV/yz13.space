@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from "@/app/_components/entities/theme"
 import { User } from "@/components/shared/user"
 import Link from "next/link"
 import { DynamicHeaderWrapper } from "./dynamic-header-wrapper"
@@ -13,7 +14,10 @@ const HomeHeader = ({ className = "" }: Props) => {
       activeClassName="backdrop-blur"
     >
       <Link href="/" className='text-2xl font-semibold'>YZ13</Link>
-      <User />
+      <div className="flex items-center gap-4">
+        <ThemeSwitcher />
+        <User />
+      </div>
     </DynamicHeaderWrapper>
   )
 }

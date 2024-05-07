@@ -28,10 +28,10 @@ const ChartSelector = ({ charts = [] }: Props) => {
                   key={chart.value}
                   variant="ghost"
                 >
-                  <span className={cn("inline-block w-full z-[1]", isSelected ? "text-primary-foreground" : "text-muted-foreground")}>{chart.label}</span>
+                  <span className={cn("inline-block w-full z-[1]", isSelected ? "text-background" : "text-secondary")}>{chart.label}</span>
                   {
                     isSelected &&
-                    <motion.span layoutId="chart-selected-indicator" className="absolute w-full h-full rounded-full bg-primary" />
+                    <motion.span layoutId="chart-selected-indicator" className="absolute w-full h-full rounded-full bg-foreground" />
                   }
                 </Button>
               )
