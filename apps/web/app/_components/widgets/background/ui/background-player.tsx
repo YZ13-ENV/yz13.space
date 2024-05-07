@@ -20,6 +20,7 @@ const BackgroundPlayer = ({ fallback, initial }: Props) => {
   if (!ready) return null
   return (
     <motion.div
+      className="z-[-3]"
       initial={{ opacity: 0, zIndex: -3 }}
       animate={{ opacity: 1, zIndex: -3 }}
       transition={{
@@ -27,7 +28,7 @@ const BackgroundPlayer = ({ fallback, initial }: Props) => {
         easings: cubicBezier(.17, .67, .83, .67),
       }}
     >
-      <VideoPlayer src={background} className='opacity-50 grayscale' onError={() => setFallback(true)} />
+      <VideoPlayer src={background} className='z-[-3] grayscale' onError={() => setFallback(true)} />
     </motion.div>
   )
 }

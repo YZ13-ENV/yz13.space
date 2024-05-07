@@ -8,9 +8,9 @@ const Background = async () => {
   const fallback = await fromStorage()
   return (
     <>
-      <BackgroundPlayer initial={initial} fallback={fallback} />
-      <SectionBackgroundBlur />
       <SectionOverlay />
+      <SectionBackgroundBlur />
+      <BackgroundPlayer initial={initial} fallback={fallback} />
     </>
   )
 }

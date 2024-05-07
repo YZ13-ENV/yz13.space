@@ -33,7 +33,7 @@ const page = async () => {
           <h1 className="w-full font-bold leading-tight text-center text-7xl">Contact</h1>
           <div className='flex justify-center w-full gap-2'>
             <Nav />
-            <Button className="border rounded-full bg-muted/50 backdrop-blur-sm" variant="secondary">
+            <Button className="border rounded-full bg-background" variant="secondary">
               <Time format="dd, DD MMMM HH:mm" className="" />
             </Button>
           </div>
@@ -49,7 +49,7 @@ const page = async () => {
       <div className="container py-12">
         <div className="grid w-full auto-rows-auto contact-card-grid">
           <div className="w-full p-4 space-y-3 border h-fit bg-card rounded-xl">
-            <div className="relative w-full overflow-hidden aspect-square bg-muted rounded-xl">
+            <div className="relative w-full overflow-hidden aspect-square bg-accents-2 rounded-xl">
               {
                 user &&
                 <Image src={user.avatar_url} fill alt={user.login} />
@@ -58,16 +58,20 @@ const page = async () => {
             <div className="w-full space-y-1.5">
               <section className="flex items-center justify-between w-full gap-2">
                 <h3 className="text-lg">Vladimir</h3>
-                <span className="text-sm text-muted-foreground">@YZ13</span>
+                <span className="text-sm text-secondary">@YZ13</span>
               </section>
               <div className="flex items-center justify-between w-full gap-2">
-                <span className="text-sm text-muted-foreground">Frontend developer</span>
-                <span className="text-sm text-muted-foreground">Russia</span>
+                <span className="text-sm text-secondary">Frontend developer</span>
+                <span className="text-sm text-secondary">Russia</span>
               </div>
             </div>
             <ul className="w-full overflow-hidden border divide-y rounded-xl bg-card">
               <li>
-                <Link target="_blank" href="https://t.me/YZTHECEO" className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-muted">
+                <Link
+                  target="_blank"
+                  href="https://t.me/YZTHECEO"
+                  className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-accents-1"
+                >
                   <span className="inline-flex items-center gap-2">
                     <BsTelegram size={18} />
                     <span>@YZTHECEO</span>
@@ -76,7 +80,11 @@ const page = async () => {
                 </Link>
               </li>
               <li>
-                <Link target="_blank" href="https://github.com/yz13-env" className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-muted">
+                <Link
+                  target="_blank"
+                  href="https://github.com/yz13-env"
+                  className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-accents-1"
+                >
                   <span className="inline-flex items-center gap-2">
                     <BsGithub size={18} />
                     <span>YZ13-ENV</span>

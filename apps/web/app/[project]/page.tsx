@@ -10,8 +10,7 @@ import { Metadata, ResolvingMetadata } from "next"
 import Image from "next/image"
 import { Suspense } from "react"
 import { AiOutlineDeploymentUnit } from "react-icons/ai"
-import { MdCommit } from "react-icons/md"
-import { RiGitRepositoryCommitsLine } from "react-icons/ri"
+import { CommitsList } from "../_components/widgets/commits/ui/list"
 import { ProjectCharts } from "../_components/widgets/project-charts"
 import { ProjectBanner } from "./project-banner"
 type Props = {
@@ -35,6 +34,8 @@ export async function generateMetadata(
 }
 dayjs.extend(relativeTime)
 const page = async ({ params }: Props) => {
+  const OWNER = "YZ13-ENV"
+  const REPO = "yz13"
   const id = params.project
   const events = await getRepoEvents("YZ13-ENV", "yz13")
   const deployments: any[] = await getRepoDeployments("YZ13-ENV", "yz13")
@@ -61,7 +62,7 @@ const page = async ({ params }: Props) => {
         <Separator />
         <div className="py-12 bg-accents-1">
           <div className="container flex lg:flex-row gap-6 flex-col items-start">
-            <section className="w-full max-w-sm space-y-6 shrink-0">
+            <section className="w-full lg:max-w-sm space-y-6 shrink-0">
               <h3 className="text-xl font-semibold">Deployments</h3>
               <div className="w-full space-y-3">
                 {
@@ -135,55 +136,9 @@ const page = async ({ params }: Props) => {
                 </div>
                 <div className="w-full space-y-3">
                   <span>Commits</span>
-                  <div className="w-full space-y-6">
-
-                    {
-                      grouped_commits_keys.map(
-                        key => {
-                          const group = grouped_commits[key] || []
-                          const created_at = dayjs(key).fromNow()
-                          return (
-                            <div key={"commits-group-" + key} className="w-full py-2 relative flex flex-col gap-2">
-                              <div className="flex items-center gap-2">
-                                <div className="w-9 h-9 relative z-[1] bg-accents-2 border-2 border-accents-1 inline-flex rounded-full items-center justify-center">
-                                  <RiGitRepositoryCommitsLine size={18} />
-                                </div>
-                                <span>{created_at} was added {group.length} commits</span>
-                              </div>
-                              <ul className="w-full space-y-2">
-                                {
-                                  group.map(
-                                    commit => {
-                                      const commit_id = commit.sha.slice(0, 7)
-                                      // const created_at = dayjs(commit.commit.committer.date).fromNow()
-                                      return (
-                                        <li key={commit.sha} className="w-full group/commit hover:bg-accents-2 transition-colors cursor-pointer p-1 rounded-lg">
-                                          <div className="w-full flex items-center gap-2">
-                                            <div className="w-7 z-[1] shrink-0 h-7 inline-flex rounded-full bg-accents-2 border-2 border-accents-1 items-center justify-center">
-                                              <MdCommit size={18} />
-                                            </div>
-                                            <div className="w-full space-x-2">
-                                              <div className="inline-block w-fit h-fit space-x-2">
-                                                <Image src={commit.committer.avatar_url} className="mb-0.5 inline-block rounded-full" width={20} height={20} alt={commit.committer.name} />
-                                                <span className="text-sm text-secondary">{commit.committer.login}</span>
-                                              </div>
-                                              <span className="text-sm px-2 rounded-md group-hover/commit:bg-accents-1 transition-colors bg-accents-2">{commit_id}</span>
-                                              <span className="text-sm">{commit.commit.message}</span>
-                                            </div>
-                                          </div>
-                                        </li>
-                                      )
-                                    }
-                                  )
-                                }
-                              </ul>
-                              <Separator orientation="vertical" className="absolute bg-accents-2 left-[17px] -top-0.5" />
-                            </div>
-                          )
-                        }
-                      )
-                    }
-                  </div>
+                  <Suspense fallback={<div className="w-full h-64 rounded-xl bg-accents-2 animate-pulse" />}>
+                    <CommitsList owner={OWNER} repo={REPO} />
+                  </Suspense>
                 </div>
               </div>
             </section>

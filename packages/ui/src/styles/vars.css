@@ -23,6 +23,18 @@
     --yz13-accent: #456990;
 
     /* status color */
+    --yz13-success: 123 37% 54%;
+    --yz13-success-light: 122 37% 61%;
+    --yz13-success-dark: 123 31% 46%;
+
+    --yz13-error: 0 84% 63%;
+    --yz13-error-light: 3, 89%, 69%;
+    --yz13-error-dark: 0 55% 53%;
+
+    --yz13-warning: 35 100% 55%;
+    --yz13-warning-light: 35 100% 69%;
+    --yz13-warning-dark: 35 66% 54%;
+
     --yz13-success: 128 47% 45%;
     --yz13-success-light: 121 37% 63%;
     --yz13-success-dark: 126 42% 33%;
@@ -83,17 +95,17 @@
     --yz13-accent: #456990;
 
     /* status color */
-    --yz13-success: 128 47% 45%;
-    --yz13-success-light: 121 37% 63%;
-    --yz13-success-dark: 126 42% 33%;
+    --yz13-success: 123 37% 54%;
+    --yz13-success-light: 122 37% 61%;
+    --yz13-success-dark: 123 31% 46%;
 
-    --yz13-error: 353 81% 51%;
-    --yz13-error-light: 0 84% 63%;
-    --yz13-error-dark: 358 69% 55%;
+    --yz13-error: 0 84% 63%;
+    --yz13-error-light: 3, 89%, 69%;
+    --yz13-error-dark: 0 55% 53%;
 
     --yz13-warning: 35 100% 55%;
-    --yz13-warning-light: 33 100% 64%;
-    --yz13-warning-dark: 34 76% 48%;
+    --yz13-warning-light: 35 100% 69%;
+    --yz13-warning-dark: 35 66% 54%;
 
     /* highlight */
     --yz13-alert: #ff0080;

@@ -33,7 +33,7 @@ const EventMark = ({ event, date = dayjs() }: Props) => {
             </div>
           </div>
         </TooltipTrigger>
-        <TooltipContent className="flex items-center gap-1 mb-4 rounded-full bg-accent text-accent-foreground backdrop-blur">
+        <TooltipContent className="flex items-center gap-1 mb-4 rounded-full bg-background text-foreground backdrop-blur">
           <span>{format} - {event.title}</span> <BiRightArrowAlt size={14} />
         </TooltipContent>
       </Tooltip>

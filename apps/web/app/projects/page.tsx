@@ -3,6 +3,7 @@ import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
+import { Separator } from "@repo/ui/separator"
 import { get } from "@vercel/edge-config"
 import { Metadata } from "next"
 import { unstable_noStore } from "next/cache"
@@ -31,7 +32,7 @@ const page = async () => {
           <h1 className="w-full font-bold leading-tight text-center text-7xl">Projects</h1>
           <div className='flex justify-center w-full gap-2'>
             <Nav />
-            <Button className="border rounded-full bg-muted/50 backdrop-blur-sm" variant="secondary">
+            <Button className="border rounded-full bg-background" variant="secondary">
               <Time format="dd, DD MMMM HH:mm" className="" />
             </Button>
           </div>
@@ -44,8 +45,9 @@ const page = async () => {
           <Rulers />
         </Suspense>
       </div>
-      <div className="w-full h-fit">
-        <div className="relative w-full py-12 h-fit">
+      <Separator />
+      <div className="w-full h-fit py-12 min-h-screen">
+        <div className="relative w-full h-fit">
           <div className="container">
             <div className="relative w-full">
               <div className="absolute left-0 flex items-center justify-center w-12 h-12">
@@ -55,7 +57,7 @@ const page = async () => {
             </div>
           </div>
         </div>
-        <div className="relative w-full h-fit">
+        <div className="relative w-full h-fit mt-12">
           <div className="container grid w-full grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2 auto-rows-auto h-fit">
             <Suspense fallback={
               <>
@@ -67,8 +69,8 @@ const page = async () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-36" />
-      <Footer />
+      <Separator />
+      <Footer className="bg-accents-1" />
     </>
   )
 }

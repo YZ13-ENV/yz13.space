@@ -6,7 +6,7 @@ import Link from "next/link"
 type Props = {
   size?: number
 }
-const User = async ({ size = 48 }: Props) => {
+const User = async ({ size = 36 }: Props) => {
   const user = await user_api.get()
   if (!user) return null
   return (
