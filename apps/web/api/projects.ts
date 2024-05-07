@@ -1,5 +1,4 @@
 "use server";
-
 import { DEFAULT_EXPIRE_TIMESTAMP } from "@/cache.json";
 import { Project } from "@/types";
 import { createClient } from "@/utils/supabase/server";
@@ -8,7 +7,7 @@ import { kv } from "@vercel/kv";
 import { cookies } from "next/headers";
 
 const getProjects = async (): Promise<PostgrestSingleResponse<Project[]>> => {
-  const key = `project-all`;
+  const key = `projects-all`;
   const cached = await kv.get<PostgrestSingleResponse<any[]>>(key);
   if (cached) return cached;
   const cookie = cookies();

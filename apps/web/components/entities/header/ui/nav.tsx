@@ -9,7 +9,7 @@ const Nav = () => {
   const pathname = usePathname()
   return (
     <>
-      <nav className="rounded-full flex border items-center bg-secondary/50 backdrop-blur-sm">
+      <nav className="rounded-full flex border bg-background items-center">
         {
           links.map(link =>
             <Button
@@ -25,7 +25,7 @@ const Nav = () => {
                 }}
               >
                 {link.icon && link.icon}
-                <span className="md:inline hidden">
+                <span className="md:inline hidden text-inherit">
                   {link.label}
                 </span>
               </Link>

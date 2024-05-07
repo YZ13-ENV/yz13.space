@@ -1,4 +1,10 @@
-@tailwind components;
+@tailwind base;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
 
 .app-grid {
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));

@@ -2,7 +2,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import * as React from "react"
 
-import { cn } from "../lib/utils"
+import { cn } from "../../lib/utils"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -10,14 +10,18 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-foreground text-background shadow hover:bg-accents-8/90",
+        error:
+          "bg-error text-foreground shadow-sm hover:bg-error-dark",
+        warning:
+          "bg-warning text-foreground shadow-sm hover:bg-warning-dark",
+        success:
+          "bg-success text-foreground shadow-sm hover:bg-success-dark",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-accents-3 bg-background shadow-sm hover:bg-accents-3 hover:text-accents-7",
         secondary:
-          "rounded-full bg-secondary/50 backdrop-sm text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+          "rounded-full bg-accents-3 backdrop-sm text-accents-7 shadow-sm hover:bg-accents-3/80",
+        ghost: "hover:bg-accents-3 hover:text-accents-7",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

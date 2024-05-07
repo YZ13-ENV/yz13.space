@@ -1,0 +1,121 @@
+@tailwind base;
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  small {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 0.875rem;
+  }
+
+  b {
+    font-weight: 600;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-headings);
+    margin: 0 0 0.625rem 0;
+    color: inherit;
+  }
+
+  h1 {
+    font-size: 3rem;
+    letter-spacing: -0.066875rem;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    letter-spacing: -0.020625rem;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    letter-spacing: -0.029375rem;
+    font-weight: 600;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    letter-spacing: -0.020625rem;
+    font-weight: 600;
+  }
+
+  h5 {
+    font-size: 1rem;
+    letter-spacing: -0.01125rem;
+    font-weight: 600;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+    letter-spacing: -0.005625rem;
+    font-weight: 600;
+  }
+  ::selection {
+    background-color: var(--yz13-selection);
+    color: hsl(var(--yz13-background));
+  }
+  code {
+    color: var(--yz13-code);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    white-space: pre-wrap;
+  }
+
+  code:before {
+    content: "`";
+  }
+  code:after {
+    content: "`";
+  }
+
+  pre {
+    border: 1px solid hsl(var(--yz13-border));
+    border-radius: var(--yz13-radius);
+    padding: calc(var(--yz13-gap) * 0.75) var(--yz13-gap);
+    margin: 1.5rem 0;
+    white-space: pre;
+    overflow: auto;
+    font-size: 0.875rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  pre > code {
+    color: var(--yz13-foreground);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    white-space: pre;
+  }
+  code > code:before,
+  code:after {
+    display: none;
+  }
+
+  details {
+    background-color: var(--accents-1);
+  }
+}

@@ -49,12 +49,12 @@ const StatusStatistic = async ({ project_id }: Props) => {
     <div className={cn(
       "w-1/2 h-full flex group/status transition-colors p-1 rounded-md items-center justify-center gap-1",
       overall_status_code === "good"
-        ? "hover:bg-green-600 bg-green-900/30 text-green-600 hover:text-accent-foreground"
+        ? "text-foreground bg-success"
         : overall_status_code === "medium"
-          ? "hover:bg-yellow-600 bg-yellow-900/30 text-yellow-600 hover:text-accent-foreground"
+          ? "text-foreground bg-warning"
           : overall_status_code === "poor"
-            ? "hover:bg-red-600 bg-red-900/30 text-red-600 hover:text-accent-foreground"
-            : "hover:bg-secondary bg-secondary/60 text-secondary-foreground hover:text-accent-foreground"
+            ? "text-foreground bg-error"
+            : "text-foreground bg-background"
     )}>
       <GrStatusGoodSmall size={10} className="transition-colors text-inherit" />
       <span className="text-sm transition-colors text-inherit">{overall_status}</span>

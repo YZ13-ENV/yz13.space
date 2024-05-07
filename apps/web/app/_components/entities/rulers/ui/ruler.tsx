@@ -48,37 +48,37 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
 
         <div className='relative flex items-end justify-center h-full'>
           <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-10'>
-            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
+            <span className="text-xs transition-colors text-accents-4 hover:text-accent-foreground"></span>
           </div>
           <Separator className='opacity-0 h-1/3' orientation="vertical" />
         </div>
         <div className='relative flex items-end justify-center h-full'>
           <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-6'>
-            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
+            <span className="text-xs transition-colors text-accents-4 hover:text-accent-foreground"></span>
           </div>
           <Separator className='h-1/3' orientation="vertical" />
         </div>
         <div className='relative flex items-end justify-center h-full'>
           <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-10'>
-            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
+            <span className="text-xs transition-colors text-accents-4 hover:text-accent-foreground"></span>
           </div>
           <Separator className='h-2/3' orientation="vertical" />
         </div>
         <div className='relative flex items-end justify-center h-full'>
           <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-10'>
-            <span className="text-xs transition-colors text-muted-foreground hover:text-accent-foreground"></span>
+            <span className="text-xs transition-colors text-accents-4 hover:text-accent-foreground"></span>
           </div>
           <Separator className='h-1/3' orientation="vertical" />
         </div>
         <div className='relative flex items-end justify-center h-full'>
           <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -bottom-6'>
-            <span className="text-xs transition-colors cursor-pointer text-muted-foreground/60">{lastDay}/1</span>
+            <span className="text-xs transition-colors cursor-pointer text-accents-4/60">{lastDay}/1</span>
           </div>
           <Separator className='h-full' orientation="vertical" />
         </div>
       </motion.div>
       <span className={cn(
-        'text-muted-foreground transition-opacity text-xs z-10'
+        'text-accents-4 transition-opacity text-xs z-10'
       )}>
         {isFirstMonth ? formatWithYear : format}
       </span>
