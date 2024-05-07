@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@repo/ui": "workspace:*",
     "@supabase/ssr": "^0.3.0",

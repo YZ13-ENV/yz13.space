@@ -11,6 +11,7 @@ import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { BodyWrapper } from "./_components/body-wrapper";
+import { Theme } from "./_components/entities/theme";
 import "./globals.css";
 const font = Geologica({
   subsets: ["latin", "cyrillic"],
@@ -41,7 +42,7 @@ type LayoutProps = Readonly<{
 export default function RootLayout({ children }: LayoutProps) {
   const cookies_list = cookies()
   const theme_cookie = cookies_list.get("theme")
-  const default_theme = theme_cookie ? theme_cookie.value : "system"
+  const default_theme = (theme_cookie ? theme_cookie.value : "system") as Theme
   return (
     <html lang="en" className={cn(font.className, font.variable, geist.variable)}>
       <CSPostHogProvider>
