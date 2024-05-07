@@ -1,15 +1,17 @@
 import { ThemeWrapper } from "@/components/entities/theme-observer";
 import { WebVitals } from "@/components/web-vitals";
 import { CSPostHogProvider } from "@/utils/posthog/provider";
-import "@repo/tailwind-config/styles";
-import "@repo/tailwind-config/vars";
 import { cn } from "@repo/ui/cn";
+import "@repo/ui/css";
+import "@repo/ui/css/typography";
+import "@repo/ui/css/vars";
 import type { Metadata, Viewport } from "next";
 import { Geologica } from "next/font/google";
 import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { BodyWrapper } from "./_components/body-wrapper";
+import { Theme } from "./_components/entities/theme";
 import "./globals.css";
 const font = Geologica({
   subsets: ["latin", "cyrillic"],
@@ -40,7 +42,7 @@ type LayoutProps = Readonly<{
 export default function RootLayout({ children }: LayoutProps) {
   const cookies_list = cookies()
   const theme_cookie = cookies_list.get("theme")
-  const default_theme = theme_cookie ? theme_cookie.value : "system"
+  const default_theme = (theme_cookie ? theme_cookie.value : "system") as Theme
   return (
     <html lang="en" className={cn(font.className, font.variable, geist.variable)}>
       <CSPostHogProvider>

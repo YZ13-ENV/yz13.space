@@ -12,7 +12,7 @@ const User = async ({ size = 48 }: Props) => {
   return (
     <Button
       style={{ width: `${size}px`, height: `${size}px` }}
-      className="relative w-12 h-12 rounded-full ring ring-primary"
+      className="relative w-12 h-12 rounded-full ring ring-foreground"
       size="icon"
       variant="secondary"
       asChild

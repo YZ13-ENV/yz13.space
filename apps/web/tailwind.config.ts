@@ -1,18 +1,16 @@
-import sharedConfig from "@repo/tailwind-config";
+import shared from "@repo/ui/tailwind";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  presets: [shared],
   content: [
-    "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
     "../../packages/ui/**/*.{ts,tsx}",
   ],
   corePlugins: {
     preflight: true,
   },
-  presets: [sharedConfig],
 };
 
 export default config;

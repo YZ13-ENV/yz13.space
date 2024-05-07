@@ -3,15 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx",
-    "./input": "./src/input.tsx",
-    "./tabs": "./src/tabs.tsx",
-    "./switch": "./src/switch.tsx",
-    "./separator": "./src/separator.tsx",
-    "./carousel": "./src/carousel.tsx",
-    "./progress": "./src/progress.tsx",
-    "./tooltip": "./src/tooltip.tsx",
-    "./accordion": "./src/accordion.tsx",
+    "./button": "./src/components/button.tsx",
+    "./input": "./src/components/input.tsx",
+    "./tabs": "./src/components/tabs.tsx",
+    "./switch": "./src/components/switch.tsx",
+    "./separator": "./src/components/separator.tsx",
+    "./carousel": "./src/components/carousel.tsx",
+    "./progress": "./src/components/progress.tsx",
+    "./tooltip": "./src/components/tooltip.tsx",
+    "./accordion": "./src/components/accordion.tsx",
+    "./css": "./src/styles/index.css",
+    "./css/vars": "./src/styles/vars.css",
+    "./css/typography": "./src/styles/typography.css",
+    "./tailwind": "./tailwind.config.ts",
     "./cn": "./lib/utils.ts"
   },
   "scripts": {
@@ -20,16 +24,15 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@turbo/gen": "^1.12.4",
-    "@types/eslint": "^8.56.5",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
+    "@turbo/gen": "^1.13.3",
+    "@types/eslint": "^8.56.10",
+    "@types/node": "^20.12.8",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
     "eslint": "^8.57.0",
-    "react": "^18.2.0",
-    "typescript": "^5.3.3"
+    "react": "^18.3.1",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
@@ -42,9 +45,10 @@
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "embla-carousel-react": "^8.0.2",
+    "embla-carousel-react": "^8.0.4",
     "postcss": "^8.4.38",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

@@ -34,7 +34,7 @@ const Rulers = ({ size = "default", className = "" }: Props) => {
         {/* <div className='absolute flex items-center justify-center w-5 h-5 rounded-md -top-8 backdrop-blur-sm'> */}
         {/* <span className="text-xs text-accent-foreground">{current_day}</span> */}
         {/* </div> */}
-        <Separator className='w-full h-full rounded-full bg-primary' orientation="vertical" />
+        <Separator className='w-full h-full rounded-full bg-foreground' orientation="vertical" />
       </div>
     )
   }

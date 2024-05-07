@@ -1,14 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("./vars.css");
-
 @layer base {
   * {
-    @apply border-border font-text;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
   h1,
   h2,
@@ -32,9 +33,6 @@
     height: 0.5rem;
     border-radius: 9999px;
     @apply bg-secondary;
-  }
-  ::selection {
-    @apply bg-primary text-primary-foreground;
   }
   .no-scrollbar::-webkit-scrollbar {
     width: 0px;
