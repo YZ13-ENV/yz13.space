@@ -7,7 +7,12 @@ export type Repo = {
   description: string | null;
   created_at: string;
 };
-
+type Creator = {
+  login: string;
+  id: number;
+  avatar_url: string;
+  type: string;
+};
 export type Commit_Metadata = {
   author: {
     name: string;
@@ -35,4 +40,18 @@ export type Commit = {
   url: string;
   commit: Commit_Metadata;
   committer: Commit_Committer;
+};
+
+export type Deployment = {
+  id: number;
+  task: string;
+  sha: string;
+  created_at: string;
+  description: string | null;
+  environment: string;
+  creator: Creator;
+};
+
+export type RepoLanguage = {
+  [key: string]: number;
 };

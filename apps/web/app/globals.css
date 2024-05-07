@@ -1,7 +1,9 @@
 @tailwind base;
 
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
     @apply border-border;
   }
 }
