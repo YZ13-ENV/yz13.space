@@ -16,7 +16,7 @@ import "./globals.css";
 const font = Geologica({
   subsets: ["latin", "cyrillic"],
   weight: "variable",
-  variable: "--root-font",
+  variable: "--text-font",
 });
 
 const geist = localFont({
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  colorScheme: "dark",
+  colorScheme: "dark light",
   themeColor: "#000000",
 }
 
@@ -44,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps) {
   const theme_cookie = cookies_list.get("theme")
   const default_theme = (theme_cookie ? theme_cookie.value : "system") as Theme
   return (
-    <html lang="en" className={cn(font.className, font.variable, geist.variable)}>
+    <html lang="en" className={cn(font.variable, geist.variable)}>
       <CSPostHogProvider>
         <BodyWrapper theme={default_theme}>
           <ThemeWrapper />
