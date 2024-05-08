@@ -2,7 +2,6 @@ import shared from "@repo/ui/tailwind";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  presets: [shared],
   content: [
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
@@ -11,6 +10,7 @@ const config: Config = {
   corePlugins: {
     preflight: true,
   },
+  presets: [shared],
 };
 
 export default config;

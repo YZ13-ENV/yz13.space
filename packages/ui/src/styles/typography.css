@@ -34,7 +34,6 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-headings);
     margin: 0 0 0.625rem 0;
     color: inherit;
   }

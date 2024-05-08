@@ -1,8 +1,8 @@
 import { links } from '@/const/nav-links'
 import { cn } from '@repo/ui/cn'
 import { Separator } from '@repo/ui/separator'
-import Image from 'next/image'
 import Link from 'next/link'
+import { ThemedLogo } from './theme-logo'
 
 type Props = {
   className?: string
@@ -13,7 +13,7 @@ const Footer = ({ className = "" }: Props) => {
       <div className='container gap-4 p-8 flex flex-col'>
         <div className='flex w-full'>
           <div className='flex flex-col justify-between w-full max-w-xs gap-4'>
-            <Image src="/dm-star-dark.svg" width={48} height={48} alt='footer-logo' />
+            <ThemedLogo width={72} height={72} mode="symbol" alt='footer-logo' />
             <div className="flex flex-wrap items-start w-full gap-1">
               <span className="text-3xl font-bold text-secondary">YZ13.</span>
               <span className="text-3xl font-bold">Frontend.</span>

@@ -1,12 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+*::before,
+*::after {
+  border-color: hsl(var(--yz13-border));
+}
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-text text-foreground;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
