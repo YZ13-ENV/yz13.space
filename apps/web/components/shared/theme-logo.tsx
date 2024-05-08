@@ -13,7 +13,10 @@ type Props = {
 
 const ThemedLogo = ({ mode = "full", ...props }: Props) => {
   const theme = useTheme(state => state.theme)
-  const src = theme === "dark" ? mode === "full" ? FULL_DARK_VARIANT_LOGO : SYMBOL_DARK_VARIANT_LOGO : mode === "full" ? FULL_LIGHT_VARIANT_LOGO : SYMBOL_LIGHT_VARIANT_LOGO
+  const systemTheme = useTheme(state => state.systemTheme)
+  const isSystemTheme = theme === "system"
+  const dynamicTheme = isSystemTheme ? systemTheme : theme
+  const src = dynamicTheme === "dark" ? mode === "full" ? FULL_DARK_VARIANT_LOGO : SYMBOL_DARK_VARIANT_LOGO : mode === "full" ? FULL_LIGHT_VARIANT_LOGO : SYMBOL_LIGHT_VARIANT_LOGO
   return <Image {...props} src={src} />
 }
 export { ThemedLogo }
