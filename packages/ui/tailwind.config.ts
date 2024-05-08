@@ -15,6 +15,9 @@ const config = {
       },
     },
     extend: {
+      borderColor: {
+        DEFAULT: "hsl(var(--yz13-border))",
+      },
       height: {
         screen: "100dvh",
       },

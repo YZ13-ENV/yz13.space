@@ -29,8 +29,8 @@ const Ruler = ({ ruler, children }: { ruler: number, children?: ReactNode }) => 
       className='relative flex flex-col items-center justify-end h-20 gap-2 mt-12 w-fit group'
     >
       <motion.div
-        initial={{ height: "10%" }}
-        animate={{ height: "100%" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{
           duration: 1,
           easings: cubicBezier(.17, .67, .83, .67),
