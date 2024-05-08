@@ -3,6 +3,7 @@ import { Nav } from "@/components/entities/header/ui/nav"
 import { Button } from "@repo/ui/button"
 import { get } from "@vercel/edge-config"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { Suspense } from "react"
 import { BiLeftArrowAlt } from "react-icons/bi"
 import { EventsProvider } from "../_components/entities/events"
@@ -16,6 +17,7 @@ type Props = {
 }
 const ProjectBanner = async ({ project_id }: Props) => {
   const { data } = await getProject(project_id)
+  if (!data) notFound()
   const project = data ? data[0] : null
   const events: Readonly<Event[]> = await get("events") || []
   return (

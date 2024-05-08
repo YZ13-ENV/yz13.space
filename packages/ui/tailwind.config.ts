@@ -7,6 +7,9 @@ const config = {
     preflight: false,
   },
   theme: {
+    borderColor: {
+      DEFAULT: "hsl(var(--yz13-border))",
+    },
     container: {
       center: true,
       padding: "2rem",
