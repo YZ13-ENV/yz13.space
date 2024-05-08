@@ -2,7 +2,7 @@
 import { Vitals } from "@/api/web-vitals"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
-import { groupBy, keys } from "lodash"
+import { flatten, groupBy, keys } from "lodash"
 import { useEffect, useMemo, useState } from "react"
 import { TbMathEqualLower, TbMathGreater } from "react-icons/tb"
 import { metrics } from "../const"
@@ -22,9 +22,20 @@ const ChartOutput = ({ data = [] }: Props) => {
   const metric = metrics.find(item => item.name === selectedChart)
   const grouped_charts = groupBy(charts, "name")
   const grouped_charts_keys = keys(grouped_charts)
-  const maxCount = Math.max(...grouped_charts_keys.map(key => grouped_charts[key]?.length || 0))
-  const max = Math.round(maxCount * 2)
+  const [max, setMax] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
+  useEffect(() => {
+    const maxes = grouped_charts_keys.map(key => {
+      const chart = grouped_charts[key] || []
+      const with_formatted_date = chart.map(chart => ({ ...chart, created_at: dayjs(chart.created_at).format("YYYY-MM-DD") }))
+      const grouped_by_date = groupBy(with_formatted_date, "created_at")
+      const grouped_by_date_keys = keys(grouped_by_date)
+      const lengths = grouped_by_date_keys.map(key => grouped_by_date[key]?.length || 0)
+      return lengths
+    })
+    const union_of_maxes = Math.max(...flatten(maxes))
+    setMax(union_of_maxes * 1.25)
+  }, [grouped_charts_keys])
   useEffect(() => {
     if (data.length !== 0) setCharts(data)
   }, [data])
@@ -71,11 +82,11 @@ const ChartOutput = ({ data = [] }: Props) => {
                   date={`${dayjs(item).format("D MMMM")} (${target.length})`}
                   barClassName={
                     status === "good"
-                      ? "text-success-foreground bg-success-background"
+                      ? "text-success-foreground border-4 border-success-border bg-success-background"
                       : status === "needs-improvement"
-                        ? "text-warning-foreground bg-warning-background"
+                        ? "text-warning-foreground bg-warning-background border-4 border-warning-border"
                         : status === "poor"
-                          ? "text-error-foreground bg-error-background"
+                          ? "text-error-foreground bg-error-background border-4 border-error-border"
                           : ""
                   }
                   key={item}
@@ -89,7 +100,7 @@ const ChartOutput = ({ data = [] }: Props) => {
         <div className="absolute top-0 left-0 z-0 w-full h-full pr-3 pt-11">
           <div className="relative z-0 w-full h-full">
             <div className="absolute top-0 left-0 flex items-center w-full gap-2 h-[1px]">
-              <span className="text-sm text-muted-foreground">{max}</span>
+              <span className="text-sm text-muted-foreground">{max.toFixed(0)}</span>
               <Separator className="z-0" />
             </div>
             <div className="absolute top-[25%] left-0 flex items-center w-full gap-2 h-[1px]">
