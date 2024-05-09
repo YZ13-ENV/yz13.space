@@ -1,12 +1,13 @@
 import { HomeHeader } from "@/components/entities/header"
 import { Footer } from "@/components/shared/footer"
 import { Suspense } from "react"
+import { BsGithub, BsTelegram } from "react-icons/bs"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
 import { CalendarWidget } from "./components/widgets/calendar"
 
 const page = () => {
-  const apps = Array.from({ length: 50 }).map((_, i) => i)
+  const apps = Array.from({ length: 1 }).map((_, i) => i)
   const AppItem = () => {
     return (
       <div className="w-fit flex h-fit flex-col gap-1">
@@ -24,6 +25,12 @@ const page = () => {
           <Time format="dddd, MMMM DD" className="text-2xl text-center font-medium" />
           <div className="grid w-full mx-auto h-fit widgets-grid gap-4 max-w-5xl my-12 px-6">
             <CalendarWidget />
+            <div className="w-full h-full bg-accents-1/60 p-4 flex flex-col justify-between backdrop-blur border rounded-xl">
+              <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-4">
+                <button className="hover:bg-accents-4 items-center bg-accents-3 flex px-3 gap-2 justify-center rounded-xl h-full w-full"><BsGithub size={18} /><span>Github</span></button>
+                <button className="hover:bg-accents-4 items-center bg-accents-3 flex px-3 gap-2 justify-center rounded-xl h-full w-full"><BsTelegram size={18} /><span>Telegram</span></button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="w-full max-h-[40dvh] md:block hidden h-full">
