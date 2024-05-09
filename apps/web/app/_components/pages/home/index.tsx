@@ -27,6 +27,7 @@ const HomePage = async () => {
             <p className="w-full text-xl font-light text-secondary text-center">Welcome to <span className='font-medium text-foreground'>YZ13 LAB</span></p>
           </div>
         </div>
+        <div className="w-96 h-16 rounded-xl bg-accents-2 bottom-12 right-6 absolute"></div>
         <div className="w-full h-[30%] py-6 flex flex-col justify-between">
           <div className='w-full flex justify-center gap-2'>
             <Nav />

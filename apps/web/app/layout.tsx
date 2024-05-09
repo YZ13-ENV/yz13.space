@@ -11,6 +11,7 @@ import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { BodyWrapper } from "./_components/body-wrapper";
+import { DateProvider } from "./_components/entities/date";
 import { Theme } from "./_components/entities/theme";
 import "./globals.css";
 const font = Geologica({
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: LayoutProps) {
       <CSPostHogProvider>
         <BodyWrapper theme={default_theme}>
           <ThemeWrapper />
+          <DateProvider />
           <WebVitals />
           {children}
         </BodyWrapper>

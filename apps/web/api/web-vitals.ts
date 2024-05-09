@@ -1,10 +1,12 @@
 "use server";
-import { DEFAULT_EXPIRE_TIMESTAMP } from "@/cache.json";
+import cache from "@/cache.json";
 import { isDev } from "@/const/app";
 import { createClient } from "@/utils/supabase/server";
 import { PostgrestResponse } from "@supabase/supabase-js";
 import { kv } from "@vercel/kv";
 import { cookies } from "next/headers";
+
+const EXPIRE_TIME = cache.DEFAULT_EXPIRE_TIMESTAMP;
 
 export type Vitals = {
   id: string;
@@ -33,7 +35,7 @@ const getWebVitalsRecords = async (
     .from("web-vitals")
     .select()
     .eq("app_id", appId);
-  if (vitals) kv.set(key, vitals, { nx: true, ex: DEFAULT_EXPIRE_TIMESTAMP });
+  if (vitals) kv.set(key, vitals, { nx: true, ex: EXPIRE_TIME });
   return vitals;
 };
 
