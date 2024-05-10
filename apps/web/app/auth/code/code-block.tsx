@@ -1,9 +1,11 @@
 "use client"
 
-import { generateCode, getLastCode, sendCode } from "@/api/session"
+import { generateCode, generateSession, getLastCode, sendCode } from "@/api/session"
+import { useSession } from "@/hooks/useSession"
 import { Button } from "@repo/ui/button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/input-otp"
 import { useDebounceEffect, useInterval } from "ahooks"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -13,6 +15,7 @@ const CodeBlock = () => {
   const [enteredCode, setEnteredCode] = useState<number>()
   const router = useRouter()
   const isPassed = code !== 0 ? code === enteredCode : false
+  const [session, loading, setSession] = useSession()
   const generateCodeAndStartTimer = async () => {
     setTimer(60)
     const new_code = await generateCode()
@@ -23,17 +26,26 @@ const CodeBlock = () => {
     if (timer !== 0) setTimer(prev => prev - 1)
   }, timer ? 1000 : undefined)
   useDebounceEffect(() => {
-    if (isPassed) router.push("/")
+    if (isPassed) {
+      generateSession()
+        .then(res => {
+          if (res) {
+            setSession(res)
+            router.push("/secured")
+          }
+        })
+    }
   }, [isPassed], { wait: 1000 })
   useDebounceEffect(() => {
-    if (!code) {
+    if (!code && !session) {
       getLastCode()
         .then(code => {
           if (code) setCode(code)
           if (!code) generateCodeAndStartTimer()
         })
     }
-  }, [code], { wait: 1000 })
+  }, [code, session], { wait: 1000 })
+  if (session) return <Button className="w-full" asChild><Link href="/secured">You already authorized</Link></Button>
   return (
     <div className="w-full flex flex-col items-center justify-center gap-4">
       {

@@ -1,19 +1,29 @@
 "use client";
 
-import { useCookieState } from "ahooks";
+import { getLastSession } from "@/api/session";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const sessionKey = "YZ13-ID-SSN";
+export const sessionKey = "YZ13-ID-SSN";
 // YZ13-ID-SSN
-const useSession = () => {
+const useSession = (): [string, boolean, (value: string) => void] => {
   const router = useRouter();
-  const [session, setSession] = useCookieState(sessionKey);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [session, setSession] = useState<string | null>(null);
   const clearSession = () => {
     setSession("");
     router.refresh();
   };
-  const runNewSession = () => {
-    if (session) clearSession();
+  const updateSession = (value: string) => {
+    setSession(value);
   };
+  useEffect(() => {
+    getLastSession().then(setSession);
+  }, []);
+  useEffect(() => {
+    if (typeof document !== "undefined") setLoading(false);
+  }, [typeof document]);
+
+  return [session as string, loading, updateSession];
 };
 export { useSession };

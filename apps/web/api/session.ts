@@ -1,14 +1,28 @@
 "use server";
 import { randomNumber } from "@/helpers/random-number";
+import { randomString } from "@/helpers/random-string";
 import { SessionCode } from "@/types/session";
 import { createClient } from "@/utils/supabase/server";
+import { kv } from "@vercel/kv";
 import dayjs from "dayjs";
 import { cookies } from "next/headers";
 
+const sessionKey = "YZ13-ID-SSN";
+
 const getLastSession = async () => {
-  const cookiesList = cookies();
-  const supabase = createClient(cookiesList);
-  // supabase.from("session_codes").select().
+  const session = await kv.get<string>("YZ13-ID-SSN");
+  return session;
+};
+
+const deleteSession = async () => {
+  await kv.del(sessionKey);
+};
+
+const generateSession = async (provided_value?: string) => {
+  const value = provided_value ? provided_value : randomString();
+  console.log("session-", sessionKey, value);
+  const res = await kv.set(sessionKey, value, { ex: 360 });
+  return res;
 };
 
 const clearCodes = async () => {
@@ -16,9 +30,7 @@ const clearCodes = async () => {
   const supabase = createClient(cookiesList);
   const { data } = await supabase.from("session_codes").select();
   const codes = (data || []).map((code) => code.code);
-  console.log(codes);
-  const res = await supabase.from("session_codes").delete().in("code", codes);
-  console.log(res);
+  await supabase.from("session_codes").delete().in("code", codes);
 };
 
 const getLastCode = async () => {
@@ -63,4 +75,11 @@ const sendCode = async (code: number) => {
   const res = await fetch(url, { method: "POST" });
   return res.ok;
 };
-export { generateCode, getLastCode, getLastSession, sendCode };
+export {
+  deleteSession,
+  generateCode,
+  generateSession,
+  getLastCode,
+  getLastSession,
+  sendCode,
+};
