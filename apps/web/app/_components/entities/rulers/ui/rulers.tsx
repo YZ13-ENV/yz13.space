@@ -1,18 +1,23 @@
 "use client"
+import { Button } from "@repo/ui/button"
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { VariantProps } from "class-variance-authority"
 import { motion } from "framer-motion"
 import { ElementRef, useEffect, useRef, useState } from "react"
+import { BiMinus, BiPlus } from "react-icons/bi"
 import { useMediaQuery } from "react-responsive"
 import { useDate } from "../../date"
 import { rulers_variants } from "../const"
+import { useZoomLevel } from "../store/zoom-store"
 import { Ruler } from "./ruler"
 
 type Props = {
   className?: string
 } & VariantProps<typeof rulers_variants>
 const Rulers = ({ size = "default", className = "" }: Props) => {
+  const zoomLevel = useZoomLevel(state => state.zoomLevel)
+  const setZoomLevel = useZoomLevel(state => state.setZoomLevel)
   const ref = useRef<ElementRef<"div">>(null)
   const [ready, setReady] = useState<boolean>(false)
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
@@ -40,16 +45,22 @@ const Rulers = ({ size = "default", className = "" }: Props) => {
   }
   if (!ready) return <div ref={ref} className={cn("overflow-x-hidden bg-muted animate-pulse overflow-y-visible", rulers_variants({ size, className }))} />
   return (
-    <div ref={ref} className={cn("overflow-x-hidden overflow-y-visible", rulers_variants({ size, className }))}>
-      <motion.div drag="x" dragConstraints={ref} className='flex flex-row items-center w-fit h-fit'>
-        {
-          rulers.map(ruler => {
-            const isInThisMonth = today_key === key(ruler)
-            // console.log(today_key === key(ruler))
-            return <Ruler key={key(ruler)} ruler={ruler}>{isInThisMonth && <Indicator />}</Ruler>
-          })
-        }
-      </motion.div>
+    <div className="w-full flex flex-col">
+      <div className="w-full px-6 flex items-center justify-end">
+        <Button className="rounded-r-none" variant="outline"><BiPlus /></Button>
+        <Button className="rounded-l-none" variant="outline"><BiMinus /></Button>
+      </div>
+      <div ref={ref} className={cn("overflow-x-hidden overflow-y-visible", rulers_variants({ size, className }))}>
+        <motion.div drag="x" dragConstraints={ref} className='flex flex-row items-center w-fit h-fit'>
+          {
+            rulers.map(ruler => {
+              const isInThisMonth = today_key === key(ruler)
+              // console.log(today_key === key(ruler))
+              return <Ruler key={key(ruler)} ruler={ruler}>{isInThisMonth && <Indicator />}</Ruler>
+            })
+          }
+        </motion.div>
+      </div>
     </div>
   )
 }

@@ -14,6 +14,7 @@ import { BodyWrapper } from "./_components/body-wrapper";
 import { DateProvider } from "./_components/entities/date";
 import { Theme } from "./_components/entities/theme";
 import "./globals.css";
+import "./markdown.css";
 const font = Geologica({
   subsets: ["latin", "cyrillic"],
   weight: "variable",
