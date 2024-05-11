@@ -1,9 +1,13 @@
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
+import dayjs from "dayjs"
 import { ReactNode } from "react"
 import { useDate } from "../../../date"
+import { useEvents } from "../../../events"
+import { EventMark } from "../event"
 import { Marker } from "../marker"
 import { key } from "../rulers"
+import { LevelWrapper } from "./level-wrapper"
 
 // month
 const SecondLevel = () => {
@@ -15,7 +19,7 @@ const SecondLevel = () => {
   const rulers = [...prev_days, ...next_days].sort((a, b) => a - b)
   const today_key = today.format("MMMM-YYYY").toLowerCase()
   return (
-    <>
+    <LevelWrapper>
       {
         rulers.map((ruler, index) => {
           const isInThisMonth = today_key === key(today, ruler)
@@ -23,7 +27,7 @@ const SecondLevel = () => {
           return <LevelRuler key={key(today, ruler)} index={index} ruler={ruler}>{isInThisMonth && <LevelIndicator hour={today.hour()} />}</LevelRuler>
         })
       }
-    </>
+    </LevelWrapper>
   )
 }
 
@@ -31,8 +35,15 @@ const SecondLevel = () => {
 const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, children?: ReactNode }) => {
   const today = useDate(state => state.date)
   const date = today.add(ruler, "days")
-  const key = date.format("MMMM-YYYY").toLowerCase()
+  const key = date.format("DD-MM")
+  const date_key = date.format("YYYY-MM-DD")
   const isFist = index === 0
+  const events = useEvents(state => state.events)
+  const onlyInRuler = events.filter(event => {
+    const event_date = dayjs(event.created_at)
+    const event_key = event_date.format("YYYY-MM-DD")
+    return event_key === date_key
+  })
   return (
     <div
       id={key}
@@ -41,6 +52,13 @@ const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, 
       <div
         className="relative flex w-full h-full gap-8"
       >
+        {
+          !!onlyInRuler.length &&
+          onlyInRuler.map(event => {
+            const key = event.event_id
+            return <EventMark key={key} event={event} date={today} />
+          })
+        }
         {children}
         <Marker className={isFist ? "opacity-1" : "opacity-0"} />
         <Marker size="mid" />

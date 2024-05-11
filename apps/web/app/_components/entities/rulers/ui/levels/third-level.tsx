@@ -1,10 +1,13 @@
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
+import dayjs from "dayjs"
 import { ReactNode } from "react"
 import { useDate } from "../../../date"
+import { useEvents } from "../../../events"
+import { EventMark } from "../event"
 import { Marker } from "../marker"
 import { key } from "../rulers"
-
+import { LevelWrapper } from "./level-wrapper"
 // week
 const ThirdLevel = () => {
   const today = useDate(state => state.date)
@@ -14,22 +17,29 @@ const ThirdLevel = () => {
   const rulers = [...days_before, ...days_after].sort((a, b) => a >= b ? 1 : -1)
   const today_key = today.format("MMMM-YYYY").toLowerCase()
   return (
-    <>
+    <LevelWrapper>
       {
         rulers.map((ruler, index) => {
           const isInThisMonth = today_key === key(today, ruler)
           return <LevelRuler key={key(today, ruler)} index={index} ruler={ruler}>{isInThisMonth && <LevelIndicator hour={today.hour()} />}</LevelRuler>
         })
       }
-    </>
+    </LevelWrapper>
   )
 }
 
 const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, children?: ReactNode }) => {
   const today = useDate(state => state.date)
   const date = today.add(ruler, "days")
-  const key = date.format("MMMM-YYYY").toLowerCase()
+  const key = date.format('dddd')
   const markers = Array.from({ length: 11 }).map((_, i) => i)
+  const date_key = date.format("YYYY-MM-DD")
+  const events = useEvents(state => state.events)
+  const onlyInRuler = events.filter(event => {
+    const event_date = dayjs(event.created_at)
+    const event_key = event_date.format("YYYY-MM-DD")
+    return event_key === date_key
+  })
   return (
     <div
       id={key}
@@ -39,7 +49,13 @@ const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, 
         className="relative flex w-full h-full gap-8"
       >
         {children}
-
+        {
+          !!onlyInRuler.length &&
+          onlyInRuler.map(event => {
+            const key = event.event_id
+            return <EventMark key={key} event={event} date={today} />
+          })
+        }
         {
           markers.map(marker => {
             const isFirst = marker === 0

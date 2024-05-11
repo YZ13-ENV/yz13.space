@@ -8,14 +8,15 @@ const rulers_variants = cva("w-full flex items-center", {
       default: "px-12 min-h-36 bottom-0",
       lg: "px-12 min-h-40 bottom-0",
     },
-    direction: {
+    align: {
       start: "justify-start",
+      center: "justify-center",
       end: "justify-end",
     },
   },
   defaultVariants: {
     size: "default",
-    direction: "end",
+    align: "end",
   },
 });
 
