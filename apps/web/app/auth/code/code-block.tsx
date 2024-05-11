@@ -31,6 +31,7 @@ const CodeBlock = () => {
         .then(res => {
           if (res) {
             setSession(res)
+            router.refresh()
             router.push("/secured")
           }
         })

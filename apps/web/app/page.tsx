@@ -1,6 +1,4 @@
 "use server"
-import { Footer } from '@/components/shared/footer';
-import { Separator } from '@repo/ui/separator';
 import { get } from '@vercel/edge-config';
 import dayjs from 'dayjs';
 import { unstable_noStore } from 'next/cache';
@@ -20,7 +18,8 @@ const page = async () => {
   return (
     <>
       <HomePage />
-      {
+      {/* {
+        process.env.NODE_ENV === "development" &&
         !!todayEvents.length &&
         <>
           <div className='min-h-screen w-full'>
@@ -59,7 +58,7 @@ const page = async () => {
           </div>
           <Footer />
         </>
-      }
+      } */}
     </>
   )
 }

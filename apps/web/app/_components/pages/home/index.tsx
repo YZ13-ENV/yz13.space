@@ -20,13 +20,13 @@ const HomePage = async () => {
         <Suspense fallback={<div className="w-full absolute z-[-3] bg-muted animate-pulse" />}>
           <Background />
         </Suspense>
-        <div className='w-full h-[60%] pt-20 flex flex-col items-center justify-center gap-6'>
+        <div className='w-full lg:h-[60%] h-[40%] pt-20 flex flex-col items-center justify-center gap-6'>
           <Time format="HH:mm" className="text-[12.5dvw] font-bold text-center" />
           <Time format="dddd, MMMM DD" className="text-2xl text-center font-medium" />
           <div className="space-y-2">
           </div>
         </div>
-        <div className="w-full h-[40%] pt-6 flex flex-col justify-between">
+        <div className="w-full lg:h-[40%] h-[60%] pt-6 flex flex-col overflow-y-hidden justify-between">
           <p className="w-full font-light text-secondary text-center">Welcome to <span className='font-medium text-foreground'>YZ13 LAB</span></p>
           <div className='w-full flex justify-center gap-2'>
             <Nav />

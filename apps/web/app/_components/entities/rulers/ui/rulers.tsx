@@ -9,6 +9,7 @@ import dayjs, { Dayjs } from "dayjs"
 import { AnimatePresence, motion } from "framer-motion"
 import { ElementRef, useEffect, useRef, useState } from "react"
 import { BiMinus, BiPlus } from "react-icons/bi"
+import { useMediaQuery } from "react-responsive"
 import { useDate } from "../../date"
 import { useEvents } from "../../events"
 import { rulers_variants } from "../const"
@@ -46,6 +47,7 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
   const events = useEvents(state => state.events)
   const date = useDate(state => state.date)
   const date_key = date.format("YYYY-MM-DD")
+  const isMobile = useMediaQuery({ query: '(max-width: 640px)' })
   const moreZoom = () => {
     const newZoomLevel = zoomLevel + 1
     if (newZoomLevel >= 1 && newZoomLevel <= 4) setZoomLevel(newZoomLevel as ZoomLevel)
@@ -89,33 +91,36 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
       <AnimatePresence>
         {
           !mini &&
-          <motion.div
-            initial={{ opacity: 0, y: 10, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: "36px" }}
-            exit={{ opacity: 0, y: 10, height: 0 }}
-            className="flex items-center px-6 w-full justify-between"
-          >
-            <Button variant="outline">
-              <Time format="dd, DD MMMM HH:mm" className="" />
-            </Button>
-            {
-              !!todayEvents.length &&
-              <div className="flex items-center mx-auto gap-2">
-                {
-                  todayEvents.map(event =>
-                    <GradientLabel key={"announcer-" + event.event_id} text={event.title} />
-                  )
-                }
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 10, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "36px" }}
+              exit={{ opacity: 0, y: 10, height: 0 }}
+              transition={{ delay: .150 }}
+              className="flex items-center px-6 w-full justify-between"
+            >
+              <Button variant="outline">
+                <Time format="dd, DD MMMM HH:mm" className="" />
+              </Button>
+              {
+                !!todayEvents.length && !isMobile &&
+                <div className="flex items-center mx-auto gap-2">
+                  {
+                    todayEvents.map(event =>
+                      <GradientLabel key={"announcer-" + event.event_id} text={event.title} />
+                    )
+                  }
+                </div>
+              }
+              <div className="flex gap-6 items-center">
+                <span className="text-secondary text-sm">{zoomLevel === 1 ? "Year" : zoomLevel === 2 ? "Month" : zoomLevel === 3 ? "Week" : zoomLevel === 4 ? "Day" : ""}</span>
+                <div className="w-fit flex items-center justify-end">
+                  <Button disabled={isMaxZoom} onClick={moreZoom} className="rounded-r-none" size='sm' variant="outline"><BiPlus size={16} /></Button>
+                  <Button disabled={isMinZoom} onClick={lessZoom} className="rounded-l-none" size='sm' variant="outline"><BiMinus size={16} /></Button>
+                </div>
               </div>
-            }
-            <div className="flex gap-6 items-center">
-              <span className="text-secondary text-sm">{zoomLevel === 1 ? "Year" : zoomLevel === 2 ? "Month" : zoomLevel === 3 ? "Week" : zoomLevel === 4 ? "Day" : ""}</span>
-              <div className="w-fit flex items-center justify-end">
-                <Button disabled={isMaxZoom} onClick={moreZoom} className="rounded-r-none" size='sm' variant="outline"><BiPlus size={16} /></Button>
-                <Button disabled={isMinZoom} onClick={lessZoom} className="rounded-l-none" size='sm' variant="outline"><BiMinus size={16} /></Button>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         }
       </AnimatePresence>
     </div>

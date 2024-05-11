@@ -67,35 +67,37 @@ const ChartOutput = ({ data = [] }: Props) => {
         </div>
       </div>
       <div className="relative w-full h-fit">
-        <div className="w-full z-10 h-[40dvh] flex pl-16 items-end justify-end">
-          {
-            group_keys.map(
-              item => {
-                const target = group[item]
-                const mid = target ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
-                const status = metric ? mid <= metric?.good ? "good" : mid > metric?.good && metric.mid >= mid ? "needs-improvement" : "poor" : "poor"
-                const value = target ? String(mid.toFixed(3)) + " s." : ""
-                const percent = ((target?.length || 0) / max) * 100
-                if (!target) return <></>
-                return <ChartBar
-                  withDate
-                  date={`${dayjs(item).format("D MMMM")} (${target.length})`}
-                  barClassName={
-                    status === "good"
-                      ? "text-success-foreground border-4 border-success-border bg-success-background"
-                      : status === "needs-improvement"
-                        ? "text-warning-foreground bg-warning-background border-4 border-warning-border"
-                        : status === "poor"
-                          ? "text-error-foreground bg-error-background border-4 border-error-border"
-                          : ""
-                  }
-                  key={item}
-                  percent={percent}
-                  value={value}
-                />
-              }
-            )
-          }
+        <div className="w-full z-10 h-[40dvh] flex pl-6 items-end justify-end">
+          <div className="flex justify-end w-full h-full overflow-x-auto">
+            {
+              group_keys.map(
+                item => {
+                  const target = group[item]
+                  const mid = target ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
+                  const status = metric ? mid <= metric?.good ? "good" : mid > metric?.good && metric.mid >= mid ? "needs-improvement" : "poor" : "poor"
+                  const value = target ? String(mid.toFixed(3)) + " s." : ""
+                  const percent = ((target?.length || 0) / max) * 100
+                  if (!target) return <></>
+                  return <ChartBar
+                    withDate
+                    date={`${dayjs(item).format("D MMMM")} (${target.length})`}
+                    barClassName={
+                      status === "good"
+                        ? "text-success-foreground border-4 border-success-border bg-success-background hover:bg-success-background/80"
+                        : status === "needs-improvement"
+                          ? "text-warning-foreground bg-warning-background border-4 border-warning-border hover:bg-warning-background/80"
+                          : status === "poor"
+                            ? "text-error-foreground bg-error-background hover:bg-error-background/80 border-4 border-error-border"
+                            : ""
+                    }
+                    key={item}
+                    percent={percent}
+                    value={value}
+                  />
+                }
+              )
+            }
+          </div>
         </div>
         <div className="absolute top-0 left-0 z-0 w-full h-full pr-3 pt-11">
           <div className="relative z-0 w-full h-full">

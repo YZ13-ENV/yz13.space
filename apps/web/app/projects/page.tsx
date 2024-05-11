@@ -4,14 +4,10 @@ import { Footer } from "@/components/shared/footer"
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
 import { Separator } from "@repo/ui/separator"
-import { get } from "@vercel/edge-config"
 import { Metadata } from "next"
 import { unstable_noStore } from "next/cache"
 import { Suspense } from "react"
 import { BiSearch } from "react-icons/bi"
-import { EventsProvider } from "../_components/entities/events"
-import { Event } from "../_components/entities/events/store/events-store"
-import { Rulers } from "../_components/entities/rulers"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
 import { ProjectsList } from "./projects-list"
@@ -23,7 +19,6 @@ export const metadata: Metadata = {
 
 const page = async () => {
   unstable_noStore()
-  const events: Readonly<Event[]> = await get("events") || []
   return (
     <>
       <HomeHeader className='fixed top-0 z-20 w-full p-6 h-fit' />
@@ -39,10 +34,6 @@ const page = async () => {
         </div>
         <Suspense fallback={<div className="w-full absolute z-[-3] bg-muted animate-pulse" />}>
           <Background />
-        </Suspense>
-        <EventsProvider events={events as Event[]} />
-        <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
-          <Rulers />
         </Suspense>
       </div>
       <Separator />

@@ -1,3 +1,4 @@
+"use client"
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
@@ -17,7 +18,7 @@ const EventMark = ({ event, date = dayjs() }: Props) => {
   const format = event_date.format("DD MMM")
   return (
     <TooltipProvider>
-      <Tooltip>
+      <Tooltip delayDuration={100}>
         <TooltipTrigger asChild>
           <div style={{ left: `${left}%` }} className='bottom-0 group/event absolute z-10 right-1/2 flex flex-col justify-between items-center w-[1px] shrink-0 h-[175%] gap-5'>
             <div className={cn(
