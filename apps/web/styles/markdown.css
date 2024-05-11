@@ -1,68 +1,69 @@
+@tailwind base;
 @tailwind components;
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold text-foreground;
+  }
+  h2 {
+    @apply text-3xl font-bold text-foreground;
+  }
+  h3 {
+    @apply text-2xl font-bold text-foreground;
+  }
+  h4 {
+    @apply text-xl font-bold text-foreground;
+  }
+  h5 {
+    @apply text-lg font-bold text-foreground;
+  }
+  h6 {
+    @apply text-base font-bold text-foreground;
+  }
+  ul {
+    @apply m-2 ml-4 list-none list-inside;
+  }
+  ol {
+    @apply m-2 ml-4 list-decimal list-inside;
+  }
+  li {
+    @apply relative mb-2 font-light text-foreground;
+  }
+  li::before {
+    content: "–";
+    @apply text-secondary -left-3 absolute;
+  }
+  strong {
+    @apply font-bold text-inherit;
+  }
+  blockquote {
+    @apply p-2 my-2 rounded-lg h-fit bg-accents-1;
+  }
+}
 
 @layer components {
   .md-layout > h1 {
-    @apply mt-12 mb-6 text-4xl font-bold text-accent-foreground;
-  }
-  .md-layout > h1:first-of-type {
-    @apply mt-0;
-  }
-  .md-layout > h2:first-of-type {
-    @apply mt-0;
-  }
-  .md-layout > h3:first-of-type {
-    @apply mt-0;
-  }
-  .md-layout > h4:first-of-type {
-    @apply mt-0;
-  }
-  .md-layout > h5:first-of-type {
-    @apply mt-0;
-  }
-  .md-layout > h6:first-of-type {
-    @apply mt-0;
-  }
-  .md-layout > p:first-of-type {
-    @apply mt-0;
+    @apply mt-12 mb-6;
   }
   .md-layout > h2 {
-    @apply mt-10 mb-6 text-3xl font-bold text-accent-foreground;
+    @apply mt-10 mb-6;
   }
   .md-layout > h3 {
-    @apply mt-9 mb-6 text-2xl font-bold text-accent-foreground;
+    @apply mt-9 mb-6;
   }
   .md-layout > h4 {
-    @apply mt-8 mb-6 text-xl font-bold text-accent-foreground;
+    @apply mt-8 mb-6;
   }
   .md-layout > h5 {
-    @apply mt-7 mb-6 text-lg font-bold text-accent-foreground;
+    @apply mt-7 mb-6;
   }
   .md-layout > h6 {
-    @apply mt-6 mb-6 text-base font-bold text-accent-foreground;
+    @apply mt-6 mb-6;
   }
   .md-layout > p {
     @apply my-4;
   }
   .md-layout > span {
     @apply my-4;
-  }
-  .md-layout > ul {
-    @apply !m-2 !ml-4 list-none list-inside;
-  }
-  .md-layout > ol {
-    @apply !m-2 !ml-4 list-decimal list-inside;
-  }
-  .md-layout > li {
-    @apply relative !mb-2 text-accent-foreground;
-  }
-  .md-layout > li::before {
-    content: "–";
-    @apply text-muted-foreground -left-3 absolute;
-  }
-  .md-layout > strong {
-    @apply font-bold text-inherit;
-  }
-  .md-layout > blockquote {
-    @apply !p-2 !my-2 rounded-lg h-fit bg-card;
   }
 }

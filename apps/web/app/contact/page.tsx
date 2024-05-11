@@ -3,7 +3,6 @@ import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
 import { Button } from "@repo/ui/button"
-import { get } from "@vercel/edge-config"
 import { Metadata } from "next"
 import { unstable_noStore } from "next/cache"
 import Image from "next/image"
@@ -11,9 +10,6 @@ import Link from "next/link"
 import { Suspense } from "react"
 import { BiChevronRight } from "react-icons/bi"
 import { BsGithub, BsTelegram } from "react-icons/bs"
-import { EventsProvider } from "../_components/entities/events"
-import { Event } from "../_components/entities/events/store/events-store"
-import { Rulers } from "../_components/entities/rulers"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
 
@@ -23,7 +19,6 @@ export const metadata: Metadata = {
 
 const page = async () => {
   unstable_noStore()
-  const events: Readonly<Event[]> = await get("events") || []
   const user = await user_api.get()
   return (
     <>
@@ -40,10 +35,6 @@ const page = async () => {
         </div>
         <Suspense fallback={<div className="w-full absolute z-[-3] bg-muted animate-pulse" />}>
           <Background />
-        </Suspense>
-        <EventsProvider events={events as Event[]} />
-        <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
-          <Rulers />
         </Suspense>
       </div>
       <div className="container py-12">
@@ -66,7 +57,7 @@ const page = async () => {
               </div>
             </div>
             <ul className="w-full overflow-hidden border divide-y rounded-xl bg-card">
-              <li>
+              <li className="m-0">
                 <Link
                   target="_blank"
                   href="https://t.me/YZTHECEO"
@@ -79,7 +70,7 @@ const page = async () => {
                   <BiChevronRight size={18} />
                 </Link>
               </li>
-              <li>
+              <li className="m-0">
                 <Link
                   target="_blank"
                   href="https://github.com/yz13-env"

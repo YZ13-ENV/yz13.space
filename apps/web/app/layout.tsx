@@ -1,5 +1,7 @@
 import { ThemeWrapper } from "@/components/entities/theme-observer";
 import { WebVitals } from "@/components/web-vitals";
+import "@/styles/globals.css";
+import "@/styles/markdown.css";
 import { CSPostHogProvider } from "@/utils/posthog/provider";
 import { cn } from "@repo/ui/cn";
 import "@repo/ui/css";
@@ -11,8 +13,8 @@ import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { BodyWrapper } from "./_components/body-wrapper";
+import { DateProvider } from "./_components/entities/date";
 import { Theme } from "./_components/entities/theme";
-import "./globals.css";
 const font = Geologica({
   subsets: ["latin", "cyrillic"],
   weight: "variable",
@@ -48,6 +50,7 @@ export default function RootLayout({ children }: LayoutProps) {
       <CSPostHogProvider>
         <BodyWrapper theme={default_theme}>
           <ThemeWrapper />
+          <DateProvider />
           <WebVitals />
           {children}
         </BodyWrapper>

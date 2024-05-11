@@ -22,11 +22,8 @@
   h6 {
     @apply font-headings;
   }
-
   ::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
-    cursor: pointer;
+    @apply w-3;
   }
   ::-webkit-scrollbar-track {
     @apply bg-transparent;
@@ -34,8 +31,8 @@
   ::-webkit-scrollbar-thumb {
     width: 0.5rem;
     height: 0.5rem;
-    border-radius: 9999px;
-    @apply bg-secondary;
+    border-radius: 0px;
+    @apply bg-accents-2;
   }
   .no-scrollbar::-webkit-scrollbar {
     width: 0px;

@@ -1,23 +1,34 @@
 "use client"
 
-import { useEffect } from "react"
+import { Theme, useTheme } from "@/app/_components/entities/theme"
+import { useEffect, useState } from "react"
 
 type Props = {
-  theme: string
+  theme: Theme
 }
 const ThemeObserver = ({ theme }: Props) => {
-  const isSystemTheme = theme === "system"
-  const isDarkTheme = theme === "dark"
-  const isLightTheme = theme === "light"
+  const localTheme = useTheme(state => state.theme)
+  const setSystemTheme = useTheme(state => state.setSystemTheme)
+  const [ready, setReady] = useState<boolean>(false)
+  const currentTheme: Theme = ready ? localTheme : theme
+  const isSystemTheme = currentTheme === "system"
+  const isDarkTheme = currentTheme === "dark"
+  const isLightTheme = currentTheme === "light"
+  useEffect(() => {
+    if (typeof document !== "undefined") setReady(true)
+  }, [typeof document])
   useEffect(() => {
     if (typeof window !== 'undefined') {
       if (!window.matchMedia) return undefined
       if (isSystemTheme) {
         if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          setSystemTheme("dark")
           const body = document.getElementById("body")
           if (body) {
             body.classList.add("dark")
           }
+        } else {
+          setSystemTheme("light")
         }
       }
       if (isDarkTheme) {
