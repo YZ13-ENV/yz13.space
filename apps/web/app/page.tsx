@@ -1,5 +1,6 @@
 "use server"
 import { Footer } from '@/components/shared/footer';
+import { Separator } from '@repo/ui/separator';
 import { get } from '@vercel/edge-config';
 import dayjs from 'dayjs';
 import { unstable_noStore } from 'next/cache';
@@ -19,24 +20,46 @@ const page = async () => {
   return (
     <>
       <HomePage />
-      <div className='min-h-screen py-12 w-full'>
-        {todayEvents.toString()}
-        <div className="max-w-4xl container md-layout">
-
-          <h1 className='text text-5xl text-foreground font-bold'>Heading h1</h1>
-          <p className='text-base font-light'>There im gonna tell ya about today's event ;0</p>
-
-          <ul>
-            <li>List item #1</li>
-            <li>List item #2</li>
-          </ul>
-
-          <h2>Heading 2</h2>
-          <p>Another description</p>
-
-        </div>
-      </div>
-      <Footer />
+      {
+        !!todayEvents.length &&
+        <>
+          <div className='min-h-screen w-full'>
+            <div className="w-full container">
+              <div className="max-w-4xl mx-auto w-full p-12 space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-36 h-9 rounded-full bg-secondary" />
+                  <div className="w-48 h-5 rounded-full bg-secondary" />
+                </div>
+                <div className="w-full h-16 flex items-center gap-4">
+                  <div className="h-full flex items-center gap-2">
+                    <div className="w-12 h-12 rounded-full bg-accents-1 border" />
+                    <div className="flex flex-col justify-center h-full">
+                      <span className="font-mediums">Author</span>
+                      <span className="text-sm text-secondary">Position</span>
+                    </div>
+                  </div>
+                </div>
+                <Separator />
+                <div className="space-y-3 w-full">
+                  <h1 className="text-5xl font-bold">Event</h1>
+                  <p className="text-lg text-secondary">Description for event</p>
+                </div>
+                <div className="w-full space-y-6">
+                  <div className="w-full md-layout">
+                    <h1>Heading h1</h1>
+                    <p>Event text</p>
+                    <ul>
+                      <li>list item</li>
+                      <li>also list item</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </>
+      }
     </>
   )
 }

@@ -17,6 +17,6 @@ const ThemedLogo = ({ mode = "full", ...props }: Props) => {
   const isSystemTheme = theme === "system"
   const dynamicTheme = isSystemTheme ? systemTheme : theme
   const src = dynamicTheme === "dark" ? mode === "full" ? FULL_DARK_VARIANT_LOGO : SYMBOL_DARK_VARIANT_LOGO : mode === "full" ? FULL_LIGHT_VARIANT_LOGO : SYMBOL_LIGHT_VARIANT_LOGO
-  return <Image {...props} src={src} />
+  return <Image {...props} priority src={src} />
 }
 export { ThemedLogo }

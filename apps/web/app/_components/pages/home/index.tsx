@@ -14,6 +14,15 @@ import { Background } from "../../widgets/background"
 const HomePage = async () => {
   unstable_noStore()
   const events: Readonly<Event[]> = await get("events") || []
+
+  const EventAnnounce = () => {
+    return (
+      <div className="p-[2px] relative flex items-center justify-center rounded-full mx-auto w-fit h-fit overflow-hidden">
+        <div className="w-full absolute aspect-square bg-gradient-to-br grayscale from-warning to-accents-3 animate-long-spin" />
+        <span className="px-2 py-1 text-xs bg-background rounded-full z-[1]">Today's event is {"{event.title}"}</span>
+      </div>
+    )
+  }
   return (
     <>
       <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
@@ -28,7 +37,8 @@ const HomePage = async () => {
           </div>
         </div>
         <div className="w-full h-[40%] py-6 flex flex-col justify-between">
-          <p className="w-full text-sms font-light text-secondary text-center">Welcome to <span className='font-medium text-foreground'>YZ13 LAB</span></p>
+          <p className="w-full font-light text-secondary text-center">Welcome to <span className='font-medium text-foreground'>YZ13 LAB</span></p>
+          <EventAnnounce />
           <div className='w-full flex justify-center gap-2'>
             <Nav />
             <Button className="rounded-full bg-background border" variant="secondary">
