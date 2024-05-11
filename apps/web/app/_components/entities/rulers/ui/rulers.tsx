@@ -64,7 +64,7 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
   useEffect(() => {
     if (typeof document !== 'undefined') setReady(true)
   }, [typeof document])
-  if (!ready) return <div ref={ref} className={cn("overflow-x-hidden bg-muted animate-pulse overflow-y-visible", rulers_variants({ size, className }))} />
+  // if (!ready) return <div ref={ref} className={cn("overflow-x-hidden bg-muted animate-pulse overflow-y-visible", rulers_variants({ size, className }))} />
   return (
     <div
       onMouseEnter={() => setMini(false)}
