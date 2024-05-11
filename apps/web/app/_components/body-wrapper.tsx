@@ -20,6 +20,10 @@ const BodyWrapper = ({ children, theme = "system" }: Props) => {
   useEffect(() => {
     if (typeof document !== "undefined") setReady(true)
   }, [typeof document])
-  return <body id="body" className={cn(currentTheme, !!modal ? "overflow-hidden" : "")}>{children}</body>
+  return (
+    <body id="body" className={cn(currentTheme, !!modal ? "overflow-hidden" : "")}>
+      {children}
+    </body>
+  )
 }
 export { BodyWrapper }

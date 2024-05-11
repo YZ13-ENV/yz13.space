@@ -1,23 +1,27 @@
+import { getEvents } from "@/api/events"
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
-import { get } from "@vercel/edge-config"
 import { unstable_noStore } from "next/cache"
+import dynamic from "next/dynamic"
 import { Suspense } from "react"
 import { DateProvider } from "../../entities/date"
 import { EventsProvider } from "../../entities/events"
 import { Event } from "../../entities/events/store/events-store"
 import { Rulers } from "../../entities/rulers"
 import { Time } from "../../time"
-import { Background } from "../../widgets/background"
+const Background = dynamic(() => import("../../widgets/background"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full absolute z-[-3] bg-muted animate-pulse" />
+})
 
 const HomePage = async () => {
   unstable_noStore()
-  const events: Readonly<Event[]> = await get("events") || []
+  const events = await getEvents()
   return (
     <>
       <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
       <div className="relative w-full h-screen">
-        <Suspense fallback={<div className="w-full absolute z-[-3] bg-muted animate-pulse" />}>
+        <Suspense fallback={<div className="w-full h-full absolute z-[-3] bg-muted animate-pulse" />}>
           <Background />
         </Suspense>
         <div className='w-full lg:h-[60%] h-[40%] pt-20 flex flex-col items-center justify-center gap-6'>
@@ -38,7 +42,6 @@ const HomePage = async () => {
           </Suspense>
         </div>
       </div>
-
     </>
   )
 }

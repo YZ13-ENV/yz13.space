@@ -2,12 +2,10 @@ import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
 import { Button } from "@repo/ui/button"
-import { Input } from "@repo/ui/input"
 import { Separator } from "@repo/ui/separator"
 import { Metadata } from "next"
 import { unstable_noStore } from "next/cache"
 import { Suspense } from "react"
-import { BiSearch } from "react-icons/bi"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
 import { ProjectsList } from "./projects-list"
@@ -38,7 +36,7 @@ const page = async () => {
       </div>
       <Separator />
       <div className="w-full h-fit py-12 min-h-screen">
-        <div className="relative w-full h-fit">
+        {/* <div className="relative w-full h-fit">
           <div className="container">
             <div className="relative w-full">
               <div className="absolute left-0 flex items-center justify-center w-12 h-12">
@@ -47,7 +45,7 @@ const page = async () => {
               <Input className="h-12 pl-12 text-base bg-background focus-visible:ring-2 rounded-xl" placeholder="Search projects" />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="relative w-full h-fit mt-12">
           <div className="container grid w-full grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2 auto-rows-auto h-fit">
             <Suspense fallback={
