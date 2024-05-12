@@ -1,17 +1,14 @@
-import { user as user_api } from "@/api/user"
+import { getTeamMembers } from "@/api/team-members"
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { Footer } from "@/components/shared/footer"
 import { Button } from "@repo/ui/button"
 import { Metadata } from "next"
 import { unstable_noStore } from "next/cache"
-import Image from "next/image"
-import Link from "next/link"
 import { Suspense } from "react"
-import { BiChevronRight } from "react-icons/bi"
-import { BsGithub, BsTelegram } from "react-icons/bs"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
+import { MemberCard } from "./member-card"
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -19,7 +16,8 @@ export const metadata: Metadata = {
 
 const page = async () => {
   unstable_noStore()
-  const user = await user_api.get()
+  const response = await getTeamMembers()
+  const members = response.data || []
   return (
     <>
       <HomeHeader className='fixed top-0 z-20 w-full p-6 h-fit' />
@@ -39,52 +37,7 @@ const page = async () => {
       </div>
       <div className="container py-12">
         <div className="grid w-full auto-rows-auto contact-card-grid">
-          <div className="w-full p-4 space-y-3 border h-fit bg-card rounded-xl">
-            <div className="relative w-full overflow-hidden aspect-square bg-accents-2 rounded-xl">
-              {
-                user &&
-                <Image src={user.avatar_url} fill alt={user.login} />
-              }
-            </div>
-            <div className="w-full space-y-1.5">
-              <section className="flex items-center justify-between w-full gap-2">
-                <h3 className="text-lg">Vladimir</h3>
-                <span className="text-sm text-secondary">@YZ13</span>
-              </section>
-              <div className="flex items-center justify-between w-full gap-2">
-                <span className="text-sm text-secondary">Frontend developer</span>
-                <span className="text-sm text-secondary">Russia</span>
-              </div>
-            </div>
-            <ul className="w-full overflow-hidden border divide-y rounded-xl bg-card">
-              <li className="m-0">
-                <Link
-                  target="_blank"
-                  href="https://t.me/YZTHECEO"
-                  className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-accents-1"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <BsTelegram size={18} />
-                    <span>@YZTHECEO</span>
-                  </span>
-                  <BiChevronRight size={18} />
-                </Link>
-              </li>
-              <li className="m-0">
-                <Link
-                  target="_blank"
-                  href="https://github.com/yz13-env"
-                  className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-accents-1"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <BsGithub size={18} />
-                    <span>YZ13-ENV</span>
-                  </span>
-                  <BiChevronRight size={18} />
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {members.map(member => <MemberCard key={member.username + "-" + member.username} member={member} />)}
         </div>
       </div>
       <div className="w-full h-48"></div>
