@@ -34,7 +34,7 @@ const CommitsList = async ({ owner, repo }: Props) => {
                     group.map(
                       commit => {
                         return (
-                          <li key={commit.sha} className="w-full group/commit hover:bg-accents-2 transition-colors cursor-pointer p-1 rounded-lg">
+                          <li key={commit.sha} className="w-full before:hidden group/commit hover:bg-accents-2 transition-colors cursor-pointer p-1 rounded-lg">
                             <Commit commit={commit} />
                           </li>
                         )
