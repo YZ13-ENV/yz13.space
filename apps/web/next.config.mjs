@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [ "@repo/ui" ],
+  pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
   experimental: {
     parallelServerCompiles: true,
     swcMinify: true,
@@ -36,3 +37,4 @@ module.exports = {
     return config;
   },
 };
+export default nextConfig

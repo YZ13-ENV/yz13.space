@@ -17,6 +17,7 @@ export type Vitals = {
   rating: string;
   value: number;
   created_at: string;
+  path: string;
 };
 
 const pushWebVitals = async (vitals: Vitals) => {

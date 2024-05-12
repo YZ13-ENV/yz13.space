@@ -39,6 +39,22 @@
   blockquote {
     @apply p-2 my-2 rounded-lg h-fit bg-accents-1;
   }
+
+  .md-layout h1 {
+    @apply text-4xl font-bold tracking-tight mt-6 mb-2;
+  }
+
+  .md-layout h2 {
+    @apply text-xl font-bold tracking-tight mt-6 mb-2;
+  }
+
+  .md-layout h3 {
+    @apply text-xl font-bold tracking-tight mt-6 mb-2;
+  }
+
+  .md-layout h4 {
+    @apply text-lg font-semibold tracking-tight mt-6 mb-2;
+  }
 }
 
 @layer components {
