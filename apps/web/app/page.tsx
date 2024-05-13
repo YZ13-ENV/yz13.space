@@ -3,11 +3,9 @@ import { Footer } from '@/components/shared/footer';
 import { get } from '@vercel/edge-config';
 import dayjs from 'dayjs';
 import { unstable_noStore } from 'next/cache';
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
 import { Event } from './_components/entities/events/store/events-store';
+import HomePage from './_components/pages/home';
 import { EmbedEventPost } from './event/[id]/embed';
-const HomePage = dynamic(() => import('./_components/pages/home'));
 
 const page = async () => {
   unstable_noStore()
@@ -21,9 +19,7 @@ const page = async () => {
   })
   return (
     <>
-      <Suspense>
-        <HomePage />
-      </Suspense>
+      <HomePage />
       {
         !!todayEvents.length &&
         <>

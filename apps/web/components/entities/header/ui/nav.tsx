@@ -9,7 +9,7 @@ const Nav = () => {
   const pathname = usePathname()
   return (
     <>
-      <nav className="rounded-full flex border bg-background items-center">
+      <nav className="rounded-full flex border bg-background/50 backdrop-blur items-center">
         {
           links.map(link =>
             <Button
