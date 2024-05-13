@@ -25,7 +25,7 @@ const page = async () => {
           <h1 className="w-full font-bold leading-tight text-center text-7xl">Projects</h1>
           <div className='flex justify-center w-full gap-2'>
             <Nav />
-            <Button className="border rounded-full bg-background" variant="secondary">
+            <Button className="border rounded-full bg-background/50 backdrop-blur" variant="secondary">
               <Time format="dd, DD MMMM HH:mm" className="" />
             </Button>
           </div>

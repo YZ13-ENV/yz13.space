@@ -31,7 +31,6 @@ const HomePage = async () => {
           </div>
         </div>
         <div className="w-full lg:h-[40%] h-[60%] pt-6 flex flex-col overflow-y-hidden justify-between">
-          <p className="w-full font-light text-secondary text-center">Welcome to <span className='font-medium text-foreground'>YZ13 LAB</span></p>
           <div className='w-full flex justify-center gap-2'>
             <Nav />
           </div>

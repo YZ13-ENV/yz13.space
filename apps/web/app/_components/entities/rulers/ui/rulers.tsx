@@ -69,7 +69,7 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
     <div
       onMouseEnter={() => setMini(false)}
       onMouseLeave={() => setMini(true)}
-      className="w-full flex flex-col bg-background border-t rounded-t-3xl pb-6"
+      className="w-full flex flex-col bg-gradient-to-b from-transparent to-background pb-6"
     >
       <div ref={ref} className={cn("overflow-x-hidden overflow-y-visible transition-all duration-500", mini ? "pt-3 pb-0" : "pt-12 pb-6", rulers_variants({ size, className, align }))}>
         <motion.div drag="x" dragConstraints={ref} className='flex flex-row justify-center px-6 items-center w-fit h-fit'>
