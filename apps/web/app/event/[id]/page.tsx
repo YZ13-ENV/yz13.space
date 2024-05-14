@@ -1,6 +1,7 @@
 import { getTeamMembers } from "@/api/team-members"
 import { GradientLabel } from "@/app/_components/shared/gradient-label"
-import { HomeHeader } from "@/components/entities/header"
+import { DefaultHeader } from "@/components/entities/header"
+import { Footer } from "@/components/shared/footer"
 import { getMDXData } from "@/utils/mdx"
 import { Button } from "@repo/ui/button"
 import { Separator } from "@repo/ui/separator"
@@ -28,7 +29,7 @@ const page = async ({ params }: Props) => {
   if (!mdx) return redirect("/")
   return (
     <>
-      <HomeHeader />
+      <DefaultHeader />
       <div className='min-h-screen w-full'>
         <div className="w-full container">
           <div className="max-w-4xl mx-auto w-full p-12 space-y-6">
@@ -61,6 +62,8 @@ const page = async ({ params }: Props) => {
           </div>
         </div>
       </div>
+      <div className="w-full h-36" />
+      <Footer />
     </>
   )
 }
