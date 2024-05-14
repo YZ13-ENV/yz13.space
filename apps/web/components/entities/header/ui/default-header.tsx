@@ -1,28 +1,20 @@
-import { Time } from "@/app/_components/time"
+import { ThemeSwitcher } from "@/app/_components/entities/theme"
+import { ThemedLogo } from "@/components/shared/theme-logo"
 import { User } from "@/components/shared/user"
-import { Button } from "@repo/ui/button"
 import Link from "next/link"
-import { DynamicHeaderWrapper } from "./dynamic-header-wrapper"
-import { Nav } from "./nav"
+import { HeaderWrapper } from "./header-wrapper"
 
-type Props = {
-  trigger?: number
-}
-const DefaultHeader = ({ trigger = 500 }: Props) => {
+const DefaultHeader = () => {
   return (
-    <DynamicHeaderWrapper
-      trigger={trigger}
-      activeClassName="backdrop-blur"
-    >
-      <Link href="/" className='text-2xl font-semibold'>YZ13</Link>
-      <div className="flex items-center gap-3">
-        <Nav />
-        <Button className="hidden rounded-full md:flex bg-muted/50 backdrop-blur-sm" variant="secondary">
-          <Time format="dd, DD MMMM HH:mm" />
-        </Button>
+    <HeaderWrapper>
+      <Link href="/" className='inline-flex items-center gap-1'>
+        <ThemedLogo width={120} mode="full" height={32} alt='header-logo' />
+      </Link>
+      <div className="flex items-center gap-4">
+        <ThemeSwitcher />
+        <User />
       </div>
-      <User />
-    </DynamicHeaderWrapper>
+    </HeaderWrapper>
   )
 }
 export { DefaultHeader }

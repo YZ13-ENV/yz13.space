@@ -4,6 +4,7 @@ import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
 import dayjs, { Dayjs } from "dayjs"
+import Link from "next/link"
 import { BiRightArrowAlt } from "react-icons/bi"
 
 type Props = {
@@ -35,7 +36,9 @@ const EventMark = ({ event, date = dayjs() }: Props) => {
           </div>
         </TooltipTrigger>
         <TooltipContent className="flex items-center gap-1 mb-2.5 rounded-full bg-background text-foreground backdrop-blur">
-          <span>{format} - {event.metadata.title}</span> <BiRightArrowAlt size={14} />
+          <Link href={`/event/${event.slug}`} className="inline-flex gap-2 items-center">
+            <span>{format} - {event.metadata.title}</span> <BiRightArrowAlt size={14} />
+          </Link>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
