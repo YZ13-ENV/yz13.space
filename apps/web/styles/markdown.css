@@ -55,6 +55,13 @@
   .md-layout h4 {
     @apply text-lg font-semibold tracking-tight mt-6 mb-2;
   }
+  .md-layout a {
+    @apply text-foreground hover:underline;
+  }
+  .md-layout > p,
+  span {
+    @apply text-foreground/75;
+  }
 }
 
 @layer components {
