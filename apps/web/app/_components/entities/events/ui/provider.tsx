@@ -1,10 +1,11 @@
 "use client"
 
+import { MDXContent } from "@/utils/mdx"
 import { useEffect } from "react"
-import { Event, useEvents } from "../store/events-store"
+import { useEvents } from "../store/events-store"
 
 type Props = {
-  events: Event[]
+  events: MDXContent[]
 }
 const EventsProvider = ({ events }: Props) => {
   const setEvents = useEvents(state => state.setEvents)

@@ -24,7 +24,7 @@ const page = async ({ params }: Props) => {
   const team = await getTeamMembers()
   const members = team.data || []
   const author = members.find(member => member.username === event_author)
-  const published_at = dayjs(mdx?.metadata.publishedAt).format("dddd, D MMMM YYYY")
+  const published_at = dayjs(mdx?.metadata.created_at).format("dddd, D MMMM YYYY")
   if (!mdx) return redirect("/")
   return (
     <>
@@ -51,7 +51,7 @@ const page = async ({ params }: Props) => {
             <Separator />
             <div className="space-y-3 w-full">
               <h1 className="text-5xl font-bold">{mdx?.metadata.title}</h1>
-              <p className="text-lg text-secondary">{mdx?.metadata.summary}</p>
+              <p className="text-lg text-secondary">{mdx?.metadata.description}</p>
             </div>
             <div className="w-full space-y-6">
               <div className="w-full md-layout">

@@ -28,7 +28,7 @@ const StatusStatistic = async ({ project_id }: Props) => {
   const prepared_metrics: PreparedMetric[] = grouped_charts_keys.map(key => {
     const metric = metrics.find(item => item.name === key)
     const target = grouped_charts[key]
-    const mid = target ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
+    const mid = target && target.length !== 0 ? (target.map(item => item.value).reduce((a, b) => a + b) / target.length) / 1000 : 0
     const status = metric ? mid <= metric?.good ? "good" : mid > metric?.good && metric.mid >= mid ? "needs-improvement" : "poor" : "poor"
     const result = {
       name: key,
@@ -38,11 +38,11 @@ const StatusStatistic = async ({ project_id }: Props) => {
     }
     return result
   })
-  const percent = prepared_metrics.map(item => {
+  const percent = prepared_metrics.length ? prepared_metrics.map(item => {
     const status = item.status
     if (status === "good") return item.weight
     return 0
-  }).reduce((a, b) => a + b)
+  }).reduce((a, b) => a + b) : 0
   const overall_status = percent >= 90 ? "Good" : percent >= 50 && percent < 90 ? "Medium" : "Poor"
   const overall_status_code = overall_status.toLowerCase()
   return (

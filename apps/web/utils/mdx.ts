@@ -3,11 +3,17 @@ import path from "path";
 
 type Metadata = {
   title: string;
-  publishedAt: string;
-  summary: string;
+  created_at: string;
+  description: string;
   author: string;
   theme: string;
   image?: string;
+};
+
+export type MDXContent = {
+  metadata: Metadata;
+  slug: string;
+  content: string;
 };
 
 function parseFrontmatter(fileContent: string) {

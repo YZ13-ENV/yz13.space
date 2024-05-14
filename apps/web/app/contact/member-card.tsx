@@ -7,7 +7,7 @@ type Props = {
 }
 const MemberCard = ({ member }: Props) => {
   return (
-    <div className="w-full p-4 space-y-3 border h-fit bg-card rounded-xl">
+    <div className="w-full p-4 space-y-3 border h-fit bg-background/60 rounded-2xl backdrop-blur">
       <div className="relative w-full overflow-hidden aspect-square bg-accents-2 rounded-xl">
         {
           member.avatar_url &&
@@ -31,7 +31,7 @@ const MemberCard = ({ member }: Props) => {
               <Link
                 target="_blank"
                 href={link.link}
-                className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-accents-1"
+                className="inline-flex items-center justify-between w-full h-10 px-3 text-sm transition-colors hover:bg-accents-2/50"
               >
                 <span className="inline-flex items-center gap-2">
                   <BiLink />

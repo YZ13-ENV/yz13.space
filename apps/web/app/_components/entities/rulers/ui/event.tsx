@@ -1,17 +1,17 @@
 "use client"
+import { MDXContent } from "@/utils/mdx"
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
 import dayjs, { Dayjs } from "dayjs"
 import { BiRightArrowAlt } from "react-icons/bi"
-import { Event } from "../../events/store/events-store"
 
 type Props = {
-  event: Event
+  event: MDXContent
   date?: Dayjs
 }
 const EventMark = ({ event, date = dayjs() }: Props) => {
-  const event_date = dayjs(event.created_at)
+  const event_date = dayjs(event.metadata.created_at)
   const current_day = event_date.date()
   const isInPast = event_date.isBefore(date)
   const left = (current_day / date.daysInMonth()) * 100
@@ -35,7 +35,7 @@ const EventMark = ({ event, date = dayjs() }: Props) => {
           </div>
         </TooltipTrigger>
         <TooltipContent className="flex items-center gap-1 mb-2.5 rounded-full bg-background text-foreground backdrop-blur">
-          <span>{format} - {event.title}</span> <BiRightArrowAlt size={14} />
+          <span>{format} - {event.metadata.title}</span> <BiRightArrowAlt size={14} />
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

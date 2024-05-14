@@ -5,7 +5,7 @@ import { Button } from "@repo/ui/button"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { Metadata, ResolvingMetadata } from "next"
+import { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 import { BiRightArrowAlt } from "react-icons/bi"
@@ -13,6 +13,7 @@ import { CommitsList } from "../_components/widgets/commits"
 import { DeploymentsList } from "../_components/widgets/deployments"
 import { LanguagesWrapper } from "../_components/widgets/languages"
 import { ProjectCharts } from "../_components/widgets/project-charts"
+
 type Props = {
   params: {
     project: string
@@ -20,8 +21,7 @@ type Props = {
 }
 
 export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
+  { params }: Props
 ): Promise<Metadata> {
   const id = params.project
 

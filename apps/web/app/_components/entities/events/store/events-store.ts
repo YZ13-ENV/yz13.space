@@ -1,3 +1,4 @@
+import { MDXContent } from "@/utils/mdx";
 import { create } from "zustand";
 
 export type Event = {
@@ -8,8 +9,8 @@ export type Event = {
 };
 
 type Store = {
-  events: Event[];
-  setEvents: (events: Event[]) => void;
+  events: MDXContent[];
+  setEvents: (events: MDXContent[]) => void;
 };
 export const useEvents = create<Store>((set) => ({
   events: [],

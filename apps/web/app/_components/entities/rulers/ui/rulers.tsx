@@ -7,7 +7,7 @@ import { Separator } from "@repo/ui/separator"
 import { VariantProps } from "class-variance-authority"
 import dayjs, { Dayjs } from "dayjs"
 import { AnimatePresence, motion } from "framer-motion"
-import { ElementRef, useEffect, useRef, useState } from "react"
+import { ElementRef, useRef, useState } from "react"
 import { BiMinus, BiPlus } from "react-icons/bi"
 import { useMediaQuery } from "react-responsive"
 import { useDate } from "../../date"
@@ -43,7 +43,6 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
   const isMaxZoom = zoomLevel === 4
   const isMinZoom = zoomLevel === 1
   const ref = useRef<ElementRef<"div">>(null)
-  const [ready, setReady] = useState<boolean>(false)
   const events = useEvents(state => state.events)
   const date = useDate(state => state.date)
   const date_key = date.format("YYYY-MM-DD")
@@ -57,14 +56,10 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
     if (newZoomLevel >= 1 && newZoomLevel <= 4) setZoomLevel(newZoomLevel as ZoomLevel)
   }
   const todayEvents = events.filter(event => {
-    const event_date = dayjs(event.created_at)
+    const event_date = dayjs(event.metadata.created_at)
     const event_key = event_date.format("YYYY-MM-DD")
     return event_key === date_key
   })
-  useEffect(() => {
-    if (typeof document !== 'undefined') setReady(true)
-  }, [typeof document])
-  // if (!ready) return <div ref={ref} className={cn("overflow-x-hidden bg-muted animate-pulse overflow-y-visible", rulers_variants({ size, className }))} />
   return (
     <div
       onMouseEnter={() => setMini(false)}
@@ -107,7 +102,7 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
                 <div className="flex items-center mx-auto gap-2">
                   {
                     todayEvents.map(event =>
-                      <GradientLabel key={"announcer-" + event.event_id} text={event.title} />
+                      <GradientLabel key={"announcer-" + event.slug} text={event.metadata.title} />
                     )
                   }
                 </div>
