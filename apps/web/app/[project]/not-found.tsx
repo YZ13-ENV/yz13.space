@@ -1,15 +1,15 @@
 import { Nav } from "@/components/entities/header/ui/nav"
+import { getMDXData } from "@/utils/mdx"
 import { Button } from "@repo/ui/button"
-import { get } from "@vercel/edge-config"
+import path from "path"
 import { Suspense } from "react"
 import { EventsProvider } from "../_components/entities/events"
-import { Event } from "../_components/entities/events/store/events-store"
 import { Rulers } from "../_components/entities/rulers"
 import { Time } from "../_components/time"
 import { Background } from "../_components/widgets/background"
 
 const notFound = async () => {
-  const events: Readonly<Event[]> = await get("events") || []
+  const events = getMDXData(path.join(process.cwd(), 'app', 'event', 'events'))
   return (
     <div className="lg:p-12 p-6 h-screen rounded-xl bg-accents-1">
       <div className="w-full flex h-full flex-col items-center justify-between relative pt-24 bg-background rounded-xl">
@@ -25,7 +25,7 @@ const notFound = async () => {
         <Suspense fallback={<div className="w-full absolute z-[-3] bg-muted animate-pulse" />}>
           <Background />
         </Suspense>
-        <EventsProvider events={events as Event[]} />
+        <EventsProvider events={events} />
         <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
           <Rulers />
         </Suspense>

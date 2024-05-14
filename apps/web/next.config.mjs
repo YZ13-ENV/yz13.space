@@ -3,22 +3,22 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [ "@repo/ui" ],
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
-  experimental: {
-    parallelServerCompiles: true,
-    swcMinify: true,
-    optimizeServerReact: true,
-    optimizePackageImports: [
-      "@repo/ui",
-      "tailwindcss"
-    ],
-    optimizeCss: true,
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    serverMinification: true,
-    useLightningcss: true,
-    workerThreads: true,
-    useWasmBinary: true
-  },
+  // experimental: {
+  //   parallelServerCompiles: true,
+  //   swcMinify: true,
+  //   optimizeServerReact: true,
+  //   optimizePackageImports: [
+  //     "@repo/ui",
+  //     "tailwindcss"
+  //   ],
+  //   optimizeCss: true,
+  //   webpackBuildWorker: true,
+  //   parallelServerBuildTraces: true,
+  //   serverMinification: true,
+  //   useLightningcss: true,
+  //   workerThreads: true,
+  //   useWasmBinary: true
+  // },
   compress: true,
   images: {
     remotePatterns: [
