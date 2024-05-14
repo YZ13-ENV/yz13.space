@@ -48,6 +48,41 @@ const page = () => {
           </div>
         </section>
       </div>
+      <div className="max-w-5xl w-full p-6 mx-auto border bg-accents-1 h-fit rounded-xl">
+        <section className="w-full">
+          <h2 className="text-3xl font-bold">Colors</h2>
+          <div className="flex flex-col gap-3 w-full">
+            <div className="w-full flex flex-row gap-3 mt-3">
+              <div className="w-full h-9 rounded-lg bg-accents-1" />
+              <div className="w-full h-9 rounded-lg bg-accents-2" />
+              <div className="w-full h-9 rounded-lg bg-accents-3" />
+              <div className="w-full h-9 rounded-lg bg-accents-4" />
+              <div className="w-full h-9 rounded-lg bg-accents-5" />
+              <div className="w-full h-9 rounded-lg bg-accents-6" />
+              <div className="w-full h-9 rounded-lg bg-accents-7" />
+              <div className="w-full h-9 rounded-lg bg-accents-8" />
+            </div>
+            <div className="w-full flex flex-row gap-3 mt-3">
+              <div className="w-1/4 h-9 rounded-lg bg-error-100" />
+              <div className="w-1/4 h-9 rounded-lg bg-error-200" />
+              <div className="w-1/4 h-9 rounded-lg bg-error-300" />
+              <div className="w-1/4 h-9 rounded-lg bg-error-400" />
+            </div>
+            <div className="w-full flex flex-row gap-3 mt-3">
+              <div className="w-1/4 h-9 rounded-lg bg-warning-100" />
+              <div className="w-1/4 h-9 rounded-lg bg-warning-200" />
+              <div className="w-1/4 h-9 rounded-lg bg-warning-300" />
+              <div className="w-1/4 h-9 rounded-lg bg-warning-400" />
+            </div>
+            <div className="w-full flex flex-row gap-3 mt-3">
+              <div className="w-1/4 h-9 rounded-lg bg-success-100" />
+              <div className="w-1/4 h-9 rounded-lg bg-success-200" />
+              <div className="w-1/4 h-9 rounded-lg bg-success-300" />
+              <div className="w-1/4 h-9 rounded-lg bg-success-400" />
+            </div>
+          </div>
+        </section>
+      </div>
       <div className="max-w-5xl w-full p-6 mx-auto border h-fit bg-accents-1 rounded-xl">
         <section className="w-full">
           <h2 className="text-4xl font-bold">Misuse</h2>

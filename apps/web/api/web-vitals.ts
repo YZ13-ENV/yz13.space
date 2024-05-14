@@ -22,7 +22,11 @@ export type Vitals = {
 
 const pushWebVitals = async (vitals: Vitals) => {
   const cookiesList = cookies();
-  if (!isDev) await createClient(cookiesList).from("web-vitals").insert(vitals);
+  if (!isDev) {
+    await createClient(cookiesList).from("web-vitals").insert(vitals);
+    const key = `web-vitals-${vitals.app_id}`;
+    await kv.del(key);
+  }
 };
 
 const getWebVitalsRecords = async (

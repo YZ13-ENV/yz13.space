@@ -5,6 +5,7 @@ import { Separator } from "@repo/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
 import dayjs, { Dayjs } from "dayjs"
 import Link from "next/link"
+import { useState } from "react"
 import { BiRightArrowAlt } from "react-icons/bi"
 
 type Props = {
@@ -17,11 +18,13 @@ const EventMark = ({ event, date = dayjs() }: Props) => {
   const isInPast = event_date.isBefore(date)
   const left = (current_day / date.daysInMonth()) * 100
   const format = event_date.format("DD MMM")
+  const [open, setOpen] = useState<boolean>(false)
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={100}>
-        <TooltipTrigger asChild>
-          <div style={{ left: `${left}%` }} className='bottom-0 group/event absolute z-10 right-1/2 flex flex-col justify-between items-center w-[1px] shrink-0 h-[175%] gap-5'>
+      <Tooltip delayDuration={100} open={open} onOpenChange={open => setOpen(open)}>
+        <TooltipTrigger asChild onClick={() => setOpen(!open)}>
+          <div style={{ left: `${left}%` }}
+            className='bottom-0 group/event absolute z-10 right-1/2 flex flex-col justify-between items-center w-[1px] shrink-0 h-[175%] gap-5'>
             <div className={cn(
               "w-[21px] rounded-md absolute h-full cursor-pointer transition-colors",
               isInPast ? "group-hover/event:bg-foreground/10" : "group-hover/event:bg-foreground/25"
