@@ -1,12 +1,12 @@
-import { getEvents } from "@/api/events"
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
+import { getMDXData } from "@/utils/mdx"
 import { unstable_noStore } from "next/cache"
 import dynamic from "next/dynamic"
+import path from "path"
 import { Suspense } from "react"
 import { DateProvider } from "../../entities/date"
 import { EventsProvider } from "../../entities/events"
-import { Event } from "../../entities/events/store/events-store"
 import { Rulers } from "../../entities/rulers"
 import { Time } from "../../time"
 const Background = dynamic(() => import("../../widgets/background"), {
@@ -16,7 +16,7 @@ const Background = dynamic(() => import("../../widgets/background"), {
 
 const HomePage = async () => {
   unstable_noStore()
-  const events = await getEvents()
+  const events = getMDXData(path.join(process.cwd(), 'app', 'event', 'events'))
   return (
     <>
       <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
@@ -35,7 +35,7 @@ const HomePage = async () => {
             <Nav />
           </div>
           <DateProvider />
-          <EventsProvider events={events as Event[]} />
+          <EventsProvider events={events} />
           <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
             <Rulers />
           </Suspense>

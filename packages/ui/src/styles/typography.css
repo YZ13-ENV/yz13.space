@@ -37,10 +37,6 @@
     margin: 0 0 0.625rem 0;
     color: inherit;
   }
-  ::selection {
-    background-color: var(--yz13-selection);
-    color: hsl(var(--yz13-background));
-  }
   code {
     color: var(--yz13-code);
     font-family: var(--font-mono);

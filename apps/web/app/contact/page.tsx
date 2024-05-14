@@ -26,7 +26,7 @@ const page = async () => {
           <h1 className="w-full font-bold leading-tight text-center text-7xl">Contact</h1>
           <div className='flex justify-center w-full gap-2'>
             <Nav />
-            <Button className="border rounded-full bg-background" variant="secondary">
+            <Button className="border rounded-full bg-background/50 backdrop-blur" variant="secondary">
               <Time format="dd, DD MMMM HH:mm" className="" />
             </Button>
           </div>
@@ -34,14 +34,14 @@ const page = async () => {
         <Suspense fallback={<div className="w-full absolute z-[-3] bg-muted animate-pulse" />}>
           <Background />
         </Suspense>
-      </div>
-      <div className="container py-12">
-        <div className="grid w-full auto-rows-auto contact-card-grid">
-          {members.map(member => <MemberCard key={member.username + "-" + member.username} member={member} />)}
+        <div className="container py-12">
+          <div className="grid w-full auto-rows-auto contact-card-grid">
+            {members.map(member => <MemberCard key={member.username + "-" + member.username} member={member} />)}
+          </div>
         </div>
+        <div className="w-full h-48"></div>
+        <Footer />
       </div>
-      <div className="w-full h-48"></div>
-      <Footer />
     </>
   )
 }

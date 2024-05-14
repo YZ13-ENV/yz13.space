@@ -38,7 +38,7 @@ const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, 
   const isFist = index === 0
   const events = useEvents(state => state.events)
   const onlyInRuler = events.filter(event => {
-    const event_date = dayjs(event.created_at)
+    const event_date = dayjs(event.metadata.created_at)
     const isSameMonth = event_date.month() === date.month()
     const isSameYear = event_date.year() === date.year()
     return isSameYear && isSameMonth
@@ -54,7 +54,7 @@ const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, 
         {
           !!onlyInRuler.length &&
           onlyInRuler.map(event => {
-            const key = event.event_id
+            const key = event.slug
             return <EventMark key={key} event={event} date={today} />
           })
         }

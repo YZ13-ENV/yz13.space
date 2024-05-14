@@ -15,7 +15,7 @@ const CodeBlock = () => {
   const [enteredCode, setEnteredCode] = useState<number>()
   const router = useRouter()
   const isPassed = code !== 0 ? code === enteredCode : false
-  const [session, loading, setSession] = useSession()
+  const [session, _, setSession] = useSession()
   const generateCodeAndStartTimer = async () => {
     setTimer(60)
     const new_code = await generateCode()

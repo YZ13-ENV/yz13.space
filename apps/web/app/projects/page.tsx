@@ -34,7 +34,6 @@ const page = async () => {
           <Background />
         </Suspense>
       </div>
-      <Separator />
       <div className="w-full h-fit py-12 min-h-screen">
         {/* <div className="relative w-full h-fit">
           <div className="container">
