@@ -92,4 +92,7 @@
   .md-layout > figure {
     @apply my-6;
   }
+  .md-layout > ul {
+    @apply mx-3.5;
+  }
 }

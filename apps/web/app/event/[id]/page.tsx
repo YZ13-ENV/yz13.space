@@ -39,7 +39,7 @@ const page = async ({ params }: Props) => {
       <DefaultHeader />
       <div className='min-h-screen w-full'>
         <div className="w-full container">
-          <div className="max-w-4xl mx-auto w-full p-12 space-y-6">
+          <div className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6 space-y-6">
             <Button size="sm" variant="ghost" className="gap-2" asChild><Link href="/"><BiLeftArrowAlt size={18} /><span>Back to home</span></Link></Button>
             <div className="flex items-center gap-4 w-fit">
               <GradientLabel text={mdx?.metadata.theme} />
@@ -74,12 +74,12 @@ const page = async ({ params }: Props) => {
         <>
           <Separator />
           <div className="w-full container">
-            <section className="max-w-4xl mx-auto w-full p-12 space-y-6">
+            <section className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6 space-y-6">
               <h2 className="text-2xl font-bold">Read more</h2>
               <div className="w-full grid lg:grid-cols-2 grid-cols-1 lg:grid-rows-1 grid-rows-2 gap-4">
                 {
                   onlyTwo.map(
-                    event => <div key={event.slug} className="w-full gap-4 p-4 flex flex-col h-fit rounded-2xl hover:border-foreground relative transition-colors border">
+                    event => <div key={event.slug} className="w-full hover:bg-accents-1 gap-4 p-4 flex flex-col h-fit rounded-2xl hover:border-foreground relative transition-colors border">
                       <Link href={`/event/${event.slug}`} className="w-full h-full absolute top-0 left-0" />
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-accents-1 border relative overflow-hidden">
@@ -106,7 +106,7 @@ const page = async ({ params }: Props) => {
         </>
       }
       <div className="w-full h-36" />
-      <Footer className="max-w-4xl mx-auto px-4" />
+      <Footer className="max-w-4xl mx-auto md:px-4 px-0" />
     </>
   )
 }
