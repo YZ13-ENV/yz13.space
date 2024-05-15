@@ -24,7 +24,7 @@ const MemberCard = ({ member }: Props) => {
           <span className="text-sm text-secondary">{member.place && member.place}</span>
         </div>
       </div>
-      <ul className="w-full overflow-hidden border divide-y rounded-xl bg-card">
+      <ul className="w-full overflow-hidden border divide-y rounded-xl mx-0 bg-card">
         {
           member.link.map(link =>
             <li key={link.label + "-" + link.link} className="m-0">

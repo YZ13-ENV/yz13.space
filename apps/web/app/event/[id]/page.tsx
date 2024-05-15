@@ -20,19 +20,26 @@ type Props = {
 }
 const page = async ({ params }: Props) => {
   const slug = params.id
-  const mdx = getMDXData(path.join(process.cwd(), 'app', 'event', 'events')).find(event => event.slug === slug)
+  const allMDX = getMDXData(path.join(process.cwd(), 'app', 'event', 'events'))
+  const mdx = allMDX.find(event => event.slug === slug)
   const event_author = mdx?.metadata.author
   const team = await getTeamMembers()
   const members = team.data || []
   const author = members.find(member => member.username === event_author)
   const published_at = dayjs(mdx?.metadata.created_at).format("dddd, D MMMM YYYY")
+  const current_event = dayjs(mdx?.metadata.created_at).format("YYYY-MM-DD")
+  const next_events = allMDX.filter(item => {
+    const event_date = dayjs(item.metadata.created_at)
+    return event_date.diff(current_event, "date")
+  })
+  const onlyTwo = next_events.slice(0, 2)
   if (!mdx) return redirect("/")
   return (
     <>
       <DefaultHeader />
       <div className='min-h-screen w-full'>
         <div className="w-full container">
-          <div className="max-w-4xl mx-auto w-full p-12 space-y-6">
+          <div className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6 space-y-6">
             <Button size="sm" variant="ghost" className="gap-2" asChild><Link href="/"><BiLeftArrowAlt size={18} /><span>Back to home</span></Link></Button>
             <div className="flex items-center gap-4 w-fit">
               <GradientLabel text={mdx?.metadata.theme} />
@@ -62,8 +69,44 @@ const page = async ({ params }: Props) => {
           </div>
         </div>
       </div>
+      {
+        onlyTwo.length !== 0 &&
+        <>
+          <Separator />
+          <div className="w-full container">
+            <section className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6 space-y-6">
+              <h2 className="text-2xl font-bold">Read more</h2>
+              <div className="w-full grid lg:grid-cols-2 grid-cols-1 lg:grid-rows-1 grid-rows-2 gap-4">
+                {
+                  onlyTwo.map(
+                    event => <div key={event.slug} className="w-full hover:bg-accents-1 gap-4 p-4 flex flex-col h-fit rounded-2xl hover:border-foreground relative transition-colors border">
+                      <Link href={`/event/${event.slug}`} className="w-full h-full absolute top-0 left-0" />
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-accents-1 border relative overflow-hidden">
+                          {author && author.avatar_url && <Image fill src={author.avatar_url} alt="author-avatar" />}
+                        </div>
+                        <div className="flex flex-col justify-center h-full">
+                          <span className="text-sm font-medium">{author?.name}</span>
+                          <span className="text-xs text-secondary">{author?.position}</span>
+                        </div>
+                      </div>
+                      <div className="w-full flex flex-col gap-0">
+                        <p className="line-clamp-1 text-xl font-medium">{event.metadata.title}</p>
+                        <p className="line-clamp-2 text-base text-secondary">{event.metadata.description}</p>
+                      </div>
+                      <div className="w-full mt-10">
+                        <span className="text-sm text-secondary">{dayjs(event.metadata.created_at).format("dddd, D MMMM YYYY")}</span>
+                      </div>
+                    </div>
+                  )
+                }
+              </div>
+            </section>
+          </div>
+        </>
+      }
       <div className="w-full h-36" />
-      <Footer />
+      <Footer className="max-w-4xl mx-auto md:px-4 px-0" />
     </>
   )
 }
