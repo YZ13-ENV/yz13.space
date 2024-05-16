@@ -17,7 +17,7 @@ const ChartOutput = ({ data = [] }: Props) => {
   const { charts, setCharts } = useCharts()
   const selectedChart = useSelectChart(state => state.selected)
   const chart = useMemo(() => { return charts.filter(chart => chart.name === selectedChart) }, [selectedChart, charts])
-  const group = groupBy(chart.map(chart => ({ ...chart, created_at: dayjs(chart.created_at).format("YYYY-MM-DD") })), "created_at")
+  const group = groupBy(chart.map(chart => ({ ...chart, created_at: dayjs(chart.created_at).format("YYYY-MM-DD") })).sort((a, b) => dayjs(a.created_at).diff(dayjs(b.created_at), "date")), "created_at")
   const group_keys = keys(group)
   const metric = metrics.find(item => item.name === selectedChart)
   const grouped_charts = groupBy(charts, "name")
@@ -27,7 +27,7 @@ const ChartOutput = ({ data = [] }: Props) => {
   useEffect(() => {
     const maxes = grouped_charts_keys.map(key => {
       const chart = grouped_charts[key] || []
-      const with_formatted_date = chart.map(chart => ({ ...chart, created_at: dayjs(chart.created_at).format("YYYY-MM-DD") }))
+      const with_formatted_date = chart.map(chart => ({ ...chart, created_at: dayjs(chart.created_at).format("YYYY-MM-DD") })).sort((a, b) => dayjs(a.created_at).diff(dayjs(b.created_at), "date"))
       const grouped_by_date = groupBy(with_formatted_date, "created_at")
       const grouped_by_date_keys = keys(grouped_by_date)
       const lengths = grouped_by_date_keys.map(key => grouped_by_date[key]?.length || 0)

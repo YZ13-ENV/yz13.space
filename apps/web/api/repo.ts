@@ -13,7 +13,7 @@ const getRepoEvents = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
+      if (json && !cached) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
       return json;
     }
     return [];
@@ -31,7 +31,7 @@ const getRepoDeployments = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
+      if (json && !cached) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
       return json;
     }
     return [];
@@ -49,7 +49,7 @@ const getRepoLanguages = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
+      if (json && !cached) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
       return json;
     }
     return null;
@@ -68,7 +68,7 @@ const getRepoCommits = async (owner: string, id: string) => {
     const res = await fetch(url, { method: "GET" });
     if (res.ok) {
       const json = await res.json();
-      if (json) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
+      if (json && !cached) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
       return json;
     }
     return [];
