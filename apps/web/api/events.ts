@@ -9,6 +9,6 @@ export const getEvents = async () => {
   const cached = await kv.get<Event[]>(key);
   if (cached) return cached;
   const events = await get<Event[]>("events");
-  if (events) kv.set(key, events, { nx: true, ex: EXPIRE_TIME });
+  if (events && !cached) kv.set(key, events, { nx: true, ex: EXPIRE_TIME });
   return events as Event[];
 };

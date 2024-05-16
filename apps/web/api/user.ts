@@ -15,7 +15,7 @@ export const user = {
       const res = await fetch(url, { method: "GET" });
       if (res.ok) {
         const json = await res.json();
-        if (json) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
+        if (json && !cached) kv.set(key, json, { nx: true, ex: EXPIRE_TIME });
         return json;
       }
       return null;
