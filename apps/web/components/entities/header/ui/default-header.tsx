@@ -4,9 +4,12 @@ import { User } from "@/components/shared/user"
 import Link from "next/link"
 import { HeaderWrapper } from "./header-wrapper"
 
-const DefaultHeader = () => {
+type Props = {
+  className?: string
+}
+const DefaultHeader = ({ className }: Props) => {
   return (
-    <HeaderWrapper>
+    <HeaderWrapper className={className}>
       <Link href="/" className='inline-flex items-center gap-1'>
         <ThemedLogo width={120} mode="full" height={32} alt='header-logo' />
       </Link>
