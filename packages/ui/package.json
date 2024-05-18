@@ -13,6 +13,7 @@
     "./tooltip": "./src/components/tooltip.tsx",
     "./accordion": "./src/components/accordion.tsx",
     "./input-otp": "./src/components/input-otp.tsx",
+    "./breadcrumb": "./src/components/breadcrumb.tsx",
     "./css": "./src/styles/index.css",
     "./css/vars": "./src/styles/vars.css",
     "./css/typography": "./src/styles/typography.css",
