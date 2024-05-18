@@ -8,6 +8,7 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Metadata } from "next"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import { Suspense } from "react"
 import { BiGlobe } from "react-icons/bi"
 import { BsSlash } from "react-icons/bs"
@@ -47,6 +48,7 @@ const page = async ({ params, searchParams }: Props) => {
   const id = params.project
   const { data } = await getProject(id)
   const project = data ? data[0] : null
+  if (!tab) return redirect(`/${id}?tab=speed-insights`)
   return (
     <>
       <DefaultHeader className='z-20 w-full p-6 h-fit bg-accents-1' />
@@ -95,8 +97,11 @@ const page = async ({ params, searchParams }: Props) => {
         }
         {
           tab === "kanban" &&
-          <section className="w-full h-[70dvh]">
-            <div className="container h-full">
+          <section className="w-full h-[75dvh] space-y-6 py-12">
+            <div className="container">
+              <h2 className="text-4xl font-bold">Kanban</h2>
+            </div>
+            <div className="container py-6 h-full">
               <Suspense fallback={<div className="w-full aspect-[4/3] bg-muted animate-pulse" />}>
                 <ProjectKanban />
               </Suspense>

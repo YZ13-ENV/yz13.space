@@ -20,7 +20,7 @@ const ProjectTabs = ({ id }: Props) => {
       <TabsList>
         <TabsTrigger className="relative gap-2" value="?tab=speed-insights">
           <MdBarChart className="text-inherit" size={16} />
-          <span>Speed insights</span>
+          <span className="text-inherit">Speed insights</span>
           {
             tab === "speed-insights" &&
             <motion.span layoutId="project-tab" className="w-full h-[2px] bg-foreground absolute -bottom-1 left-0" />
@@ -28,7 +28,7 @@ const ProjectTabs = ({ id }: Props) => {
         </TabsTrigger>
         <TabsTrigger className="relative gap-2" value="?tab=kanban">
           <MdOutlineViewKanban className="text-inherit" size={16} />
-          <span>Kanban</span>
+          <span className="text-inherit">Kanban</span>
           {
             tab === "kanban" &&
             <motion.span layoutId="project-tab" className="w-full h-[2px] bg-foreground absolute -bottom-1 left-0" />
