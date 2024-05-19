@@ -6,6 +6,7 @@ import { unstable_noStore } from 'next/cache';
 import path from 'path';
 import HomePage from './_components/pages/home';
 import { EmbedEventPost } from './event/[id]/embed';
+import { RelatedEvents } from './event/[id]/related-events';
 
 const page = async () => {
   unstable_noStore()
@@ -25,10 +26,11 @@ const page = async () => {
         <>
           {
             todayEvents.map(event =>
-              <EmbedEventPost id={event.slug} />
+              <EmbedEventPost key={event.slug + "-" + event.metadata.created_at} id={event.slug} />
             )
           }
-          <Footer />
+          <RelatedEvents />
+          <Footer className="max-w-4xl mx-auto md:px-4 px-0" />
         </>
       }
     </>

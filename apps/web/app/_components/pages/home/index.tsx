@@ -43,7 +43,7 @@ const HomePage = async () => {
             <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
               <Rulers />
             </Suspense>
-            <div className="w-full h-9 px-6 flex items-center justify-end">
+            <div className="w-full bg-background h-9 px-3 flex items-center justify-end">
               <div className="flex items-center gap-4">
                 <Link href="https://t.me/YZTHECEO" className="text-xs transition-colors text-secondary hover:text-foreground">Telegram</Link>
                 <Link href="https://github.com/yz13-env" className="text-xs transition-colors text-secondary hover:text-foreground">Github</Link>
