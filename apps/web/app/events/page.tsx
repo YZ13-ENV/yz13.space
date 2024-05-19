@@ -17,31 +17,37 @@ const page = async () => {
       <div className='min-h-screen w-full'>
         <div className="w-full container">
           <div className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6">
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-6 auto-rows-auto">
+            <div className="grid md:grid-cols-2 grid-flow-row grid-cols-1 gap-6 auto-rows-auto">
               {
-                allMDX.map(
-                  event => {
-                    const author = members.find(member => member.username === event.metadata.author)
-                    const published_at = dayjs(event.metadata.created_at).format("dddd, D MMMM YYYY")
-                    return <div key={event.slug} className="w-full flex flex-col relative">
-                      <Link className="w-full h-full absolute left-0 top-0" href={`/event/${event.slug}`} />
-                      <span className="text-xs text-secondary">{event.metadata.theme}</span>
-                      <div className="my-2">
-                        <p className="text-2xl font-bold">{event.metadata.title}</p>
-                        <p className="text-sm text-secondary">{event.metadata.description}</p>
-                      </div>
-                      <div className="w-full flex items-center justify-between">
-                        <div className="flex mt-2 items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-accents-1 border relative overflow-hidden">
-                            {author && author.avatar_url && <Image fill src={author.avatar_url} alt="author-avatar" />}
-                          </div>
-                          <span>{author?.username}</span>
+                allMDX
+                  .sort((a, b) => {
+                    const a_date = dayjs(a.metadata.created_at)
+                    const b_date = dayjs(b.metadata.created_at)
+                    return a_date.diff(b_date)
+                  })
+                  .map(
+                    event => {
+                      const author = members.find(member => member.username === event.metadata.author)
+                      const published_at = dayjs(event.metadata.created_at).format("dddd, D MMMM YYYY")
+                      return <div key={event.slug} className="w-full flex flex-col border border-transparent hover:border-foreground p-6 hover:bg-accents-1 transition-colors rounded-2xl relative">
+                        <Link className="w-full h-full absolute left-0 top-0" href={`/event/${event.slug}`} />
+                        <span className="text-xs text-secondary">{event.metadata.theme}</span>
+                        <div className="my-2">
+                          <p className="text-2xl font-bold">{event.metadata.title}</p>
+                          <p className="text-sm text-secondary">{event.metadata.description}</p>
                         </div>
-                        <span className="text-sm text-secondary">{published_at}</span>
+                        <div className="w-full flex items-center justify-between">
+                          <div className="flex mt-2 items-center gap-2">
+                            <div className="w-6 h-6 rounded-full bg-accents-1 border relative overflow-hidden">
+                              {author && author.avatar_url && <Image fill src={author.avatar_url} alt="author-avatar" />}
+                            </div>
+                            <span>{author?.username}</span>
+                          </div>
+                          <span className="text-sm text-secondary">{published_at}</span>
+                        </div>
                       </div>
-                    </div>
-                  }
-                )
+                    }
+                  )
               }
             </div>
           </div>

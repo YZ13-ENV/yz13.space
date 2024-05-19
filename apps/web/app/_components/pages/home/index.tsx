@@ -1,8 +1,10 @@
 import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
+import { ThemedLogo } from "@/components/shared/theme-logo"
 import { getMDXData } from "@/utils/mdx"
 import { unstable_noStore } from "next/cache"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 import path from "path"
 import { Suspense } from "react"
 import { DateProvider } from "../../entities/date"
@@ -36,9 +38,20 @@ const HomePage = async () => {
           </div>
           <DateProvider />
           <EventsProvider events={events} />
-          <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
-            <Rulers />
-          </Suspense>
+          <div className="w-full flex flex-col">
+
+            <Suspense fallback={<div className="w-full h-32 bg-muted animate-pulse" />}>
+              <Rulers />
+            </Suspense>
+            <div className="w-full bg-background h-9 px-3 flex items-center justify-end">
+              <div className="flex items-center gap-4">
+                <Link href="https://t.me/YZTHECEO" className="text-xs transition-colors text-secondary hover:text-foreground">Telegram</Link>
+                <Link href="https://github.com/yz13-env" className="text-xs transition-colors text-secondary hover:text-foreground">Github</Link>
+                <Link href="https://github.com/yz13-env/yz13.space" className="text-xs transition-colors text-secondary hover:text-foreground">Source code</Link>
+                <ThemedLogo mode="symbol" width={20} height={20} alt="footer-logo" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

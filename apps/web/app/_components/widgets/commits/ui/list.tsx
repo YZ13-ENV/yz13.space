@@ -29,7 +29,7 @@ const CommitsList = async ({ owner, repo }: Props) => {
                   </div>
                   <span>{created_at} was added {group.length} commits</span>
                 </div>
-                <ul className="w-full space-y-2">
+                <ul className="w-full px-0 space-y-2">
                   {
                     group.map(
                       commit => {
