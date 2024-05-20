@@ -50,7 +50,6 @@ const ChartOutput = ({ data = [] }: Props) => {
   const yesterday_avg = ((yesterday_metric.length !== 0 ? yesterday_metric.map(metric => metric.value).reduce((a, b) => a + b) : 0) / yesterday_metric.length) / 1000 || 0
   const today_avg_formatted = String(today_avg.toFixed(3)) + "s."
   const avg_diff = today_avg - yesterday_avg
-  console.log(0 / today_metric.length / 1000)
   if (loading) return (
     <div className="container">
       <div className="w-full h-[450px] flex items-end rounded-xl bg-muted animate-pulse justify-end"></div>
