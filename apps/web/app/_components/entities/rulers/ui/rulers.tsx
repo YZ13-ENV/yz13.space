@@ -60,6 +60,7 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
     const event_key = event_date.format("YYYY-MM-DD")
     return event_key === date_key
   })
+  const level_date_format = zoomLevel === 1 ? "MMMM YYYY" : zoomLevel === 2 ? "DD MMMM YYYY" : zoomLevel === 3 ? "dd, DD MMMM YYYY" : "dd, DD MMMM HH:mm"
   return (
     <div
       onMouseEnter={() => setMini(false)}
@@ -95,7 +96,7 @@ const Rulers = ({ size = "default", className = "", align = "center" }: Props) =
               className="flex items-center px-6 w-full justify-between"
             >
               <Button variant="outline">
-                <Time format="dd, DD MMMM HH:mm" className="" />
+                <Time format={level_date_format} className="" />
               </Button>
               {
                 !!todayEvents.length && !isMobile &&

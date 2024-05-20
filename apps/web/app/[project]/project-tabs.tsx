@@ -13,12 +13,12 @@ const ProjectTabs = ({ id }: Props) => {
   const router = useRouter()
   return (
     <Tabs
-      className="mt-6"
+      className="mt-6 h-12"
       onValueChange={router.push}
       value={tab ? `?tab=${tab}` : "?tab=speed-insights"}
     >
-      <TabsList>
-        <TabsTrigger className="relative gap-2" value="?tab=speed-insights">
+      <TabsList className="h-full">
+        <TabsTrigger className="relative h-full gap-2" value="?tab=speed-insights">
           <MdBarChart className="text-inherit" size={16} />
           <span className="text-inherit">Speed insights</span>
           {
@@ -26,7 +26,7 @@ const ProjectTabs = ({ id }: Props) => {
             <motion.span layoutId="project-tab" className="w-full h-[2px] bg-foreground absolute -bottom-1 left-0" />
           }
         </TabsTrigger>
-        <TabsTrigger className="relative gap-2" value="?tab=kanban">
+        <TabsTrigger className="relative h-full gap-2" value="?tab=kanban">
           <MdOutlineViewKanban className="text-inherit" size={16} />
           <span className="text-inherit">Kanban</span>
           {
