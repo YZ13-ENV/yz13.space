@@ -1,4 +1,4 @@
-import { MdBarChart, MdGridView, MdOutlineViewKanban } from "react-icons/md"
+import { MdBarChart, MdCommit, MdGridView, MdOutlineViewKanban } from "react-icons/md"
 
 export const tabs = [
   {
@@ -15,5 +15,10 @@ export const tabs = [
     icon: MdOutlineViewKanban,
     label: "Kanban",
     value: "/kanban"
+  },
+  {
+    icon: MdCommit,
+    label: "Git",
+    value: "/git"
   }
 ]

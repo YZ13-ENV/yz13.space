@@ -66,7 +66,7 @@ const page = async ({ params }: Props) => {
             </li>
             {
               all_vitals
-                .filter((_, i) => i <= 10)
+                .filter((_, i) => i <= 100)
                 .map(
                   item => {
                     const score = getMetricScore(item.name, item.value)

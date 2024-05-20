@@ -120,6 +120,11 @@ const page = async ({ params }: Props) => {
           </div>
         </div>
       </div>
+      <div className="container">
+        <div className="max-w-6xl mx-auto pb-12 w-full">
+          <div className="w-full h-80 bg-accents-2 rounded-xl"></div>
+        </div>
+      </div>
       <Details id={id} />
       <Footer className="bg-accents-1/50 max-w-6xl mx-auto border-x border-t mt-auto" />
     </>

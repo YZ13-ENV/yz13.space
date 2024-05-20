@@ -1,7 +1,6 @@
 import { getProject } from "@/api/projects"
 import { ThemeSwitcher } from "@/app/_components/entities/theme"
 import { ProjectKanban } from "@/app/_components/widgets/project-kanban"
-import { Footer } from "@/components/shared/footer"
 import { User } from "@/components/shared/user"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
@@ -38,12 +37,11 @@ const page = async ({ params }: Props) => {
           <h1 className="text-6xl font-bold">Kanban</h1>
         </div>
       </div>
-      <div className="container h-screen py-12">
+      <div className="container h-[84dvh] py-12">
         <div className="max-w-6xl mx-auto w-full">
           <ProjectKanban />
         </div>
       </div>
-      <Footer />
     </>
   )
 }
