@@ -14,8 +14,8 @@ import { LevelWrapper } from "./level-wrapper"
 const FirstLevel = () => {
   const today = useDate(state => state.date)
   const month = today.month()
-  const months_before = Array.from({ length: 12 - (12 - month) }).map((_, i) => -(i + 1))
-  const months_after = Array.from({ length: 12 - month }).map((_, i) => i)
+  const months_before = Array.from({ length: 12 - (12 - month) + 6 }).map((_, i) => -(i + 1))
+  const months_after = Array.from({ length: (12 - month) + 6 }).map((_, i) => i)
   const rulers = [...months_before, ...months_after].sort((a, b) => a >= b ? 1 : -1)
   const today_key = today.format("MMMM-YYYY").toLowerCase()
   return (
@@ -37,6 +37,7 @@ const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, 
   const key = date.format("MM-YYYY")
   const isFist = index === 0
   const events = useEvents(state => state.events)
+  const firstMonthOfYear = date.month() === 0
   const onlyInRuler = events.filter(event => {
     const event_date = dayjs(event.metadata.created_at)
     const isSameMonth = event_date.month() === date.month()
@@ -68,7 +69,7 @@ const LevelRuler = ({ ruler, children, index }: { ruler: number, index: number, 
       <span className={cn(
         'text-accents-4 transition-opacity text-start w-full text-xs z-10'
       )}>
-        {date.format("MMMM")}
+        {firstMonthOfYear ? date.format("MMMM YYYY") : date.format("MMMM")}
       </span>
     </div>
   )

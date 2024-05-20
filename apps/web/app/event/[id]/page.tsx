@@ -4,6 +4,7 @@ import { DefaultHeader } from "@/components/entities/header"
 import { Footer } from "@/components/shared/footer"
 import { getMDXData } from "@/utils/mdx"
 import { Button } from "@repo/ui/button"
+import { Input } from "@repo/ui/input"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -63,7 +64,14 @@ const page = async ({ params }: Props) => {
             </div>
             <div className="w-full space-y-6">
               <div className="w-full md-layout">
-                <MDXRemote source={mdx?.content || ""} />
+                <MDXRemote
+                  source={mdx?.content || ""}
+                  options={{ mdxOptions: { format: "mdx", useDynamicImport: true, jsxRuntime: "automatic" } }}
+                  components={{
+                    button: (props) => <Button {...props} />,
+                    input: (props) => <Input {...props} />
+                  }}
+                />
               </div>
             </div>
           </div>

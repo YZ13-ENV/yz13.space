@@ -1,10 +1,12 @@
 "use client"
 import { Vitals } from "@/api/web-vitals"
+import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import { flatten, groupBy, keys } from "lodash"
 import { useEffect, useMemo, useState } from "react"
 import { TbMathEqualLower, TbMathGreater } from "react-icons/tb"
+import { getMetricData } from "../api/getMetricData"
 import { metrics } from "../const"
 import { useCharts } from "../store/charts-store"
 import { useSelectChart } from "../store/select-chart"
@@ -42,6 +44,13 @@ const ChartOutput = ({ data = [] }: Props) => {
   useEffect(() => {
     if (!!metric) setLoading(false)
   }, [metric])
+  const today_metric = getMetricData(charts, selectedChart)
+  const yesterday_metric = getMetricData(charts, selectedChart, dayjs().subtract(1, "day").format("YYYY-MM-DD"))
+  const today_avg = ((today_metric.length !== 0 ? today_metric.map(metric => metric.value).reduce((a, b) => a + b) : 0) / today_metric.length) / 1000 || 0
+  const yesterday_avg = ((yesterday_metric.length !== 0 ? yesterday_metric.map(metric => metric.value).reduce((a, b) => a + b) : 0) / yesterday_metric.length) / 1000 || 0
+  const today_avg_formatted = String(today_avg.toFixed(3)) + "s."
+  const avg_diff = today_avg - yesterday_avg
+  console.log(0 / today_metric.length / 1000)
   if (loading) return (
     <div className="container">
       <div className="w-full h-[450px] flex items-end rounded-xl bg-muted animate-pulse justify-end"></div>
@@ -50,7 +59,17 @@ const ChartOutput = ({ data = [] }: Props) => {
   return (
     <div className="container pt-6 pb-10 bg-card rounded-3xl">
       <div className="flex flex-col justify-center gap-1">
-        <h3 className="text-3xl font-bold">{selectedChart}</h3>
+        <h3 className="text-3xl text-secondary font-semibold">{selectedChart}</h3>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-5xl text-foreground font-bold">{today_avg_formatted}</span>
+          <div className="flex flex-col justify-center items-start">
+            <span className={cn(avg_diff > 0 ? "text-error-foreground" : avg_diff < 0 ? "text-success-foreground" : "text-secondary", "text-lg")}>
+              {avg_diff > 0 && "+"}
+              {avg_diff.toFixed(3)}s.
+            </span>
+            <span className="text-xs text-secondary">vs yesterday</span>
+          </div>
+        </div>
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 bg-success-background text-success-foreground text-xs">
             <TbMathEqualLower size={14} />

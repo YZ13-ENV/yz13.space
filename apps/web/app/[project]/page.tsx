@@ -1,5 +1,4 @@
 import { getProject } from "@/api/projects"
-import { DefaultHeader } from "@/components/entities/header"
 import { Footer } from "@/components/shared/footer"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@repo/ui/breadcrumb"
 import { Button } from "@repo/ui/button"
@@ -51,14 +50,14 @@ const page = async ({ params, searchParams }: Props) => {
   if (!tab) return redirect(`/${id}?tab=speed-insights`)
   return (
     <>
-      <div className="bg-accents-1">
+      {/* <div className="bg-accents-1">
         <div className="container">
           <DefaultHeader className='z-20 w-full py-6 px-0 h-fit' />
         </div>
-      </div>
+      </div> */}
       <div className="w-full h-fit">
         <div className="w-full bg-accents-1 border-y">
-          <div className="container pt-3">
+          <div className="container pt-6">
             <div className="w-fit mb-2 h-fit flex items-center gap-2">
               <Breadcrumb>
                 <BreadcrumbList>
