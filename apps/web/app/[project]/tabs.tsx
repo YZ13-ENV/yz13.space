@@ -4,16 +4,16 @@ export const tabs = [
   {
     icon: MdGridView,
     label: "Overview",
-    value: "overview"
+    value: ""
   },
   {
     icon: MdBarChart,
     label: "Speed insights",
-    value: "speed-insights"
+    value: "/speed-insights"
   },
   {
     icon: MdOutlineViewKanban,
     label: "Kanban",
-    value: "kanban"
+    value: "/kanban"
   }
 ]

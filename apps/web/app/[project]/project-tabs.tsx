@@ -3,15 +3,16 @@ import { cn } from "@repo/ui/cn"
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/tabs"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { tabs } from "./tabs"
 
 type Props = {
+  id: string
   className?: string
 }
 
 
-const ProjectTabs = ({ className }: Props) => {
+const ProjectTabs = ({ id, className }: Props) => {
   const searchParams = useSearchParams()
   const selected_tab = searchParams.get("tab")
   const router = useRouter()
@@ -40,10 +41,10 @@ const ProjectTabs = ({ className }: Props) => {
   )
 }
 
-const ProjectTabsV2 = () => {
-  const searchParams = useSearchParams()
-  const selected_tab = searchParams.get("tab")
-  const value = (tab: string) => `?tab=${tab}`
+const ProjectTabsV2 = ({ id }: Props) => {
+  const pathname = usePathname()
+  const selected_tab = pathname
+  const value = (tab: string) => "/" + id + tab
   return (
     <>
       {
@@ -53,7 +54,7 @@ const ProjectTabsV2 = () => {
             key={tab.value}
             className={cn(
               "px-2 py-1 rounded-lg text-sm inline-flex gap-2 items-center transition-colors",
-              (selected_tab ? value(selected_tab) === value(tab.value) : false)
+              selected_tab === value(tab.value)
                 ? "bg-foreground text-background"
                 : "bg-accents-1 text-foreground/70"
             )}

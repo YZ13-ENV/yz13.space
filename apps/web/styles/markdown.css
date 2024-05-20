@@ -2,60 +2,44 @@
 @tailwind components;
 
 @layer base {
-  h1 {
+  .md-layout > h1 {
     @apply text-4xl font-bold text-foreground;
   }
-  h2 {
+  .md-layout > h2 {
     @apply text-3xl font-bold text-foreground;
   }
-  h3 {
+  .md-layout > h3 {
     @apply text-2xl font-bold text-foreground;
   }
-  h4 {
+  .md-layout > h4 {
     @apply text-xl font-bold text-foreground;
   }
-  h5 {
+  .md-layout > h5 {
     @apply text-lg font-bold text-foreground;
   }
-  h6 {
+  .md-layout > h6 {
     @apply text-base font-bold text-foreground;
   }
-  ul {
+  .md-layout > ul {
     @apply m-2 ml-4 list-none list-inside;
   }
-  ol {
+  .md-layout > ol {
     @apply m-2 ml-4 list-decimal list-inside;
   }
-  li {
+  .md-layout > li {
     @apply relative mb-2 font-light text-foreground;
   }
-  li::before {
+  .md-layout > li::before {
     content: "–";
     @apply text-secondary -left-3 absolute;
   }
-  strong {
+  .md-layout > strong {
     @apply font-bold text-inherit;
   }
-  blockquote {
+  .md-layout > blockquote {
     @apply p-2 my-2 rounded-lg h-fit bg-accents-1;
   }
-
-  .md-layout h1 {
-    @apply text-4xl font-bold tracking-tight mt-6 mb-2;
-  }
-
-  .md-layout h2 {
-    @apply text-xl font-bold tracking-tight mt-6 mb-2;
-  }
-
-  .md-layout h3 {
-    @apply text-xl font-bold tracking-tight mt-6 mb-2;
-  }
-
-  .md-layout h4 {
-    @apply text-lg font-semibold tracking-tight mt-6 mb-2;
-  }
-  .md-layout a {
+  .md-layout > a {
     @apply text-foreground hover:underline;
   }
   .md-layout > p,
