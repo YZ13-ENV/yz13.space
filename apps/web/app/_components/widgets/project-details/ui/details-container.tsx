@@ -1,3 +1,4 @@
+import { SectionContainer } from "@/app/[project]/containers"
 import { Accordion } from "@repo/ui/info-accordion"
 import { LastMetrics } from "./last-metrics"
 import { UserExperience } from "./user-experience"
@@ -7,7 +8,7 @@ type Props = {
 }
 const Details = ({ id }: Props) => {
   return (
-    <div className="w-full max-w-6xl mx-auto py-6 space-y-6 bg-accents-1/50 rounded-t-3xl border-x border-t">
+    <SectionContainer className="py-6 space-y-6 bg-accents-1/50 rounded-3xl border">
       <section className="container space-y-6">
         <h3 className="text-2xl font-bold">Project details</h3>
         <div className="rounded-xl bg-accents-1 border">
@@ -60,7 +61,7 @@ const Details = ({ id }: Props) => {
           </div>
         </div>
       </div> */}
-    </div>
+    </SectionContainer>
   )
 }
 export { Details }
