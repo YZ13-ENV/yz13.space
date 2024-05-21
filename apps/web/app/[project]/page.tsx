@@ -6,7 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { BiImage, BiRightArrowAlt, BiUser } from "react-icons/bi"
+import { BiImage, BiRightArrowAlt } from "react-icons/bi"
 import { BsGithub } from "react-icons/bs"
 import { VitalsProvider } from "../_components/entities/vitals"
 import { Details } from "../_components/widgets/project-details"
@@ -101,7 +101,7 @@ const page = async ({ params }: Props) => {
           </div>
           <div className="sm:w-1/2 w-full sm:h-full h-fit items-end flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <Button variant="outline" className="gap-2"><BiUser /><span className="text-inherit">Share</span></Button>
+              {/* <Button variant="outline" className="gap-2"><BiUser /><span className="text-inherit">Share</span></Button> */}
               <Button className="gap-2" asChild>
                 <Link href={project?.link || ""} target="_blank">
                   <span className="text-inherit">Visit</span><BiRightArrowAlt size={18} />
