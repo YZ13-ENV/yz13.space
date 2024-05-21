@@ -15,7 +15,7 @@ const HomeHeader = ({ className = "" }: Props) => {
       activeClassName="backdrop-blur"
     >
       <Link href="/" className='inline-flex items-center gap-1'>
-        <ThemedLogo width={120} mode="full" height={32} alt='header-logo' />
+        <ThemedLogo width={32} mode="symbol" height={32} alt='header-logo' />
       </Link>
       <div className="flex items-center gap-4">
         <ThemeSwitcher />

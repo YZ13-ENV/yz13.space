@@ -102,7 +102,11 @@ const page = async ({ params }: Props) => {
           <div className="sm:w-1/2 w-full sm:h-full h-fit items-end flex flex-col gap-3">
             <div className="flex items-center gap-2">
               <Button variant="outline" className="gap-2"><BiUser /><span className="text-inherit">Share</span></Button>
-              <Button className="gap-2"><span className="text-inherit">Visit</span><BiRightArrowAlt size={18} /></Button>
+              <Button className="gap-2" asChild>
+                <Link href={project?.link || ""} target="_blank">
+                  <span className="text-inherit">Visit</span><BiRightArrowAlt size={18} />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

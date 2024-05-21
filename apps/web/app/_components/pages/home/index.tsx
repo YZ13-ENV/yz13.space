@@ -34,7 +34,7 @@ const HomePage = async () => {
         </div>
         <div className="w-full lg:h-[40%] h-[60%] pt-6 flex flex-col overflow-y-hidden justify-between">
           <div className='w-full flex justify-center gap-2'>
-            <Nav />
+            <Nav exclude={["/"]} />
           </div>
           <DateProvider />
           <EventsProvider events={events} />

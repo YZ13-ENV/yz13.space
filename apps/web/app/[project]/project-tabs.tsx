@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "@repo/ui/tabs"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { BiLeftArrowAlt } from "react-icons/bi"
 import { tabs } from "./tabs"
 
 type Props = {
@@ -47,6 +48,9 @@ const ProjectTabsV2 = ({ id }: Props) => {
   const value = (tab: string) => "/" + id + tab
   return (
     <>
+      <Link href="/projects" className="px-2 py-1 rounded-lg text-sm inline-flex gap-2 items-center transition-colors bg-accents-1/80 hover:bg-accents-2/70 text-foreground/70">
+        <BiLeftArrowAlt size={14} /><span>Back</span>
+      </Link>
       {
         tabs.map(tab =>
           <Link
