@@ -38,7 +38,7 @@ const Content = ({ id }: Props) => {
                     <span className="text-sm shrink-0 px-2 py-1 w-fit rounded-md bg-accents-2">{dayjs(item.created_at).format("DD MMMM HH:mm:ss:SSS")}</span>
                     <span className="text-sm shrink-0 px-2 py-1 w-fit rounded-md bg-accents-2">{item.name}</span>
                     <div className={cn("px-2 divide-x shrink-0 rounded-md py-1", statuses_variants({ variant: score.score }))}>
-                      <span className={cn("capitalize text-sm pr-2 text-inherit border-inherit")}>{score.score}</span>
+                      <span className={cn("capitalize text-sm pr-2 text-inherit border-inherit")}>{score.score.length > 4 ? score.score.slice(0, 5) + "..." : score.score}</span>
                       <span className={cn("text-sm pl-2 text-inherit border-inherit")}>{score.formattedValue}s.</span>
                     </div>
                     <span className="text-sm shrink-0 px-2 py-1 min-w-12 w-fit rounded-md bg-accents-2">{item.path}</span>

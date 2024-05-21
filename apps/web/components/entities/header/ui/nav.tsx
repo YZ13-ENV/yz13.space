@@ -1,36 +1,34 @@
 "use client"
 import { links } from "@/const/nav-links"
-import { Button } from "@repo/ui/button"
+import { cn } from "@repo/ui/cn"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import posthog from "posthog-js"
 
-const Nav = () => {
+type Props = {
+  exclude?: string[]
+}
+const Nav = ({ exclude = [] }: Props) => {
   const pathname = usePathname()
   return (
     <>
-      <nav className="rounded-full flex border bg-background/50 backdrop-blur items-center">
+      <nav className="flex items-center gap-2">
         {
-          links.map(link =>
-            <Button
-              key={link.value}
-              asChild
-              variant={link.value === pathname ? "default" : "ghost"}
-              className="gap-2"
-            >
+          links
+            .filter(link => !exclude.includes(link.value))
+            .map(link =>
               <Link
                 href={link.value}
-                onClick={() => {
-                  posthog.capture('navigate', { path: link.value })
-                }}
+                key={link.value}
+                className={cn(
+                  "px-2 py-1 rounded-lg text-sm inline-flex gap-2 items-center transition-colors",
+                  pathname === link.value
+                    ? "bg-foreground text-background"
+                    : "bg-accents-1/80 hover:bg-accents-2/70 text-foreground/70"
+                )}
               >
-                {link.icon && link.icon}
-                <span className="md:inline hidden text-inherit">
-                  {link.label}
-                </span>
+                {link.icon && link.icon({ size: 14 })}{link.label}
               </Link>
-            </Button>
-          )
+            )
         }
       </nav>
     </>

@@ -19,7 +19,7 @@ const layout = ({ params, children }: Props) => {
           <div className="w-full flex flex-row flex-wrap gap-2">
             <ProjectTabsV2 id={id} />
           </div>
-          <div className="flex items-center gap-4 w-full justify-end">
+          <div className="flex items-center gap-4 w-fit justify-end">
             <ThemeSwitcher />
             <User />
           </div>
