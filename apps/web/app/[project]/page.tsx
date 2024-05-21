@@ -1,4 +1,5 @@
 import { getProject } from "@/api/projects"
+import { Vitals, getWebVitalsRecords } from "@/api/web-vitals"
 import { Button } from "@repo/ui/button"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
@@ -7,6 +8,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { BiImage, BiRightArrowAlt, BiUser } from "react-icons/bi"
 import { BsGithub } from "react-icons/bs"
+import { VitalsProvider } from "../_components/entities/vitals"
 import { Details } from "../_components/widgets/project-details"
 import { SectionContainer } from "./containers"
 
@@ -38,8 +40,11 @@ const page = async ({ params }: Props) => {
   const created_at = dayjs(project?.created_at).fromNow(true)
   const repo_id = project?.repo_id
   const repo_owner = project?.repo_owner
+  const vitals_response = await getWebVitalsRecords(id)
+  const vitals: Vitals[] = vitals_response.data as Vitals[]
   return (
     <>
+      <VitalsProvider vitals={vitals} />
       <SectionContainer className="w-full py-6">
         <h1 className="text-6xl font-bold">{project?.name}</h1>
       </SectionContainer>

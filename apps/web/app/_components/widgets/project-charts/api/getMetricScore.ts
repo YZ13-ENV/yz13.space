@@ -3,7 +3,7 @@ import { MetricParams, metrics } from "../const";
 type MetricScoreResult = {
   value: number;
   formattedValue: string;
-  score: string;
+  score: "good" | "needs-improvement" | "poor";
   metric?: MetricParams;
 };
 
