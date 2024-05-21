@@ -78,4 +78,25 @@ const getRepoCommits = async (owner: string, id: string) => {
   }
 };
 
-export { getRepoCommits, getRepoDeployments, getRepoEvents, getRepoLanguages };
+const getRepoFile = async (owner: string, id: string, filename: string) => {
+  try {
+    const url = `https://raw.githubusercontent.com/${owner}/${id}/main/${filename}`;
+    const res = await fetch(url, { method: "GET" });
+    if (res.ok) {
+      const json = await res.text();
+      return json;
+    }
+    return "";
+  } catch (e) {
+    console.log(e);
+    return "";
+  }
+};
+
+export {
+  getRepoCommits,
+  getRepoDeployments,
+  getRepoEvents,
+  getRepoFile,
+  getRepoLanguages,
+};

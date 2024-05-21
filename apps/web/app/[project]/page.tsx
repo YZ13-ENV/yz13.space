@@ -1,29 +1,20 @@
 import { getProject } from "@/api/projects"
-import { Footer } from "@/components/shared/footer"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@repo/ui/breadcrumb"
+import { Vitals, getWebVitalsRecords } from "@/api/web-vitals"
 import { Button } from "@repo/ui/button"
-import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
-import { redirect } from "next/navigation"
-import { Suspense } from "react"
-import { BiGlobe } from "react-icons/bi"
-import { BsSlash } from "react-icons/bs"
-import { CommitsList } from "../_components/widgets/commits"
-import { DeploymentsList } from "../_components/widgets/deployments"
-import { LanguagesWrapper } from "../_components/widgets/languages"
-import { ProjectCharts } from "../_components/widgets/project-charts"
-import { ProjectKanban } from "../_components/widgets/project-kanban"
-import { ProjectTabs } from "./project-tabs"
+import { BiImage, BiRightArrowAlt, BiUser } from "react-icons/bi"
+import { BsGithub } from "react-icons/bs"
+import { VitalsProvider } from "../_components/entities/vitals"
+import { Details } from "../_components/widgets/project-details"
+import { SectionContainer } from "./containers"
 
 type Props = {
   params: {
     project: string
-  }
-  searchParams: {
-    tab?: string
   }
 }
 
@@ -40,108 +31,84 @@ export async function generateMetadata(
   }
 }
 dayjs.extend(relativeTime)
-const page = async ({ params, searchParams }: Props) => {
-  const tab = searchParams.tab
+const page = async ({ params }: Props) => {
   const OWNER = "YZ13-ENV"
   const REPO = "yz13"
   const id = params.project
   const { data } = await getProject(id)
   const project = data ? data[0] : null
-  if (!tab) return redirect(`/${id}?tab=speed-insights`)
+  const created_at = dayjs(project?.created_at).fromNow(true)
+  const repo_id = project?.repo_id
+  const repo_owner = project?.repo_owner
+  const vitals_response = await getWebVitalsRecords(id)
+  const vitals: Vitals[] = vitals_response.data as Vitals[]
   return (
     <>
-      {/* <div className="bg-accents-1">
-        <div className="container">
-          <DefaultHeader className='z-20 w-full py-6 px-0 h-fit' />
+      <VitalsProvider vitals={vitals} />
+      <SectionContainer className="w-full py-6">
+        <h1 className="text-6xl font-bold">{project?.name}</h1>
+      </SectionContainer>
+      <SectionContainer className="w-full flex md:flex-row flex-col pb-6 gap-6">
+        <div className="md:w-1/3 w-full h-full">
+          <div className="relative overflow-hidden w-full aspect-[16/10] bg-accents-1 rounded-xl">
+            {
+              project?.thumbnail
+                ? <Image src={project.thumbnail} fill alt="project-thumbnail" />
+                : <div className="w-full h-full flex items-center justify-center"><BiImage size={48} className="text-secondary" /></div>
+            }
+          </div>
         </div>
-      </div> */}
-      <div className="w-full h-fit">
-        <div className="w-full bg-accents-1 border-y">
-          <div className="container pt-6">
-            <div className="w-fit mb-2 h-fit flex items-center gap-2">
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="/projects">Projects</BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator>
-                    <BsSlash />
-                  </BreadcrumbSeparator>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href={`/${id}`}>{project?.name || id}</BreadcrumbLink>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+        <div className="md:w-2/3 w-full h-full flex sm:flex-row gap-3 flex-col-reverse">
+
+          <div className="sm:w-1/2 w-full sm:h-full h-fit space-y-3">
+            <div className="flex flex-wrap gap-3">
+
+              <div className="flex flex-col justify-center">
+                <span className="text-sm text-secondary">Status</span>
+                <span className="text-sm text-foreground">{project?.status}</span>
+              </div>
+
+              <div className="flex flex-col justify-center">
+                <span className="text-sm text-secondary">Duration</span>
+                <span className="text-sm text-foreground">{created_at}</span>
+              </div>
+              <div className="flex w-fit flex-col justify-center">
+                <span className="text-sm text-secondary">Domain</span>
+                <Link href={project?.link || ""} className="text-sm hover:underline text-foreground">{project?.link}</Link>
+              </div>
             </div>
-            <div className="flex items-center justify-between">
-              <h1 className="text-5xl font-medium">{project?.name}</h1>
-              <div className="flex items-center justify-end gap-2">
-                <Button size="default" asChild>
-                  <Link target="_blank" href={project?.link || "/"} className="inline-flex items-center gap-2">
-                    <BiGlobe size={16} />
-                    <span className="text-inherit">Visit</span>
+            <div className="flex flex-col justify-center">
+              <span className="text-sm text-secondary">Source</span>
+              {
+                repo_owner && repo_id
+                  ?
+                  <Link
+                    target="_blank"
+                    href={`https://github.com/${repo_owner}/${repo_id}`}
+                    className="mt-1 inline-flex border items-center w-fit h-fit gap-1 rounded-full bg-accents-1 px-2.5 py-1"
+                  >
+                    <BsGithub size={16} className="" />
+                    <span className="text-sm">{repo_owner}/{repo_id}</span>
                   </Link>
-                </Button>
-              </div>
+                  : <span></span>
+              }
             </div>
-            <ProjectTabs id={id} />
+
+            <div className="flex flex-col justify-center">
+              <span className="text-sm text-secondary">Description </span>
+              <span className="text-sm text-foreground">{project?.description}</span>
+            </div>
+          </div>
+          <div className="sm:w-1/2 w-full sm:h-full h-fit items-end flex flex-col gap-3">
+            <div className="flex items-center gap-2">
+              <Button variant="outline" className="gap-2"><BiUser /><span className="text-inherit">Share</span></Button>
+              <Button className="gap-2"><span className="text-inherit">Visit</span><BiRightArrowAlt size={18} /></Button>
+            </div>
           </div>
         </div>
-        {
-          tab === "speed-insights" &&
-          <section className="w-full space-y-6 py-12">
-            <div className="container">
-              <h2 className="text-4xl font-bold">Speed insights</h2>
-            </div>
-            <Suspense fallback={<div className="w-full aspect-[4/3] bg-muted animate-pulse" />}>
-              <ProjectCharts project_id={id} />
-            </Suspense>
-          </section>
-        }
-        {
-          tab === "kanban" &&
-          <section className="w-full h-[75dvh] space-y-6 py-12">
-            <div className="container">
-              <h2 className="text-4xl font-bold">Kanban</h2>
-            </div>
-            <div className="container py-6 h-full">
-              <Suspense fallback={<div className="w-full aspect-[4/3] bg-muted animate-pulse" />}>
-                <ProjectKanban />
-              </Suspense>
-            </div>
-          </section>
-        }
-        <Separator />
-        <div className="py-12 bg-accents-1">
-          <div className="container flex lg:flex-row gap-6 flex-col items-start">
-            <section className="w-full lg:max-w-sm space-y-6 shrink-0">
-              <h3 className="text-xl font-semibold">Deployments</h3>
-              <Suspense fallback={<div className="w-full h-64 rounded-lg bg-accents-2 animate-pulse" />}>
-                <DeploymentsList owner={OWNER} repo={REPO} />
-              </Suspense>
-            </section>
-            <section className="w-full space-y-6">
-              <h3 className="text-xl font-semibold">Details</h3>
-              <div className="w-full space-y-12">
-                <div className="w-full space-y-3">
-                  <span className="text-base font-medium">Languages</span>
-                  <Suspense fallback={<div className="w-full h-64 rounded-lg bg-accents-2 animate-pulse" />}>
-                    <LanguagesWrapper owner={OWNER} repo={REPO} />
-                  </Suspense>
-                </div>
-                <div className="w-full space-y-3">
-                  <span>Commits</span>
-                  <Suspense fallback={<div className="w-full h-64 rounded-xl bg-accents-2 animate-pulse" />}>
-                    <CommitsList owner={OWNER} repo={REPO} />
-                  </Suspense>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-        <Separator />
-      </div>
-      <Footer className="bg-accents-1" />
+      </SectionContainer>
+      <Details id={id} />
+      {/* <Footer className="bg-accents-1/50 max-w-4xl mx-auto border-x border-t mt-auto" /> */}
     </>
   )
 }

@@ -10,7 +10,7 @@ type Props = {
 const Deployment = ({ deployment }: Props) => {
   const dep = deployment
   return (
-    <div key={dep.id} className="w-full p-4 space-y-2 transition-colors bg-accents-1 group/deployment border cursor-pointer hover:border-foreground rounded-xl">
+    <div key={dep.id} className="w-full p-4 space-y-2 transition-colors hover:bg-accents-1 group/deployment border cursor-pointer hover:border-foreground rounded-xl">
       <div className="w-full">
         <div className="flex items-center gap-2">
           <div className="relative flex items-center justify-center rounded-full w-9 h-9 bg-accents-2">

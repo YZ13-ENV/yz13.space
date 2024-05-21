@@ -16,6 +16,7 @@
     "./breadcrumb": "./src/components/breadcrumb.tsx",
     "./popover": "./src/components/popover.tsx",
     "./calendar": "./src/components/calendar.tsx",
+    "./info-accordion": "./src/custom-components/info-accordion.tsx",
     "./css": "./src/styles/index.css",
     "./css/vars": "./src/styles/vars.css",
     "./css/typography": "./src/styles/typography.css",
