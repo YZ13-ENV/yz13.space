@@ -1,7 +1,10 @@
 import { getTeamMembers } from "@/api/team-members"
+import { ThemeSwitcher } from "@/app/_components/entities/theme"
 import { GradientLabel } from "@/app/_components/shared/gradient-label"
-import { DefaultHeader } from "@/components/entities/header"
+import { Nav } from "@/components/entities/header"
 import { Footer } from "@/components/shared/footer"
+import { ThemedLogo } from "@/components/shared/theme-logo"
+import { User } from "@/components/shared/user"
 import { getMDXData } from "@/utils/mdx"
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
@@ -37,10 +40,19 @@ const page = async ({ params }: Props) => {
   if (!mdx) return redirect("/")
   return (
     <>
-      <DefaultHeader />
+      <header className="p-6 flex items-center justify-between max-w-4xl w-full mx-auto">
+        <div className="flex items-center gap-4">
+          <ThemedLogo mode="symbol" width={32} height={32} alt="logo" />
+          <Nav />
+        </div>
+        <div className="flex items-center gap-2">
+          <ThemeSwitcher />
+          <User />
+        </div>
+      </header>
       <div className='min-h-screen w-full'>
-        <div className="w-full container">
-          <div className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6 space-y-6">
+        <div className="w-full">
+          <div className="max-w-4xl mx-auto w-full lg:py-12 px-6 md:py-6 py-6 space-y-6">
             <Button size="sm" variant="ghost" className="gap-2" asChild><Link href="/"><BiLeftArrowAlt size={18} /><span>Back to home</span></Link></Button>
             <div className="flex items-center gap-4 w-fit">
               <GradientLabel text={mdx?.metadata.theme} />
@@ -81,8 +93,8 @@ const page = async ({ params }: Props) => {
         onlyTwo.length !== 0 &&
         <>
           <Separator />
-          <div className="w-full container">
-            <section className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6 space-y-6">
+          <div className="w-full">
+            <section className="max-w-4xl mx-auto w-full lg:py-12 px-6 md:py-6 py-6 space-y-6">
               <h2 className="text-2xl font-bold">Read more</h2>
               <div className="w-full grid lg:grid-cols-2 grid-cols-1 lg:grid-rows-1 grid-rows-2 gap-4">
                 {
@@ -114,7 +126,7 @@ const page = async ({ params }: Props) => {
         </>
       }
       <div className="w-full h-36" />
-      <Footer className="max-w-4xl mx-auto md:px-4 px-0" />
+      <Footer className="max-w-4xl mx-auto" />
     </>
   )
 }

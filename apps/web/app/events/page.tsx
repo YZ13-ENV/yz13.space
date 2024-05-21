@@ -1,11 +1,14 @@
 import { getTeamMembers } from "@/api/team-members"
-import { DefaultHeader } from "@/components/entities/header"
+import { Nav } from "@/components/entities/header"
 import { Footer } from "@/components/shared/footer"
+import { ThemedLogo } from "@/components/shared/theme-logo"
+import { User } from "@/components/shared/user"
 import { getMDXData } from "@/utils/mdx"
 import dayjs from "dayjs"
 import Image from "next/image"
 import Link from "next/link"
 import path from "path"
+import { ThemeSwitcher } from "../_components/entities/theme"
 
 const page = async () => {
   const allMDX = getMDXData(path.join(process.cwd(), 'app', 'event', 'events'))
@@ -13,10 +16,19 @@ const page = async () => {
   const members = team.data || []
   return (
     <>
-      <DefaultHeader />
+      <header className="p-6 flex items-center justify-between max-w-4xl w-full mx-auto">
+        <div className="flex items-center gap-4">
+          <ThemedLogo mode="symbol" width={32} height={32} alt="logo" />
+          <Nav />
+        </div>
+        <div className="flex items-center gap-2">
+          <ThemeSwitcher />
+          <User />
+        </div>
+      </header>
       <div className='min-h-screen w-full'>
         <div className="w-full container">
-          <div className="max-w-4xl mx-auto w-full lg:p-12 md:p-6 py-6">
+          <div className="max-w-4xl mx-auto w-full lg:py-12 py-6">
             <div className="grid md:grid-cols-2 grid-flow-row grid-cols-1 gap-6 auto-rows-auto">
               {
                 allMDX

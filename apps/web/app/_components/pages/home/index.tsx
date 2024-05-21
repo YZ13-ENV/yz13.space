@@ -1,6 +1,6 @@
-import { HomeHeader } from "@/components/entities/header"
 import { Nav } from "@/components/entities/header/ui/nav"
 import { ThemedLogo } from "@/components/shared/theme-logo"
+import { User } from "@/components/shared/user"
 import { getMDXData } from "@/utils/mdx"
 import { unstable_noStore } from "next/cache"
 import dynamic from "next/dynamic"
@@ -10,6 +10,7 @@ import { Suspense } from "react"
 import { DateProvider } from "../../entities/date"
 import { EventsProvider } from "../../entities/events"
 import { Rulers } from "../../entities/rulers"
+import { ThemeSwitcher } from "../../entities/theme"
 import { Time } from "../../time"
 const Background = dynamic(() => import("../../widgets/background"), {
   ssr: false,
@@ -21,7 +22,13 @@ const HomePage = async () => {
   const events = getMDXData(path.join(process.cwd(), 'app', 'event', 'events'))
   return (
     <>
-      <HomeHeader className='fixed z-20 top-0 w-full h-fit p-6' />
+      <header className='fixed z-20 top-0 w-full h-fit p-6 flex items-center justify-between'>
+        <ThemedLogo mode="symbol" width={36} height={36} alt="header-logo" />
+        <div className="flex items-center gap-4">
+          <ThemeSwitcher />
+          <User />
+        </div>
+      </header>
       <div className="relative w-full h-screen">
         <Suspense fallback={<div className="w-full h-full absolute z-[-3] bg-muted animate-pulse" />}>
           <Background />
