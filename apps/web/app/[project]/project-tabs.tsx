@@ -48,7 +48,7 @@ const ProjectTabsV2 = ({ id }: Props) => {
   const value = (tab: string) => "/" + id + tab
   return (
     <>
-      <Link href="/projects" className="px-2 py-1 rounded-lg text-sm inline-flex gap-2 items-center transition-colors bg-accents-1/80 hover:bg-accents-2/70 text-foreground/70">
+      <Link href="/projects" className="px-2 py-1 rounded-lg text-sm inline-flex gap-2 items-center transition-colors bg-accents-2/50 hover:bg-accents-2 text-foreground/70">
         <BiLeftArrowAlt size={14} /><span>Back</span>
       </Link>
       {
@@ -60,7 +60,7 @@ const ProjectTabsV2 = ({ id }: Props) => {
               "px-2 py-1 rounded-lg text-sm inline-flex gap-2 items-center transition-colors",
               selected_tab === value(tab.value)
                 ? "bg-foreground text-background"
-                : "bg-accents-1/80 hover:bg-accents-2/70 text-foreground/70"
+                : "bg-accents-2/50 hover:bg-accents-2 text-foreground/70"
             )}
           >
             {tab.icon({ size: 14 })}{tab.label}
