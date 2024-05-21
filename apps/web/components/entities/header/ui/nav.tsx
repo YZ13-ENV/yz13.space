@@ -23,7 +23,7 @@ const Nav = ({ exclude = [] }: Props) => {
                   "px-2 py-1 rounded-lg text-sm inline-flex gap-2 items-center transition-colors",
                   pathname === link.value
                     ? "bg-foreground text-background"
-                    : "bg-accents-1/80 hover:bg-accents-2/70 text-foreground/70"
+                    : "bg-accents-2/50 hover:bg-accents-2 text-foreground/70"
                 )}
               >
                 {link.icon && link.icon({ size: 14 })}{link.label}

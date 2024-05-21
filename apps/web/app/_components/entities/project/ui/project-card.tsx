@@ -19,7 +19,7 @@ const ProjectCard = ({ project }: Props) => {
       {
         project.thumbnail &&
         <div className="w-full aspect-[16/10] pt-1 px-1">
-          <div className="w-full h-full relative rounded-lg bg-accents-2">
+          <div className="w-full h-full relative border rounded-lg bg-accents-2">
             <Image src={project.thumbnail} fill className="rounded-lg" alt="project-thumbnail" />
           </div>
         </div>

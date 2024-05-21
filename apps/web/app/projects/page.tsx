@@ -20,7 +20,7 @@ const page = () => {
           <ThemedLogo mode="symbol" width={32} height={32} alt="logo" />
           <Nav />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <ThemeSwitcher />
           <User />
         </div>
