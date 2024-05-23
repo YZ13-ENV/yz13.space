@@ -2,6 +2,7 @@ import { ThemeWrapper } from "@/components/entities/theme-observer";
 import { WebVitals } from "@/components/web-vitals";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
+import "@/styles/svg.css";
 import { CSPostHogProvider } from "@/utils/posthog/provider";
 import { cn } from "@repo/ui/cn";
 import "@repo/ui/css";

@@ -14,7 +14,10 @@
     "./db/session": "./src/db/session.ts",
     "./db/web-vitals": "./src/db/web-vitals.ts",
     "./db/types": "./src/db/types.ts",
-    "./edge/types": "./src/edge/types.ts"
+    "./edge/types": "./src/edge/types.ts",
+    "./helpers": "./src/helpers/index.ts",
+    "./helpers/random-number": "./src/helpers/random-number.ts",
+    "./helpers/random-string": "./src/helpers/random-string.ts"
   },
   "dependencies": {
     "@repo/typescript-config": "workspace:*",

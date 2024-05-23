@@ -8,12 +8,10 @@ export type Project = {
   status: "dev" | "prod" | "pre-prod" | "planned";
   disabled: boolean;
   link: ProjectLink;
-  icon: ProjectIcon;
   created_at: string; // Нужно для обозначения бейджиком "новое"
   tags: string[];
-  part_of: string[]; // Нужно для перечисления принадлежности к другим проекта
-  stack?: string[];
   thumbnail: string | null;
+  attachments: string[];
 };
 
 export type ProjectLink =
@@ -75,6 +73,15 @@ export type Deployment = {
   description: string | null;
   environment: string;
   creator: Creator;
+};
+
+export type Contributors = {
+  login: string;
+  id: number;
+  avatar_url: string;
+  contributions: number;
+  html_url: string;
+  type: string;
 };
 
 export type RepoLanguage = {

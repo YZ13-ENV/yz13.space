@@ -5,7 +5,8 @@
   "exports": {
     "./client": "./src/supabase/client.ts",
     "./middleware": "./src/supabase/middleware.ts",
-    "./server": "./src/supabase/server.ts"
+    "./server": "./src/supabase/server.ts",
+    "./storage": "./src/supabase/storage.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.3.0",

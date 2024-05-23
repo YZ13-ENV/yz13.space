@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+
+@layer base {
+  .folder:hover {
+    .folder-back > path {
+      stroke: hsl(var(--accents-3));
+      fill: hsl(var(--accents-2) / 0.6);
+    }
+    .folder-images {
+      @apply bottom-32;
+    }
+    .folder-images > .folder-image:nth-child(1) {
+      @apply left-1 rotate-[-3deg];
+    }
+    .folder-images > .folder-image:nth-child(2) {
+      @apply left-12 rotate-[3deg];
+    }
+    .folder-images > .folder-image:nth-child(3) {
+      @apply right-10 rotate-[-3deg];
+    }
+    .folder-images > .folder-image:nth-child(4) {
+      @apply right-1 rotate-[3deg];
+    }
+    .folder-image:hover {
+      @apply -translate-y-3;
+    }
+  }
+  .folder-images {
+    @apply bottom-24 transition-all duration-1000;
+  }
+  .folder-image {
+    @apply bg-accents-4 w-24 rounded-lg aspect-[1/1.25] border transition-all duration-1000 delay-100;
+  }
+  .folder-images > .folder-image:nth-child(1) {
+    @apply absolute -bottom-14 left-6 rotate-[-7.5deg];
+  }
+  .folder-images > .folder-image:nth-child(2) {
+    @apply absolute -bottom-14 left-12 rotate-[15deg];
+  }
+  .folder-images > .folder-image:nth-child(3) {
+    @apply absolute -bottom-12 right-12 rotate-[-2deg];
+  }
+  .folder-images > .folder-image:nth-child(4) {
+    @apply absolute right-6 rotate-[15deg];
+  }
+  .folder-back > path {
+    stroke-width: 1px;
+    stroke: hsl(var(--accents-2));
+    fill: hsl(var(--accents-1));
+    @apply transition-colors duration-500;
+  }
+
+  .folder-front > path {
+    fill: hsl(var(--accents-2));
+  }
+}

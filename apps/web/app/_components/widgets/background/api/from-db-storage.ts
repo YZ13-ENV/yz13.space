@@ -1,5 +1,5 @@
-import { randomNumber } from "@/helpers/random-number";
 import { get } from "@vercel/edge-config";
+import { randomNumber } from "@yz13/api/helpers/random-number";
 import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";
 
