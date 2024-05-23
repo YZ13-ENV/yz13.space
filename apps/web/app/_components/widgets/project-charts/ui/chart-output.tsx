@@ -1,7 +1,7 @@
 "use client"
-import { Vitals } from "@/api/web-vitals"
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
+import { Vitals } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import { flatten, groupBy, keys } from "lodash"
 import { useEffect, useMemo, useState } from "react"

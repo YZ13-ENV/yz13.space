@@ -1,5 +1,5 @@
-import { getRepoDeployments } from "@/api/repo"
-import { Deployment as DeploymentType } from "@/types/repo"
+import { getRepoDeployments } from "@yz13/api/gh/repo"
+import { Deployment as DeploymentType } from "@yz13/api/gh/types"
 import { Deployment } from "./deployment"
 
 

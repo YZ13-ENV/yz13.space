@@ -1,6 +1,6 @@
-import { getRepoCommits } from "@/api/repo"
-import { Commit as CommitType } from "@/types/repo"
 import { Separator } from "@repo/ui/separator"
+import { getRepoCommits } from "@yz13/api/gh/repo"
+import { Commit as CommitType } from "@yz13/api/gh/types"
 import dayjs from "dayjs"
 import { groupBy, keys } from "lodash"
 import { RiGitRepositoryCommitsLine } from "react-icons/ri"

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: [ "@repo/ui" ],
+  transpilePackages: [ "@repo/ui", "@yz13/api" ],
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
   // experimental: {
   //   parallelServerCompiles: true,

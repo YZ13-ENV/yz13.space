@@ -1,6 +1,6 @@
-import { getTeamMembers } from "@/api/team-members"
-import { KanbanTask } from "@/types/kanban"
 import { Button } from "@repo/ui/button"
+import { getTeamMembers } from "@yz13/api/db/team"
+import { KanbanTask } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import Image from "next/image"
 import { BiDotsHorizontalRounded, BiMessageRounded } from "react-icons/bi"

@@ -1,4 +1,5 @@
-import { Vitals, getWebVitalsRecords } from "@/api/web-vitals"
+import { Vitals } from "@yz13/api/db/types"
+import { getWebVitals } from "@yz13/api/db/web-vitals"
 import { uniqBy } from "lodash"
 import { unstable_noStore } from "next/cache"
 import { ChartOutput } from "./chart-output"
@@ -14,7 +15,7 @@ type Props = {
 }
 const ProjectCharts = async ({ project_id }: Props) => {
   unstable_noStore()
-  const vitals = await getWebVitalsRecords(project_id)
+  const vitals = await getWebVitals(project_id)
   const chart_names: ChartTab[] = uniqBy(vitals.data, "name")?.map(insight => ({ label: insight.name, value: insight.name })) || []
   const data: Vitals[] = vitals.data as Vitals[]
   const charts: ChartTab[] = chart_names

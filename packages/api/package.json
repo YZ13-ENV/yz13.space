@@ -5,11 +5,16 @@
   "exports": {
     "./gh": "./src/gh/index.ts",
     "./gh/repo": "./src/gh/repo.ts",
+    "./gh/user": "./src/gh/user.ts",
     "./gh/types": "./src/gh/types.ts",
     "./db": "./src/db/index.ts",
     "./db/kanban": "./src/db/kanban.ts",
     "./db/team": "./src/db/team.ts",
-    "./db/types": "./src/db/types.ts"
+    "./db/project": "./src/db/project.ts",
+    "./db/session": "./src/db/session.ts",
+    "./db/web-vitals": "./src/db/web-vitals.ts",
+    "./db/types": "./src/db/types.ts",
+    "./edge/types": "./src/edge/types.ts"
   },
   "dependencies": {
     "@repo/typescript-config": "workspace:*",

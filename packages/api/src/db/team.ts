@@ -1,3 +1,4 @@
+"use server";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";

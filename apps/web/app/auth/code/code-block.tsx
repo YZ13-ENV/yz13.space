@@ -1,9 +1,9 @@
 "use client"
 
-import { generateCode, generateSession, getLastCode, sendCode } from "@/api/session"
 import { useSession } from "@/hooks/useSession"
 import { Button } from "@repo/ui/button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/input-otp"
+import { generateCode, generateSession, getLastCode, sendCode } from "@yz13/api/db/session"
 import { useDebounceEffect, useInterval } from "ahooks"
 import Link from "next/link"
 import { useRouter } from "next/navigation"

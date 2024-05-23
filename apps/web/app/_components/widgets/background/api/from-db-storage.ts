@@ -1,6 +1,6 @@
 import { randomNumber } from "@/helpers/random-number";
-import { createClient } from "@/utils/supabase/server";
 import { get } from "@vercel/edge-config";
+import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";
 
 const fromStorage = async (): Promise<string> => {

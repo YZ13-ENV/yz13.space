@@ -1,3 +1,4 @@
+"use server";
 import { PostgrestResponse } from "@supabase/supabase-js";
 import { kv } from "@vercel/kv";
 import { createClient } from "@yz13/supabase/server";

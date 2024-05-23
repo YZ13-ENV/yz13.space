@@ -1,6 +1,7 @@
-import { getProject } from "@/api/projects"
-import { Vitals, getWebVitalsRecords } from "@/api/web-vitals"
 import { Button } from "@repo/ui/button"
+import { getProject } from "@yz13/api/db/project"
+import { Vitals } from "@yz13/api/db/types"
+import { getWebVitals } from "@yz13/api/db/web-vitals"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Metadata } from "next"
@@ -40,7 +41,7 @@ const page = async ({ params }: Props) => {
   const created_at = dayjs(project?.created_at).fromNow(true)
   const repo_id = project?.repo_id
   const repo_owner = project?.repo_owner
-  const vitals_response = await getWebVitalsRecords(id)
+  const vitals_response = await getWebVitals(id)
   const vitals: Vitals[] = vitals_response.data as Vitals[]
   return (
     <>

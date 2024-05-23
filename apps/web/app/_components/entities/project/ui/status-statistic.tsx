@@ -1,6 +1,7 @@
-import { getWebVitalsRecords, Vitals } from "@/api/web-vitals"
 import { metrics } from "@/app/_components/widgets/project-charts/const"
 import { cn } from "@repo/ui/cn"
+import { Vitals } from "@yz13/api/db/types"
+import { getWebVitals } from "@yz13/api/db/web-vitals"
 import dayjs from "dayjs"
 import { groupBy, keys } from "lodash"
 import { GrStatusGoodSmall } from "react-icons/gr"
@@ -18,7 +19,7 @@ type PreparedMetric = {
 const StatusStatistic = async ({ project_id }: Props) => {
   const today = dayjs()
   const today_key = today.format("YYYY-MM-DD")
-  const vitals = await getWebVitalsRecords(project_id)
+  const vitals = await getWebVitals(project_id)
   const charts: Vitals[] = (vitals.data as Vitals[]).filter(item => {
     const item_date_key = dayjs(item.created_at).format("YYYY-MM-DD")
     return item_date_key === today_key

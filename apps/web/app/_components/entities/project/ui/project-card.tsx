@@ -1,4 +1,4 @@
-import { Project } from "@/types"
+import { Project } from "@yz13/api/gh/types"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Image from "next/image"

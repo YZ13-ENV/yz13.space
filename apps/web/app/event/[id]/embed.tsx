@@ -1,8 +1,8 @@
-import { getTeamMembers } from "@/api/team-members"
 import { GradientLabel } from "@/app/_components/shared/gradient-label"
 import { getMDXData } from "@/utils/mdx"
 import { Button } from "@repo/ui/button"
 import { Separator } from "@repo/ui/separator"
+import { getTeamMembers } from "@yz13/api/db/team"
 import dayjs from "dayjs"
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Image from "next/image"
