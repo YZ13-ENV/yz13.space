@@ -1,5 +1,5 @@
-import { getColumnCards } from "@/api/kanban"
-import { KanbanColumn } from "@/types/kanban"
+import { getColumnCards } from "@yz13/api/db/kanban"
+import { KanbanColumn } from "@yz13/api/db/types"
 import { TaskCard } from "./card"
 
 type Props = {

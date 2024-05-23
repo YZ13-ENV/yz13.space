@@ -1,4 +1,4 @@
-import { getColumns } from "@/api/kanban"
+import { getColumns } from "@yz13/api/db/kanban"
 import { Column } from "./column"
 
 const ProjectKanban = async () => {

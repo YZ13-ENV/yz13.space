@@ -1,7 +1,7 @@
 "use server";
-import { randomNumber } from "@/helpers/random-number";
 import { ListBlobResult, ListBlobResultBlob, list } from "@vercel/blob";
 import { get } from "@vercel/edge-config";
+import { randomNumber } from "@yz13/api/helpers/random-number";
 
 const fromBlob = async () => {
   const background_mode = await get<string>("background_mode");

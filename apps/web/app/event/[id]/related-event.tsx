@@ -1,5 +1,5 @@
-import { getTeamMembers } from "@/api/team-members"
 import { MDXContent, getMDXData } from "@/utils/mdx"
+import { getTeamMembers } from "@yz13/api/db/team"
 import dayjs from "dayjs"
 import Image from "next/image"
 import Link from "next/link"

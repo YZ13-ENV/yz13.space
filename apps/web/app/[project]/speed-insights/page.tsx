@@ -1,9 +1,10 @@
-import { getProject } from "@/api/projects"
-import { Vitals, getWebVitalsRecords } from "@/api/web-vitals"
 import { ProjectCharts } from "@/app/_components/widgets/project-charts"
 import { getMetricScore } from "@/app/_components/widgets/project-charts/api/getMetricScore"
 import { Footer } from "@/components/shared/footer"
 import { cn } from "@repo/ui/cn"
+import { getProject } from "@yz13/api/db/project"
+import { Vitals } from "@yz13/api/db/types"
+import { getWebVitals } from "@yz13/api/db/web-vitals"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { SectionContainer } from "../containers"
@@ -21,7 +22,7 @@ const page = async ({ params }: Props) => {
   const { data } = await getProject(id)
   const project = data ? data[0] : null
   const created_at = dayjs(project?.created_at).fromNow(true)
-  const vitals = await getWebVitalsRecords(id)
+  const vitals = await getWebVitals(id)
   const all_vitals: Vitals[] = vitals.data as Vitals[]
   return (
     <>

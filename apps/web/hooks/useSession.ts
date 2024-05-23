@@ -1,6 +1,6 @@
 "use client";
 
-import { getLastSession } from "@/api/session";
+import { getLastSession } from "@yz13/api/db/session";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

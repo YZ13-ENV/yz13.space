@@ -1,3 +1,21 @@
+@tailwind base;
+@tailwind components;
+
+.attachments-grid {
+  grid-template-areas:
+    "a a b"
+    "a a c";
+}
+.attachment-a {
+  grid-area: a;
+}
+.attachment-b {
+  grid-area: b;
+}
+.attachment-c {
+  grid-area: c;
+}
+
 .app-grid {
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 }

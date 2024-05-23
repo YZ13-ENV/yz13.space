@@ -1,5 +1,5 @@
-import { user as user_api } from "@/api/user"
 import { Button } from "@repo/ui/button"
+import { getUser } from "@yz13/api/gh/user"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -7,7 +7,7 @@ type Props = {
   size?: number
 }
 const User = async ({ size = 36 }: Props) => {
-  const user = await user_api.get()
+  const user = await getUser()
   if (!user) return null
   return (
     <Button

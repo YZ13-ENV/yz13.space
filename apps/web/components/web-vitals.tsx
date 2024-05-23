@@ -1,7 +1,8 @@
 "use client"
 
-import { Vitals, pushWebVitals } from '@/api/web-vitals'
 import { id } from '@/const/app'
+import { Vitals } from '@yz13/api/db/types'
+import { pushWebVitals } from '@yz13/api/db/web-vitals'
 import dayjs from 'dayjs'
 import { usePathname } from 'next/navigation'
 import { useReportWebVitals } from 'next/web-vitals'

@@ -1,5 +1,5 @@
-import { getProject } from "@/api/projects"
 import { ProjectKanban } from "@/app/_components/widgets/project-kanban"
+import { getProject } from "@yz13/api/db/project"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { SectionContainer } from "../containers"

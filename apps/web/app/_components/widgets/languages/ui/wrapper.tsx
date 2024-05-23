@@ -1,4 +1,4 @@
-import { getRepoLanguages } from "@/api/repo"
+import { getRepoLanguages } from "@yz13/api/gh/repo"
 import { keys } from "lodash"
 import { LanguagesTags } from "./tags"
 import { LanguagesVisualization } from "./visualization"

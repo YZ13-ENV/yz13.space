@@ -1,6 +1,6 @@
 "use client"
 
-import { Vitals } from "@/api/web-vitals"
+import { Vitals } from "@yz13/api/db/types"
 import { useEffect } from "react"
 import { useVitals } from "../store/vitals-store"
 

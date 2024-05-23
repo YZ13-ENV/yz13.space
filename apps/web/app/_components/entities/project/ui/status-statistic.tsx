@@ -1,6 +1,7 @@
-import { getWebVitalsRecords, Vitals } from "@/api/web-vitals"
 import { metrics } from "@/app/_components/widgets/project-charts/const"
 import { cn } from "@repo/ui/cn"
+import { Vitals } from "@yz13/api/db/types"
+import { getWebVitals } from "@yz13/api/db/web-vitals"
 import dayjs from "dayjs"
 import { groupBy, keys } from "lodash"
 import { GrStatusGoodSmall } from "react-icons/gr"
@@ -18,7 +19,7 @@ type PreparedMetric = {
 const StatusStatistic = async ({ project_id }: Props) => {
   const today = dayjs()
   const today_key = today.format("YYYY-MM-DD")
-  const vitals = await getWebVitalsRecords(project_id)
+  const vitals = await getWebVitals(project_id)
   const charts: Vitals[] = (vitals.data as Vitals[]).filter(item => {
     const item_date_key = dayjs(item.created_at).format("YYYY-MM-DD")
     return item_date_key === today_key
@@ -47,7 +48,7 @@ const StatusStatistic = async ({ project_id }: Props) => {
   const overall_status_code = overall_status.toLowerCase()
   return (
     <div className={cn(
-      "w-1/2 h-full flex group/status transition-colors p-1 rounded-md items-center justify-center gap-1",
+      "w-fit h-full flex group/status transition-colors py-0.5 px-2 rounded-md items-center justify-center gap-1",
       overall_status_code === "good"
         ? "text-success-foreground bg-success-background"
         : overall_status_code === "medium"
@@ -56,8 +57,8 @@ const StatusStatistic = async ({ project_id }: Props) => {
             ? "text-error-foreground bg-error-background"
             : "text-foreground bg-background"
     )}>
-      <GrStatusGoodSmall size={10} className="transition-colors text-inherit" />
-      <span className="text-sm transition-colors text-inherit">{overall_status}</span>
+      <GrStatusGoodSmall size={8} className="transition-colors text-inherit" />
+      <span className="text-xs transition-colors text-inherit">{overall_status}</span>
     </div>
   )
 }

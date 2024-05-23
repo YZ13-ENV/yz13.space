@@ -1,4 +1,4 @@
-import { Vitals } from "@/api/web-vitals";
+import { Vitals } from "@yz13/api/db/types";
 import { create } from "zustand";
 
 type Store = {

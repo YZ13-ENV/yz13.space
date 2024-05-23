@@ -1,6 +1,6 @@
 "use server"
-import { getLastSession } from "@/api/session";
 import { kv } from "@vercel/kv";
+import { getLastSession } from "@yz13/api/db/session";
 import { redirect } from "next/navigation";
 
 const page = async () => {
