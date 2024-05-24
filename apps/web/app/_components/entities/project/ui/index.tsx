@@ -43,7 +43,7 @@ const ProjectCard = ({ project }: Props) => {
               <div className="w-full flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="line-clamp-1 text-foreground">{project.name}</span>
-                  <span className="px-1.5 py-0.5 rounded-md bg-accents-3 text-xs">{project.status}</span>
+                  <span className="px-1.5 py-0.5 rounded-md dark:bg-accents-3 bg-accents-1 text-xs">{project.status}</span>
                 </div>
                 <CardStatistics project_id={project.id} />
               </div>
@@ -53,7 +53,7 @@ const ProjectCard = ({ project }: Props) => {
               OWNER && REPO &&
               <Link
                 href={`https://github.com/${OWNER}/${REPO}`}
-                className="px-1.5 py-0.5 rounded-md bg-accents-3 inline-flex items-center gap-1 w-fit"
+                className="px-1.5 py-0.5 rounded-md dark:bg-accents-3 bg-accents-1 inline-flex items-center gap-1 w-fit"
               >
                 <BsGithub size={14} />
                 <span className="text-xs">{OWNER}/{REPO}</span>
