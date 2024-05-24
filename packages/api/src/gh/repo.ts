@@ -1,7 +1,22 @@
 "use server";
 import { kv } from "@vercel/kv";
 import { expireTime } from "../const";
-import { Contributor } from "./types";
+import { Contributor, Repo } from "./types";
+
+const getRepos = async (OWNER: string): Promise<Repo[]> => {
+  try {
+    const url = `https://api.github.com/users/${OWNER}/repos`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const json = await response.json();
+      return json;
+    } else return [];
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};
+
 const getRepo = async (OWNER: string, REPO: string) => {
   try {
     const url = `https://api.github.com/repos/${OWNER}/${REPO}`;
@@ -133,4 +148,5 @@ export {
   getRepoEvents,
   getRepoFile,
   getRepoLanguages,
+  getRepos,
 };
