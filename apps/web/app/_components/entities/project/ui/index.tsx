@@ -1,12 +1,14 @@
 import { Button } from "@repo/ui/button"
-import { cn } from "@repo/ui/cn"
-import { BigFolder } from "@repo/ui/svg/folder"
+import { Folder, FolderFront } from "@repo/ui/svg/folder"
 import { Project } from "@yz13/api/gh/types"
 import { getStorageItem } from "@yz13/supabase/storage"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Image from "next/image"
+import Link from "next/link"
 import { BiDotsHorizontalRounded } from "react-icons/bi"
+import { BsGithub } from "react-icons/bs"
+import { Contributors } from "./contributors"
 import { ProjectDropdownMenu } from "./dropdown-menu"
 import { CardStatistics } from "./statistics"
 
@@ -15,46 +17,55 @@ type Props = {
 }
 dayjs.extend(relativeTime)
 const ProjectCard = ({ project }: Props) => {
-  const created_at = dayjs(project.created_at).fromNow(true)
-  const repo_id = project.repo_id
-  const repo_owner = project.repo_owner
+  const OWNER = project.repo_owner
+  const REPO = project.repo_id
+  const created_at = dayjs(project.created_at).fromNow(false)
   const attachments = project.attachments.map(attachment => getStorageItem([attachment]))
-  // Обрезать массив до 2-3х и при attachments > 3 выводить сколько осталось
-  console.log(attachments)
   return (
     <div className="w-fit folder h-fit flex flex-col items-center justify-center relative">
-      <BigFolder className="folder-back" />
-      <div className="w-full absolute left-0 top-0 h-full pb-1 pt-4 px-1">
-        <div className="w-full h-full flex gap-1 flex-col">
-          <div className="flex flex-col bg-accents-2/60 p-1 rounded-lg gap-1 h-full w-full">
-            <div className="w-full h-full grid gap-1 attachments-grid">
-              {
-                attachments.map(
-                  (attachment, i) => <div className={cn("w-full relative border rounded-lg h-full", i === 0 ? "attachment-a" : i === 1 ? "attachment-b" : "attachment-c")}>
-                    <Image src={attachment} fill className="rounded-lg object-cover" alt="project-thumbnail" />
-                  </div>
-                )
-              }
-            </div>
-            <div className="w-full flex items-end justify-between gap-2">
-              <div className="flex px-1 pb-1 flex-col gap-1">
-                <span className="text-foreground">{project.name}</span>
-                <span className="text-xs line-clamp-1">{project.description || "Без описания"}</span>
+      <Folder className="folder-back" />
+      <div className="absolute folder-images bottom-24 w-full flex items-center justify-center gap-4">
+        {
+          attachments
+            .slice(0, 4)
+            .map(attachment =>
+              <div key={attachment} className="folder-image relative">
+                <Image src={attachment} className="rounded-lg object-cover" fill alt="folder-attachment" />
               </div>
-              <div className="flex items-center mt-auto -space-x-3">
-                <div className="w-8 aspect-square bg-accents-1 rounded-full border border-accents-3" />
-                <div className="w-8 aspect-square bg-accents-1 rounded-full border border-accents-3" />
-                <div className="w-8 aspect-square bg-accents-1 rounded-full border border-accents-3" />
+            )
+        }
+      </div>
+      <div className="absolute bottom-0">
+        <div className="absolute w-full h-full flex flex-col justify-between py-2 px-3">
+          <div className="relative w-full flex flex-col gap-1">
+            <div className="w-full flex items-center justify-between">
+              <div className="relative flex items-center gap-2">
+                <Link href={`/${project.id}`} className="absolute w-full h-full left-0 top-0" />
+                <span className="line-clamp-1 text-foreground">{project.name}</span>
+                <span className="px-1.5 py-0.5 rounded-md bg-accents-3 text-xs">{project.status}</span>
               </div>
+              <CardStatistics project_id={project.id} />
             </div>
+            <span className="text-xs">{created_at}</span>
+            {
+              OWNER && REPO &&
+              <Link
+                href={`https://github.com/${OWNER}/${REPO}`}
+                className="px-1.5 py-0.5 rounded-md bg-accents-3 inline-flex items-center gap-1 w-fit"
+              >
+                <BsGithub size={14} />
+                <span className="text-xs">{OWNER}/{REPO}</span>
+              </Link>
+            }
           </div>
-          <div className="w-full h-6 flex items-center justify-between">
-            <CardStatistics created_at={created_at} project_id={project.id} />
+          <div className="w-full h-fit flex items-center justify-between">
+            <Contributors project={project} />
             <ProjectDropdownMenu project={project}>
               <Button className="w-6 h-6" size="icon" variant="ghost"><BiDotsHorizontalRounded size={14} /></Button>
             </ProjectDropdownMenu>
           </div>
         </div>
+        <FolderFront className="folder-front" />
       </div>
     </div>
   )

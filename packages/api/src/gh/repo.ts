@@ -1,6 +1,7 @@
 "use server";
 import { kv } from "@vercel/kv";
 import { expireTime } from "../const";
+import { Contributor } from "./types";
 const getRepo = async (OWNER: string, REPO: string) => {
   try {
     const url = `https://api.github.com/repos/${OWNER}/${REPO}`;
@@ -102,10 +103,13 @@ const getRepoFile = async (owner: string, id: string, filename: string) => {
   }
 };
 
-const getRepoContributors = async (owner: string, id: string) => {
+const getRepoContributors = async (
+  owner: string,
+  id: string
+): Promise<Contributor[]> => {
   try {
     const key = `contributors-${owner}/${id}`;
-    const cached = await kv.get(key);
+    const cached = await kv.get<Contributor[]>(key);
     if (cached) return cached;
     const url = `https://api.github.com/repos/${owner}/${id}/contributors`;
     const res = await fetch(url, { method: "GET" });
@@ -123,9 +127,10 @@ const getRepoContributors = async (owner: string, id: string) => {
 
 export {
   getRepo,
-  getRepoCommits, getRepoContributors, getRepoDeployments,
+  getRepoCommits,
+  getRepoContributors,
+  getRepoDeployments,
   getRepoEvents,
   getRepoFile,
-  getRepoLanguages
+  getRepoLanguages,
 };
-

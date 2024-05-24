@@ -75,7 +75,7 @@ export type Deployment = {
   creator: Creator;
 };
 
-export type Contributors = {
+export type Contributor = {
   login: string;
   id: number;
   avatar_url: string;

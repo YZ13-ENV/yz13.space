@@ -1,3 +1,3 @@
-import { ProjectCard } from "./ui/project-card";
+import { ProjectCard } from "./ui";
 
 export { ProjectCard };
