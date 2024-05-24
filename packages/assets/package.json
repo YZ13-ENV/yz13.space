@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "this package should serve images and videos",
   "exports": {
-    "./brand": "./src/brand/index.ts",
+    "./brand": "./src/brand/index.tsx",
     "./font/geist": "./src/font/geist/index.ts"
   },
   "scripts": {
@@ -11,7 +11,14 @@
   },
   "author": "YZ13-ENV",
   "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.8",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0"
+  },
   "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "next": "14.1.0",
     "@repo/typescript-config": "workspace:*"
   }

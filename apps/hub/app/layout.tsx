@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/svg.css";
 import { cn } from "@repo/ui/cn";
 import "@repo/ui/css";
 import "@repo/ui/css/typography";
