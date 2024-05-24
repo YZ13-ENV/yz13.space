@@ -37,16 +37,18 @@ const ProjectCard = ({ project }: Props) => {
       </div>
       <div className="absolute bottom-0">
         <div className="absolute w-full h-full flex flex-col justify-between py-2 px-3">
-          <div className="relative w-full flex flex-col gap-1">
-            <div className="w-full flex items-center justify-between">
-              <div className="relative flex items-center gap-2">
-                <Link href={`/${project.id}`} className="absolute w-full h-full left-0 top-0" />
-                <span className="line-clamp-1 text-foreground">{project.name}</span>
-                <span className="px-1.5 py-0.5 rounded-md bg-accents-3 text-xs">{project.status}</span>
+          <div className="w-full flex flex-col gap-1">
+            <div className="relative flex flex-col gap-1 w-full">
+              <Link href={`/${project.id}`} className="absolute w-full h-full left-0 top-0" />
+              <div className="w-full flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="line-clamp-1 text-foreground">{project.name}</span>
+                  <span className="px-1.5 py-0.5 rounded-md bg-accents-3 text-xs">{project.status}</span>
+                </div>
+                <CardStatistics project_id={project.id} />
               </div>
-              <CardStatistics project_id={project.id} />
+              <span className="text-xs">{created_at}</span>
             </div>
-            <span className="text-xs">{created_at}</span>
             {
               OWNER && REPO &&
               <Link
