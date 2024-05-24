@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
 import { CSPostHogProvider } from "@/utils/posthog/provider";
+import "@repo/tailwind-config/css";
 import { cn } from "@repo/ui/cn";
 import "@repo/ui/css";
 import "@repo/ui/css/typography";

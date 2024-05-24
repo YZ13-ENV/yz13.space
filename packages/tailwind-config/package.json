@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "exports": {
-    ".": "./tailwind.config.ts"
+    ".": "./tailwind.config.ts",
+    "./css": "./src/index.css",
+    "./config": "./tailwind.config.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

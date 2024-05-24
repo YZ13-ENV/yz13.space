@@ -1,24 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: [ "@repo/ui", "@yz13/api", "@microservice/playground", "@yz13/supabase" ],
+  transpilePackages: [ "@repo/ui", "@repo/tailwind-config", "@microservice/playground", "@yz13/supabase" ],
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
-  // experimental: {
-  //   parallelServerCompiles: true,
-  //   swcMinify: true,
-  //   optimizeServerReact: true,
-  //   optimizePackageImports: [
-  //     "@repo/ui",
-  //     "tailwindcss"
-  //   ],
-  //   optimizeCss: true,
-  //   webpackBuildWorker: true,
-  //   parallelServerBuildTraces: true,
-  //   serverMinification: true,
-  //   useLightningcss: true,
-  //   workerThreads: true,
-  //   useWasmBinary: true
-  // },
+  experimental: {
+    serverComponentsExternalPackages: [ "@yz13/api" ],
+    optimizeCss: true,
+    swcMinify: true,
+    // optimizePackageImports: [
+    // "@repo/ui",
+    // "tailwindcss"
+    // ],
+    // parallelServerCompiles: true,
+    //   optimizeServerReact: true,
+    //   webpackBuildWorker: true,
+    //   parallelServerBuildTraces: true,
+    //   serverMinification: true,
+    //   useLightningcss: true,
+    //   workerThreads: true,
+    //   useWasmBinary: true
+  },
   compress: true,
   images: {
     remotePatterns: [
