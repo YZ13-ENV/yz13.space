@@ -4,8 +4,7 @@
 @layer base {
   .folder:hover {
     .folder-back > path {
-      stroke: hsl(var(--accents-3));
-      fill: hsl(var(--accents-2) / 0.6);
+      fill: hsl(var(--accents-2));
     }
     .folder-images {
       @apply bottom-32;
@@ -46,12 +45,14 @@
   }
   .folder-back > path {
     stroke-width: 1px;
-    stroke: hsl(var(--accents-2));
-    fill: hsl(var(--accents-1));
+    stroke: hsl(var(--accents-3));
+    fill: hsl(var(--accents-2) / 0.6);
     @apply transition-colors duration-500;
   }
 
   .folder-front > path {
+    stroke-width: 1px;
+    stroke: hsl(var(--accents-3));
     fill: hsl(var(--accents-2));
   }
 }
