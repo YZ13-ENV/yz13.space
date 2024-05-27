@@ -25,6 +25,16 @@ export const metadata: Metadata = {
   title: "YZ13",
   description: "Created by YZ13",
   authors: { name: "YZ13", url: "https://github.com/yz13-env" },
+  openGraph: {
+    type: "website",
+    countryName: "Russia",
+    description: "Portfolio website",
+    locale: "RU",
+    url: "https://yz13.space",
+    title: "YZ13",
+    images: "/thumbnail.png",
+  },
+  icons: "/brand/yz13-dark.svg",
 };
 
 export const viewport: Viewport = {
