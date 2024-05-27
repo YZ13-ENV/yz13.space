@@ -31,8 +31,48 @@ const page = async () => {
   }
   return (
     <div className="flex w-full h-screen">
-      <aside className="w-96 shrink-0 p-6 h-full">
-
+      <aside className="w-96 shrink-0 p-6 flex flex-col gap-3 h-full">
+        <div className="w-12 h-12 rounded-full bg-accents-1"></div>
+        <div className="flex flex-col">
+          <h1 className="text-xl">YZ13</h1>
+          <p>Frontend developer</p>
+        </div>
+        <div className="flex flex-col">
+          <span className="uppercase text-sm text-secondary">about</span>
+          <p>Hi :)</p>
+        </div>
+        <div className="flex flex-col">
+          <span className="uppercase text-sm text-secondary">contact</span>
+          <ul>
+            <li>
+              <div className="flex h-9 items-center justify-start gap-2">
+                <BsTelegram />
+                <span className="text-sm">YZTHECEO</span>
+              </div>
+            </li>
+            <li>
+              <div className="flex h-9 items-center justify-start gap-2">
+                <BsTwitterX />
+                <span className="text-sm">@YZ13_DEV</span>
+              </div>
+            </li>
+            <li>
+              <div className="flex h-9 items-center justify-start gap-2">
+                <BsGithub />
+                <span className="text-sm">YZ13-ENV</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className="flex flex-col gap-2">
+          <span className="uppercase text-sm text-secondary">skills</span>
+          <div className="flex flex-row flex-wrap gap-1 w-full">
+            <span className="px-2 py-1 text-sm rounded-full border">TypeScript</span>
+          </div>
+        </div>
+        <div className="w-full mt-auto flex items-center gap-3">
+          <Button size="icon" variant="ghost"><BsGithub size={24} /></Button>
+        </div>
       </aside>
       <div className="w-full h-full">
         <div className="w-full max-w-xl mx-auto h-full space-y-12 px-6 py-12">
@@ -56,7 +96,7 @@ const page = async () => {
               </section>
             </Thread>
             <section className="space-y-3 py-6">
-              <h2 className="text-sm text-secondary capitalize">contact</h2>
+              <h2 className="text-sm text-secondary uppercase">contact</h2>
               <ul className="divide-y">
                 <li>
                   <div className="flex h-9 items-center justify-between">
