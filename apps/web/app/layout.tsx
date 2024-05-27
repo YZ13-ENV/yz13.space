@@ -38,7 +38,7 @@ type LayoutProps = Readonly<{
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={cn(geist.className, geist.variable)}>
-      <body>
+      <body className="dark">
         {children}
       </body>
     </html>
