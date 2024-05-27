@@ -1,32 +1,24 @@
-import { ThemeWrapper } from "@/components/entities/theme-observer";
-import { WebVitals } from "@/components/web-vitals";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
-import { CSPostHogProvider } from "@/utils/posthog/provider";
 import "@repo/tailwind-config/css";
 import { cn } from "@repo/ui/cn";
 import "@repo/ui/css";
 import "@repo/ui/css/typography";
 import "@repo/ui/css/vars";
 import type { Metadata, Viewport } from "next";
-import { Geologica } from "next/font/google";
 import localFont from "next/font/local";
-import { cookies } from "next/headers";
 import { ReactNode } from "react";
-import { BodyWrapper } from "./_components/body-wrapper";
-import { DateProvider } from "./_components/entities/date";
-import { Theme } from "./_components/entities/theme";
-const font = Geologica({
-  subsets: ["latin", "cyrillic"],
-  weight: "variable",
-  variable: "--text-font",
-});
+// const font = Geologica({
+//   subsets: ["latin", "cyrillic"],
+//   weight: "variable",
+//   variable: "--text-font",
+// });
 
 const geist = localFont({
   src: "../font/geist/variable/GeistVF.ttf",
   display: "swap",
-  variable: "--headings-font"
+  variable: "--text-font"
 })
 
 export const metadata: Metadata = {
@@ -44,19 +36,11 @@ type LayoutProps = Readonly<{
   children?: ReactNode
 }>
 export default function RootLayout({ children }: LayoutProps) {
-  const cookies_list = cookies()
-  const theme_cookie = cookies_list.get("theme")
-  const default_theme = (theme_cookie ? theme_cookie.value : "system") as Theme
   return (
-    <html lang="en" className={cn(font.variable, geist.variable)}>
-      <CSPostHogProvider>
-        <BodyWrapper theme={default_theme}>
-          <ThemeWrapper />
-          <DateProvider />
-          <WebVitals />
-          {children}
-        </BodyWrapper>
-      </CSPostHogProvider>
+    <html lang="en" className={cn(geist.className, geist.variable)}>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
