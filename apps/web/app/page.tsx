@@ -5,12 +5,12 @@ import dayjs from 'dayjs';
 import { unstable_noStore } from 'next/cache';
 import path from 'path';
 import HomePage from './_components/pages/home';
-import { EmbedEventPost } from './event/[id]/embed';
-import { RelatedEvents } from './event/[id]/related-events';
+import { EmbedEventPost } from './yz13/event/[id]/embed';
+import { RelatedEvents } from './yz13/event/[id]/related-events';
 
 const page = async () => {
   unstable_noStore()
-  const events = getMDXData(path.join(process.cwd(), 'app', 'event', 'events'))
+  const events = getMDXData(path.join(process.cwd(), 'app', 'yz13', 'event', 'events'))
   const now = dayjs()
   const now_key = now.format("YYYY-MM-DD")
   const todayEvents = events.filter(event => {

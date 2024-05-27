@@ -1,27 +1,24 @@
-import { Nav } from "@/components/entities/header/ui/nav"
-import { ThemedLogo } from "@/components/shared/theme-logo"
-import { User } from "@/components/shared/user"
-import { getMDXData } from "@/utils/mdx"
-import { unstable_noStore } from "next/cache"
-import dynamic from "next/dynamic"
-import Link from "next/link"
-import path from "path"
-import { Suspense } from "react"
-import { DateProvider } from "../../entities/date"
-import { EventsProvider } from "../../entities/events"
-import { Rulers } from "../../entities/rulers"
-import { Time } from "../../time"
-const Background = dynamic(() => import("../../widgets/background"), {
-  ssr: false,
-  loading: () => <div className="w-full h-full absolute z-[-3] bg-muted animate-pulse" />
-})
+"use server"
+import { Nav } from '@/components/entities/header';
+import { ThemedLogo } from '@/components/shared/theme-logo';
+import { User } from '@/components/shared/user';
+import { getMDXData } from '@/utils/mdx';
+import { unstable_noStore } from 'next/cache';
+import Link from 'next/link';
+import path from 'path';
+import { Suspense } from 'react';
+import { DateProvider } from '../_components/entities/date';
+import { EventsProvider } from '../_components/entities/events';
+import { Rulers } from '../_components/entities/rulers';
+import { Time } from '../_components/time';
+import Background from '../_components/widgets/background';
 
-const HomePage = async () => {
+const HomePageV1 = async () => {
   unstable_noStore()
   const events = getMDXData(path.join(process.cwd(), 'app', 'yz13', 'event', 'events'))
   return (
     <>
-      <header className='fixed z-20 top-0 w-full h-fit p-6 flex items-center justify-between'>
+      <header className='absolute z-20 top-0 left-0 w-full h-fit p-6 flex items-center justify-between'>
         <ThemedLogo mode="symbol" width={36} height={36} alt="header-logo" />
         <div className="flex items-center gap-4">
           <User />
@@ -62,4 +59,4 @@ const HomePage = async () => {
     </>
   )
 }
-export default HomePage
+export default HomePageV1

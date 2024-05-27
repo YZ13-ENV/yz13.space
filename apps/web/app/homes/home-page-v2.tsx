@@ -10,7 +10,7 @@ import Image from "next/image"
 import Link from "next/link"
 import path from "path"
 import { TbBrandAppgallery, TbCalendar } from "react-icons/tb"
-import { SidebarLarge } from "./sidebar-large"
+import { SidebarLarge } from "../yz13/sidebar-large"
 
 // # need types for feed
 type FeedItem = {
@@ -19,7 +19,7 @@ type FeedItem = {
   item: MDXContent | Project
 }
 
-const page = async () => {
+const HomePageV2 = async () => {
   const { data } = await getProjects()
   const projects = (data || [])
   const allMDX = getMDXData(path.join(process.cwd(), 'app', 'yz13', 'event', 'events'))
@@ -128,4 +128,4 @@ const page = async () => {
     </div>
   )
 }
-export default page
+export default HomePageV2

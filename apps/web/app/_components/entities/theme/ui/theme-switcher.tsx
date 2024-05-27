@@ -14,16 +14,16 @@ const ThemeSwitcher = () => {
     if (!!theme) setCookieTheme(theme)
   }, [theme])
   return (
-    <div className="flex items-center h-7  rounded-lg">
+    <div className="flex items-center h-9 w-full rounded-xl">
       <Button
-        className={cn("h-full !bg-transparent rounded-lg relative", theme === "light" ? "w-fit gap-1 px-2" : "w-7")}
+        className={cn("h-full flex !bg-transparent rounded-xl w-1/3 relative", theme === "light" ? "gap-1 px-2" : "")}
         onClick={() => setTheme("light")}
-        size="icon"
+        size="default"
         variant={theme === "light" ? "default" : "ghost"}
       >
         <BiSun size={14} />
         {theme === "light" && <>
-          <motion.span layoutId="theme-switcher-bg" className="absolute top-0 left-0 w-full h-full bg-foreground rounded-lg -z-10" />
+          <motion.span layoutId="theme-switcher-bg" className="absolute top-0 left-0 w-full h-full bg-foreground rounded-xl -z-10" />
           <motion.span
             animate={{ width: 35, opacity: 1 }}
             initial={{ width: 12.5, opacity: 0 }}
@@ -35,27 +35,27 @@ const ThemeSwitcher = () => {
         }
       </Button>
       <Button
-        className={cn("h-full rounded-lg relative", theme === "system" ? "w-fit gap-1 px-2" : "w-7")}
+        className={cn("h-full flex rounded-xl w-1/3 relative", theme === "system" ? "gap-1 px-2" : "")}
         onClick={() => setTheme("system")}
-        size="icon"
+        size="default"
         variant={theme === "system" ? "default" : "ghost"}
       >
         <BiDesktop size={14} />
         {
           theme === "system" && <>
-            <motion.span layoutId="theme-switcher-bg" className="absolute top-0 left-0 w-full h-full bg-foreground rounded-lg -z-10" />
+            <motion.span layoutId="theme-switcher-bg" className="absolute top-0 left-0 w-full h-full bg-foreground rounded-xl -z-10" />
           </>
         }
       </Button>
       <Button
-        className={cn("h-full !bg-transparent rounded-lg relative", theme === "dark" ? "w-fit gap-1 px-2" : "w-7")}
+        className={cn("h-full flex !bg-transparent w-1/3 rounded-xl relative", theme === "dark" ? "gap-1 px-2" : "")}
         onClick={() => setTheme("dark")}
-        size="icon"
+        size="default"
         variant={theme === "dark" ? "default" : "ghost"}
       >
         {theme === "dark" &&
           <>
-            <motion.span layoutId="theme-switcher-bg" className="absolute top-0 left-0 w-full h-full bg-foreground rounded-lg -z-10" />
+            <motion.span layoutId="theme-switcher-bg" className="absolute top-0 left-0 w-full h-full bg-foreground rounded-xl -z-10" />
             <motion.span
               initial={{ width: 20, opacity: 0 }}
               animate={{ width: 30, opacity: 1 }}

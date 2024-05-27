@@ -1,6 +1,7 @@
 import { BiHomeAlt2 } from "react-icons/bi";
 import { IconType } from "react-icons/lib";
-import { MdGridView, MdPhone } from "react-icons/md";
+import { MdPhone } from "react-icons/md";
+import { TbBrandAppgallery } from "react-icons/tb";
 
 type NavLink = {
   label: string;
@@ -16,7 +17,7 @@ export const links: NavLink[] = [
   {
     label: "Projects",
     value: "/projects",
-    icon: MdGridView
+    icon: TbBrandAppgallery
   },
   {
     label: "Contact",
