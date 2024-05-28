@@ -11,6 +11,7 @@
     "./db/kanban": "./src/db/kanban.ts",
     "./db/team": "./src/db/team.ts",
     "./db/project": "./src/db/project.ts",
+    "./db/threads": "./src/db/threads.ts",
     "./db/session": "./src/db/session.ts",
     "./db/web-vitals": "./src/db/web-vitals.ts",
     "./db/types": "./src/db/types.ts",
