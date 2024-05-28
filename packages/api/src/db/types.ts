@@ -9,14 +9,6 @@ export type Vitals = {
   created_at: string;
   path: string;
 };
-export type User = {
-  id: number;
-  avatar_url: string;
-  name: string;
-  bio: string;
-  location?: string;
-  login: string;
-};
 
 export type MemberLink = {
   label: string;
@@ -60,4 +52,20 @@ export type SessionCode = {
   code: number;
   created_at: string;
   expired_at: string;
+};
+
+export type ThreadItem = {
+  sub_thread_id: number;
+  text: string;
+  attachments: string[];
+  likes: string[];
+  views: string[];
+  created_at: string;
+  author: string[];
+};
+
+export type ThreadTree = {
+  thread_id: number;
+  threads: number[];
+  created_at: string;
 };

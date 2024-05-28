@@ -6,6 +6,8 @@ import { cn } from "@repo/ui/cn";
 import "@repo/ui/css";
 import "@repo/ui/css/typography";
 import "@repo/ui/css/vars";
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { ReactNode } from "react";
@@ -64,7 +66,7 @@ type LayoutProps = Readonly<{
 }>
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" className={cn(geist.className, geist.variable)}>
+    <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
       <body className="dark">
         {children}
       </body>

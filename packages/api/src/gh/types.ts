@@ -87,3 +87,16 @@ export type Contributor = {
 export type RepoLanguage = {
   [key: string]: number;
 };
+export type User = {
+  id: number;
+  avatar_url: string;
+  name: string;
+  bio: string;
+  login: string;
+  html_url: string;
+  location?: string;
+  twitter_username?: string;
+  hireable: boolean;
+  blog?: string;
+  public_repo: number;
+};

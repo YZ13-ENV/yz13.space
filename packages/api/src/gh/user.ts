@@ -1,7 +1,7 @@
 "use server";
 import { kv } from "@vercel/kv";
 import { expireTime } from "../const";
-import { User } from "../db/types";
+import { User } from "./types";
 
 const getUser = async (): Promise<User | null> => {
   try {
