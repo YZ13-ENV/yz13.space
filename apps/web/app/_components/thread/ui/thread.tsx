@@ -13,7 +13,7 @@ type Props = {
   className?: string
 }
 const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: Props) => {
-  const { thread_id } = thread
+  const { thread_id, name } = thread
   const sub_threads_res = await getSubThreads(thread_id)
   const sub_threads = (sub_threads_res.data || [])
   const sorted = sub_threads.sort((a, b) => {
@@ -23,7 +23,11 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: P
   })
   const maxed_sub_threads = (max !== 0 ? sorted.slice(0, max) : sorted)
   return (
-    <div className={className}>
+    <section className={className}>
+      {
+        name &&
+        <h3 className="text-xl font-semibold">{name}</h3>
+      }
       <div className="w-full relative">
         <div className="w-full h-fit">
           {
@@ -36,9 +40,12 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: P
             )
           }
         </div>
-        <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
-          <Separator orientation="vertical" className="w-[3px]" />
-        </div>
+        {
+          sub_threads.length >= 2 &&
+          <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
+            <Separator orientation="vertical" className="w-[3px]" />
+          </div>
+        }
       </div>
       {
         sub_threads.length >= max && max >= 1 &&
@@ -55,7 +62,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: P
           }
         </div>
       }
-    </div>
+    </section>
   )
 }
 export { Thread }

@@ -2,6 +2,7 @@ import { getThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
 import { Contacts } from "./_components/contacts";
 import { Footer } from "./_components/footer";
+import { Header } from "./_components/header";
 import { LeftSide } from "./_components/left";
 import { RightSide } from "./_components/right";
 import { Thread } from "./_components/thread/ui/thread";
@@ -17,6 +18,7 @@ const page = async () => {
     <div className="flex lg:flex-row lg:max-w-full max-w-xl lg:mx-0 mx-auto flex-col lg:divide-x divide-x-0 w-full justify-center min-h-screen">
       <LeftSide />
       <RightSide>
+        <Header />
         <div className="w-full space-y-3">
           {
             threads.map(

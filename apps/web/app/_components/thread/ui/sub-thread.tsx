@@ -15,7 +15,8 @@ type Props = {
 }
 dayjs.extend(relativeTime)
 const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Props) => {
-  const created_at = dayjs(sub_thread?.created_at).fromNow(false)
+  const created_at = dayjs(sub_thread?.created_at)
+  const formatted_created_at = created_at.fromNow(false)
   return (
     <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
       <div className="w-9 -space-y-4">
@@ -26,14 +27,16 @@ const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Pro
           }
         </TooltipProvider>
       </div>
-      <div className="w-full flex flex-col gap-3 pt-1">
-        {
-          enableLink
-            ? <Link href={`/${sub_thread.thread_id}`}>
-              <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-            </Link>
-            : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-        }
+      <div className="w-full flex flex-col gap-3">
+        <div className="p-2 rounded-tl-md group-hover:bg-accents-1 transition-colors rounded-bl-2xl rounded-r-2xl border">
+          {
+            enableLink
+              ? <Link href={`/${sub_thread.thread_id}`}>
+                <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
+              </Link>
+              : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
+          }
+        </div>
         <div className="w-full flex items-center justify-between">
           <div className="relative -left-3 flex items-center gap-2">
             <Button disabled variant="ghost" size="sm" className="gap-2">
@@ -45,7 +48,7 @@ const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Pro
               <span className="text-sm text-inherit">{sub_thread?.views.length || 0}</span>
             </Button>
           </div>
-          <span className="text-xs">{created_at}</span>
+          <span className="text-xs">{formatted_created_at}</span>
         </div>
       </div>
     </div>

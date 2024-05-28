@@ -69,4 +69,5 @@ export type ThreadTree = {
   thread_id: number;
   threads: number[];
   created_at: string;
+  name?: string;
 };
