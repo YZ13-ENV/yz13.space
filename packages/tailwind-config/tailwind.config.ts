@@ -22,9 +22,8 @@ const config = {
         screen: "100dvh",
       },
       fontFamily: {
-        special: "var(--special-font)",
-        headings: "var(--headings-font)",
-        text: "var(--text-font)",
+        sans: "var(--font-geist-sans)",
+        mono: "var(--font-geist-mono)",
       },
       colors: {
         "accents-1": "hsl(var(--accents-1))",
