@@ -17,7 +17,7 @@ dayjs.extend(relativeTime)
 const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Props) => {
   const created_at = dayjs(sub_thread?.created_at).fromNow(false)
   return (
-    <div className={cn("flex items-start py-3 gap-3 relative", className)}>
+    <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
       <div className="w-9 -space-y-4">
         <TooltipProvider delayDuration={100}>
           {
@@ -26,13 +26,13 @@ const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Pro
           }
         </TooltipProvider>
       </div>
-      <div className="w-full flex flex-col gap-3">
+      <div className="w-full flex flex-col gap-3 pt-1">
         {
           enableLink
             ? <Link href={`/${sub_thread.thread_id}`}>
-              <span className="text-sm">{sub_thread?.text}</span>
+              <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
             </Link>
-            : <span className="text-sm">{sub_thread?.text}</span>
+            : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
         }
         <div className="w-full flex items-center justify-between">
           <div className="relative -left-3 flex items-center gap-2">

@@ -23,7 +23,6 @@ const page = async () => {
               (thread) => <Thread
                 key={thread.thread_id + "-" + thread.created_at}
                 thread={thread}
-                className="hover:bg-accents-1 transition-all rounded-2xl"
                 max={3}
                 enableLink
               />
