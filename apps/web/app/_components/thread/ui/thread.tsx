@@ -1,5 +1,7 @@
 import { Separator } from "@repo/ui/separator"
+import { getSubThreads } from "@yz13/api/db/threads"
 import { ThreadTree } from "@yz13/api/db/types"
+import dayjs from "dayjs"
 import Link from "next/link"
 import { BiDotsVerticalRounded } from "react-icons/bi"
 import { SubThread } from "./sub-thread"
@@ -10,36 +12,37 @@ type Props = {
   enableLink?: boolean
   className?: string
 }
-const Thread = ({ thread, max = 0, enableLink = false, className = "" }: Props) => {
-  const { created_at, thread_id, threads } = thread
+const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: Props) => {
+  const { thread_id } = thread
+  const sub_threads_res = await getSubThreads(thread_id)
+  const sub_threads = (sub_threads_res.data || [])
+  const sorted = sub_threads.sort((a, b) => {
+    const a_date = dayjs(a.created_at)
+    const b_date = dayjs(b.created_at)
+    return a_date.diff(b_date)
+  })
+  const maxed_sub_threads = (max !== 0 ? sorted.slice(0, max) : sorted)
   return (
     <div className={className}>
       <div className="w-full relative">
-
         <div className="w-full h-fit">
           {
-            (
-              max !== 0
-                ? threads.slice(0, max)
-                : threads
+            maxed_sub_threads.map(
+              sub_thread =>
+                <SubThread
+                  key={`${thread_id}-${thread}`}
+                  enableLink={enableLink}
+                  sub_thread={sub_thread} />
             )
-              .map(
-                sub_thread =>
-                  <SubThread
-                    key={`${thread_id}-${thread}`}
-                    thread_id={thread_id}
-                    enableLink={enableLink}
-                    sub_thread_id={sub_thread} />
-              )
           }
         </div>
-        <div className="absolute w-9 h-full left-2.5 py-3 flex justify-center top-0 z-[-2]">
+        <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
           <Separator orientation="vertical" className="w-[3px]" />
         </div>
       </div>
       {
-        max >= 1 &&
-        <div className="w-full h-12 flex items-center relative gap-3 pl-2.5">
+        sub_threads.length >= max && max >= 1 &&
+        <div className="w-full h-12 flex items-center relative gap-3 hover:bg-accents-1 rounded-xl transition-colors">
           <div className="w-9 h-9 flex justify-center items-center">
             <BiDotsVerticalRounded size={18} className="text-secondary" />
           </div>

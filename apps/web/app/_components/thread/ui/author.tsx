@@ -19,7 +19,7 @@ const Author = async ({ author }: Props) => {
         />
       </TooltipTrigger>
       <TooltipContent side="left" align="end" avoidCollisions sideOffset={6} className="rounded-l-xl rounded-tr-xl rounded-br-sm flex flex-col">
-        <span className="font-medium text-foreground">{member?.username}</span>
+        <span className="font-semibold text-foreground">{member?.username}</span>
         <span>{member?.position}</span>
       </TooltipContent>
     </Tooltip>
