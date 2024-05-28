@@ -11,7 +11,7 @@ const LeftSide = async () => {
   const contacts = await get<Contact[]>("contacts")
   return (
     <div className="lg:w-1/2 w-full shrink-0 md:py-6 py-3 px-6 flex flex-col items-center gap-6 lg:sticky relative top-0 lg:h-screen h-fit">
-      <div className="w-full h-full flex items-center justify-center flex-col lg:pt-20 pt-0">
+      <div className="w-full h-full flex items-center justify-center flex-col">
         <div className="max-w-sm w-full space-y-5">
           <div className="w-16 aspect-square rounded-full bg-accents-1 relative">
             {

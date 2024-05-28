@@ -62,6 +62,10 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: P
           }
         </div>
       }
+      {
+        // max && sub_threads.length > max &&
+        // <ThreadSummary sub_threads={sub_threads} />
+      }
     </section>
   )
 }
