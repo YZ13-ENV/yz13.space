@@ -37,47 +37,6 @@
     margin: 0 0 0.625rem 0;
     color: inherit;
   }
-
-  h1 {
-    font-size: 3rem;
-    letter-spacing: -0.066875rem;
-    line-height: 1.5;
-    font-weight: 700;
-  }
-
-  h2 {
-    font-size: 2.25rem;
-    letter-spacing: -0.020625rem;
-    font-weight: 600;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    letter-spacing: -0.029375rem;
-    font-weight: 600;
-  }
-
-  h4 {
-    font-size: 1.25rem;
-    letter-spacing: -0.020625rem;
-    font-weight: 600;
-  }
-
-  h5 {
-    font-size: 1rem;
-    letter-spacing: -0.01125rem;
-    font-weight: 600;
-  }
-
-  h6 {
-    font-size: 0.875rem;
-    letter-spacing: -0.005625rem;
-    font-weight: 600;
-  }
-  ::selection {
-    background-color: var(--yz13-selection);
-    color: hsl(var(--yz13-background));
-  }
   code {
     color: var(--yz13-code);
     font-family: var(--font-mono);
@@ -86,10 +45,12 @@
   }
 
   code:before {
-    content: "`";
+    /* content: "`"; */
+    display: hidden;
   }
   code:after {
-    content: "`";
+    /* content: "`"; */
+    display: hidden;
   }
 
   pre {

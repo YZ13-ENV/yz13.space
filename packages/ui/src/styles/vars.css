@@ -55,9 +55,9 @@
     /* yz13-success // v2 */
 
     --yz13-success-accent: 158 60% 48%; /*#31c48d*/
-    --yz13-success-foreground: var(--yz13-success-100);
-    --yz13-success-border: var(--yz13-success-300);
-    --yz13-success-background: var(--yz13-success-400);
+    --yz13-success-foreground: var(--yz13-success-400);
+    --yz13-success-border: var(--yz13-success-200);
+    --yz13-success-background: var(--yz13-success-100);
 
     /* //light */
     --yz13-success-100: 157 56% 92%; /*#dff6ed*/
@@ -68,9 +68,9 @@
     /* yz13-error // v2 */
 
     --yz13-error-accent: 349 100% 65%; /*#ff4d6d*/
-    --yz13-error-foreground: var(--yz13-error-100);
-    --yz13-error-border: var(--yz13-error-300);
-    --yz13-error-background: var(--yz13-error-400);
+    --yz13-error-foreground: var(--yz13-error-400);
+    --yz13-error-border: var(--yz13-error-200);
+    --yz13-error-background: var(--yz13-error-100);
 
     /* //light */
     --yz13-error-100: 349 100% 95%; /*#ffe3e8*/
@@ -81,9 +81,9 @@
     /* yz13-warning // v2 */
 
     --yz13-warning-accent: 43 100% 51%; /*#ffb703*/
-    --yz13-warning-foreground: var(--yz13-warning-100);
-    --yz13-warning-border: var(--yz13-warning-300);
-    --yz13-warning-background: var(--yz13-warning-400);
+    --yz13-warning-foreground: var(--yz13-warning-400);
+    --yz13-warning-border: var(--yz13-warning-200);
+    --yz13-warning-background: var(--yz13-warning-100);
 
     /* //light */
     --yz13-warning-100: 44 100% 92%; /*#fff4d7*/
@@ -132,7 +132,7 @@
 
     /* yz13-success // v2 */
     --yz13-success-foreground: var(--yz13-success-accent);
-    --yz13-success-border: var(--yz13-success-300);
+    --yz13-success-border: var(--yz13-success-200);
     --yz13-success-background: var(--yz13-success-400);
     /* // dark */
     --yz13-success-100: 158 60% 38%; /*#279D71*/
@@ -141,7 +141,7 @@
     --yz13-success-400: 157 60% 17%; /*#124733*/
     /* yz13-error // v2 */
     --yz13-error-foreground: var(--yz13-error-accent);
-    --yz13-error-border: var(--yz13-error-300);
+    --yz13-error-border: var(--yz13-error-200);
     --yz13-error-background: var(--yz13-error-400);
     /* // dark */
     --yz13-error-100: 349 58% 52%; /*#CC3E57*/
@@ -150,7 +150,7 @@
     --yz13-error-400: 350 53% 24%; /*#5C1C27*/
     /* yz13-warning // v2 */
     --yz13-warning-foreground: var(--yz13-warning-accent);
-    --yz13-warning-border: var(--yz13-warning-300);
+    --yz13-warning-border: var(--yz13-warning-200);
     --yz13-warning-background: var(--yz13-warning-400);
     /* // dark */
     --yz13-warning-100: 43 98% 40%; /*#CC9202*/

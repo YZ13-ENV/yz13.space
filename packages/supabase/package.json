@@ -1,11 +1,12 @@
 {
-  "name": "@repo/supabase",
-  "version": "0.0.0",
+  "name": "@yz13/supabase",
+  "version": "0.1.0",
   "private": true,
   "exports": {
-    "./client": "./utils/supabase/client.ts",
-    "./middleware": "./utils/supabase/middleware.ts",
-    "./server": "./utils/supabase/server.ts"
+    "./client": "./src/supabase/client.ts",
+    "./middleware": "./src/supabase/middleware.ts",
+    "./server": "./src/supabase/server.ts",
+    "./storage": "./src/supabase/storage.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.3.0",

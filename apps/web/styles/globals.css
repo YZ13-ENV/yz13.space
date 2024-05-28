@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+
+.attachments-grid {
+  grid-template-areas:
+    "a a b"
+    "a a c";
+}
+.attachment-a {
+  grid-area: a;
+}
+.attachment-b {
+  grid-area: b;
+}
+.attachment-c {
+  grid-area: c;
+}
+
+.app-grid {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+.team-avatar-grid {
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+}
+.widgets-grid {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.apps-widget-grid {
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+}
+.contact-card-grid {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--contact-card-width), 1fr)
+  );
+}
+.header {
+  height: var(--header-height);
+}
+.page-wrapper {
+  min-height: var(--page-wrapper-height);
+}

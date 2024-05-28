@@ -1,9 +1,33 @@
 {
-  "name": "@repo/api",
-  "version": "0.0.0",
+  "name": "@yz13/api",
+  "version": "0.1.0",
   "private": true,
-  "exports": {},
+  "exports": {
+    "./gh": "./src/gh/index.ts",
+    "./gh/repo": "./src/gh/repo.ts",
+    "./gh/user": "./src/gh/user.ts",
+    "./gh/types": "./src/gh/types.ts",
+    "./db": "./src/db/index.ts",
+    "./db/kanban": "./src/db/kanban.ts",
+    "./db/team": "./src/db/team.ts",
+    "./db/project": "./src/db/project.ts",
+    "./db/threads": "./src/db/threads.ts",
+    "./db/session": "./src/db/session.ts",
+    "./db/web-vitals": "./src/db/web-vitals.ts",
+    "./db/types": "./src/db/types.ts",
+    "./edge/types": "./src/edge/types.ts",
+    "./helpers": "./src/helpers/index.ts",
+    "./helpers/random-number": "./src/helpers/random-number.ts",
+    "./helpers/random-string": "./src/helpers/random-string.ts"
+  },
   "dependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "@supabase/supabase-js": "^2.43.2",
+    "@vercel/blob": "^0.23.2",
+    "@vercel/edge-config": "^1.1.0",
+    "@vercel/kv": "^1.0.1",
+    "@yz13/supabase": "workspace:*",
+    "dayjs": "^1.11.11",
+    "next": "14.1.0"
   }
 }
