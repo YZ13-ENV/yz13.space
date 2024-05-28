@@ -17,6 +17,14 @@ const getThread = async (
   return supabase.from("threads").select().eq("thread_id", thread_id).single();
 };
 
+const getSubThreads = async (
+  thread_id: number
+): Promise<PostgrestSingleResponse<ThreadItem[]>> => {
+  const cookie = cookies();
+  const supabase = createClient(cookie);
+  return supabase.from("sub_threads").select().eq("thread_id", thread_id);
+};
+
 const getSubThread = async (
   thread_id: number,
   sub_thread_id: number
@@ -31,4 +39,4 @@ const getSubThread = async (
     .single();
 };
 
-export { getSubThread, getThread, getThreads };
+export { getSubThread, getSubThreads, getThread, getThreads };

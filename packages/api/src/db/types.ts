@@ -55,6 +55,7 @@ export type SessionCode = {
 };
 
 export type ThreadItem = {
+  thread_id: number;
   sub_thread_id: number;
   text: string;
   attachments: string[];
