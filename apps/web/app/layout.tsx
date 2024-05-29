@@ -13,6 +13,7 @@ import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { ReactNode } from "react";
+import { AnonSession } from "./_components/anon-session";
 // const font = Geologica({
 //   subsets: ["latin", "cyrillic"],
 //   weight: "variable",
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps) {
       <body className="dark">
         <Analytics />
         <SpeedInsights />
+        <AnonSession />
         {children}
       </body>
     </html>

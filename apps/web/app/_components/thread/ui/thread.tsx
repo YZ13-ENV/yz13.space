@@ -46,6 +46,12 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: P
             <Separator orientation="vertical" className="w-[3px]" />
           </div>
         }
+        {
+          sub_threads.length >= 2 &&
+          <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
+            <Separator orientation="vertical" className="w-[3px]" />
+          </div>
+        }
       </div>
       {
         sub_threads.length >= max && max >= 1 &&
@@ -61,6 +67,10 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: P
             </>
           }
         </div>
+      }
+      {
+        // max && sub_threads.length > max &&
+        // <ThreadSummary sub_threads={sub_threads} />
       }
     </section>
   )
