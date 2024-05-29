@@ -5,7 +5,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import Link from "next/link"
 import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
-import { SubThreadsProps } from "../threads/thread"
+import { SubThreadsProps } from "../threads/thread-v1"
 dayjs.extend(relativeTime)
 
 const SubThreadBig = async ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {

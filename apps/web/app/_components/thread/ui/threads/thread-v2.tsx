@@ -19,7 +19,7 @@ export type SubThreadsProps = {
   enableLink?: boolean
   className?: string
 }
-const PageThread = async ({ thread, max = 0, enableLink = false, className = "", component = SubThreadV2 }: Props) => {
+const Thread = async ({ thread, max = 0, enableLink = false, className = "", component = SubThreadV2 }: Props) => {
   const { thread_id, name } = thread
   const sub_threads_res = await getSubThreads(thread_id)
   const sub_threads = (sub_threads_res.data || [])
@@ -87,4 +87,4 @@ const PageThread = async ({ thread, max = 0, enableLink = false, className = "",
     </section>
   )
 }
-export { PageThread }
+export { Thread }

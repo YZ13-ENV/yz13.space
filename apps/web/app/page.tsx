@@ -5,7 +5,7 @@ import { Footer } from "./_components/footer";
 import { LeftSide } from "./_components/left";
 import { RightSide } from "./_components/right";
 import { SubThreadV2 } from "./_components/thread/ui/sub-threads/sub-thread-v2";
-import { Thread } from "./_components/thread/ui/threads/thread";
+import { Thread } from "./_components/thread/ui/threads/thread-v2";
 
 const page = async () => {
   const threads_res = await getThreads()
