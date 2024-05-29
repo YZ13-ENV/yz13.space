@@ -6,7 +6,7 @@ const Footer = () => {
     <footer>
       <div className="w-full flex items-center justify-between">
         <span className="text-sm">©2024 YZ13</span>
-        <span>v{version}</span>
+        <span className="text-sm">v{version}</span>
       </div>
     </footer>
   )
