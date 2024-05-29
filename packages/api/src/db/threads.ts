@@ -39,4 +39,24 @@ const getSubThread = async (
     .single();
 };
 
-export { getSubThread, getSubThreads, getThread, getThreads };
+const getLikes = async (
+  thread_id: number,
+  sub_thread_id: number
+): Promise<PostgrestSingleResponse<{ likes: ThreadItem["likes"] } | null>> => {
+  const cookie = cookies();
+  const supabase = createClient(cookie);
+  return supabase
+    .from("sub_threads")
+    .select("likes")
+    .eq("thread_id", thread_id)
+    .eq("sub_thread_id", sub_thread_id)
+    .single();
+};
+
+const viewSubThread = async (
+  thread_id: number,
+  sub_thread_id: number,
+  uid: string
+) => {};
+
+export { getLikes, getSubThread, getSubThreads, getThread, getThreads };

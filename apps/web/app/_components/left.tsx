@@ -25,7 +25,7 @@ const LeftSide = async () => {
           </div>
           <div className="flex flex-col">
             <span className="uppercase text-sm text-secondary">about</span>
-            <p>{gh_user?.bio}</p>
+            <p className="text-sm">{gh_user?.bio}</p>
           </div>
           <div className="flex flex-col">
             <span className="uppercase text-sm text-secondary">contact</span>
