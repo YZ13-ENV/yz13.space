@@ -2,10 +2,10 @@ import { getThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
 import { Contacts } from "./_components/contacts";
 import { Footer } from "./_components/footer";
-import { Header } from "./_components/header";
 import { LeftSide } from "./_components/left";
 import { RightSide } from "./_components/right";
-import { Thread } from "./_components/thread/ui/thread";
+import { SubThreadV2 } from "./_components/thread/ui/sub-threads/sub-thread-v2";
+import { Thread } from "./_components/thread/ui/threads/thread";
 
 const page = async () => {
   const threads_res = await getThreads()
@@ -18,7 +18,6 @@ const page = async () => {
     <div className="flex lg:flex-row lg:max-w-full max-w-xl lg:mx-0 mx-auto flex-col lg:divide-x divide-x-0 w-full justify-center min-h-screen">
       <LeftSide />
       <RightSide>
-        <Header />
         <div className="w-full space-y-3">
           {
             threads.map(
@@ -26,6 +25,7 @@ const page = async () => {
                 key={thread.thread_id + "-" + thread.created_at}
                 thread={thread}
                 max={3}
+                component={SubThreadV2}
                 enableLink
               />
             )

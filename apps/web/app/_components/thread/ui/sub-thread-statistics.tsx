@@ -1,4 +1,5 @@
 "use client"
+import { cn } from "@repo/ui/cn"
 import { likeSubThread, viewSubThread } from "@yz13/api/db/client-threads"
 import { ThreadItem } from "@yz13/api/db/types"
 import { useLocalStorageState } from "ahooks"
@@ -9,13 +10,16 @@ import { LikeButton } from "./like-button"
 import { ViewButton } from "./view-button"
 
 type Props = {
+  className?: string
   sub_thread: ThreadItem
+  hideTime?: boolean
+  format?: string
 }
 dayjs.extend(relativeTime)
-const SubThreadStatistics = ({ sub_thread }: Props) => {
+const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = false }: Props) => {
   const [sid] = useLocalStorageState<string | null>("anon-sid", { defaultValue: null })
   const created_at = dayjs(sub_thread?.created_at)
-  const formatted_created_at = created_at.fromNow(false)
+  const formatted_created_at = format ? created_at.format(format) : created_at.fromNow(false)
   const [likes, setLikes] = useState<string[]>(sub_thread.likes)
   const [views, setViews] = useState<string[]>(sub_thread.views)
   const session_id = sid || ""
@@ -40,8 +44,8 @@ const SubThreadStatistics = ({ sub_thread }: Props) => {
     }
   }
   return (
-    <div className="w-full flex items-center justify-between">
-      <div className="relative -left-3 flex items-center gap-2">
+    <div className={cn("w-full flex items-center justify-between", className)}>
+      <div className="relative -left-1 flex items-center gap-2">
         <LikeButton
           onClick={like}
           variant={isLiked ? "liked" : "not-liked"}
@@ -53,7 +57,10 @@ const SubThreadStatistics = ({ sub_thread }: Props) => {
           onView={view}
         />
       </div>
-      <span className="text-xs">{formatted_created_at}</span>
+      {
+        !hideTime &&
+        <span className="text-xs">{formatted_created_at}</span>
+      }
     </div>
   )
 }

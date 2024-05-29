@@ -12,8 +12,12 @@ import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { AnonSession } from "./_components/anon-session";
+import { ThemeBodyWrapper } from "./_components/theme/theme-body-wrapper";
+import { Theme } from "./_components/theme/theme-store";
+import { ThemeSwitcherButton } from "./_components/theme/theme-switcher-button";
 // const font = Geologica({
 //   subsets: ["latin", "cyrillic"],
 //   weight: "variable",
@@ -68,14 +72,18 @@ type LayoutProps = Readonly<{
   children?: ReactNode
 }>
 export default function RootLayout({ children }: LayoutProps) {
+  const cookiesList = cookies()
+  const themeCookie = cookiesList.get("theme")
+  const theme: Theme = themeCookie?.value as Theme || "light"
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
-      <body className="dark">
+      <ThemeBodyWrapper theme={theme}>
+        <ThemeSwitcherButton />
         <Analytics />
         <SpeedInsights />
         <AnonSession />
         {children}
-      </body>
+      </ThemeBodyWrapper>
     </html>
   );
 }

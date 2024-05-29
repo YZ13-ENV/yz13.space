@@ -22,7 +22,7 @@ const buttonVariants = cva(
         secondary:
           "rounded-full bg-accents-2/70 backdrop-sm text-accents-7 shadow-sm hover:bg-accents-3/90",
         ghost: "hover:bg-accents-2/70 hover:text-accents-7",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-primary",
       },
       size: {
         default: "h-9 px-4 py-2",

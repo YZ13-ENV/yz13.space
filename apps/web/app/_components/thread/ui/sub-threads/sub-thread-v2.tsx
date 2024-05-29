@@ -1,16 +1,15 @@
 import { cn } from "@repo/ui/cn"
 import { TooltipProvider } from "@repo/ui/tooltip"
-import { ThreadItem } from "@yz13/api/db/types"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
 import Link from "next/link"
-import { Author } from "./author"
-import { SubThreadStatistics } from "./sub-thread-statistics"
+import { Author } from "../author"
+import { SubThreadStatistics } from "../sub-thread-statistics"
+import { SubThreadsProps } from "../threads/thread"
+dayjs.extend(relativeTime)
 
-type Props = {
-  sub_thread: ThreadItem
-  enableLink?: boolean
-  className?: string
-}
-const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Props) => {
+const SubThreadV2 = async ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
+  const created_at = dayjs(sub_thread?.created_at).fromNow()
   return (
     <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
       <div className="w-9 -space-y-4">
@@ -22,6 +21,12 @@ const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Pro
         </TooltipProvider>
       </div>
       <div className="w-full flex flex-col gap-3">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-sm text-foreground line-clamp-1">{sub_thread.author.join(", ")}</span>
+          </div>
+          <span className="text-xs text-secondary">{created_at}</span>
+        </div>
         <div className="p-2 rounded-tl-md group-hover:bg-accents-1 transition-colors rounded-bl-2xl rounded-r-2xl border">
           {
             enableLink
@@ -31,9 +36,9 @@ const SubThread = async ({ enableLink = false, sub_thread, className = "" }: Pro
               : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
           }
         </div>
-        <SubThreadStatistics sub_thread={sub_thread} />
+        <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start gap-2" />
       </div>
     </div>
   )
 }
-export { SubThread }
+export { SubThreadV2 }

@@ -10,9 +10,9 @@ const LeftSide = async () => {
   const skills = await get<string[]>("skills")
   const contacts = await get<Contact[]>("contacts")
   return (
-    <div className="lg:w-1/2 w-full shrink-0 md:py-6 py-3 px-6 flex flex-col items-center gap-6 lg:sticky relative top-0 lg:h-screen h-fit">
+    <div className="lg:w-1/2 w-full shrink-0 flex flex-col items-center gap-6 lg:sticky relative top-0 lg:h-screen h-fit">
       <div className="w-full h-full flex items-center justify-center flex-col">
-        <div className="max-w-sm w-full space-y-5">
+        <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
           <div className="w-16 aspect-square rounded-full bg-accents-1 relative">
             {
               gh_user &&
