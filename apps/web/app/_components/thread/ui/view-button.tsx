@@ -23,7 +23,8 @@ const ViewButton = ({ value, onClick, variant, onView }: Props) => {
       ref={ref}
       onClick={onClick}
       variant={variant}
-      size="sm" className="gap-2"
+      size="sm"
+      className="gap-1 px-2 py-0 h-6"
     >
       <BiChart size={16} />
       <AnimatedNumbers

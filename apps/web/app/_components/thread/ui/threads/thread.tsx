@@ -1,18 +1,24 @@
 import { Separator } from "@repo/ui/separator"
 import { getSubThreads } from "@yz13/api/db/threads"
-import { ThreadTree } from "@yz13/api/db/types"
+import { ThreadItem, ThreadTree } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import Link from "next/link"
 import { BiDotsVerticalRounded } from "react-icons/bi"
-import { SubThread } from "./sub-thread"
+import { SubThread } from "../sub-threads/sub-thread"
 
 type Props = {
   thread: ThreadTree
   max?: number
   enableLink?: boolean
   className?: string
+  component?: (props: SubThreadsProps) => Promise<JSX.Element>
 }
-const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: Props) => {
+export type SubThreadsProps = {
+  sub_thread: ThreadItem
+  enableLink?: boolean
+  className?: string
+}
+const Thread = async ({ thread, max = 0, enableLink = false, className = "", component }: Props) => {
   const { thread_id, name } = thread
   const sub_threads_res = await getSubThreads(thread_id)
   const sub_threads = (sub_threads_res.data || [])
@@ -33,19 +39,12 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "" }: P
           {
             maxed_sub_threads.map(
               sub_thread =>
-                <SubThread
-                  key={`${thread_id}-${thread}`}
-                  enableLink={enableLink}
-                  sub_thread={sub_thread} />
+                component
+                  ? component({ enableLink: enableLink, sub_thread: sub_thread })
+                  : SubThread({ enableLink: enableLink, sub_thread: sub_thread })
             )
           }
         </div>
-        {
-          sub_threads.length >= 2 &&
-          <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
-            <Separator orientation="vertical" className="w-[3px]" />
-          </div>
-        }
         {
           sub_threads.length >= 2 &&
           <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">

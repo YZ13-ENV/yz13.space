@@ -4,8 +4,9 @@ import Image from "next/image"
 
 type Props = {
   author: string
+  size?: number
 }
-const Author = async ({ author }: Props) => {
+const Author = async ({ author, size = 36 }: Props) => {
   const member_res = await team.getTeamMember(author)
   const member = member_res.data
   return (
@@ -14,7 +15,7 @@ const Author = async ({ author }: Props) => {
         <Image
           className="aspect-square shrink-0 rounded-full border-2 border-background bg-accents-2"
           src={member?.avatar_url || ""}
-          width={36} height={36}
+          width={size} height={size}
           alt="author-photo"
         />
       </TooltipTrigger>

@@ -25,7 +25,7 @@ const LikeButton = ({ value, onClick, variant = "not-liked" }: Props) => {
       }}
       variant={"ghost"}
       size="sm"
-      className={cn("gap-2", variant === "liked" ? "text-error-foreground" : "")}
+      className={cn("gap-1 px-2 py-0 h-6", variant === "liked" ? "text-error-foreground" : "")}
     >
       {
         variant === "liked"
