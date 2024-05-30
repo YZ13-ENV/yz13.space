@@ -14,10 +14,10 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
-import { AnonSession } from "./_components/anon-session";
-import { ThemeBodyWrapper } from "./_components/theme/theme-body-wrapper";
-import { Theme } from "./_components/theme/theme-store";
-import { ThemeSwitcherButton } from "./_components/theme/theme-switcher-button";
+import { AnonSession } from "./(threads)/_components/anon-session";
+import { ThemeBodyWrapper } from "./(threads)/_components/theme/theme-body-wrapper";
+import { Theme } from "./(threads)/_components/theme/theme-store";
+import { ThemeSwitcherButton } from "./(threads)/_components/theme/theme-switcher-button";
 // const font = Geologica({
 //   subsets: ["latin", "cyrillic"],
 //   weight: "variable",

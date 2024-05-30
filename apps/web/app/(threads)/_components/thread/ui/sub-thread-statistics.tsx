@@ -5,6 +5,7 @@ import { ThreadItem } from "@yz13/api/db/types"
 import { useLocalStorageState } from "ahooks"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { useMemo } from "react"
 import { LikeButton } from "./like-button"
 import { ViewButton } from "./view-button"
 
@@ -22,8 +23,8 @@ const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = fa
   const likes = sub_thread.likes
   const views = sub_thread.views
   const session_id = sid || ""
-  const isLiked = likes.includes(session_id)
-  const isViewed = views.includes(session_id)
+  const isLiked = useMemo(() => { return likes.includes(session_id) }, [likes])
+  const isViewed = useMemo(() => { return views.includes(session_id) }, [views])
   const view = async () => {
     if (session_id && !isViewed) {
       await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
@@ -37,6 +38,10 @@ const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = fa
   return (
     <div className={cn("w-full flex items-center justify-between", className)}>
       <div className="relative -left-1 flex items-center gap-2">
+        {
+          process.env.NODE_ENV === "development" &&
+          <span className="text-sm">{sub_thread.sub_thread_id}</span>
+        }
         <LikeButton
           onClick={like}
           variant={isLiked ? "liked" : "not-liked"}

@@ -72,3 +72,15 @@ export type ThreadTree = {
   name?: string;
   pinned: boolean;
 };
+
+export type ComponentsThreadTree = ThreadTree;
+export type ComponentsSubThreadTree = {
+  thread_id: number;
+  sub_thread_id: number;
+  children: JSX.Element;
+  attachments: string[];
+  likes: string[];
+  views: string[];
+  created_at: string;
+  author: string[];
+};

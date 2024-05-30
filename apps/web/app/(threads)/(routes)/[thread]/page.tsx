@@ -1,12 +1,14 @@
+import { LeftSide } from "@/app/_components/left"
+import { RightSide } from "@/app/_components/right"
+import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { Separator } from "@repo/ui/separator"
 import { getThread, otherThreads } from "@yz13/api/db/threads"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
-import { Footer } from "../_components/footer"
-import { LeftSide } from "../_components/left"
-import { RightSide } from "../_components/right"
-import { SubThreadV2 } from "../_components/thread/ui/sub-threads/sub-thread-v2"
-import { Thread } from "../_components/thread/ui/threads/thread-v2"
+import { Footer } from "../../_components/footer"
+import { SubThreadV2 } from "../../_components/thread/ui/sub-threads/sub-thread-v2"
+import { Thread } from "../../_components/thread/ui/threads/thread-v2"
+import { YZ13Info } from "../../_components/yz13-info"
 
 type Props = {
   params: {
@@ -20,8 +22,10 @@ const page = async ({ params }: Props) => {
   const other_threads_res = await otherThreads(thread_id)
   const other_threads = other_threads_res.data ? other_threads_res.data : []
   return (
-    <div className="flex lg:flex-row lg:max-w-full max-w-xl lg:mx-0 mx-auto flex-col lg:divide-x divide-x-0 w-full justify-center min-h-screen">
-      <LeftSide />
+    <SplitViewContainer>
+      <LeftSide>
+        <YZ13Info />
+      </LeftSide>
       <RightSide>
         <div className="flex items-center justify-start">
           <Link href="/" className="inline-flex items-center text-secondary gap-1">
@@ -59,7 +63,7 @@ const page = async ({ params }: Props) => {
         }
         <Footer />
       </RightSide>
-    </div>
+    </SplitViewContainer>
   )
 }
 export default page

@@ -3,6 +3,7 @@ import { TooltipProvider } from "@repo/ui/tooltip"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Link from "next/link"
+import { Attachments } from "../attachmets"
 import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
 import { SubThreadsProps } from "../threads/thread-v1"
@@ -27,7 +28,7 @@ const SubThreadV2 = ({ enableLink = false, sub_thread, className = "" }: SubThre
           </div>
           <span className="text-xs text-secondary">{created_at}</span>
         </div>
-        <div className="p-2 rounded-tl-md group-hover:bg-accents-1 transition-colors rounded-bl-2xl rounded-r-2xl border">
+        <div className="p-2 rounded-tl-md group-hover:bg-accents-1 transition-colors rounded-bl-2xl rounded-r-2xl space-y-2 border">
           {
             enableLink
               ? <Link href={`/${sub_thread.thread_id}`}>
@@ -35,7 +36,11 @@ const SubThreadV2 = ({ enableLink = false, sub_thread, className = "" }: SubThre
               </Link>
               : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
           }
-          <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start ml-1 mt-2 gap-2" />
+          {
+            sub_thread.attachments.length !== 0 &&
+            <Attachments attachments={sub_thread.attachments} />
+          }
+          <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start ml-1 gap-2" />
         </div>
       </div>
     </div>

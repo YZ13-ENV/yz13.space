@@ -1,0 +1,30 @@
+{
+  "name": "@microservices/widgets-lib",
+  "version": "0.0.1",
+  "description": "",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "YZ13-ENV",
+  "license": "ISC",
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.12.8",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0"
+  },
+  "dependencies": {
+    "@repo/tailwind-config": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "dayjs": "^1.11.11",
+    "postcss": "^8.4.38",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.2.0",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
+  }
+}
