@@ -3,6 +3,8 @@ import { RightSide } from "@/app/_components/right";
 import { SplitViewContainer } from "@/app/_components/split-view-container";
 import { getThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
+import Link from "next/link";
+import { TbRouteSquare } from "react-icons/tb";
 import { Contacts } from "../_components/contacts";
 import { Footer } from "../_components/footer";
 import { SearchBar } from "../_components/search-bar";
@@ -32,8 +34,17 @@ const page = async ({ searchParams }: Props) => {
         <YZ13Info />
       </LeftSide>
       <RightSide>
-        <div className="w-full">
+        <div className="w-full space-y-3">
           <SearchBar />
+          <nav>
+            <Link
+              className="inline-flex gap-2 hover:bg-accents-1 items-center text-secondary hover:text-foreground px-2 py-1 text-sm hover:border-foreground rounded-md border"
+              href="/services"
+            >
+              <TbRouteSquare size={14} className="text-inherit" />
+              <span className="text-inherit">Services</span>
+            </Link>
+          </nav>
         </div>
         <div className="w-full space-y-3">
           {

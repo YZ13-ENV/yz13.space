@@ -3,6 +3,7 @@ import { LeftSide } from "@/app/_components/left"
 import { RightSide } from "@/app/_components/right"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import { BiHomeAlt2, BiLeftArrowAlt } from "react-icons/bi"
 
 type Props = {
@@ -17,6 +18,7 @@ const page = ({ params }: Props) => {
   const service = registered_services.find(service => service.service_id === service_id)
   const service_route = service?.routes.find(service => service.route === route)
   const empty_route = !service_route
+  if (!service) return redirect("/services")
   return (
     <SplitViewContainer>
       <LeftSide>
