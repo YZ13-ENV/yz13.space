@@ -4,22 +4,21 @@ import { ThreadItem, ThreadTree } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import Link from "next/link"
 import { BiDotsVerticalRounded } from "react-icons/bi"
-import { SubThreadBig } from "../sub-threads/big-sub-thread"
-import { SubThreadV2 } from "../sub-threads/sub-thread-v2"
+import { SubThread } from "../sub-threads/sub-thread"
 
 type Props = {
   thread: ThreadTree
   max?: number
   enableLink?: boolean
   className?: string
-  component?: (props: SubThreadsProps) => Promise<JSX.Element>
+  component?: (props: SubThreadsProps) => JSX.Element
 }
 export type SubThreadsProps = {
   sub_thread: ThreadItem
   enableLink?: boolean
   className?: string
 }
-const PageThread = async ({ thread, max = 0, enableLink = false, className = "", component = SubThreadV2 }: Props) => {
+const Thread = async ({ thread, max = 0, enableLink = false, className = "", component }: Props) => {
   const { thread_id, name } = thread
   const sub_threads_res = await getSubThreads(thread_id)
   const sub_threads = (sub_threads_res.data || [])
@@ -35,35 +34,23 @@ const PageThread = async ({ thread, max = 0, enableLink = false, className = "",
         name &&
         <h3 className="text-xl font-semibold">{name}</h3>
       }
-      <div className="w-full">
-        {
-          maxed_sub_threads
-            .slice(0, 1)
-            .map(
-              (sub_thread, i) => {
-                if (i === 0) return SubThreadBig({ enableLink: enableLink, sub_thread: sub_thread })
-                return component({ enableLink: enableLink, sub_thread: sub_thread })
-              }
+      <div className="w-full relative">
+        <div className="w-full h-fit">
+          {
+            maxed_sub_threads.map(
+              sub_thread =>
+                component
+                  ? component({ enableLink: enableLink, sub_thread: sub_thread })
+                  : SubThread({ enableLink: enableLink, sub_thread: sub_thread })
             )
-        }
-        <div className="w-full h-fit relative">
-          {
-            maxed_sub_threads
-              .slice(1, maxed_sub_threads.length)
-              .map(
-                (sub_thread, i) => {
-                  return component({ enableLink: enableLink, sub_thread: sub_thread })
-                }
-              )
-          }
-          {
-            maxed_sub_threads
-              .slice(1, maxed_sub_threads.length).length >= 2 &&
-            <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
-              <Separator orientation="vertical" className="w-[3px]" />
-            </div>
           }
         </div>
+        {
+          sub_threads.length >= 2 &&
+          <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
+            <Separator orientation="vertical" className="w-[3px]" />
+          </div>
+        }
       </div>
       {
         sub_threads.length >= max && max >= 1 &&
@@ -87,4 +74,4 @@ const PageThread = async ({ thread, max = 0, enableLink = false, className = "",
     </section>
   )
 }
-export { PageThread }
+export { Thread }

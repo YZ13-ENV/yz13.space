@@ -5,7 +5,6 @@ import { ThreadItem } from "@yz13/api/db/types"
 import { useLocalStorageState } from "ahooks"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { useState } from "react"
 import { LikeButton } from "./like-button"
 import { ViewButton } from "./view-button"
 
@@ -20,27 +19,19 @@ const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = fa
   const [sid] = useLocalStorageState<string | null>("anon-sid", { defaultValue: null })
   const created_at = dayjs(sub_thread?.created_at)
   const formatted_created_at = format ? created_at.format(format) : created_at.fromNow(false)
-  const [likes, setLikes] = useState<string[]>(sub_thread.likes)
-  const [views, setViews] = useState<string[]>(sub_thread.views)
+  const likes = sub_thread.likes
+  const views = sub_thread.views
   const session_id = sid || ""
   const isLiked = likes.includes(session_id)
   const isViewed = views.includes(session_id)
   const view = async () => {
     if (session_id && !isViewed) {
-      const updated_views_res = await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
-      const updated_views = updated_views_res.data ? updated_views_res.data.likes : []
-      setViews(updated_views)
+      await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
     }
-
-    if (isViewed) {
-      return
-    } else setViews([...views, session_id])
   }
   const like = async () => {
     if (session_id) {
-      const updated_likes_res = await likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
-      const updated_likes = updated_likes_res.data ? updated_likes_res.data.likes : []
-      setLikes(updated_likes)
+      await likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
     }
   }
   return (

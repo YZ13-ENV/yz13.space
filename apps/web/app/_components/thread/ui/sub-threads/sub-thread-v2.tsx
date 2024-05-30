@@ -5,14 +5,14 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import Link from "next/link"
 import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
-import { SubThreadsProps } from "../threads/thread"
+import { SubThreadsProps } from "../threads/thread-v1"
 dayjs.extend(relativeTime)
 
-const SubThreadV2 = async ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
+const SubThreadV2 = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
   const created_at = dayjs(sub_thread?.created_at).fromNow()
   return (
     <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
-      <div className="w-9 -space-y-4">
+      <div className="w-9 shrink-0 -space-y-4">
         <TooltipProvider delayDuration={100}>
           {
             sub_thread?.author.map(
@@ -35,8 +35,8 @@ const SubThreadV2 = async ({ enableLink = false, sub_thread, className = "" }: S
               </Link>
               : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
           }
+          <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start ml-1 mt-2 gap-2" />
         </div>
-        <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start gap-2" />
       </div>
     </div>
   )

@@ -70,4 +70,5 @@ export type ThreadTree = {
   threads: number[];
   created_at: string;
   name?: string;
+  pinned: boolean;
 };

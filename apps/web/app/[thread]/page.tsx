@@ -2,11 +2,11 @@ import { Separator } from "@repo/ui/separator"
 import { getThread, otherThreads } from "@yz13/api/db/threads"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
+import { Footer } from "../_components/footer"
 import { LeftSide } from "../_components/left"
 import { RightSide } from "../_components/right"
 import { SubThreadV2 } from "../_components/thread/ui/sub-threads/sub-thread-v2"
-import { PageThread } from "../_components/thread/ui/threads/page-thread"
-import { Thread } from "../_components/thread/ui/threads/thread"
+import { Thread } from "../_components/thread/ui/threads/thread-v2"
 
 type Props = {
   params: {
@@ -32,16 +32,16 @@ const page = async ({ params }: Props) => {
         <div className="w-full space-y-3">
           {
             thread &&
-            <PageThread thread={thread} component={SubThreadV2} />
+            <Thread thread={thread} component={SubThreadV2} />
           }
         </div>
         {
           !!other_threads.length &&
           <>
             <Separator />
-            <section>
+            <section className="space-y-3">
               <h2 className="text-2xl font-semibold">Other</h2>
-              <div className="w-full space-y-3">
+              <div className="w-full py-3 space-y-3">
                 {
                   other_threads.map(
                     thread =>
@@ -57,7 +57,7 @@ const page = async ({ params }: Props) => {
             </section>
           </>
         }
-
+        <Footer />
       </RightSide>
     </div>
   )
