@@ -38,7 +38,7 @@ const page = async ({ searchParams }: Props) => {
           <SearchBar />
           <nav>
             <Link
-              className="inline-flex gap-2 hover:bg-accents-1 items-center text-secondary hover:text-foreground px-2 py-1 text-sm hover:border-foreground rounded-md border"
+              className="inline-flex transition-colors gap-2 hover:bg-accents-1 items-center text-foreground/80 hover:text-foreground px-2 py-1 text-sm hover:border-foreground rounded-md border"
               href="/services"
             >
               <TbRouteSquare size={14} className="text-inherit" />

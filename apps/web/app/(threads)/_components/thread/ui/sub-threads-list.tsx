@@ -3,6 +3,7 @@ import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { onSubThreads } from "@yz13/api/db/client-threads"
 import { ThreadItem } from "@yz13/api/db/types"
+import dayjs from "dayjs"
 import { useEffect, useMemo, useState } from "react"
 import { SubThreadBig } from "./sub-threads/big-sub-thread"
 import { SubThreadV2 } from "./sub-threads/sub-thread-v2"
@@ -13,10 +14,18 @@ type Props = {
   thread_id: number
   sub_threads?: ThreadItem[]
   className?: string
+  enableLink?: boolean
   component?: (props: SubThreadsProps) => JSX.Element
 }
-const SubThreadsList = ({ thread_id, className = "", sub_threads = [], component = SubThreadV2 }: Props) => {
-  const [threads, setThreads] = useState<ThreadItem[]>(sub_threads)
+const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_threads = [], component = SubThreadV2 }: Props) => {
+  const sorted = useMemo(() => {
+    return sub_threads.sort((a, b) => {
+      const a_date = dayjs(a.created_at)
+      const b_date = dayjs(b.created_at)
+      return a_date.diff(b_date)
+    })
+  }, [sub_threads])
+  const [threads, setThreads] = useState<ThreadItem[]>(sorted)
   const first_part = useMemo(() => { return threads.slice(0, 1) }, [threads])
   const second_part = useMemo(() => { return threads.slice(1, threads.length) }, [threads])
   const Component = component
@@ -50,7 +59,7 @@ const SubThreadsList = ({ thread_id, className = "", sub_threads = [], component
           first_part
             .map(
               (sub_thread, i) => {
-                return <SubThreadBig key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
+                return <SubThreadBig enableLink={enableLink} key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
               }
             )
         }
@@ -59,7 +68,7 @@ const SubThreadsList = ({ thread_id, className = "", sub_threads = [], component
             second_part
               .map(
                 (sub_thread, i) => {
-                  return <Component key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
+                  return <Component key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} enableLink={enableLink} />
                 }
               )
           }

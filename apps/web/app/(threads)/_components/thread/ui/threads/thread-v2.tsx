@@ -1,6 +1,5 @@
 import { getSubThreads } from "@yz13/api/db/threads"
 import { ThreadItem, ThreadTree } from "@yz13/api/db/types"
-import dayjs from "dayjs"
 import Link from "next/link"
 import { BiDotsVerticalRounded, BiStar } from "react-icons/bi"
 import { SubThreadsList } from "../sub-threads-list"
@@ -22,12 +21,6 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
   const { thread_id, name } = thread
   const sub_threads_res = await getSubThreads(thread_id)
   const sub_threads = (sub_threads_res.data || [])
-  const sorted = sub_threads.sort((a, b) => {
-    const a_date = dayjs(a.created_at)
-    const b_date = dayjs(b.created_at)
-    return a_date.diff(b_date)
-  })
-  const maxed_sub_threads = (max !== 0 ? sorted.slice(0, max) : sorted)
   return (
     <section id={name} className={className}>
       {
@@ -40,6 +33,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
         </div>
       }
       <SubThreadsList
+        enableLink={enableLink}
         thread_id={thread.thread_id}
         sub_threads={sub_threads}
       />
