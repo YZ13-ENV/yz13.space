@@ -81,9 +81,9 @@
     /* yz13-warning // v2 */
 
     --yz13-warning-accent: 43 100% 51%; /*#ffb703*/
-    --yz13-warning-foreground: var(--yz13-warning-400);
+    --yz13-warning-foreground: var(--yz13-warning-accent);
     --yz13-warning-border: var(--yz13-warning-200);
-    --yz13-warning-background: var(--yz13-warning-100);
+    --yz13-warning-background: var(--yz13-warning-100) / 0.7;
 
     /* //light */
     --yz13-warning-100: 44 100% 92%; /*#fff4d7*/

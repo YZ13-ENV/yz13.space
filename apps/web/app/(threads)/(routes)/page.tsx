@@ -1,12 +1,14 @@
+import { LeftSide } from "@/app/_components/left";
+import { RightSide } from "@/app/_components/right";
+import { SplitViewContainer } from "@/app/_components/split-view-container";
 import { getThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
-import { Contacts } from "./_components/contacts";
-import { Footer } from "./_components/footer";
-import { LeftSide } from "./_components/left";
-import { RightSide } from "./_components/right";
-import { SearchBar } from "./_components/search-bar";
-import { SubThreadV2 } from "./_components/thread/ui/sub-threads/sub-thread-v2";
-import { Thread } from "./_components/thread/ui/threads/thread-v2";
+import { Contacts } from "../_components/contacts";
+import { Footer } from "../_components/footer";
+import { SearchBar } from "../_components/search-bar";
+import { SubThreadV2 } from "../_components/thread/ui/sub-threads/sub-thread-v2";
+import { Thread } from "../_components/thread/ui/threads/thread-v2";
+import { YZ13Info } from "../_components/yz13-info";
 
 type Props = {
   searchParams: {
@@ -25,8 +27,10 @@ const page = async ({ searchParams }: Props) => {
     })
     .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
   return (
-    <div className="flex lg:flex-row lg:max-w-full max-w-xl lg:mx-0 mx-auto flex-col lg:divide-x divide-x-0 w-full justify-center min-h-screen">
-      <LeftSide />
+    <SplitViewContainer>
+      <LeftSide>
+        <YZ13Info />
+      </LeftSide>
       <RightSide>
         <div className="w-full">
           <SearchBar />
@@ -47,7 +51,7 @@ const page = async ({ searchParams }: Props) => {
           <Footer />
         </div>
       </RightSide>
-    </div>
+    </SplitViewContainer>
   )
 }
 export default page
