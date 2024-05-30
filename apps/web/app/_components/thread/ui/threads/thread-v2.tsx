@@ -3,7 +3,7 @@ import { getSubThreads } from "@yz13/api/db/threads"
 import { ThreadItem, ThreadTree } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import Link from "next/link"
-import { BiDotsVerticalRounded } from "react-icons/bi"
+import { BiDotsVerticalRounded, BiStar } from "react-icons/bi"
 import { SubThreadBig } from "../sub-threads/big-sub-thread"
 import { SubThreadV2 } from "../sub-threads/sub-thread-v2"
 
@@ -30,10 +30,15 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
   })
   const maxed_sub_threads = (max !== 0 ? sorted.slice(0, max) : sorted)
   return (
-    <section className={className}>
+    <section id={name} className={className}>
       {
         name &&
-        <h3 className="text-xl font-semibold">{name}</h3>
+        <div className="flex items-center gap-2">
+          {thread.pinned &&
+            <BiStar className="text-warning-foreground" size={20} />
+          }
+          <h3 className="text-xl font-semibold">{name}</h3>
+        </div>
       }
       <div className="w-full">
         {
@@ -41,8 +46,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
             .slice(0, 1)
             .map(
               (sub_thread, i) => {
-                if (i === 0) return SubThreadBig({ enableLink: enableLink, sub_thread: sub_thread })
-                return component({ enableLink: enableLink, sub_thread: sub_thread })
+                return SubThreadBig({ enableLink: enableLink, sub_thread: sub_thread })
               }
             )
         }

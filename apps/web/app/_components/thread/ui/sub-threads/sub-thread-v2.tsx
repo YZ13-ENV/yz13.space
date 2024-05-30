@@ -35,8 +35,8 @@ const SubThreadV2 = async ({ enableLink = false, sub_thread, className = "" }: S
               </Link>
               : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
           }
+          <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start ml-1 mt-2 gap-2" />
         </div>
-        <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start gap-2" />
       </div>
     </div>
   )

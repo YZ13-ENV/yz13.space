@@ -2,6 +2,7 @@ import { Separator } from "@repo/ui/separator"
 import { getThread, otherThreads } from "@yz13/api/db/threads"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
+import { Footer } from "../_components/footer"
 import { LeftSide } from "../_components/left"
 import { RightSide } from "../_components/right"
 import { SubThreadV2 } from "../_components/thread/ui/sub-threads/sub-thread-v2"
@@ -56,7 +57,7 @@ const page = async ({ params }: Props) => {
             </section>
           </>
         }
-
+        <Footer />
       </RightSide>
     </div>
   )
