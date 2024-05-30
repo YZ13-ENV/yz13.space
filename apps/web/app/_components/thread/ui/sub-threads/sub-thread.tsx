@@ -5,7 +5,7 @@ import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
 import { SubThreadsProps } from "../threads/thread-v1"
 
-const SubThread = async ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
+const SubThread = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
   return (
     <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
       <div className="w-9 -space-y-4">

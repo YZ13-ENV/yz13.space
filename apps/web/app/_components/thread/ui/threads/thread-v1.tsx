@@ -11,7 +11,7 @@ type Props = {
   max?: number
   enableLink?: boolean
   className?: string
-  component?: (props: SubThreadsProps) => Promise<JSX.Element>
+  component?: (props: SubThreadsProps) => JSX.Element
 }
 export type SubThreadsProps = {
   sub_thread: ThreadItem

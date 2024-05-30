@@ -1,4 +1,7 @@
-import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import {
+  PostgrestSingleResponse,
+  RealtimePostgresChangesPayload,
+} from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/client";
 import { ThreadItem } from "./types";
 
@@ -70,4 +73,33 @@ const viewSubThread = async (
     .single();
 };
 
-export { getLikesClient, getViewsClient, likeSubThread, viewSubThread };
+const onSubThreads = (
+  channel: string,
+  thread_id: number,
+  onPayload: (payload: RealtimePostgresChangesPayload<ThreadItem>) => void
+) => {
+  const supabase = createClient();
+  const channels = supabase
+    .channel(channel)
+    .on<ThreadItem>(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "sub_threads",
+        filter: `thread_id=eq.${thread_id}`,
+      },
+      (payload) => {
+        onPayload(payload);
+      }
+    )
+    .subscribe();
+};
+
+export {
+  getLikesClient,
+  getViewsClient,
+  likeSubThread,
+  onSubThreads,
+  viewSubThread,
+};

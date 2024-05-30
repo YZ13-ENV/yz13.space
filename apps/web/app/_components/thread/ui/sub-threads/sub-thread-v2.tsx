@@ -8,11 +8,11 @@ import { SubThreadStatistics } from "../sub-thread-statistics"
 import { SubThreadsProps } from "../threads/thread-v1"
 dayjs.extend(relativeTime)
 
-const SubThreadV2 = async ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
+const SubThreadV2 = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
   const created_at = dayjs(sub_thread?.created_at).fromNow()
   return (
     <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
-      <div className="w-9 -space-y-4">
+      <div className="w-9 shrink-0 -space-y-4">
         <TooltipProvider delayDuration={100}>
           {
             sub_thread?.author.map(

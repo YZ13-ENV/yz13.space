@@ -1,10 +1,9 @@
-import { Separator } from "@repo/ui/separator"
 import { getSubThreads } from "@yz13/api/db/threads"
 import { ThreadItem, ThreadTree } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import Link from "next/link"
 import { BiDotsVerticalRounded, BiStar } from "react-icons/bi"
-import { SubThreadBig } from "../sub-threads/big-sub-thread"
+import { SubThreadsList } from "../sub-threads-list"
 import { SubThreadV2 } from "../sub-threads/sub-thread-v2"
 
 type Props = {
@@ -12,7 +11,7 @@ type Props = {
   max?: number
   enableLink?: boolean
   className?: string
-  component?: (props: SubThreadsProps) => Promise<JSX.Element>
+  component?: (props: SubThreadsProps) => JSX.Element
 }
 export type SubThreadsProps = {
   sub_thread: ThreadItem
@@ -40,35 +39,10 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
           <h3 className="text-xl font-semibold">{name}</h3>
         </div>
       }
-      <div className="w-full">
-        {
-          maxed_sub_threads
-            .slice(0, 1)
-            .map(
-              (sub_thread, i) => {
-                return SubThreadBig({ enableLink: enableLink, sub_thread: sub_thread })
-              }
-            )
-        }
-        <div className="w-full h-fit relative">
-          {
-            maxed_sub_threads
-              .slice(1, maxed_sub_threads.length)
-              .map(
-                (sub_thread, i) => {
-                  return component({ enableLink: enableLink, sub_thread: sub_thread })
-                }
-              )
-          }
-          {
-            maxed_sub_threads
-              .slice(1, maxed_sub_threads.length).length >= 2 &&
-            <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
-              <Separator orientation="vertical" className="w-[3px]" />
-            </div>
-          }
-        </div>
-      </div>
+      <SubThreadsList
+        thread_id={thread.thread_id}
+        sub_threads={sub_threads}
+      />
       {
         sub_threads.length >= max && max >= 1 &&
         <div className="w-full h-12 flex items-center relative gap-3 hover:bg-accents-1 rounded-xl transition-colors">
