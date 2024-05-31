@@ -2,8 +2,9 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "@repo/ui/tooltip"
 import { team } from "@yz13/api/db"
 import { TeamMember } from "@yz13/api/db/types"
+import { useInterval } from "ahooks"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 type Props = {
   author: string
@@ -11,13 +12,14 @@ type Props = {
 }
 const Author = ({ author, size = 36 }: Props) => {
   const [member, setMember] = useState<TeamMember | null>(null)
-  useEffect(() => {
-    team.getTeamMember(author)
-      .then(res => {
-        const member_res = res.data
-        setMember(member_res)
-      })
-  }, [author])
+  const fetchMember = async () => {
+    const res = await team.getTeamMember(author)
+    const member_res = res.data
+    setMember(member_res)
+  }
+  useInterval(() => {
+    fetchMember()
+  }, member ? undefined : 1000)
   return (
     <Tooltip>
       <TooltipTrigger className="z-20" asChild>
