@@ -4,7 +4,7 @@ import { team } from "@yz13/api/db"
 import { TeamMember } from "@yz13/api/db/types"
 import { useInterval } from "ahooks"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 type Props = {
   author: string
@@ -20,6 +20,9 @@ const Author = ({ author, size = 36 }: Props) => {
   useInterval(() => {
     fetchMember()
   }, member ? undefined : 1000)
+  useEffect(() => {
+    fetchMember()
+  }, [author])
   return (
     <Tooltip>
       <TooltipTrigger className="z-20" asChild>
