@@ -18,6 +18,7 @@ import { AnonSession } from "./(threads)/_components/anon-session";
 import { ThemeBodyWrapper } from "./(threads)/_components/theme/theme-body-wrapper";
 import { Theme } from "./(threads)/_components/theme/theme-store";
 import { ThemeSwitcherButton } from "./(threads)/_components/theme/theme-switcher-button";
+import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
 // const font = Geologica({
 //   subsets: ["latin", "cyrillic"],
 //   weight: "variable",
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: LayoutProps) {
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
       <ThemeBodyWrapper theme={theme}>
         <ThemeSwitcherButton />
+        <MediaOverlay />
         <Analytics />
         <SpeedInsights />
         <AnonSession />

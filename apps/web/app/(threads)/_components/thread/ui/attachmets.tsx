@@ -1,3 +1,4 @@
+import { MediaWrapper } from "@/app/_components/media-overlay/ui/media-wrapper"
 import { ThreadItem } from "@yz13/api/db/types"
 import Image from "next/image"
 
@@ -10,7 +11,11 @@ const Attachments = ({ attachments }: Props) => {
     <div className="w-full aspect-[16/9] border rounded-xl group-hover:bg-accents-2 transition-colors bg-accents-1">
       {
         isSingleAttachment
-          ? attachments.map(url => <Image key={url} src={url} className="!relative rounded-xl object-cover" fill alt="attachment" />)
+          ? attachments.map(
+            url => <MediaWrapper key={url} id={url}>
+              <Image src={url} className="!relative rounded-xl object-cover" fill alt="attachment" />
+            </MediaWrapper>
+          )
           : null
       }
     </div>
