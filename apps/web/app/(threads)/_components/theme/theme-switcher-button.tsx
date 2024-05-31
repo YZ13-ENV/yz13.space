@@ -11,9 +11,7 @@ const ThemeSwitcherButton = () => {
     } else setTheme("dark")
   }
   return (
-    <Button
-      onClick={changeTheme}
-      className="absolute right-6 top-6 z-10" size="icon" variant="ghost">
+    <Button onClick={changeTheme} size="icon" variant="ghost">
       {
         theme === "light"
           ? <BiSun />
