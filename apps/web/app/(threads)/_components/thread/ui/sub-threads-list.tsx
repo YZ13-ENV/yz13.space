@@ -3,6 +3,7 @@ import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { onSubThreads } from "@yz13/api/db/client-threads"
 import { ThreadItem } from "@yz13/api/db/types"
+import { useDebounceFn } from "ahooks"
 import dayjs from "dayjs"
 import { useEffect, useMemo, useState } from "react"
 import { SubThreadBig } from "./sub-threads/big-sub-thread"
@@ -28,14 +29,13 @@ const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_thr
   const [threads, setThreads] = useState<ThreadItem[]>(sorted)
   const first_part = useMemo(() => { return threads.slice(0, 1) }, [threads])
   const second_part = useMemo(() => { return threads.slice(1, threads.length) }, [threads])
-  const Component = component
-  const replaceThread = (new_thread: ThreadItem) => {
+  const { run } = useDebounceFn((new_thread: ThreadItem) => {
     const update_threads = threads.map(old_thread => {
       if (old_thread.sub_thread_id === new_thread.sub_thread_id) return new_thread
       return old_thread
     })
     setThreads(update_threads)
-  }
+  }, { wait: 1000 })
   const deleteThread = (sub_thread_id: number) => {
     const update_threads = threads.filter(old_thread => old_thread.sub_thread_id !== sub_thread_id)
     setThreads(update_threads)
@@ -44,32 +44,29 @@ const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_thr
     const update_threads = [...threads, new_thread]
     setThreads(update_threads)
   }
+  const Component = component
   useEffect(() => {
     const channel = `thread-${thread_id}`
     onSubThreads(channel, thread_id, (payload) => {
-      if (payload.eventType === "UPDATE") replaceThread(payload.new)
+      if (payload.eventType === "UPDATE") run(payload.new)
       if (payload.eventType === "DELETE" && payload.old.sub_thread_id) deleteThread(payload.old.sub_thread_id)
       if (payload.eventType === "INSERT") addThread(payload.new)
     })
-  }, [thread_id])
+  }, [])
   return (
     <div className={cn("w-full space-y-3", className)}>
       <div className="w-full">
         {
           first_part
             .map(
-              (sub_thread, i) => {
-                return <SubThreadBig enableLink={enableLink} key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
-              }
+              sub_thread => <SubThreadBig enableLink={enableLink} key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
             )
         }
         <div className="w-full h-fit relative">
           {
             second_part
               .map(
-                (sub_thread, i) => {
-                  return <Component key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} enableLink={enableLink} />
-                }
+                sub_thread => <Component key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} enableLink={enableLink} />
               )
           }
           {

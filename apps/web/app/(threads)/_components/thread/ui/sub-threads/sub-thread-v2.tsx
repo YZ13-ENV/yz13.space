@@ -28,7 +28,7 @@ const SubThreadV2 = ({ enableLink = false, sub_thread, className = "" }: SubThre
           </div>
           <span className="text-xs text-secondary">{created_at}</span>
         </div>
-        <div className="p-2 rounded-tl-md group-hover:bg-accents-1 transition-colors rounded-bl-2xl rounded-r-2xl space-y-2 border">
+        <div className="p-2 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 transition-colors rounded-bl-2xl rounded-r-2xl space-y-2 border">
           {
             enableLink
               ? <Link href={`/${sub_thread.thread_id}`}>

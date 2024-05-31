@@ -1,4 +1,5 @@
 import { MediaWrapper } from "@/app/_components/media-overlay/ui/media-wrapper"
+import { Video } from "@/app/_components/video"
 import { ThreadItem } from "@yz13/api/db/types"
 import Image from "next/image"
 
@@ -12,10 +13,18 @@ const Attachments = ({ attachments }: Props) => {
       {
         isSingleAttachment
           ? attachments.map(
-            url =>
-              <MediaWrapper key={url} id={url}>
-                <Image src={url} className="!relative object-cover rounded-xl" fill alt="attachment" />
-              </MediaWrapper>
+            url => {
+              const isVideo = url.endsWith(".mp4")
+              return (
+                <MediaWrapper key={url} id={url} className="relative">
+                  {
+                    isVideo
+                      ? <Video src={url} className="relative object-cover rounded-xl" autoPlay muted loop />
+                      : <Image src={url} className="!relative object-cover rounded-xl" fill alt="attachment" />
+                  }
+                </MediaWrapper>
+              )
+            }
           )
           : null
       }

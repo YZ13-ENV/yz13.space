@@ -38,10 +38,6 @@ const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = fa
   return (
     <div className={cn("w-full flex items-center justify-between", className)}>
       <div className="relative -left-1 flex items-center gap-2">
-        {
-          process.env.NODE_ENV === "development" &&
-          <span className="text-sm">{sub_thread.sub_thread_id}</span>
-        }
         <LikeButton
           onClick={like}
           variant={isLiked ? "liked" : "not-liked"}
