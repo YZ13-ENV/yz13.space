@@ -12,9 +12,10 @@ const Attachments = ({ attachments }: Props) => {
       {
         isSingleAttachment
           ? attachments.map(
-            url => <MediaWrapper key={url} id={url}>
-              <Image src={url} className="!relative rounded-xl object-cover" fill alt="attachment" />
-            </MediaWrapper>
+            url =>
+              <MediaWrapper key={url} id={url}>
+                <Image src={url} className="!relative object-cover rounded-xl" fill alt="attachment" />
+              </MediaWrapper>
           )
           : null
       }

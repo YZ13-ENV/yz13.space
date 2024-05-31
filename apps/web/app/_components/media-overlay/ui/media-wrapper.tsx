@@ -1,13 +1,15 @@
 "use client"
+import { cn } from "@repo/ui/cn"
 import { motion } from "framer-motion"
 import { ReactNode } from "react"
 import { useMediaOverlay } from "../store/overlay-store"
 
 type Props = {
   id?: string
+  className?: string
   children?: ReactNode
 }
-const MediaWrapper = ({ children, id = "media" }: Props) => {
+const MediaWrapper = ({ className = "", children, id = "media" }: Props) => {
   const media = useMediaOverlay(state => state.media)
   const setMedia = useMediaOverlay(state => state.setMedia)
   return (
@@ -17,7 +19,7 @@ const MediaWrapper = ({ children, id = "media" }: Props) => {
         if (!media) setMedia(id)
       }}
       layoutId={id}
-      className="w-fit h-fit"
+      className={cn("w-fit h-fit cursor-pointer", className)}
     >
       {children}
     </motion.div>
