@@ -3,7 +3,6 @@ import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { onSubThreads } from "@yz13/api/db/client-threads"
 import { ThreadItem } from "@yz13/api/db/types"
-import { useDebounceFn } from "ahooks"
 import dayjs from "dayjs"
 import { useEffect, useMemo, useState } from "react"
 import { SubThreadBig } from "./sub-threads/big-sub-thread"
@@ -29,13 +28,13 @@ const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_thr
   const [threads, setThreads] = useState<ThreadItem[]>(sorted)
   const first_part = useMemo(() => { return threads.slice(0, 1) }, [threads])
   const second_part = useMemo(() => { return threads.slice(1, threads.length) }, [threads])
-  const { run } = useDebounceFn((new_thread: ThreadItem) => {
+  const update_thread = (new_thread: ThreadItem) => {
     const update_threads = threads.map(old_thread => {
       if (old_thread.sub_thread_id === new_thread.sub_thread_id) return new_thread
       return old_thread
     })
     setThreads(update_threads)
-  }, { wait: 1000 })
+  }
   const deleteThread = (sub_thread_id: number) => {
     const update_threads = threads.filter(old_thread => old_thread.sub_thread_id !== sub_thread_id)
     setThreads(update_threads)
@@ -48,7 +47,7 @@ const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_thr
   useEffect(() => {
     const channel = `thread-${thread_id}`
     onSubThreads(channel, thread_id, (payload) => {
-      if (payload.eventType === "UPDATE") run(payload.new)
+      if (payload.eventType === "UPDATE") update_thread(payload.new)
       if (payload.eventType === "DELETE" && payload.old.sub_thread_id) deleteThread(payload.old.sub_thread_id)
       if (payload.eventType === "INSERT") addThread(payload.new)
     })
@@ -71,7 +70,7 @@ const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_thr
           }
           {
             second_part.length >= 2 &&
-            <div className="absolute w-9 h-full -left-0.5 py-3 flex justify-center top-0 z-[-2]">
+            <div className="absolute w-9 h-full left-0 py-3 flex justify-center top-0 z-[-2]">
               <Separator orientation="vertical" className="w-[3px]" />
             </div>
           }

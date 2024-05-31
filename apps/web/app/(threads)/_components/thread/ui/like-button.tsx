@@ -5,18 +5,19 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/
 import { useTimeout } from "ahooks"
 import dynamic from "next/dynamic"
 import { useEffect, useState } from "react"
-import { BiHeart, BiSolidHeart } from "react-icons/bi"
+import { BiHeart, BiLoaderAlt, BiSolidHeart } from "react-icons/bi"
 const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
   ssr: false
 })
 
 type Props = {
+  loading?: boolean
   onClick?: () => void
   value: number
   variant?: "liked" | "not-liked"
 }
 
-const LikeButton = ({ value, onClick, variant = "not-liked" }: Props) => {
+const LikeButton = ({ loading = false, value, onClick, variant = "not-liked" }: Props) => {
   const [ready, setReady] = useState<boolean>(false)
   const [clicked, setClicked] = useState<boolean>(false)
   const isLiked = ready ? variant === "liked" : false
@@ -31,6 +32,7 @@ const LikeButton = ({ value, onClick, variant = "not-liked" }: Props) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
+            disabled={loading}
             onClick={() => {
               onClick && onClick()
               setClicked(true)
@@ -40,9 +42,12 @@ const LikeButton = ({ value, onClick, variant = "not-liked" }: Props) => {
             className={cn("gap-1 px-2 py-0 h-6", isLiked ? "text-error-foreground" : "text-inherit")}
           >
             {
-              isLiked
-                ? <BiSolidHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
-                : <BiHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
+              loading
+                ? <BiLoaderAlt size={16} className={cn("animate-spin", isLiked ? "text-error-foreground" : "text-inherit")} />
+                :
+                isLiked
+                  ? <BiSolidHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
+                  : <BiHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
             }
             <AnimatedNumbers
               className={isLiked ? "text-error-foreground" : "text-inherit"}
