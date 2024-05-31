@@ -80,7 +80,7 @@ const Video = forwardRef<HTMLVideoElement, VideoProps>(
               e.stopPropagation()
               stopOrPlay()
             }}
-            className="w-7 aspect-square rounded-lg flex items-center hover:text-foreground transition-colors hover:bg-accents-1 justify-center text-secondary border"
+            className="w-7 aspect-square rounded-lg flex items-center bg-background hover:text-foreground transition-colors hover:bg-accents-1 justify-center text-secondary border"
           >
             {
               isPaused
