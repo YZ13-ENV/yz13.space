@@ -1,4 +1,5 @@
 import { LeftSide } from "@/app/_components/left";
+import { CursorsPlayground } from "@/app/_components/real-time/ui/cursors-playground";
 import { RightSide } from "@/app/_components/right";
 import { SplitViewContainer } from "@/app/_components/split-view-container";
 import { getThreads } from "@yz13/api/db/threads";
@@ -30,6 +31,7 @@ const page = async ({ searchParams }: Props) => {
     .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
   return (
     <SplitViewContainer>
+      <CursorsPlayground />
       <LeftSide>
         <YZ13Info />
       </LeftSide>

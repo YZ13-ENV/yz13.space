@@ -1,6 +1,6 @@
-@tailwind base;
+@tailwind components;
 
-@layer base {
+@layer components {
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

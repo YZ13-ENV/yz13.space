@@ -1,7 +1,6 @@
-@tailwind base;
 @tailwind components;
 
-@layer base {
+@layer components {
   .folder:hover {
     .folder-back > path {
       fill: hsl(var(--accents-2));

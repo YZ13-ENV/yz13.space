@@ -1,7 +1,6 @@
-@tailwind base;
 @tailwind components;
 
-@layer base {
+@layer components {
   .md-layout > h1 {
     @apply text-4xl font-bold text-foreground;
   }
@@ -46,9 +45,6 @@
   span {
     @apply text-foreground/75;
   }
-}
-
-@layer components {
   .md-layout > h1 {
     @apply mt-12 mb-6;
   }
