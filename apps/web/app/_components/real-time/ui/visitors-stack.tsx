@@ -2,7 +2,6 @@
 import { BiUser } from "react-icons/bi"
 import { SimpleTooltip } from "../../simple-tooltip"
 import { useCursors } from "../store/cursors-store"
-import { VisitorSync } from "./visitor-sync"
 
 const VisitorsStack = () => {
   const cursors = useCursors(state => state.cursors)
@@ -31,7 +30,6 @@ const VisitorsStack = () => {
           }
         </div>
       </SimpleTooltip>
-      <VisitorSync />
     </>
   )
 }

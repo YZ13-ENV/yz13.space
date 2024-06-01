@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type VisitorCursor = {
+export type VisitorCursor = {
   uid: string;
   cursor: { x: number; y: number };
 };

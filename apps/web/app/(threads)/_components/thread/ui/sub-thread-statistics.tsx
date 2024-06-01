@@ -17,6 +17,7 @@ type Props = {
 }
 dayjs.extend(relativeTime)
 const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = false }: Props) => {
+  const isDev = process.env.NODE_ENV === "development"
   const [sid] = useLocalStorageState<string | null>("anon-sid", { defaultValue: null })
   const created_at = dayjs(sub_thread?.created_at)
   const formatted_created_at = format ? created_at.format(format) : created_at.fromNow(false)
@@ -28,14 +29,19 @@ const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = fa
   const [waitLike, setWaitLike] = useState<boolean>(false)
   const view = async () => {
     if (session_id && !isViewed) {
-      await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
+      if (!isDev) {
+        await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
+      }
     }
   }
   const like = () => {
     if (session_id) {
-      setWaitLike(true)
-      likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
-        .finally(() => setWaitLike(false))
+      if (!isDev) {
+        setWaitLike(true)
+
+        likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
+          .finally(() => setWaitLike(false))
+      }
     }
   }
   return (
