@@ -6,7 +6,8 @@ import dynamic from "next/dynamic"
 import { ElementRef, useEffect, useRef } from "react"
 import { BiChart } from "react-icons/bi"
 const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
-  ssr: false
+  ssr: false,
+  loading: () => <span className="w-6 h-4 rounded-md bg-accents-2 animate-pulse inline-block" />
 })
 
 type Props = {
@@ -39,8 +40,12 @@ const ViewButton = ({ value, onClick, variant, onView }: Props) => {
                 type: "spring",
                 duration: index + 0.3,
               })}
-              animateToNumber={value}
+              animateToNumber={value > 1000 ? value / 1000 : value}
             />
+            {
+              value > 1000 &&
+              <span>k.</span>
+            }
           </Button>
         </TooltipTrigger>
         <TooltipContent className="rounded-lg" sideOffset={6}>{value} views</TooltipContent>

@@ -19,6 +19,7 @@ import { ThemeBodyWrapper } from "./(threads)/_components/theme/theme-body-wrapp
 import { Theme } from "./(threads)/_components/theme/theme-store";
 import { ThemeSwitcherButton } from "./(threads)/_components/theme/theme-switcher-button";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
+import { PageRank, RankingControl } from "./_components/page-ranking";
 // const font = Geologica({
 //   subsets: ["latin", "cyrillic"],
 //   weight: "variable",
@@ -81,6 +82,8 @@ export default function RootLayout({ children }: LayoutProps) {
       <ThemeBodyWrapper theme={theme}>
         <div className="w-9 gap-2 flex flex-col h-fit absolute top-6 right-6 z-10">
           <ThemeSwitcherButton />
+          <PageRank />
+          <RankingControl />
         </div>
         <MediaOverlay />
         <Analytics />
