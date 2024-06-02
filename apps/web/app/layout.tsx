@@ -20,6 +20,7 @@ import { Theme } from "./(threads)/_components/theme/theme-store";
 import { ThemeSwitcherButton } from "./(threads)/_components/theme/theme-switcher-button";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
 import { VisitorsStack } from "./_components/real-time";
+import { VisitorSync } from "./_components/real-time/ui/visitor-sync";
 // const font = Geologica({
 //   subsets: ["latin", "cyrillic"],
 //   weight: "variable",
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
       <ThemeBodyWrapper theme={theme}>
+        <VisitorSync />
         <div className="w-9 gap-2 flex flex-col h-fit absolute top-6 right-6 z-10">
           <ThemeSwitcherButton />
           <VisitorsStack />

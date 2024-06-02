@@ -1,5 +1,4 @@
 import { LeftSide } from "@/app/_components/left";
-import { VisitorSync } from "@/app/_components/real-time/ui/visitor-sync";
 import { RightSide } from "@/app/_components/right";
 import { SplitViewContainer } from "@/app/_components/split-view-container";
 import { getThreads } from "@yz13/api/db/threads";
@@ -65,7 +64,6 @@ const page = async ({ searchParams }: Props) => {
           </div>
         </RightSide>
       </SplitViewContainer>
-      <VisitorSync />
     </>
   )
 }

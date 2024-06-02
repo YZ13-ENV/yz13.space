@@ -1,5 +1,4 @@
 "use client"
-
 import { cn } from "@repo/ui/cn"
 import { useLocalStorageState } from "ahooks"
 import { useEffect } from "react"
@@ -20,7 +19,7 @@ const CursorsPlayground = () => {
           cursor =>
             <Cursor
               key={cursor.uid}
-              style={{ top: `${cursor.cursor.y}px`, left: `${cursor.cursor.x}px` }}
+              style={{ top: `${cursor.cursor ? cursor.cursor.y : 0}px`, left: `${cursor.cursor ? cursor.cursor.x : 0}px` }}
               className={cn("absolute", sid ? sid === cursor.uid ? "opacity-10" : "" : "")}
             />
         )
