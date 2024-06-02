@@ -1,6 +1,7 @@
-import { BrowserMini, List } from "@microservices/widgets-lib"
+import { BrowserMini, CalendarEvents, List, MusicPlayer } from "@microservices/widgets-lib"
 import { ReactNode } from "react"
-import { BiListUl } from "react-icons/bi"
+import { BiCalendar, BiListUl } from "react-icons/bi"
+import { BsMusicPlayer } from "react-icons/bs"
 import { IconType } from "react-icons/lib"
 import { LuKeyRound } from 'react-icons/lu'
 
@@ -37,6 +38,18 @@ const widgets_lib_service: Service = {
       entry: <BrowserMini />,
       icon: LuKeyRound,
       title: "Password manager"
+    },
+    {
+      route: "/calendar",
+      entry: <CalendarEvents />,
+      icon: BiCalendar,
+      title: "Calendar"
+    },
+    {
+      route: "/music-player",
+      entry: <MusicPlayer />,
+      icon: BsMusicPlayer,
+      title: "Music player"
     }
   ]
 }

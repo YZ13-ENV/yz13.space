@@ -31,7 +31,7 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThr
         </div>
       </div>
       <div className="w-full flex flex-col gap-3">
-        <div className="p-2 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 bg-background transition-colors rounded-bl-2xl space-y-2 rounded-r-2xl border">
+        <div className="py-2 px-2.5 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 bg-background transition-colors rounded-bl-2xl space-y-2 rounded-r-2xl border">
           {
             enableLink
               ? <Link href={`/${sub_thread.thread_id}`}>

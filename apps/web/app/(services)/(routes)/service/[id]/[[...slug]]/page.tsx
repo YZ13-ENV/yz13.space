@@ -63,7 +63,7 @@ const page = ({ params }: Props) => {
             </div>
             : <>
               <header className="flex items-center justify-start gap-4">
-                <Link href="/" className="inline-flex items-center text-secondary gap-1">
+                <Link href="/services" className="inline-flex items-center text-secondary gap-1">
                   <BiLeftArrowAlt size={16} className="text-inherit" />
                   <span className="text-sm text-inherit">Back</span>
                 </Link>

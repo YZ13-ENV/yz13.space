@@ -25,7 +25,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
     <section id={name} className={className}>
       {
         name &&
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mb-2">
           {thread.pinned &&
             <BiStar className="text-warning-foreground" size={20} />
           }
@@ -51,10 +51,6 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
             </>
           }
         </div>
-      }
-      {
-        // max && sub_threads.length > max &&
-        // <ThreadSummary sub_threads={sub_threads} />
       }
     </section>
   )

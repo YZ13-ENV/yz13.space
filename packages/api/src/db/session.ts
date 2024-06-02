@@ -20,7 +20,6 @@ const deleteSession = async () => {
 
 const generateSession = async (provided_value?: string) => {
   const value = provided_value ? provided_value : randomString();
-  console.log("session-", sessionKey, value);
   const res = await kv.set(sessionKey, value, { ex: 360 });
   return res;
 };
@@ -81,5 +80,6 @@ export {
   generateSession,
   getLastCode,
   getLastSession,
-  sendCode,
+  sendCode
 };
+

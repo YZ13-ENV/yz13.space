@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className="w-full flex items-center p-2 justify-between border-b">
       <Button size="icon" variant="ghost"><BiPlus size={16} /></Button>
-      <Input className="max-w-xs text-center rounded-xl" placeholder="Search" />
+      <Input className="max-w-[70%] text-center rounded-xl" placeholder="Search" />
       <Button size="icon" variant="ghost"><BiDotsHorizontalRounded size={16} /></Button>
     </div>
   )

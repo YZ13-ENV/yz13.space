@@ -79,7 +79,9 @@ export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
       <ThemeBodyWrapper theme={theme}>
-        <ThemeSwitcherButton />
+        <div className="w-9 gap-2 flex flex-col h-fit absolute top-6 right-6 z-10">
+          <ThemeSwitcherButton />
+        </div>
         <MediaOverlay />
         <Analytics />
         <SpeedInsights />

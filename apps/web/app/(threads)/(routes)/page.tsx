@@ -29,40 +29,42 @@ const page = async ({ searchParams }: Props) => {
     })
     .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
   return (
-    <SplitViewContainer>
-      <LeftSide>
-        <YZ13Info />
-      </LeftSide>
-      <RightSide>
-        <div className="w-full space-y-3">
-          <SearchBar />
-          <nav>
-            <Link
-              className="inline-flex transition-colors gap-2 hover:bg-accents-1 items-center text-foreground/80 hover:text-foreground px-2 py-1 text-sm hover:border-foreground rounded-md border"
-              href="/services"
-            >
-              <TbRouteSquare size={14} className="text-inherit" />
-              <span className="text-inherit">Services</span>
-            </Link>
-          </nav>
-        </div>
-        <div className="w-full space-y-3">
-          {
-            threads.map(
-              (thread) => <Thread
-                key={thread.thread_id + "-" + thread.created_at}
-                thread={thread}
-                max={3}
-                component={SubThreadV2}
-                enableLink
-              />
-            )
-          }
-          <Contacts />
-          <Footer />
-        </div>
-      </RightSide>
-    </SplitViewContainer>
+    <>
+      <SplitViewContainer>
+        <LeftSide>
+          <YZ13Info />
+        </LeftSide>
+        <RightSide>
+          <div className="w-full space-y-3">
+            <SearchBar />
+            <nav>
+              <Link
+                className="inline-flex transition-colors gap-2 hover:bg-accents-1 items-center text-foreground/80 hover:text-foreground px-2 py-1 text-sm hover:border-foreground rounded-md border"
+                href="/services"
+              >
+                <TbRouteSquare size={14} className="text-inherit" />
+                <span className="text-inherit">Services</span>
+              </Link>
+            </nav>
+          </div>
+          <div className="w-full space-y-3">
+            {
+              threads.map(
+                (thread) => <Thread
+                  key={thread.thread_id + "-" + thread.created_at}
+                  thread={thread}
+                  max={3}
+                  component={SubThreadV2}
+                  enableLink
+                />
+              )
+            }
+            <Contacts />
+            <Footer />
+          </div>
+        </RightSide>
+      </SplitViewContainer>
+    </>
   )
 }
 export default page
