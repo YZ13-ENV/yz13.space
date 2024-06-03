@@ -1,4 +1,5 @@
 import { cn } from "@repo/ui/cn"
+import { Separator } from "@repo/ui/separator"
 import { TooltipProvider } from "@repo/ui/tooltip"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
@@ -9,15 +10,30 @@ import { SubThreadStatistics } from "../sub-thread-statistics"
 import { SubThreadsProps } from "../threads/thread-v1"
 dayjs.extend(relativeTime)
 
-const SubThreadV2 = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
+const SubThreadV2 = ({
+  enableLink = false,
+  sub_thread,
+  className = "",
+  enableLine = false
+}: SubThreadsProps) => {
   const created_at = dayjs(sub_thread?.created_at).fromNow()
+  const avatar_size = 36
   return (
-    <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
-      <div className="w-9 shrink-0 -space-y-4">
+    <div className={cn("flex items-start group h-fit gap-3 relative", className)}>
+      {
+        enableLine &&
+        <div
+          style={{ width: `${avatar_size}px`, top: `${avatar_size / 2}px` }}
+          className="absolute w-fit h-full left-0 py-0 flex justify-center top-0 z-[-2]"
+        >
+          <Separator orientation="vertical" className="w-[3px]" />
+        </div>
+      }
+      <div className="w-9 h-full shrink-0 relative -space-y-4">
         <TooltipProvider delayDuration={100}>
           {
             sub_thread?.author.map(
-              (author, i) => <Author key={author + "-" + i} author={author} />)
+              (author, i) => <Author size={avatar_size} key={author + "-" + i} author={author} />)
           }
         </TooltipProvider>
       </div>

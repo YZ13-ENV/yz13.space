@@ -15,6 +15,7 @@ type Props = {
 }
 export type SubThreadsProps = {
   sub_thread: ThreadItem
+  enableLine?: boolean
   enableLink?: boolean
   className?: string
 }
