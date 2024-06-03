@@ -1,11 +1,11 @@
 "use client"
+import { RealtimeChannel } from "@supabase/supabase-js"
 import { createClient } from "@yz13/supabase/client"
 import { useLocalStorageState, useMouse } from "ahooks"
-import { flatten, keys } from "lodash"
+import { flatten, throttle } from "lodash"
 import { usePathname } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useTransition } from "react"
 import { VisitorCursor, useCursors } from "../store/cursors-store"
-import { CursorsPlayground } from "./cursors-playground"
 
 
 export type Visitor = {
@@ -21,45 +21,70 @@ const VisitorSync = () => {
   const cursors = useCursors(state => state.cursors)
   const setCursors = useCursors(state => state.setCursors)
   const client = createClient()
-  const update_cursor = () => {
-    const channel = client.channel(pathname)
-    const updated_cursor = {
-      uid: sid,
-      cursor: { x: mouse.clientX || 24, y: mouse.clientY || 24 }
-    }
-    channel.subscribe(async (status) => {
-      if (status === 'SUBSCRIBED') {
-        await channel.track(updated_cursor)
+  const [isPending, startTransition] = useTransition()
+  const sendCursor = throttle((channel: RealtimeChannel, visitor: VisitorCursor) => {
+    channel.send({
+      type: "broadcast",
+      event: "POS",
+      payload: visitor
+    })
+  }, 1000 / 10)
+  useEffect(() => {
+    const cursors_channel = client.channel("cursors")
+    cursors_channel
+      .on("broadcast",
+        { event: "POS" },
+        (payload) => {
+          const newPos = payload.payload as VisitorCursor | null
+          if (newPos) {
+            const updated_users = cursors.map(user => {
+              const isTargetUser = newPos.user_id === user.user_id
+              if (isTargetUser) return newPos
+              return user
+            })
+            startTransition(() => {
+              setCursors(updated_users)
+            })
+          }
+        })
+      .subscribe((status) => {
+        const updated_cursor: VisitorCursor = {
+          user_id: sid || "anon",
+          cursor: { x: mouse.clientX || 24, y: mouse.clientY || 24 }
+        }
+        sendCursor(cursors_channel, updated_cursor)
+      })
+  }, [mouse])
+  useEffect(() => {
+    const users_channel = client.channel("users", {
+      config: {
+        presence: {
+          key: sid || "anon"
+        }
       }
     })
-  }
-  useEffect(() => {
-    const channel = client.channel(pathname)
-    channel
+    users_channel
       .on('presence', { event: 'sync' }, () => {
-        const newState = channel.presenceState<VisitorCursor>()
-        const state_keys = keys(newState)
-        const state = flatten(state_keys.map(key => newState[key])) as VisitorCursor[]
+        const state = users_channel.presenceState<VisitorCursor>()
         console.log('synced', state)
-        setCursors(state)
+        const entries = Object.values(state)
+        const prepared_users = flatten(entries).map(user => ({ ...user, cursor: { x: 24, y: 24 } }))
+        setCursors(prepared_users)
       })
       .on<VisitorCursor>('presence', { event: 'join' }, ({ key, newPresences }) => {
         console.log('join', key, newPresences)
-        setCursors(newPresences)
       })
       .on<VisitorCursor>('presence', { event: 'leave' }, ({ key, leftPresences }) => {
         console.log('leave', key, leftPresences)
-        setCursors(leftPresences)
       })
-      .subscribe()
-    return () => {
-      channel.untrack()
-      client.removeChannel(channel)
-    }
-  }, [client])
-  useEffect(() => {
-    if (sid && mouse) update_cursor()
-  }, [mouse, sid])
-  return <CursorsPlayground />
+      .subscribe((status) => {
+
+        console.log(status)
+        if (status === "SUBSCRIBED") {
+          users_channel.track({ user_id: sid })
+        }
+      })
+  }, [])
+  return <></>
 }
 export { VisitorSync }
