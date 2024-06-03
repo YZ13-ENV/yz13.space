@@ -7,7 +7,7 @@ import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { Separator } from "@repo/ui/separator"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
-import { Change_3_05_2024 } from "../../_logs/3-05-2024"
+import { ChangeLog } from "../../_components/change-log"
 
 const page = () => {
   return (
@@ -26,7 +26,24 @@ const page = () => {
       </LeftSide>
       <RightSide>
         <RightContentContainer className="relative">
-          <Change_3_05_2024 />
+          <ChangeLog>
+            <h2 className="text-2xl font-bold">Introducing changelog</h2>
+            <p>
+              I wanna start write some changelogs, to have ability to track changes.
+              I have a lot of portfolio ideas, so check back from time to time to see new features.
+            </p>
+            <p>Other changes:</p>
+            <ul>
+              <li>Page ranking</li>
+              <li>Fixed css styles</li>
+              <li>Comments space</li>
+            </ul>
+            <h3 className="text-xl font-bold">Ideas</h3>
+            <p>
+              I want to try to make a page where users can interact with each other,
+              where users can see each other's cursors, etc.
+            </p>
+          </ChangeLog>
           <Separator />
           <div>
             <Contacts />
