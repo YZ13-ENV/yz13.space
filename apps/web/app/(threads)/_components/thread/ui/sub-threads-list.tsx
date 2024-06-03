@@ -1,6 +1,5 @@
 "use client"
 import { cn } from "@repo/ui/cn"
-import { Separator } from "@repo/ui/separator"
 import { onSubThreads } from "@yz13/api/db/client-threads"
 import { ThreadItem } from "@yz13/api/db/types"
 import dayjs from "dayjs"
@@ -15,9 +14,10 @@ type Props = {
   sub_threads?: ThreadItem[]
   className?: string
   enableLink?: boolean
+  forceLines?: boolean
   component?: (props: SubThreadsProps) => JSX.Element
 }
-const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_threads = [], component = SubThreadV2 }: Props) => {
+const SubThreadsList = ({ forceLines = false, enableLink = false, thread_id, className = "", sub_threads = [], component = SubThreadV2 }: Props) => {
   const sorted = useMemo(() => {
     return sub_threads.sort((a, b) => {
       const a_date = dayjs(a.created_at)
@@ -61,18 +61,20 @@ const SubThreadsList = ({ enableLink = false, thread_id, className = "", sub_thr
               sub_thread => <SubThreadBig enableLink={enableLink} key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
             )
         }
-        <div className="w-full h-fit relative">
+        <div className="w-full space-y-3 h-fit relative">
           {
             second_part
               .map(
-                sub_thread => <Component key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} enableLink={enableLink} />
+                (sub_thread, index, arr) => {
+                  const isLast = index === arr.length - 1
+                  return <Component
+                    enableLine={forceLines ? forceLines : !isLast}
+                    key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
+                    sub_thread={sub_thread}
+                    enableLink={enableLink}
+                  />
+                }
               )
-          }
-          {
-            second_part.length >= 2 &&
-            <div className="absolute w-9 h-full left-0 py-3 flex justify-center top-0 z-[-2]">
-              <Separator orientation="vertical" className="w-[3px]" />
-            </div>
           }
         </div>
       </div>

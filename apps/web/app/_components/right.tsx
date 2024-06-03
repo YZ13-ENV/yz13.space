@@ -14,9 +14,7 @@ const RightSide = ({ children }: Props) => {
       "transition-all duration-500",
       mode === "1:1" ? "lg:w-1/2" : mode === "2:1" ? "lg:w-1/3" : "lg:w-2/3"
     )}>
-      <div className="max-w-xl lg:mr-auto lg:ml-6 mx-auto h-full space-y-12 py-3 px-6">
-        {children}
-      </div>
+      {children}
     </div>
   )
 }
