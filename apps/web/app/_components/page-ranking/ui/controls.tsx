@@ -75,7 +75,7 @@ const RankingControl = () => {
   }, [sid, path])
   return (
     <SimpleTooltip
-      text="Do you like this page?"
+      text={liked ? "You liked this page" : disliked ? "You didn't like this page" : "Do you like this page?"}
       side="left"
       sideOffset={12}
     >
