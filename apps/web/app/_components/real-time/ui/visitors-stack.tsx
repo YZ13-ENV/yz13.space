@@ -17,7 +17,7 @@ const VisitorsStack = () => {
           {
             chunk.map(
               cursor =>
-                <div key={"stach-item-" + cursor.uid} className="w-full aspect-square rounded-full bg-accents-1 border flex items-center justify-center">
+                <div key={"stach-item-" + cursor.user_id} className="w-full aspect-square rounded-full bg-accents-1 border flex items-center justify-center">
                   <BiUser size={16} className="text-secondary" />
                 </div>
             )
