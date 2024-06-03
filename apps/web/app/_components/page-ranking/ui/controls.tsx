@@ -56,7 +56,6 @@ const RankingControl = () => {
     }
   }
   useEffect(() => {
-    console.log(path)
     if (sid) {
       getUserVote(sid, path)
         .then(vote => {

@@ -14,7 +14,13 @@ const SplitViewContainer = ({ children, className, mode = "1:1" }: Props) => {
     setSplitMode(mode)
   }, [mode])
   return (
-    <div className={cn("flex lg:flex-row lg:max-w-full max-w-xl lg:mx-0 mx-auto flex-col lg:divide-x divide-x-0 w-full justify-center min-h-screen", className)}>{children}</div>
+    <div className={cn(
+      "flex lg:flex-row lg:max-w-full max-w-xl lg:mx-0 mx-auto flex-col lg:divide-x divide-x-0 w-full justify-center overflow-y-auto min-h-screen",
+      className
+    )}
+    >
+      {children}
+    </div>
   )
 }
 export { SplitViewContainer }
