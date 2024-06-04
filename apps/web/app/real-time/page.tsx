@@ -1,9 +1,9 @@
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
 import Link from "next/link"
-import { VisitorsStack } from "../_components/real-time"
 import { CursorsPlayground } from "../_components/real-time/ui/cursors-playground"
 import { VisitorSync } from "../_components/real-time/ui/visitor-sync"
+import { VisitorsStack } from "../_components/real-time/ui/visitors-stack"
 
 const page = () => {
   return (
