@@ -25,10 +25,17 @@
   .md-layout > ol {
     @apply m-2 ml-4 list-decimal list-inside;
   }
-  .md-layout > li {
-    @apply relative mb-2 font-light text-foreground;
+  .md-layout > ol > li {
+    @apply relative mb-2 pl-1 font-light text-foreground;
   }
-  .md-layout > li::before {
+  .md-layout > ol > li::before {
+    content: "–";
+    @apply text-secondary -left-3 absolute;
+  }
+  .md-layout > ul > li {
+    @apply relative mb-2 pl-1 text-foreground;
+  }
+  .md-layout > ul > li::before {
     content: "–";
     @apply text-secondary -left-3 absolute;
   }

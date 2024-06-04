@@ -1,6 +1,7 @@
 import { registered_services } from "@/app/(services)/_components/registered-services"
 import { LeftSide } from "@/app/_components/left"
 import { RightSide } from "@/app/_components/right"
+import { RightContentContainer } from "@/app/_components/right-content-container"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
 import Link from "next/link"
 import { redirect } from "next/navigation"
@@ -53,25 +54,27 @@ const page = ({ params }: Props) => {
         </div>
       </LeftSide>
       <RightSide>
-        {
-          empty_route
-            ? <div className="w-full h-full flex items-center justify-center aspect-square">
-              <span className="gap-2 inline-flex text-base items-center">
-                <BiLeftArrowAlt size={18} className="lg:rotate-0 rotate-90" />
-                Select route
-              </span>
-            </div>
-            : <>
-              <header className="flex items-center justify-start gap-4">
-                <Link href="/services" className="inline-flex items-center text-secondary gap-1">
-                  <BiLeftArrowAlt size={16} className="text-inherit" />
-                  <span className="text-sm text-inherit">Back</span>
-                </Link>
-              </header>
-              <h2 className="text-4xl font-semibold">{service_route?.title}</h2>
-              {service_route?.entry}
-            </>
-        }
+        <RightContentContainer>
+          {
+            empty_route
+              ? <div className="w-full h-full flex items-center justify-center aspect-square">
+                <span className="gap-2 inline-flex text-base items-center">
+                  <BiLeftArrowAlt size={18} className="lg:rotate-0 rotate-90" />
+                  Select route
+                </span>
+              </div>
+              : <>
+                <header className="flex items-center justify-start gap-4">
+                  <Link href="/services" className="inline-flex items-center text-secondary gap-1">
+                    <BiLeftArrowAlt size={16} className="text-inherit" />
+                    <span className="text-sm text-inherit">Back</span>
+                  </Link>
+                </header>
+                <h2 className="text-4xl font-semibold">{service_route?.title}</h2>
+                {service_route?.entry}
+              </>
+          }
+        </RightContentContainer>
       </RightSide>
     </SplitViewContainer>
   )

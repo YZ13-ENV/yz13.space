@@ -12,13 +12,17 @@ const buttonVariants = cva(
         default:
           "bg-foreground text-background shadow hover:bg-accents-8/90",
         error:
-          "bg-error text-foreground shadow-sm hover:bg-error-dark",
+          "bg-error-background text-error-foreground shadow-sm hover:bg-error-background/80",
+        "error-default":
+          "bg-error-foreground text-error-background shadow-sm hover:bg-error-foreground/80",
         warning:
-          "bg-warning text-foreground shadow-sm hover:bg-warning-dark",
+          "bg-warning-background text-warning-foreground shadow-sm hover:bg-warning-background/80",
         success:
-          "bg-success text-foreground shadow-sm hover:bg-success-dark",
+          "bg-success-background text-success-foreground shadow-sm hover:bg-success-background/80",
+        "success-default":
+          "bg-success-foreground text-success-background shadow-sm hover:bg-success-foreground/80",
         outline:
-          "border border-accents-3 bg-background shadow-sm hover:bg-accents-2/70 hover:text-accents-7",
+          "border border-border bg-background shadow-sm hover:bg-accents-2/70 hover:text-accents-7",
         secondary:
           "rounded-full bg-accents-2/70 backdrop-sm text-accents-7 shadow-sm hover:bg-accents-3/90",
         ghost: "hover:bg-accents-2/70 hover:text-accents-7",

@@ -21,6 +21,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
   const { thread_id, name } = thread
   const sub_threads_res = await getSubThreads(thread_id)
   const sub_threads = (sub_threads_res.data || [])
+  const hasMoreThanMax = sub_threads.length >= max && max >= 1
   return (
     <section id={name} className={className}>
       {
@@ -33,13 +34,14 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
         </div>
       }
       <SubThreadsList
+        forceLines={hasMoreThanMax}
         enableLink={enableLink}
         thread_id={thread.thread_id}
         sub_threads={sub_threads}
       />
       {
-        sub_threads.length >= max && max >= 1 &&
-        <div className="w-full h-12 flex items-center relative gap-3 hover:bg-accents-1 rounded-xl transition-colors">
+        hasMoreThanMax &&
+        <div className="w-full h-10 mt-5 flex items-center relative gap-3 hover:bg-accents-1 rounded-xl transition-colors">
           <div className="w-9 h-9 flex justify-center items-center">
             <BiDotsVerticalRounded size={18} className="text-secondary" />
           </div>
