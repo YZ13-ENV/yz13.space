@@ -16,7 +16,7 @@ const CursorsPlayground = () => {
             <Cursor
               key={cursor.user_id + "-" + index}
               style={{ top: `${cursor.cursor ? cursor.cursor.y : 0}px`, left: `${cursor.cursor ? cursor.cursor.x : 0}px` }}
-              className={cn("absolute", sid ? sid === cursor.user_id ? "opacity-10" : "" : "")}
+              className={cn("absolute", sid ? sid === cursor.user_id ? "dark:opacity-30 opacity-10" : "" : "")}
             />
         )
       }
