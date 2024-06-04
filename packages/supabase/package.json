@@ -9,9 +9,9 @@
     "./storage": "./src/supabase/storage.ts"
   },
   "dependencies": {
+    "@repo/typescript-config": "workspace:*",
     "@supabase/ssr": "^0.3.0",
-    "@supabase/supabase-js": "^2.42.5",
-    "next": "14.2.3",
-    "@repo/typescript-config": "workspace:*"
+    "@supabase/supabase-js": "^2.43.4",
+    "next": "14.2.3"
   }
 }
