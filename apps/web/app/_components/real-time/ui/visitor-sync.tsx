@@ -65,7 +65,9 @@ const VisitorSync = () => {
           user_id: sid || "anon",
           cursor: { x: mouse.clientX || 24, y: mouse.clientY || 24 }
         }
-        sendCursor(cursors_channel, updated_cursor)
+        startTransition(() => {
+          sendCursor(cursors_channel, updated_cursor)
+        })
       })
   }, [mouse])
   useEffect(() => {
