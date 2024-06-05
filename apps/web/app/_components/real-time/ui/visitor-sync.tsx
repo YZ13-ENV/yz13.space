@@ -142,24 +142,26 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
         mapInitialUsers(users_channel)
       })
       .on("presence", { event: "join" }, ({ key, newPresences }) => {
-        console.log("join", key, newPresences)
+        // console.log("join", key, newPresences)
         const newUsers = newPresences.map((user) => {
           const theme_id = getRandomThemeId()
-          return { ...user, user_id: user.user_id, cursor: { x: 24, y: 24 }, theme_id: theme_id } as VisitorCursor
+          return { ...user, user_id: user.user_id, cursor: { x: window.innerWidth / 2, y: window.innerHeight / 2 }, theme_id: theme_id } as VisitorCursor
         })
         onUsers && onUsers(newUsers)
       })
       .on("presence", { event: "leave" }, ({ key, leftPresences }) => {
-        console.log("leave", key, leftPresences)
+        // console.log("leave", key, leftPresences)
         const filtered = users.filter(user => user.user_id !== key)
         onUsers && onUsers(filtered)
       })
       .subscribe((status) => {
         // console.log(status)
         if (status === "SUBSCRIBED") {
+          const theme_id = getRandomThemeId()
           const user: VisitorCursor = {
             user_id: sid || "anon",
             cursor: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+            theme_id: theme_id
           }
           users_channel.track(user)
         }

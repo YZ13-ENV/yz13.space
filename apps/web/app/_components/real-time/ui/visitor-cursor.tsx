@@ -26,21 +26,21 @@ const VisitorCursor = ({ className = "", cursor, user_id, theme_id, isLocal = fa
       />
       <span
         className={cn(
-          "relative left-6 -top-6 text-xs rounded-xl",
-          "bg-background inline-block max-w-xs shrink-0 w-fit h-fit border px-1.5 py-0.5"
+          "relative left-6 -top-8 text-xs rounded-bl-md rounded-tl-xl rounded-r-xl",
+          "bg-background inline-block max-w-xs shrink-0 w-fit h-fit border px-1.5 py-1"
         )}
-      >{isLocal ? "You" : `#${user_id.slice(0, 6)}`}</span>
+      >{isLocal ? "You " + `#${user_id.slice(0, 6)}` : `#${user_id.slice(0, 6)}`}</span>
       {
         message && (message.uid === user_id) &&
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className={cn(
-            "relative left-6 bottom-4 text-sm rounded-tl-md rounded-bl-xl rounded-r-xl",
-            "bg-background inline-block max-w-xs shrink-0 w-full border px-2 py-1"
+            "relative left-6 bottom-6 text-xs rounded-tl-md rounded-bl-xl rounded-r-xl",
+            "bg-background inline-block max-w-xs shrink-0 w-full border px-1.5 py-1"
           )}
         >
-          {message.text}
+          {"YZ13"}
         </motion.span>
       }
     </div>
