@@ -15,6 +15,7 @@
     "./db/page-rank": "./src/db/page-rank.ts",
     "./db/client-threads": "./src/db/client-threads.ts",
     "./db/session": "./src/db/session.ts",
+    "./db/visitor": "./src/db/visitor.ts",
     "./db/web-vitals": "./src/db/web-vitals.ts",
     "./db/types": "./src/db/types.ts",
     "./edge/types": "./src/edge/types.ts",

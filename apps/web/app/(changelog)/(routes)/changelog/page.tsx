@@ -36,7 +36,7 @@ const page = () => {
             <ul>
               <li>Page ranking</li>
               <li>Fixed css styles</li>
-              <li>Comments space</li>
+              {/* <li>Comments space</li> */}
             </ul>
             <h3 className="text-xl font-bold">Ideas</h3>
             <p>

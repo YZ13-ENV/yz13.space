@@ -1,13 +1,41 @@
+"use client"
 import { Footer } from "@/app/(threads)/_components/footer"
 import { LeftSide } from "@/app/_components/left"
 import { RightSide } from "@/app/_components/right"
 import { RightContentContainer } from "@/app/_components/right-content-container"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
-import { Input } from "@repo/ui/input"
+import { Visitor } from "@yz13/api/db/types"
+import { getVisitor, updateVisitor } from "@yz13/api/db/visitor"
+import { useLocalStorageState } from "ahooks"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { BiLeftArrowAlt } from "react-icons/bi"
+import { EditNameSection } from "../../_components/edit-name"
 
 const page = () => {
+  const [sid] = useLocalStorageState<string | null>("anon-sid", { defaultValue: null })
+  const [visitor, setVisitor] = useState<Visitor | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const handleSave = (newValue: string) => {
+    if (visitor) {
+
+      setLoading(true)
+      updateVisitor({ username: newValue }, visitor.uid)
+        .then(res => {
+          console.log(res)
+          const data = res.data
+          setVisitor(data)
+        })
+        .finally(() => setLoading(false))
+    }
+  }
+  useEffect(() => {
+    if (sid) getVisitor(sid)
+      .then(res => {
+        const data = res.data
+        setVisitor(data)
+      })
+  }, [sid])
   return (
     <SplitViewContainer mode="1:2">
       <LeftSide>
@@ -24,15 +52,11 @@ const page = () => {
       </LeftSide>
       <RightSide>
         <RightContentContainer>
-          <section className="space-y-3 w-full p-4 h-fit border rounded-xl bg-accents-1">
-            <div className="space-y-1">
-              <h3 className="text-xl font-semibold">Name</h3>
-              <p className="text-sm text-secondary">
-                Name that users can know you there
-              </p>
-            </div>
-            <Input className="bg-background" placeholder="Enter name" />
-          </section>
+          <EditNameSection
+            disabled={!visitor || loading}
+            value={visitor?.username}
+            onSave={handleSave}
+          />
           <Footer className="pb-6 pt-12 w-full" />
         </RightContentContainer>
       </RightSide>
