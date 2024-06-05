@@ -1,11 +1,13 @@
 "use client"
 import { BiUser } from "react-icons/bi"
 import { SimpleTooltip } from "../../simple-tooltip"
-import { useCursors } from "../store/cursors-store"
+import { VisitorCursor } from "../store/cursors-store"
 
-const VisitorsStack = () => {
-  const cursors = useCursors(state => state.cursors)
-  const chunk = cursors.slice(0, 3)
+type Props = {
+  users?: VisitorCursor[]
+}
+const VisitorsStack = ({ users = [] }: Props) => {
+  const chunk = users.slice(0, 3)
   return (
     <>
       <SimpleTooltip
@@ -23,9 +25,9 @@ const VisitorsStack = () => {
             )
           }
           {
-            cursors.length > 3 &&
+            users.length > 3 &&
             <div className="w-full aspect-square rounded-full bg-accents-1 border flex items-center justify-center">
-              <span className="text-sm text-secondary">+{cursors.length - 3}</span>
+              <span className="text-sm text-secondary">+{users.length - 3}</span>
             </div>
           }
         </div>
