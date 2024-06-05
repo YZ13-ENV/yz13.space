@@ -23,7 +23,7 @@ const getThread = async (
 ): Promise<PostgrestSingleResponse<ThreadTree>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const key = "thread#${thread_id}";
+  const key = `thread#${thread_id}`;
   const cached = await getCache<ThreadTree>(key);
   if (cached) {
     return cached;

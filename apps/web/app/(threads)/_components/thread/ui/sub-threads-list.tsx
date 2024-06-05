@@ -22,7 +22,10 @@ const SubThreadsList = ({ forceLines = false, enableLink = false, thread_id, cla
     return sub_threads.sort((a, b) => {
       const a_date = dayjs(a.created_at)
       const b_date = dayjs(b.created_at)
-      return a_date.diff(b_date)
+      // from newer to older
+      return b_date.diff(a_date)
+      // from older to newer
+      // return a_date.diff(b_date)
     })
   }, [sub_threads])
   const [threads, setThreads] = useState<ThreadItem[]>(sorted)
