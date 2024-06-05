@@ -29,7 +29,7 @@ const CursorsPlayground = ({ users = [] }: Props) => {
               style={{ top: `${cursor.cursor ? cursor.cursor.y : 0}px`, left: `${cursor.cursor ? cursor.cursor.x : 0}px` }}
             >
               <Cursor
-                className={cn("", sid ? sid === cursor.user_id ? "" : "" : "")}
+                className={cn("", sid ? sid === cursor.user_id ? "opacity-20" : "" : "")}
                 cursorBorder={theme?.border}
                 cursorColor={theme?.color}
               />
@@ -40,7 +40,7 @@ const CursorsPlayground = ({ users = [] }: Props) => {
                     "relative left-6 -top-6 text-xs rounded-xl",
                     "bg-background inline-block max-w-xs shrink-0 w-fit h-fit border px-1.5 py-0.5"
                   )}
-                >#{sid.slice(0, 6)}</span>
+                >You #{sid.slice(0, 6)}</span>
               }
               {
                 message && (message.uid === cursor.user_id) &&

@@ -29,10 +29,12 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
   const client = createClient()
   const [isPending, startTransition] = useTransition()
   const sendCursor = throttle((channel: RealtimeChannel, visitor: VisitorCursor) => {
-    channel.send({
-      type: "broadcast",
-      event: "POS",
-      payload: visitor
+    startTransition(() => {
+      channel.send({
+        type: "broadcast",
+        event: "POS",
+        payload: visitor
+      })
     })
   }, 10)
   const sendMessage = (channel: RealtimeChannel, message: VisitorMessage) => {
@@ -44,9 +46,12 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
   }
   const mapInitialUsers = (channel: RealtimeChannel) => {
     const state = channel.presenceState<VisitorCursor>()
+    console.log(state)
     const entries = Object.values(state)
     const prepared_users = flatten(entries).map(user => {
       const theme_id = getRandomThemeId()
+      const existedUser = users.find(existed => existed.user_id === user.user_id)
+      if (existedUser) return existedUser
       if (user.theme_id) return { ...user, cursor: { x: 24, y: 24 } }
       return { ...user, cursor: { x: 24, y: 24 }, theme_id: theme_id }
     })
@@ -130,10 +135,12 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
       .on('presence', { event: 'sync' }, () => {
         mapInitialUsers(users_channel)
       })
-      .on("presence", { event: "join" }, () => {
+      .on("presence", { event: "join" }, ({ key, newPresences }) => {
+        // console.log(key, newPresences)
         mapInitialUsers(users_channel)
       })
-      .on("presence", { event: "leave" }, () => {
+      .on("presence", { event: "leave" }, ({ key, leftPresences }) => {
+        // console.log(key, leftPresences)
         mapInitialUsers(users_channel)
       })
       .subscribe((status) => {

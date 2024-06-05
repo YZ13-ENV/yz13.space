@@ -2,8 +2,9 @@
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
 import { createClient } from "@yz13/supabase/client"
-import { useLocalStorageState } from "ahooks"
+import { useLocalStorageState, useTimeout } from "ahooks"
 import dayjs from "dayjs"
+import { motion } from "framer-motion"
 import { ElementRef, useEffect, useRef, useState } from "react"
 import { BiUpArrowAlt, BiUser } from "react-icons/bi"
 import { getLastMessages, onMessages, uploadMessage } from "./api/messages"
@@ -16,7 +17,14 @@ const MessagesStack = () => {
   const messages_channel = client.channel("messages")
   const [text, setText] = useState<string>("")
   const input_ref = useRef<ElementRef<"input">>(null)
+  const [show, setShow] = useState<boolean>(false)
   const setMessage = useMessage(state => state.setMessage)
+  useTimeout(() => {
+    setShow(false)
+  }, show ? 3000 : undefined)
+  useEffect(() => {
+    setShow(true)
+  }, [messages])
   const sendMessage = () => {
     const message: VisitorMessage = {
       created_at: dayjs().toISOString(),
@@ -67,7 +75,12 @@ const MessagesStack = () => {
   }, [typeof document, input_ref])
   return (
     <div className="w-full max-w-sm space-y-3">
-      <div className="w-full space-y-2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="w-full space-y-2"
+      >
         {
           messages
             .slice(0, 5)
@@ -88,7 +101,7 @@ const MessagesStack = () => {
               </div>
             )
         }
-      </div>
+      </motion.div>
       <div className="flex items-center gap-2">
         <Input
           ref={input_ref}
