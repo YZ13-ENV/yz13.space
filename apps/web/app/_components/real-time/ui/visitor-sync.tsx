@@ -1,7 +1,10 @@
 "use client"
+import { getRandomThemeId } from "@/app/(real-time)/_components/cursors-themes"
+import { VisitorMessage, useMessages } from "@/app/(real-time)/_components/messages-store"
 import { RealtimeChannel } from "@supabase/supabase-js"
 import { createClient } from "@yz13/supabase/client"
 import { useLocalStorageState, useMouse } from "ahooks"
+import dayjs from "dayjs"
 import { flatten, throttle } from "lodash"
 import { usePathname } from "next/navigation"
 import { useEffect, useTransition } from "react"
@@ -25,6 +28,8 @@ const VisitorSync = () => {
   const cursors = useCursors(state => state.cursors)
   const setCursors = useCursors(state => state.setCursors)
   const client = createClient()
+  const messages = useMessages(state => state.messages)
+  const setMessages = useMessages(state => state.setMessages)
   const [isPending, startTransition] = useTransition()
   const sendCursor = throttle((channel: RealtimeChannel, visitor: VisitorCursor) => {
     channel.send({
@@ -33,10 +38,18 @@ const VisitorSync = () => {
       payload: visitor
     })
   }, 1000 / 10)
+  const sendMessage = (channel: RealtimeChannel, message: VisitorMessage) => {
+    channel.send({
+      type: "broadcast",
+      event: "message",
+      payload: message
+    })
+  }
   useEffect(() => {
     const cursors_channel = client.channel("cursors")
     cursors_channel
-      .on("broadcast",
+      .on(
+        "broadcast",
         { event: "POS" },
         (payload) => {
           const newPos = payload.payload as VisitorCursor | null
@@ -60,7 +73,6 @@ const VisitorSync = () => {
           }
         })
       .subscribe((status) => {
-
         const updated_cursor: VisitorCursor = {
           user_id: sid || "anon",
           cursor: { x: mouse.clientX || 24, y: mouse.clientY || 24 }
@@ -69,7 +81,38 @@ const VisitorSync = () => {
           sendCursor(cursors_channel, updated_cursor)
         })
       })
+    return () => {
+      cursors_channel.unsubscribe()
+      client.removeChannel(cursors_channel)
+    }
   }, [mouse])
+  useEffect(() => {
+    const messages_channel = client.channel("messages")
+    messages_channel
+      .on(
+        "broadcast",
+        { event: "message" },
+        (payload) => {
+          const message = payload.payload
+          startTransition(() => {
+            setMessages([...messages, message])
+          })
+        })
+      .subscribe((status) => {
+        const message: VisitorMessage = {
+          created_at: dayjs().toISOString(),
+          text: "Hello",
+          uid: sid || "anone"
+        }
+        startTransition(() => {
+          sendMessage(messages_channel, message)
+        })
+      })
+    return () => {
+      messages_channel.unsubscribe()
+      client.removeChannel(messages_channel)
+    }
+  }, [])
   useEffect(() => {
     const users_channel = client.channel("users", {
       config: {
@@ -81,30 +124,40 @@ const VisitorSync = () => {
     users_channel
       .on('presence', { event: 'sync' }, () => {
         const state = users_channel.presenceState<VisitorCursor>()
-        console.log('synced', state)
+        // console.log('synced', state)
         const entries = Object.values(state)
         const prepared_users = flatten(entries).map(user => ({ ...user, cursor: { x: 24, y: 24 } }))
         setCursors(prepared_users)
       })
       .on<VisitorCursor>('presence', { event: 'join' }, ({ key, newPresences }) => {
-        const newUsers = newPresences.map(user => ({ user_id: user.user_id, cursor: { x: 24, y: 24 } }))
+        const theme_id = getRandomThemeId()
+        const newUsers = newPresences.map(user => ({ user_id: user.user_id, cursor: { x: 24, y: 24 }, theme_id: theme_id }))
         const updated_users = [...cursors, ...newUsers]
         setCursors(updated_users)
-        console.log('join', key, newPresences)
+        // console.log('join', key, newPresences)
       })
       .on<VisitorCursor>('presence', { event: 'leave' }, ({ key, leftPresences }) => {
         const leftUsers = cursors.filter(user => leftPresences.findIndex(left => left.user_id === user.user_id) > -1)
-        console.log(leftUsers)
+        // console.log(leftUsers)
         setCursors(leftUsers)
-        console.log('leave', key, leftPresences)
+        // console.log('leave', key, leftPresences)
       })
       .subscribe((status) => {
 
-        console.log(status)
+        // console.log(status)
         if (status === "SUBSCRIBED") {
-          users_channel.track({ user_id: sid })
+          const user: VisitorCursor = {
+            user_id: sid || "anon",
+            cursor: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+          }
+          users_channel.track(user)
         }
       })
+    return () => {
+      users_channel.untrack()
+      users_channel.unsubscribe()
+      client.removeChannel(users_channel)
+    }
   }, [])
   return <></>
 }
