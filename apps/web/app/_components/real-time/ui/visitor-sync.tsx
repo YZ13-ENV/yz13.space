@@ -1,12 +1,11 @@
 "use client"
 import { getRandomThemeId } from "@/app/(real-time)/_components/cursors-themes"
-import { VisitorMessage, useMessages } from "@/app/(real-time)/_components/messages-store"
+import { VisitorMessage } from "@/app/(real-time)/_components/store/message-store"
 import { RealtimeChannel } from "@supabase/supabase-js"
 import { createClient } from "@yz13/supabase/client"
 import { useLocalStorageState, useMouse } from "ahooks"
 import dayjs from "dayjs"
 import { flatten, throttle } from "lodash"
-import { usePathname } from "next/navigation"
 import { useEffect, useTransition } from "react"
 import { VisitorCursor, useCursors } from "../store/cursors-store"
 
@@ -22,14 +21,11 @@ const X_THRESHOLD = 25
 const Y_THRESHOLD = 35
 
 const VisitorSync = () => {
-  const pathname = usePathname()
   const [sid] = useLocalStorageState<string | null>("anon-sid", { defaultValue: null })
   const mouse = useMouse();
   const cursors = useCursors(state => state.cursors)
   const setCursors = useCursors(state => state.setCursors)
   const client = createClient()
-  const messages = useMessages(state => state.messages)
-  const setMessages = useMessages(state => state.setMessages)
   const [isPending, startTransition] = useTransition()
   const sendCursor = throttle((channel: RealtimeChannel, visitor: VisitorCursor) => {
     channel.send({
@@ -37,13 +33,23 @@ const VisitorSync = () => {
       event: "POS",
       payload: visitor
     })
-  }, 1000 / 10)
+  }, 10)
   const sendMessage = (channel: RealtimeChannel, message: VisitorMessage) => {
     channel.send({
       type: "broadcast",
       event: "message",
       payload: message
     })
+  }
+  const mapInitialUsers = (channel: RealtimeChannel) => {
+    const state = channel.presenceState<VisitorCursor>()
+    const entries = Object.values(state)
+    const prepared_users = flatten(entries).map(user => {
+      const theme_id = getRandomThemeId()
+      if (user.theme_id) return { ...user, cursor: { x: 24, y: 24 } }
+      return { ...user, cursor: { x: 24, y: 24 }, theme_id: theme_id }
+    })
+    setCursors(prepared_users)
   }
   useEffect(() => {
     const cursors_channel = client.channel("cursors")
@@ -92,12 +98,8 @@ const VisitorSync = () => {
       .on(
         "broadcast",
         { event: "message" },
-        (payload) => {
-          const message = payload.payload
-          startTransition(() => {
-            setMessages([...messages, message])
-          })
-        })
+        () => { }
+      )
       .subscribe((status) => {
         const message: VisitorMessage = {
           created_at: dayjs().toISOString(),
@@ -123,27 +125,12 @@ const VisitorSync = () => {
     })
     users_channel
       .on('presence', { event: 'sync' }, () => {
-        const state = users_channel.presenceState<VisitorCursor>()
-        // console.log('synced', state)
-        const entries = Object.values(state)
-        const prepared_users = flatten(entries).map(user => ({ ...user, cursor: { x: 24, y: 24 } }))
-        setCursors(prepared_users)
+        mapInitialUsers(users_channel)
       })
-      .on<VisitorCursor>('presence', { event: 'join' }, ({ key, newPresences }) => {
-        const theme_id = getRandomThemeId()
-        const newUsers = newPresences.map(user => ({ user_id: user.user_id, cursor: { x: 24, y: 24 }, theme_id: theme_id }))
-        const updated_users = [...cursors, ...newUsers]
-        setCursors(updated_users)
-        // console.log('join', key, newPresences)
-      })
-      .on<VisitorCursor>('presence', { event: 'leave' }, ({ key, leftPresences }) => {
-        const leftUsers = cursors.filter(user => leftPresences.findIndex(left => left.user_id === user.user_id) > -1)
-        // console.log(leftUsers)
-        setCursors(leftUsers)
-        // console.log('leave', key, leftPresences)
+      .on("presence", { event: "join" }, () => {
+        mapInitialUsers(users_channel)
       })
       .subscribe((status) => {
-
         // console.log(status)
         if (status === "SUBSCRIBED") {
           const user: VisitorCursor = {

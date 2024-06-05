@@ -2,6 +2,7 @@ import { MessagesStack } from "@/app/(real-time)/_components/messages-stack"
 import { CursorsPlayground } from "@/app/_components/real-time/ui/cursors-playground"
 import { VisitorSync } from "@/app/_components/real-time/ui/visitor-sync"
 import { VisitorsStack } from "@/app/_components/real-time/ui/visitors-stack"
+import { MdSpaceBar } from "react-icons/md"
 
 const page = () => {
   return (
@@ -16,6 +17,12 @@ const page = () => {
       <div className="absolute left-0 px-6 bottom-6 flex items-end justify-between w-full">
         <div className="w-fit flex items-center px-3 h-9 rounded-full bg-accents-2/60 border min-w-9">
           <span className="text-sm text-secondary font-medium">YZ13/real-time</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
+            <MdSpaceBar />
+            <span className="text-sm">Chat</span>
+          </div>
         </div>
         <MessagesStack />
       </div>

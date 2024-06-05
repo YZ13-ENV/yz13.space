@@ -7,7 +7,8 @@ type Props = {
   mobile?: ReactNode
 }
 const Wrapper = ({ desktop, mobile }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
+  const isMobile = useMediaQuery({ query: '(max-width: 786px)' })
   const type = isMobile ? "mobile" : "desktop"
   if (type === "desktop") return desktop
   if (type === "mobile") return mobile
