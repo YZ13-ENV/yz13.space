@@ -7,7 +7,7 @@ import { useLocalStorageState, useMouse } from "ahooks"
 import dayjs from "dayjs"
 import { flatten, throttle } from "lodash"
 import { useEffect, useTransition } from "react"
-import { VisitorCursor, useCursors } from "../store/cursors-store"
+import { VisitorCursor } from "../store/cursors-store"
 
 
 export type Visitor = {
@@ -19,12 +19,13 @@ export type Visitor = {
 
 const X_THRESHOLD = 25
 const Y_THRESHOLD = 35
-
-const VisitorSync = () => {
+type Props = {
+  users?: VisitorCursor[]
+  onUsers?: (users: VisitorCursor[]) => void
+}
+const VisitorSync = ({ onUsers, users = [] }: Props) => {
   const [sid] = useLocalStorageState<string | null>("anon-sid", { defaultValue: null })
   const mouse = useMouse();
-  const cursors = useCursors(state => state.cursors)
-  const setCursors = useCursors(state => state.setCursors)
   const client = createClient()
   const [isPending, startTransition] = useTransition()
   const sendCursor = throttle((channel: RealtimeChannel, visitor: VisitorCursor) => {
@@ -49,7 +50,7 @@ const VisitorSync = () => {
       if (user.theme_id) return { ...user, cursor: { x: 24, y: 24 } }
       return { ...user, cursor: { x: 24, y: 24 }, theme_id: theme_id }
     })
-    setCursors(prepared_users)
+    onUsers && onUsers(prepared_users)
   }
   useEffect(() => {
     const cursors_channel = client.channel("cursors")
@@ -68,20 +69,22 @@ const VisitorSync = () => {
               (newPos.cursor?.y ?? 0 - Y_THRESHOLD) > window.innerHeight
                 ? window.innerHeight - Y_THRESHOLD
                 : newPos.cursor?.y
-            const updated_users = cursors.map(user => {
+            const updated_users = users.map(user => {
               const isTargetUser = newPos.user_id === user.user_id
               if (isTargetUser) return { ...newPos, cursor: { x: x, y: y } }
               return user
             })
             startTransition(() => {
-              setCursors(updated_users)
+              onUsers && onUsers(updated_users)
             })
           }
         })
       .subscribe((status) => {
+        const theme = users.find(user => user.user_id === sid)
         const updated_cursor: VisitorCursor = {
           user_id: sid || "anon",
-          cursor: { x: mouse.clientX || 24, y: mouse.clientY || 24 }
+          cursor: { x: mouse.clientX || 24, y: mouse.clientY || 24 },
+          theme_id: theme?.theme_id
         }
         startTransition(() => {
           sendCursor(cursors_channel, updated_cursor)
@@ -128,6 +131,9 @@ const VisitorSync = () => {
         mapInitialUsers(users_channel)
       })
       .on("presence", { event: "join" }, () => {
+        mapInitialUsers(users_channel)
+      })
+      .on("presence", { event: "leave" }, () => {
         mapInitialUsers(users_channel)
       })
       .subscribe((status) => {
