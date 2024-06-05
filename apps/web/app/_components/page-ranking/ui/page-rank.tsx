@@ -6,7 +6,7 @@ import Circle from "../../circle"
 import { SimpleTooltip } from "../../simple-tooltip"
 
 const PageRank = () => {
-  const [rank, setRank] = useState<number>(0)
+  // const [rank, setRank] = useState<number>(0)
   const page = usePathname()
   const [likes, setLikes] = useState<number>(0)
   const [dislikes, setDislikes] = useState<number>(0)
@@ -23,6 +23,9 @@ const PageRank = () => {
           const onlyDislikes = rank_data.length !== 0 ? (rank_data.map(rank => rank.disliked).map(dislike => dislike === true ? 1 : 0) as number[]).reduce((a, b) => a + b) : 0
           setLikes(onlyLikes)
           setDislikes(onlyDislikes)
+        } else {
+          setLikes(0)
+          setDislikes(0)
         }
       })
   }, [])

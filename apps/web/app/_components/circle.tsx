@@ -46,7 +46,7 @@ const Circle = ({ size = "md", percent = 0 }: Props) => {
           strokeLinejoin="round"
           shapeRendering="geometricprecision"
           className="box-border"
-          stroke="hsl(var(--yz13-error-foreground))"
+          stroke="hsl(var(--accents-2))"
           style={{
             opacity: 1,
             strokeDasharray: `calc(${secondary_percent} * ${percent_to_px}) ${circumference}`,
@@ -65,7 +65,6 @@ const Circle = ({ size = "md", percent = 0 }: Props) => {
           strokeLinejoin="round"
           shapeRendering="geometricprecision"
           className="box-border"
-          strokeDasharray={stroke}
           stroke="hsl(var(--yz13-success-foreground))"
           style={{
             opacity: 1,

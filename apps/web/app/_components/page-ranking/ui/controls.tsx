@@ -16,6 +16,7 @@ const RankingControl = () => {
   const [disliked, setDisliked] = useState<boolean>(false)
   const [likeLoading, setLikeLoading] = useState<boolean>(false)
   const [dislikeLoading, setDislikeLoading] = useState<boolean>(false)
+  const disabled = likeLoading || dislikeLoading
   const addLike = async () => {
     if (sid) {
       const vote: PageRankVote = {
@@ -55,7 +56,6 @@ const RankingControl = () => {
     }
   }
   useEffect(() => {
-    console.log(path)
     if (sid) {
       getUserVote(sid, path)
         .then(vote => {
@@ -81,6 +81,7 @@ const RankingControl = () => {
     >
       <div className="flex flex-col w-full">
         <Button
+          disabled={disabled}
           onClick={addLike}
           variant={liked ? "success-default" : "success"}
           className={cn(
@@ -94,6 +95,7 @@ const RankingControl = () => {
           }
         </Button>
         <Button
+          disabled={disabled}
           onClick={addDislike}
           variant={disliked ? "error-default" : "error"}
           className={cn(

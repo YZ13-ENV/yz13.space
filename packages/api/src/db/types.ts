@@ -84,3 +84,10 @@ export type ComponentsSubThreadTree = {
   created_at: string;
   author: string[];
 };
+
+export type Visitor = {
+  uid: string;
+  created_at: string;
+  updated_at: string;
+  username: string;
+};

@@ -1,3 +1,4 @@
+import { BiCog } from "react-icons/bi"
 import { IconType } from "react-icons/lib"
 import { TbRouteSquare } from "react-icons/tb"
 
@@ -14,6 +15,16 @@ const nav_links: NavLink[] = [
     label: "Services",
     link: "/services",
     icon: TbRouteSquare
+  },
+  // {
+  //   label: "Changelog",
+  //   link: "/changelog",
+  //   icon: MdOutlineHistory
+  // },
+  {
+    label: "Settings",
+    link: "/settings",
+    icon: BiCog
   }
 ]
 export { nav_links }
