@@ -1,13 +1,14 @@
 "use client"
 import { getRandomThemeId } from "@/app/(real-time)/_components/cursors-themes"
-import { VisitorMessage } from "@/app/(real-time)/_components/store/message-store"
+import { VisitorMessage, useMessage } from "@/app/(real-time)/_components/store/message-store"
 import { RealtimeChannel } from "@supabase/supabase-js"
 import { createClient } from "@yz13/supabase/client"
 import { useLocalStorageState, useMouse } from "ahooks"
 import dayjs from "dayjs"
 import { flatten, throttle } from "lodash"
-import { useEffect, useTransition } from "react"
+import { useEffect, useState, useTransition } from "react"
 import { VisitorCursor } from "../store/cursors-store"
+import { VisitorCursor as Cursor } from "./visitor-cursor"
 
 
 export type Visitor = {
@@ -28,7 +29,13 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
   const mouse = useMouse();
   const client = createClient()
   const [isPending, startTransition] = useTransition()
+  const [cursor, setCursor] = useState<VisitorCursor["cursor"]>({ x: 24, y: 24 })
+  const message = useMessage(state => state.message)
+  const [ready, setReady] = useState<boolean>(false)
   const sendCursor = throttle((channel: RealtimeChannel, visitor: VisitorCursor) => {
+    const x = visitor.cursor.x
+    const y = visitor.cursor.y
+    setCursor({ x: x, y: y })
     startTransition(() => {
       channel.send({
         type: "broadcast",
@@ -46,7 +53,6 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
   }
   const mapInitialUsers = (channel: RealtimeChannel) => {
     const state = channel.presenceState<VisitorCursor>()
-    console.log(state)
     const entries = Object.values(state)
     const prepared_users = flatten(entries).map(user => {
       const theme_id = getRandomThemeId()
@@ -132,16 +138,21 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
       }
     })
     users_channel
-      .on('presence', { event: 'sync' }, () => {
+      .on('presence', { event: "sync" }, () => {
         mapInitialUsers(users_channel)
       })
       .on("presence", { event: "join" }, ({ key, newPresences }) => {
-        // console.log(key, newPresences)
-        mapInitialUsers(users_channel)
+        console.log("join", key, newPresences)
+        const newUsers = newPresences.map((user) => {
+          const theme_id = getRandomThemeId()
+          return { ...user, user_id: user.user_id, cursor: { x: 24, y: 24 }, theme_id: theme_id } as VisitorCursor
+        })
+        onUsers && onUsers(newUsers)
       })
       .on("presence", { event: "leave" }, ({ key, leftPresences }) => {
-        // console.log(key, leftPresences)
-        mapInitialUsers(users_channel)
+        console.log("leave", key, leftPresences)
+        const filtered = users.filter(user => user.user_id !== key)
+        onUsers && onUsers(filtered)
       })
       .subscribe((status) => {
         // console.log(status)
@@ -159,6 +170,19 @@ const VisitorSync = ({ onUsers, users = [] }: Props) => {
       client.removeChannel(users_channel)
     }
   }, [])
-  return <></>
+  useEffect(() => {
+    if (typeof document) setReady(true)
+  }, [typeof document])
+  if (!ready) return null
+  if (!sid) return null
+  return (
+    <Cursor
+      cursor={cursor}
+      user_id={sid}
+      message={message}
+      isLocal
+      theme_id={1}
+    />
+  )
 }
 export { VisitorSync }
