@@ -8,13 +8,11 @@
     "./gh/user": "./src/gh/user.ts",
     "./gh/types": "./src/gh/types.ts",
     "./db": "./src/db/index.ts",
-    "./db/kanban": "./src/db/kanban.ts",
     "./db/team": "./src/db/team.ts",
     "./db/project": "./src/db/project.ts",
     "./db/threads": "./src/db/threads.ts",
     "./db/page-rank": "./src/db/page-rank.ts",
     "./db/client-threads": "./src/db/client-threads.ts",
-    "./db/session": "./src/db/session.ts",
     "./db/visitor": "./src/db/visitor.ts",
     "./db/web-vitals": "./src/db/web-vitals.ts",
     "./db/types": "./src/db/types.ts",
@@ -31,6 +29,6 @@
     "@vercel/kv": "^1.0.1",
     "@yz13/supabase": "workspace:*",
     "dayjs": "^1.11.11",
-    "next": "14.1.1"
+    "next": "14.2.3"
   }
 }

@@ -1,21 +1,13 @@
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";
-import { getCache, setCache } from "../cache";
 import { ThreadItem, ThreadTree } from "./types";
 
 const getThreads = async (): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const key = "threads";
-  const cached = await getCache<ThreadTree[]>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase.from("threads").select();
-    setCache(key, result);
-    return result;
-  }
+  const result = await supabase.from("threads").select();
+  return result;
 };
 
 const getThread = async (
@@ -23,19 +15,12 @@ const getThread = async (
 ): Promise<PostgrestSingleResponse<ThreadTree>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const key = `thread#${thread_id}`;
-  const cached = await getCache<ThreadTree>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase
-      .from("threads")
-      .select()
-      .eq("thread_id", thread_id)
-      .single();
-    setCache(key, result);
-    return result;
-  }
+  const result = await supabase
+    .from("threads")
+    .select()
+    .eq("thread_id", thread_id)
+    .single();
+  return result;
 };
 
 const getSubThreads = async (
@@ -43,18 +28,11 @@ const getSubThreads = async (
 ): Promise<PostgrestSingleResponse<ThreadItem[]>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const key = `thread#${thread_id}/sub_threads`;
-  const cached = await getCache<ThreadItem[]>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase
-      .from("sub_threads")
-      .select()
-      .eq("thread_id", thread_id);
-    setCache(key, result);
-    return result;
-  }
+  const result = await supabase
+    .from("sub_threads")
+    .select()
+    .eq("thread_id", thread_id);
+  return result;
 };
 
 const getSubThread = async (

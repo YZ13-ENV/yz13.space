@@ -2,13 +2,13 @@
 import { Button, ButtonProps } from "@repo/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
 import { useInViewport } from "ahooks"
-import dynamic from "next/dynamic"
 import { ElementRef, useEffect, useRef } from "react"
+import AnimatedNumbers from "react-animated-numbers"
 import { BiChart } from "react-icons/bi"
-const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
-  ssr: false,
-  loading: () => <span className="w-6 h-4 rounded-md bg-accents-2 animate-pulse inline-block" />
-})
+// const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
+// ssr: false,
+// loading: () => <span className="w-6 h-4 rounded-md bg-accents-2 animate-pulse inline-block" />
+// })
 
 type Props = {
   onClick?: () => void

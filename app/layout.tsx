@@ -11,7 +11,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { AnonSession } from "./(threads)/_components/anon-session";
@@ -20,17 +19,6 @@ import { Theme } from "./(threads)/_components/theme/theme-store";
 import { ThemeSwitcherButton } from "./(threads)/_components/theme/theme-switcher-button";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
 import { PageRank, RankingControl } from "./_components/page-ranking";
-// const font = Geologica({
-//   subsets: ["latin", "cyrillic"],
-//   weight: "variable",
-//   variable: "--text-font",
-// });
-
-const geist = localFont({
-  src: "../font/geist/variable/GeistVF.ttf",
-  display: "swap",
-  variable: "--text-font"
-})
 
 export const metadata: Metadata = {
   title: "YZ13",

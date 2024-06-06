@@ -29,19 +29,18 @@ const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = fa
   const [waitLike, setWaitLike] = useState<boolean>(false)
   const view = async () => {
     if (session_id && !isViewed) {
-      if (!isDev) {
-        await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
-      }
+      // if (!isDev) {
+      await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
+      // }
     }
   }
   const like = () => {
     if (session_id) {
-      if (!isDev) {
-        setWaitLike(true)
-
-        likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
-          .finally(() => setWaitLike(false))
-      }
+      // if (!isDev) {
+      setWaitLike(true)
+      likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
+        .finally(() => setWaitLike(false))
+      // }
     }
   }
   return (

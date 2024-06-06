@@ -6,8 +6,8 @@ const config: Config = {
   content: [
     "./components/**/*.{ts,tsx,mdx}",
     "./app/**/*.{ts,tsx,mdx}",
-    "../../packages/ui/**/*.{ts,tsx,mdx}",
-    "../../microservices/**/*.{ts,tsx,mdx}",
+    "./packages/ui/**/*.{ts,tsx,mdx}",
+    "./microservices/**/*.{ts,tsx,mdx}",
   ],
   corePlugins: {
     preflight: true,

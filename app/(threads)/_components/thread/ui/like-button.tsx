@@ -3,13 +3,13 @@ import { Button } from "@repo/ui/button"
 import { cn } from "@repo/ui/cn"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
 import { useTimeout } from "ahooks"
-import dynamic from "next/dynamic"
 import { useEffect, useState } from "react"
+import AnimatedNumbers from "react-animated-numbers"
 import { BiHeart, BiLoaderAlt, BiSolidHeart } from "react-icons/bi"
-const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
-  ssr: false,
-  loading: () => <span className="w-6 h-4 rounded-md bg-accents-2 animate-pulse inline-block" />
-})
+// const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
+//   ssr: false,
+//   loading: () => <span className="w-6 h-4 rounded-md bg-accents-2 animate-pulse inline-block" />
+// })
 
 type Props = {
   loading?: boolean
