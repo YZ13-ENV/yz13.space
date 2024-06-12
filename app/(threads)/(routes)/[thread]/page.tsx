@@ -4,6 +4,7 @@ import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { ThreadsWrapper } from "@/app/_components/threads-wrapper"
 import { Separator } from "@repo/ui/separator"
 import { getFullThread, otherThreads } from "@yz13/api/db/threads"
+import { unstable_noStore } from "next/cache"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
 import { Footer } from "../../_components/footer"
@@ -16,6 +17,8 @@ type Props = {
     thread: string
   }
 }
+
+unstable_noStore()
 const page = async ({ params }: Props) => {
   const thread_id = parseInt(params.thread)
   const thread = await getFullThread(thread_id)
