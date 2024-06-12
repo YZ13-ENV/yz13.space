@@ -1,3 +1,4 @@
+import { SubThread } from "@/packages/api/src/db/types"
 import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import { TooltipProvider } from "@repo/ui/tooltip"
@@ -7,8 +8,14 @@ import Link from "next/link"
 import { Attachments } from "../attachmets"
 import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
-import { SubThreadsProps } from "../threads/thread-v1"
 dayjs.extend(relativeTime)
+
+export type SubThreadsProps = {
+  sub_thread: SubThread
+  enableLine?: boolean
+  enableLink?: boolean
+  className?: string
+}
 
 const SubThreadV2 = ({
   enableLink = false,

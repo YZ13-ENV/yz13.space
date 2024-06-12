@@ -1,7 +1,7 @@
 "use client"
 import { cn } from "@repo/ui/cn"
 import { likeSubThread, viewSubThread } from "@yz13/api/db/client-threads"
-import { ThreadItem } from "@yz13/api/db/types"
+import { SubThread } from "@yz13/api/db/types"
 import { useLocalStorageState } from "ahooks"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
@@ -11,7 +11,7 @@ import { ViewButton } from "./view-button"
 
 type Props = {
   className?: string
-  sub_thread: ThreadItem
+  sub_thread: SubThread
   hideTime?: boolean
   format?: string
 }
@@ -29,18 +29,18 @@ const SubThreadStatistics = ({ className = "", sub_thread, format, hideTime = fa
   const [waitLike, setWaitLike] = useState<boolean>(false)
   const view = async () => {
     if (session_id && !isViewed) {
-      // if (!isDev) {
-      await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
-      // }
+      if (!isDev) {
+        await viewSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
+      }
     }
   }
   const like = () => {
     if (session_id) {
-      // if (!isDev) {
-      setWaitLike(true)
-      likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
-        .finally(() => setWaitLike(false))
-      // }
+      if (!isDev) {
+        setWaitLike(true)
+        likeSubThread(sub_thread.thread_id, sub_thread.sub_thread_id, session_id)
+          .finally(() => setWaitLike(false))
+      }
     }
   }
   return (

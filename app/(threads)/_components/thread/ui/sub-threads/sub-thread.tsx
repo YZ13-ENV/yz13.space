@@ -3,7 +3,7 @@ import { TooltipProvider } from "@repo/ui/tooltip"
 import Link from "next/link"
 import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
-import { SubThreadsProps } from "../threads/thread-v1"
+import { SubThreadsProps } from "../threads/thread-v2"
 
 const SubThread = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
   return (

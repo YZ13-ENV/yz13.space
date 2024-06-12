@@ -91,3 +91,30 @@ export type Visitor = {
   updated_at: string;
   username: string;
 };
+
+export type SubThread = {
+  thread_id: number;
+  sub_thread_id: number;
+  text: string;
+  attachments: string[];
+  likes: string[];
+  views: string[];
+  created_at: string;
+  author: TeamMember[];
+};
+
+export type Thread = {
+  thread_id: number;
+  threads: number[];
+  created_at: string;
+  name?: string;
+  pinned: boolean;
+};
+
+export type FullThread = {
+  thread_id: number;
+  threads: SubThread[];
+  created_at: string;
+  name?: string;
+  pinned: boolean;
+};

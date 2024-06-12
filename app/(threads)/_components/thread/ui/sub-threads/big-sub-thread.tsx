@@ -6,7 +6,7 @@ import Link from "next/link"
 import { Attachments } from "../attachmets"
 import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
-import { SubThreadsProps } from "../threads/thread-v1"
+import { SubThreadsProps } from "../threads/thread-v2"
 dayjs.extend(relativeTime)
 
 const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {

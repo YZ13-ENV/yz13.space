@@ -1,26 +1,24 @@
-import { getSubThreads } from "@yz13/api/db/threads"
-import { ThreadItem, ThreadTree } from "@yz13/api/db/types"
+import { FullThread, SubThread } from "@yz13/api/db/types"
 import Link from "next/link"
 import { BiDotsVerticalRounded, BiStar } from "react-icons/bi"
 import { SubThreadsList } from "../sub-threads-list"
 import { SubThreadV2 } from "../sub-threads/sub-thread-v2"
 
 type Props = {
-  thread: ThreadTree
+  thread: FullThread
   max?: number
   enableLink?: boolean
   className?: string
   component?: (props: SubThreadsProps) => JSX.Element
 }
 export type SubThreadsProps = {
-  sub_thread: ThreadItem
+  sub_thread: SubThread
   enableLink?: boolean
   className?: string
 }
 const Thread = async ({ thread, max = 0, enableLink = false, className = "", component = SubThreadV2 }: Props) => {
-  const { thread_id, name } = thread
-  const sub_threads_res = await getSubThreads(thread_id)
-  const sub_threads = (sub_threads_res.data || [])
+  const { thread_id, name, threads } = thread
+  const sub_threads = threads
   const hasMoreThanMax = sub_threads.length >= max && max >= 1
   return (
     <section id={name} className={className}>

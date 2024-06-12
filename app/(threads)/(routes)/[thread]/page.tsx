@@ -1,9 +1,9 @@
 import { LeftSide } from "@/app/_components/left"
 import { RightSide } from "@/app/_components/right"
-import { RightContentContainer } from "@/app/_components/right-content-container"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
+import { ThreadsWrapper } from "@/app/_components/threads-wrapper"
 import { Separator } from "@repo/ui/separator"
-import { getThread, otherThreads } from "@yz13/api/db/threads"
+import { getFullThread, otherThreads } from "@yz13/api/db/threads"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
 import { Footer } from "../../_components/footer"
@@ -18,17 +18,15 @@ type Props = {
 }
 const page = async ({ params }: Props) => {
   const thread_id = parseInt(params.thread)
-  const thread_res = await getThread(thread_id)
-  const thread = thread_res.data
-  const other_threads_res = await otherThreads(thread_id)
-  const other_threads = other_threads_res.data ? other_threads_res.data : []
+  const thread = await getFullThread(thread_id)
+  const other_threads = await otherThreads(thread_id)
   return (
     <SplitViewContainer>
-      <LeftSide>
+      <LeftSide showButton>
         <YZ13Info />
       </LeftSide>
       <RightSide>
-        <RightContentContainer>
+        <ThreadsWrapper>
           <div className="flex items-center justify-start">
             <Link href="/" className="inline-flex items-center text-secondary gap-1">
               <BiLeftArrowAlt size={16} className="text-inherit" />
@@ -64,7 +62,7 @@ const page = async ({ params }: Props) => {
             </>
           }
           <Footer />
-        </RightContentContainer>
+        </ThreadsWrapper>
       </RightSide>
     </SplitViewContainer>
   )

@@ -1,8 +1,8 @@
 import { LeftSide } from "@/app/_components/left";
 import { RightSide } from "@/app/_components/right";
-import { RightContentContainer } from "@/app/_components/right-content-container";
 import { SplitViewContainer } from "@/app/_components/split-view-container";
-import { getThreads } from "@yz13/api/db/threads";
+import { ThreadsWrapper } from "@/app/_components/threads-wrapper";
+import { getFullThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { Contacts } from "../_components/contacts";
@@ -20,8 +20,7 @@ type Props = {
 }
 const page = async ({ searchParams }: Props) => {
   const filter = searchParams.filter
-  const threads_res = await getThreads()
-  const threads = (threads_res.data || [])
+  const threads = (await getFullThreads())
     .filter(thread => filter ? thread.name?.toLowerCase().includes(filter) : thread)
     .sort((a, b) => {
       const a_date = dayjs(a.created_at)
@@ -32,11 +31,11 @@ const page = async ({ searchParams }: Props) => {
   return (
     <>
       <SplitViewContainer>
-        <LeftSide>
+        <LeftSide showButton>
           <YZ13Info />
         </LeftSide>
         <RightSide>
-          <RightContentContainer>
+          <ThreadsWrapper>
             <div className="w-full space-y-3">
               <SearchBar />
               <nav className="space-x-2">
@@ -69,7 +68,7 @@ const page = async ({ searchParams }: Props) => {
               <Contacts />
               <Footer />
             </div>
-          </RightContentContainer>
+          </ThreadsWrapper>
         </RightSide>
       </SplitViewContainer>
     </>
