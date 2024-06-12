@@ -24,6 +24,7 @@ export const GET = async (request: Request) => {
     );
     const team = await getTeamMembers();
     const members = team.data || [];
+    console.log(members);
     const threads_response = await cached_threads_response();
     const threads: ThreadTree[] = threads_response.data || [];
     const sub_threads_response = await cached_sub_threads_response();
@@ -32,7 +33,7 @@ export const GET = async (request: Request) => {
       .map((sub_thread) => {
         const authors = sub_thread.author.map((author) => {
           const indexOfAuthor = members.findIndex(
-            (member) => member.name === author
+            (member) => member.username === author
           );
           if (indexOfAuthor > -1) return members[indexOfAuthor];
           return undefined;

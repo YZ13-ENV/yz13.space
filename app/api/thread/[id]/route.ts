@@ -47,7 +47,7 @@ export const GET = async (request: Request, { params }: Params) => {
       .map((sub_thread) => {
         const authors = sub_thread.author.map((author) => {
           const indexOfAuthor = members.findIndex(
-            (member) => member.name === author
+            (member) => member.username === author
           );
           if (indexOfAuthor > -1) return members[indexOfAuthor];
           return undefined;

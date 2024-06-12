@@ -11,15 +11,12 @@ const Author = ({ author, size = 36 }: Props) => {
     <Tooltip>
       <TooltipTrigger className="z-20" asChild>
         {
-          author
-            ?
-            <Image
-              className="aspect-square shrink-0 rounded-full border-2 border-background bg-accents-2"
-              src={author?.avatar_url || ""}
-              width={size} height={size}
-              alt="author-photo"
-            />
-            : <div style={{ width: `${size}px`, height: `${size}px` }} className="aspect-square shrink-0 rounded-full border-2 border-background bg-accents-2 animate-pulse" />
+          <Image
+            className="aspect-square shrink-0 rounded-full border-2 border-background bg-accents-2"
+            src={author?.avatar_url || ""}
+            width={size} height={size}
+            alt="author-photo"
+          />
         }
       </TooltipTrigger>
       <TooltipContent side="left" align="end" avoidCollisions sideOffset={6} className="rounded-l-xl rounded-tr-xl rounded-br-sm flex flex-col">
