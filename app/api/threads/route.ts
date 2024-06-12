@@ -15,12 +15,12 @@ export const GET = async (request: Request) => {
     const cached_threads_response = cache(
       async () => client.from("threads").select(),
       [],
-      { tags: ["threads_all"] }
+      { revalidate: 360 }
     );
     const cached_sub_threads_response = cache(
       async () => client.from("sub_threads").select(),
       [],
-      { tags: ["sub_threads_all"] }
+      { revalidate: 360 }
     );
     const team = await getTeamMembers();
     const members = team.data || [];

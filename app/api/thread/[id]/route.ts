@@ -30,12 +30,12 @@ export const GET = async (request: Request, { params }: Params) => {
           .limit(1)
           .maybeSingle(),
       [],
-      { tags: ["threads_all", `thread-${id}`] }
+      { revalidate: 360 }
     );
     const cached_sub_threads_response = cache(
       async () => client.from("sub_threads").select().eq("thread_id", id),
       [],
-      { tags: ["sub_threads_all"] }
+      { revalidate: 360 }
     );
     const team = await getTeamMembers();
     const members = team.data || [];
