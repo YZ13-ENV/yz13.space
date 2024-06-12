@@ -2,9 +2,7 @@ import {
   PostgrestSingleResponse,
   RealtimePostgresChangesPayload,
 } from "@supabase/supabase-js";
-import { kv } from "@vercel/kv";
 import { createClient } from "@yz13/supabase/client";
-import { getCache, setCache } from "../cache";
 import { ThreadItem } from "./types";
 
 const getLikesClient = async (
@@ -12,20 +10,13 @@ const getLikesClient = async (
   sub_thread_id: number
 ): Promise<PostgrestSingleResponse<{ likes: ThreadItem["likes"] } | null>> => {
   const supabase = createClient();
-  const key = `thread#${thread_id}/${sub_thread_id}/likes`;
-  const cached = await getCache<{ likes: ThreadItem["likes"] } | null>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase
-      .from("sub_threads")
-      .select("likes")
-      .eq("thread_id", thread_id)
-      .eq("sub_thread_id", sub_thread_id)
-      .single();
-    setCache(key, result);
-    return result;
-  }
+  const result = await supabase
+    .from("sub_threads")
+    .select("likes")
+    .eq("thread_id", thread_id)
+    .eq("sub_thread_id", sub_thread_id)
+    .single();
+  return result;
 };
 
 const likeSubThread = async (
@@ -40,7 +31,6 @@ const likeSubThread = async (
   const result = isLiked
     ? likes.filter((like_uid) => like_uid !== uid)
     : [...likes, uid];
-  kv.del(`thread#${thread_id}/${sub_thread_id}/likes`);
   return supabase
     .from("sub_threads")
     .update({ likes: result })
@@ -55,20 +45,13 @@ const getViewsClient = async (
   sub_thread_id: number
 ): Promise<PostgrestSingleResponse<{ views: ThreadItem["views"] } | null>> => {
   const supabase = createClient();
-  const key = `thread#${thread_id}/${sub_thread_id}/views`;
-  const cached = await getCache<{ views: ThreadItem["views"] } | null>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase
-      .from("sub_threads")
-      .select("views")
-      .eq("thread_id", thread_id)
-      .eq("sub_thread_id", sub_thread_id)
-      .single();
-    setCache(key, result);
-    return result;
-  }
+  const result = await supabase
+    .from("sub_threads")
+    .select("views")
+    .eq("thread_id", thread_id)
+    .eq("sub_thread_id", sub_thread_id)
+    .single();
+  return result;
 };
 
 const viewSubThread = async (
@@ -83,7 +66,6 @@ const viewSubThread = async (
   const result = isViewed
     ? views.filter((view_uid) => view_uid !== uid)
     : [...views, uid];
-  kv.del(`thread#${thread_id}/${sub_thread_id}/views`);
   return supabase
     .from("sub_threads")
     .update({ views: result })

@@ -1,20 +1,43 @@
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";
-import { getCache, setCache } from "../cache";
-import { ThreadItem, ThreadTree } from "./types";
+import { isDev } from "../const";
+import { FullThread, ThreadItem, ThreadTree } from "./types";
 
 const getThreads = async (): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const key = "threads";
-  const cached = await getCache<ThreadTree[]>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase.from("threads").select();
-    setCache(key, result);
-    return result;
+  const result = await supabase.from("threads").select();
+  return result;
+};
+
+const getFullThreads = async (): Promise<FullThread[]> => {
+  const url = isDev ? "http://localhost:3000" : "https://www.yz13.space";
+  const path = "/api/threads";
+  try {
+    const response = await fetch(url + path, { method: "GET" });
+    if (response.ok) {
+      const json = await response.json();
+      return json;
+    } else return [];
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+};
+
+const getFullThread = async (id: number): Promise<FullThread | null> => {
+  const url = isDev ? "http://localhost:3000" : "https://www.yz13.space";
+  const path = `/api/thread/${id}`;
+  try {
+    const response = await fetch(url + path, { method: "GET" });
+    if (response.ok) {
+      const json = await response.json();
+      return json;
+    } else return null;
+  } catch (e) {
+    console.log(e);
+    return null;
   }
 };
 
@@ -23,19 +46,12 @@ const getThread = async (
 ): Promise<PostgrestSingleResponse<ThreadTree>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const key = `thread#${thread_id}`;
-  const cached = await getCache<ThreadTree>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase
-      .from("threads")
-      .select()
-      .eq("thread_id", thread_id)
-      .single();
-    setCache(key, result);
-    return result;
-  }
+  const result = await supabase
+    .from("threads")
+    .select()
+    .eq("thread_id", thread_id)
+    .single();
+  return result;
 };
 
 const getSubThreads = async (
@@ -43,18 +59,11 @@ const getSubThreads = async (
 ): Promise<PostgrestSingleResponse<ThreadItem[]>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const key = `thread#${thread_id}/sub_threads`;
-  const cached = await getCache<ThreadItem[]>(key);
-  if (cached) {
-    return cached;
-  } else {
-    const result = await supabase
-      .from("sub_threads")
-      .select()
-      .eq("thread_id", thread_id);
-    setCache(key, result);
-    return result;
-  }
+  const result = await supabase
+    .from("sub_threads")
+    .select()
+    .eq("thread_id", thread_id);
+  return result;
 };
 
 const getSubThread = async (
@@ -85,15 +94,14 @@ const getLikes = async (
     .single();
 };
 
-const otherThreads = async (
-  thread_id: number
-): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
-  const cookie = cookies();
-  const supabase = createClient(cookie);
-  return supabase.from("threads").select().neq("thread_id", thread_id).limit(5);
+const otherThreads = async (thread_id: number): Promise<FullThread[]> => {
+  const threads = await getFullThreads();
+  return threads.filter((thread) => thread.thread_id !== thread_id);
 };
 
 export {
+  getFullThread,
+  getFullThreads,
   getLikes,
   getSubThread,
   getSubThreads,

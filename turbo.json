@@ -1,7 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local", ".env.*local"],
-  "globalDotEnv": [".env"],
+  "globalEnv": ["NODE_ENV", "EDGE_CONFIG"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
@@ -13,7 +12,27 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "dotEnv": [".env.loca", ".env"]
+      "env": [
+        "BLOB_READ_WRITE_TOKEN",
+        "EDGE_CONFIG",
+        "KV_REST_API_READ_ONLY_TOKEN",
+        "KV_REST_API_TOKEN",
+        "KV_REST_API_URL",
+        "KV_URL",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "NEXT_PUBLIC_SUPABASE_URL",
+        "POSTGRES_DATABASE",
+        "POSTGRES_HOST",
+        "POSTGRES_PASSWORD",
+        "POSTGRES_PRISMA_URL",
+        "POSTGRES_URL",
+        "POSTGRES_URL_NON_POOLING",
+        "POSTGRES_USER",
+        "SUPABASE_ANON_KEY",
+        "SUPABASE_JWT_SECRET",
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "SUPABASE_URL"
+      ]
     }
   }
 }
