@@ -6,6 +6,7 @@ import {
   ThreadTree,
 } from "@/packages/api/src/db/types";
 import { createClient } from "@/packages/supabase/src/supabase/server";
+import { getStorageItem } from "@/packages/supabase/src/supabase/storage";
 import { flatten } from "lodash";
 import { unstable_cache as cache } from "next/cache";
 import { cookies } from "next/headers";
@@ -45,6 +46,9 @@ export const GET = async (request: Request, { params }: Params) => {
     const sub_threads: ThreadItem[] = sub_threads_response.data || [];
     const sub_threads_with_authors = sub_threads
       .map((sub_thread) => {
+        const attachments = sub_thread.attachments.map((attachment) =>
+          getStorageItem(["/threads", attachment])
+        );
         const authors = sub_thread.author.map((author) => {
           const indexOfAuthor = members.findIndex(
             (member) => member.username === author
@@ -52,7 +56,11 @@ export const GET = async (request: Request, { params }: Params) => {
           if (indexOfAuthor > -1) return members[indexOfAuthor];
           return undefined;
         });
-        return { ...sub_thread, author: authors as TeamMember[] };
+        return {
+          ...sub_thread,
+          author: authors as TeamMember[],
+          attachments: attachments,
+        };
       })
       .filter((member) => !!member);
     const ready_sub_threads = flatten(
