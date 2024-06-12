@@ -67,9 +67,21 @@ export const GET = async (request: Request, { params }: Params) => {
       ...thread,
       threads: ready_sub_threads,
     };
-    return new Response(JSON.stringify(ready_thread, null, 2));
+    return new Response(JSON.stringify(ready_thread, null, 2), {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+      },
+    });
   } catch (e) {
     console.log(e);
-    return new Response(JSON.stringify([], null, 2));
+    return new Response(JSON.stringify([], null, 2), {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+      },
+    });
   }
 };

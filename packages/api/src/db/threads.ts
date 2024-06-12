@@ -11,7 +11,7 @@ const getThreads = async (): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
 };
 
 const getFullThreads = async (): Promise<FullThread[]> => {
-  const url = process.env.__NEXT_PRIVATE_ORIGIN;
+  const url = "https://www.yz13.space";
   const path = "/api/threads";
   try {
     const response = await fetch(url + path, { method: "GET" });
@@ -26,7 +26,7 @@ const getFullThreads = async (): Promise<FullThread[]> => {
 };
 
 const getFullThread = async (id: number): Promise<FullThread | null> => {
-  const url = process.env.__NEXT_PRIVATE_ORIGIN;
+  const url = "https://www.yz13.space";
   const path = `/api/thread/${id}`;
   try {
     const response = await fetch(url + path, { method: "GET" });
