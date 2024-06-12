@@ -9,7 +9,7 @@ import { registered_services } from "../../_components/registered-services"
 
 const page = () => {
   return (
-    <SplitViewContainer mode="1:2">
+    <SplitViewContainer>
       <LeftSide>
         <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
           <div className="space-y-2">
