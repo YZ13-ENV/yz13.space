@@ -24,7 +24,6 @@ export const GET = async (request: Request) => {
     );
     const team = await getTeamMembers();
     const members = team.data || [];
-    console.log(members);
     const threads_response = await cached_threads_response();
     const threads: ThreadTree[] = threads_response.data || [];
     const sub_threads_response = await cached_sub_threads_response();

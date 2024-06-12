@@ -20,7 +20,7 @@ const Author = ({ author, size = 36 }: Props) => {
         }
       </TooltipTrigger>
       <TooltipContent side="left" align="end" avoidCollisions sideOffset={6} className="rounded-l-xl rounded-tr-xl rounded-br-sm flex flex-col">
-        <span className="font-semibold text-foreground">{author?.username}</span>
+        <span className="font-semibold text-foreground">{author?.name}</span>
         <span>{author?.position}</span>
       </TooltipContent>
     </Tooltip>

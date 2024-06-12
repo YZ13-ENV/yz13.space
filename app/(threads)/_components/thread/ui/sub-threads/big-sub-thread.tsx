@@ -18,6 +18,7 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThr
         <div className="w-fit -space-y-4">
           <TooltipProvider delayDuration={100}>
             {
+              sub_thread?.author &&
               sub_thread?.author.map(
                 (author, i) => <Author size={42} key={author + "-" + i} author={author} />)
             }
@@ -25,7 +26,9 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThr
         </div>
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground line-clamp-1">{sub_thread.author.join(", ")}</span>
+            <span className="font-semibold text-foreground line-clamp-1">
+              {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
+            </span>
           </div>
           <span className="text-xs text-secondary">{created_at}</span>
         </div>

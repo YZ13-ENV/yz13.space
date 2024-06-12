@@ -39,7 +39,8 @@ const SubThreadV2 = ({
       <div className="w-9 h-full shrink-0 relative -space-y-4">
         <TooltipProvider delayDuration={100}>
           {
-            sub_thread?.author.map(
+            sub_thread?.author &&
+            sub_thread.author.map(
               (author, i) => <Author size={avatar_size} key={author + "-" + i} author={author} />)
           }
         </TooltipProvider>
@@ -47,7 +48,9 @@ const SubThreadV2 = ({
       <div className="w-full flex flex-col gap-3">
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-sm text-foreground line-clamp-1">{sub_thread.author.join(", ")}</span>
+            <span className="font-semibold text-sm text-foreground line-clamp-1">
+              {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
+            </span>
           </div>
           <span className="text-xs text-secondary">{created_at}</span>
         </div>
