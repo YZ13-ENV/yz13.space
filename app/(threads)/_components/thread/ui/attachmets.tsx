@@ -20,8 +20,14 @@ const Attachments = ({ attachments }: Props) => {
                   <MediaWrapper key={url} id={url} className="relative">
                     {
                       isVideo
-                        ? <Video src={url} className="relative object-cover rounded-xl" autoPlay muted loop />
-                        : <Image src={url} className="!relative object-cover rounded-xl" fill alt="attachment" />
+                        ? <Video
+                          src={url}
+                          className="relative object-cover rounded-xl" autoPlay muted loop
+                        />
+                        : <Image
+                          src={url}
+                          className="!relative object-cover rounded-xl" fill alt="attachment"
+                        />
                     }
                   </MediaWrapper>
                 )

@@ -19,7 +19,9 @@ const page = ({ params }: Props) => {
   const service = registered_services.find(service => service.service_id === service_id)
   const service_route = service?.routes.find(service => service.route === route)
   const empty_route = !service_route
+  const asPage = service_route?.as ? service_route?.as : "widget"
   if (!service) return redirect("/services")
+  if (asPage) return service_route?.entry
   return (
     <SplitViewContainer>
       <LeftSide>
