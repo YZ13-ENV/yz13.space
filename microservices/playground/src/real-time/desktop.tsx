@@ -1,4 +1,6 @@
 "use client"
+import { useEventListener } from "ahooks"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { MdSpaceBar } from "react-icons/md"
 import { MessagesStack } from "../components/messages-stack"
@@ -9,6 +11,11 @@ import { VisitorsStack } from "../components/ui/visitors-stack"
 
 const Desktop = () => {
   const [users, setUsers] = useState<VisitorCursor[]>([])
+  const router = useRouter()
+  useEventListener("keyup", ev => {
+    console.log(ev.code)
+    if (ev.code === "Escape") router.push("/services")
+  })
   return (
     <div className="w-full cursor-none relative flex items-center justify-center h-screen overflow-hidden bg-transparent">
       <div className="w-full h-full absolute left-0 top-0 bg-grid-neutral-100 dark:bg-grid-neutral-900 z-[-2]" />
@@ -19,12 +26,18 @@ const Desktop = () => {
       </div>
       <CursorsPlayground users={users} />
       <div className="absolute left-0 px-6 bottom-6 flex items-end justify-between w-full">
-        <div className="w-fit flex items-center px-3 h-9 rounded-full bg-accents-2/60 border min-w-9">
-          <span className="text-sm text-secondary font-medium">YZ13</span>
-        </div>
         <div className="flex items-center gap-2">
+          <span className="text-sm text-secondary font-medium">Experimental, may have bugs</span>
+        </div>
+        <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <MdSpaceBar />
+            <span className="text-xs px-2 py-1 rounded-md border">Esc</span>
+            <span className="text-sm">Exit</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-1 rounded-md border shrink-0">
+              <MdSpaceBar size={16} />
+            </span>
             <span className="text-sm">Chat</span>
           </div>
         </div>
