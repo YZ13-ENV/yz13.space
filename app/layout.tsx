@@ -1,3 +1,4 @@
+import { createClient } from "@/packages/supabase/src/supabase/server";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
@@ -63,6 +64,7 @@ type LayoutProps = Readonly<{
 }>
 export default function RootLayout({ children }: LayoutProps) {
   const cookiesList = cookies()
+  const sp = createClient(cookiesList)
   const themeCookie = cookiesList.get("theme")
   const theme: Theme = themeCookie?.value as Theme || "light"
   return (
