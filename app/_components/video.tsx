@@ -68,7 +68,7 @@ const Video = forwardRef<HTMLVideoElement, VideoProps>(
         ></video>
         <div className="flex items-center absolute left-3 bottom-3 gap-1">
           {
-            duration && !isNaN(duration) &&
+            (current_time.isValid() && total_time.isValid()) &&
             <span className="text-xs px-3 h-7 py-1 inline-flex items-center rounded-lg bg-background border">
               {current_time.format("mm:ss")}
               /

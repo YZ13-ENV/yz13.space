@@ -1,7 +1,7 @@
 "use client"
-import { useMessage } from "@/app/(real-time)/_components/store/message-store"
 import { useLocalStorageState, useTimeout } from "ahooks"
 import { VisitorCursor } from "../store/cursors-store"
+import { useMessage } from "../store/message-store"
 import { VisitorCursor as Cursor } from "./visitor-cursor"
 
 type Props = {

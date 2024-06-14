@@ -3,7 +3,7 @@ import {
   RealtimePostgresChangesPayload,
 } from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/client";
-import { ThreadItem } from "./types";
+import { SubThread, ThreadItem } from "./types";
 
 const getLikesClient = async (
   thread_id: number,
@@ -98,10 +98,43 @@ const onSubThreads = (
     .subscribe();
 };
 
+const onSubThread = (
+  channel: string,
+  thread_id: number,
+  sub_thread_id: number,
+  onPayload: (payload: RealtimePostgresChangesPayload<SubThread>) => void
+) => {
+  const supabase = createClient();
+  const channels = supabase
+    .channel(channel)
+    .on<SubThread>(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "sub_threads",
+        filter: `thread_id=eq.${thread_id}`,
+      },
+      async (payload) => {
+        const type = payload.eventType;
+        const new_update = payload.new;
+        if (!!new_update && type === "UPDATE") {
+          const sub_thread = new_update as SubThread;
+          if (sub_thread.sub_thread_id === sub_thread_id) {
+            console.log(type);
+            onPayload(payload);
+          }
+        }
+      }
+    )
+    .subscribe();
+};
+
 export {
   getLikesClient,
   getViewsClient,
   likeSubThread,
+  onSubThread,
   onSubThreads,
   viewSubThread,
 };

@@ -1,8 +1,8 @@
-import { getThemeById } from "@/app/(real-time)/_components/cursors-themes"
-import { VisitorMessage } from "@/app/(real-time)/_components/store/message-store"
 import { cn } from "@repo/ui/cn"
 import { motion } from "framer-motion"
+import { getThemeById } from "../cursors-themes"
 import { VisitorCursor as Visitor } from "../store/cursors-store"
+import { VisitorMessage } from "../store/message-store"
 import { Cursor } from "./cursor"
 
 type Props = Visitor & {

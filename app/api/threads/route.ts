@@ -5,6 +5,7 @@ import {
   ThreadTree,
 } from "@/packages/api/src/db/types";
 import { createClient } from "@/packages/supabase/src/supabase/server";
+import { getStorageItem } from "@/packages/supabase/src/supabase/storage";
 import { unstable_cache as cache } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -37,7 +38,14 @@ export const GET = async (request: Request) => {
           if (indexOfAuthor > -1) return members[indexOfAuthor];
           return undefined;
         });
-        return { ...sub_thread, author: authors as TeamMember[] };
+        const attachments = sub_thread.attachments.map((attachment) =>
+          getStorageItem(["/threads", attachment])
+        );
+        return {
+          ...sub_thread,
+          author: authors as TeamMember[],
+          attachments: attachments,
+        };
       })
       .filter((member) => !!member);
     const ready_threads = threads.map((thread) => {

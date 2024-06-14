@@ -1,16 +1,18 @@
+import { Playground } from "@/microservices/playground/src"
 import { BrowserMini, CalendarEvents, List, MusicPlayer } from "@microservices/widgets-lib"
 import { ReactNode } from "react"
 import { BiCalendar, BiListUl } from "react-icons/bi"
 import { BsMusicPlayer } from "react-icons/bs"
+import { HiMiniCursorArrowRipple } from "react-icons/hi2"
 import { IconType } from "react-icons/lib"
 import { LuKeyRound } from 'react-icons/lu'
-
 
 type ServiceRoute = {
   route: string // /router/**/*
   title: string
   icon?: IconType
   entry: ReactNode
+  as?: "widget" | "page" // default "widget"
 }
 
 type Service = {
@@ -19,6 +21,20 @@ type Service = {
   description?: string
   entry: ReactNode
   routes: ServiceRoute[]
+}
+
+const playground_service: Service = {
+  service_id: "real-time",
+  title: "Realtime",
+  entry: <Playground />,
+  routes: [
+    {
+      route: "/",
+      icon: HiMiniCursorArrowRipple,
+      entry: <Playground />,
+      title: "Playground",
+    }
+  ]
 }
 
 const widgets_lib_service: Service = {
@@ -55,6 +71,7 @@ const widgets_lib_service: Service = {
 }
 
 const registered_services: Service[] = [
-  widgets_lib_service
+  widgets_lib_service,
+  playground_service
 ]
 export { registered_services }

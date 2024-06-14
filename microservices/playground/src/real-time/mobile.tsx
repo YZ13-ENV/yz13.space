@@ -1,8 +1,8 @@
 import { Button } from "@repo/ui/button"
 import { BiLeftArrowAlt } from "react-icons/bi"
-import { Modal } from "../modal"
+import { Modal } from "./modal"
 
-const page = () => {
+const Mobile = () => {
   const MobileModalContent = () => {
     return (
       <div className="max-w-sm w-full space-y-4">
@@ -25,4 +25,4 @@ const page = () => {
     </Modal>
   )
 }
-export default page
+export default Mobile

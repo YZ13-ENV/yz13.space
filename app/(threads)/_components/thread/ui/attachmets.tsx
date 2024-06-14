@@ -1,20 +1,18 @@
 import { MediaWrapper } from "@/app/_components/media-overlay/ui/media-wrapper"
 import { Video } from "@/app/_components/video"
 import { ThreadItem } from "@yz13/api/db/types"
-import { getStorageItem } from "@yz13/supabase/storage"
 import Image from "next/image"
 
 type Props = {
   attachments: ThreadItem["attachments"]
 }
 const Attachments = ({ attachments }: Props) => {
-  const preparedAttachments = attachments.map(attachment => getStorageItem(["/threads", attachment]))
   const isSingleAttachment = attachments.length === 1
   return (
     <div className="w-full border rounded-xl group-hover:bg-accents-2 transition-colors bg-accents-1">
       {
         isSingleAttachment
-          ? preparedAttachments
+          ? attachments
             .map(
               url => {
                 const isVideo = url.endsWith(".mp4")
@@ -22,8 +20,14 @@ const Attachments = ({ attachments }: Props) => {
                   <MediaWrapper key={url} id={url} className="relative">
                     {
                       isVideo
-                        ? <Video src={url} className="relative object-cover rounded-xl" autoPlay muted loop />
-                        : <Image src={url} className="!relative object-cover rounded-xl" fill alt="attachment" />
+                        ? <Video
+                          src={url}
+                          className="relative object-cover rounded-xl" autoPlay muted loop
+                        />
+                        : <Image
+                          src={url}
+                          className="!relative object-cover rounded-xl" fill alt="attachment"
+                        />
                     }
                   </MediaWrapper>
                 )

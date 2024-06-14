@@ -1,13 +1,13 @@
 "use client"
-import { getRandomThemeId } from "@/app/(real-time)/_components/cursors-themes"
-import { VisitorMessage, useMessage } from "@/app/(real-time)/_components/store/message-store"
 import { RealtimeChannel } from "@supabase/supabase-js"
 import { createClient } from "@yz13/supabase/client"
 import { useLocalStorageState, useMouse } from "ahooks"
 import dayjs from "dayjs"
 import { flatten, throttle } from "lodash"
 import { useEffect, useState, useTransition } from "react"
+import { getRandomThemeId } from "../cursors-themes"
 import { VisitorCursor } from "../store/cursors-store"
+import { VisitorMessage, useMessage } from "../store/message-store"
 import { VisitorCursor as Cursor } from "./visitor-cursor"
 
 

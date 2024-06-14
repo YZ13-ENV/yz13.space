@@ -24,7 +24,7 @@ const page = () => {
       </LeftSide>
       <RightSide>
         <RightContentContainer>
-          <ul>
+          <ul className="space-y-4">
             {
               registered_services.map(service => {
                 return (
