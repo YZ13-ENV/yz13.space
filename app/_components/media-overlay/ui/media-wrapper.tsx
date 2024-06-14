@@ -19,7 +19,7 @@ const MediaWrapper = ({ className = "", children, id = "media" }: Props) => {
         if (!media) setMedia(id)
       }}
       layoutId={id}
-      className={cn("w-fit overflow-hidden h-fit cursor-pointer", className)}
+      className={cn("w-fit overflow-hidden group h-fit cursor-pointer", className)}
     >
       {children}
     </motion.div>
