@@ -8,8 +8,9 @@ import { useSplitMode } from "./split-control/store/store"
 type Props = {
   showButton?: boolean
   children?: ReactNode
+  ratio?: "1/3" | "1/2" | "2/3"
 }
-const LeftSide = ({ children, showButton = false }: Props) => {
+const LeftSide = ({ children, showButton = false, ratio }: Props) => {
   const mode = useSplitMode(state => state.mode)
   const setMode = useSplitMode(state => state.setMode)
   const isMiddle = mode === "1:1"
@@ -17,7 +18,13 @@ const LeftSide = ({ children, showButton = false }: Props) => {
     <div className={cn(
       "w-full shrink-0 gap-6 lg:sticky top-0 lg:h-screen h-fit",
       "transition-all duration-500",
-      mode === "1:1" ? "lg:w-1/2" : mode === "2:1" ? "lg:w-2/3" : "lg:w-1/3"
+      ratio
+        ? ratio === "1/2" ? "lg:w-1/2"
+          : ratio === "2/3" ? "lg:w-2/3"
+            : ratio === "1/3" ? "lg:w-1/3"
+              : ""
+        :
+        mode === "1:1" ? "lg:w-1/2" : mode === "2:1" ? "lg:w-2/3" : "lg:w-1/3"
     )}>
       <div className="w-full h-full flex items-center justify-center flex-col">
         {children}
