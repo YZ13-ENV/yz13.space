@@ -1,4 +1,3 @@
-import { createClient } from "@/packages/supabase/src/supabase/server";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
@@ -62,15 +61,14 @@ export const viewport: Viewport = {
 type LayoutProps = Readonly<{
   children?: ReactNode
 }>
-export default function RootLayout({ children }: LayoutProps) {
-  const cookiesList = cookies()
-  const sp = createClient(cookiesList)
-  const themeCookie = cookiesList.get("theme")
+export default async function RootLayout({ children }: LayoutProps) {
+  const cks = cookies()
+  const themeCookie = cks.get("theme")
   const theme: Theme = themeCookie?.value as Theme || "light"
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
       <ThemeBodyWrapper theme={theme}>
-        <div className="w-9 gap-2 flex flex-col h-fit absolute top-6 right-6 z-10">
+        <div className="w-9 gap-4 flex flex-col h-fit absolute top-6 right-6 z-10">
           <ThemeSwitcherButton />
           <PageRank />
           <RankingControl />

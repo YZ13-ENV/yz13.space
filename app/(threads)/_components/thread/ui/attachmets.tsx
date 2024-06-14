@@ -22,11 +22,15 @@ const Attachments = ({ attachments }: Props) => {
                       isVideo
                         ? <Video
                           src={url}
+                          width={480}
+                          height={240}
                           className="relative object-cover rounded-xl" autoPlay muted loop
                         />
                         : <Image
                           src={url}
-                          className="!relative object-cover rounded-xl" fill alt="attachment"
+                          width={480}
+                          height={240}
+                          className="!relative object-cover rounded-xl" alt="attachment"
                         />
                     }
                   </MediaWrapper>

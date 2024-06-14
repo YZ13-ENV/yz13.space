@@ -4,7 +4,6 @@ import { SplitViewContainer } from "@/app/_components/split-view-container";
 import { ThreadsWrapper } from "@/app/_components/threads-wrapper";
 import { getFullThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
-import { unstable_noStore } from "next/cache";
 import Link from "next/link";
 import { Contacts } from "../_components/contacts";
 import { Footer } from "../_components/footer";
@@ -20,7 +19,6 @@ type Props = {
   }
 }
 const page = async ({ searchParams }: Props) => {
-  unstable_noStore()
   const filter = searchParams.filter
   const threads = (await getFullThreads())
     .filter(thread => filter ? thread.name?.toLowerCase().includes(filter) : thread)
