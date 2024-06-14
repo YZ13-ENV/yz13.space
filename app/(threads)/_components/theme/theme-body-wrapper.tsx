@@ -24,6 +24,6 @@ const ThemeBodyWrapper = ({ theme = "light", children, className = "" }: Props) 
       if (local_theme !== theme) setLocalTheme(theme)
     }
   }, [typeof document])
-  return <body className={cn("", final_theme, className)}>{children}</body>
+  return <body id="root" className={cn("", final_theme, className)}>{children}</body>
 }
 export { ThemeBodyWrapper }
