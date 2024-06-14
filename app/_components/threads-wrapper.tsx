@@ -12,9 +12,9 @@ const ThreadsWrapper = ({ children, className }: Props) => {
   const isWide = mode === "1:2"
   return (
     <div className={cn(
-      "max-w-xl lg:mr-auto lg:ml-6 mx-auto h-full space-y-12 py-3 px-6",
+      "max-w-xl lg:mr-auto lg:ml-6 mx-auto h-full pr-12 space-y-12 py-3 pl-6",
       "transition-all duration-700",
-      isWide ? "max-w-4xl pr-12" : "",
+      isWide ? "max-w-4xl" : "",
       className
     )}>
       {children}

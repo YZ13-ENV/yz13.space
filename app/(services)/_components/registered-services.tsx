@@ -6,6 +6,8 @@ import { BsMusicPlayer } from "react-icons/bs"
 import { HiMiniCursorArrowRipple } from "react-icons/hi2"
 import { IconType } from "react-icons/lib"
 import { LuKeyRound } from 'react-icons/lu'
+import { MdDataset } from "react-icons/md"
+import { Redirect } from "./redirect"
 
 type ServiceRoute = {
   route: string // /router/**/*
@@ -19,14 +21,13 @@ type Service = {
   service_id: string
   title: string
   description?: string
-  entry: ReactNode
   routes: ServiceRoute[]
+  isExternal?: boolean
 }
 
 const playground_service: Service = {
   service_id: "real-time",
   title: "Realtime",
-  entry: <Playground />,
   routes: [
     {
       route: "/",
@@ -37,11 +38,24 @@ const playground_service: Service = {
   ]
 }
 
+const json_service: Service = {
+  service_id: "json-store",
+  title: "JSON Store",
+  isExternal: true,
+  routes: [
+    {
+      route: "/",
+      icon: MdDataset,
+      entry: <Redirect href="https://json.yz13.space" />,
+      title: "JSON Store"
+    }
+  ]
+}
+
 const widgets_lib_service: Service = {
   service_id: "widgets",
   title: "Widgets library",
   description: "A simple widgets library",
-  entry: <List />,
   routes: [
     {
       route: '/list',
@@ -72,6 +86,7 @@ const widgets_lib_service: Service = {
 
 const registered_services: Service[] = [
   widgets_lib_service,
-  playground_service
+  playground_service,
+  json_service
 ]
 export { registered_services }

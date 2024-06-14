@@ -11,11 +11,10 @@ dayjs.extend(relativeTime)
 
 const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
   const created_at = dayjs(sub_thread?.created_at).fromNow()
-
   return (
     <div className={cn("flex flex-col items-start py-3 group gap-3 relative", className)}>
-      <div className="flex items-center gap-2">
-        <div className="w-fit -space-y-4">
+      <div className="w-full flex items-center gap-2">
+        <div className="w-fit shrink-0 -space-y-4">
           <TooltipProvider delayDuration={100}>
             {
               sub_thread?.author &&
@@ -24,10 +23,13 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThr
             }
           </TooltipProvider>
         </div>
-        <div className="flex flex-col">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground line-clamp-1">
+        <div className="w-full flex justify-between items-center gap-2">
+          <div className="flex flex-col">
+            <span className="font-semibold text-base text-foreground line-clamp-1">
               {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
+            </span>
+            <span className="text-xs text-accents-5">
+              {sub_thread?.author && sub_thread.author.map(item => item.position).join(", ")}
             </span>
           </div>
           <span className="text-xs text-secondary">{created_at}</span>

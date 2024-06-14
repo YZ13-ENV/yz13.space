@@ -45,13 +45,11 @@ const SubThreadV2 = ({
           }
         </TooltipProvider>
       </div>
-      <div className="w-full flex flex-col gap-3">
-        <div className="flex flex-col">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-sm text-foreground line-clamp-1">
-              {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
-            </span>
-          </div>
+      <div className="w-full flex flex-col gap-2">
+        <div className="flex justify-between items-center gap-2">
+          <span className="font-semibold text-base text-foreground line-clamp-1">
+            {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
+          </span>
           <span className="text-xs text-secondary">{created_at}</span>
         </div>
         <div className="py-2 px-2.5 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 transition-colors rounded-bl-2xl rounded-r-2xl space-y-2 border">

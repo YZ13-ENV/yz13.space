@@ -32,7 +32,6 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
         </div>
       }
       <SubThreadsList
-        forceLines={hasMoreThanMax}
         enableLink={enableLink}
         thread_id={thread.thread_id}
         sub_threads={sub_threads}

@@ -12,7 +12,7 @@ const PageRank = () => {
   const [dislikes, setDislikes] = useState<number>(0)
   const sum = likes + dislikes
   const percent = (likes / (likes + dislikes)) * 100 || 0
-  const isReadyToShowRank = sum >= 10
+  const isReadyToShowRank = sum >= 2
   const rank_description = `Likes - ${likes} / Dislikes - ${dislikes}`
   useEffect(() => {
     getPageRank(page)
