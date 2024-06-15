@@ -16,9 +16,7 @@ import { ReactNode } from "react";
 import { AnonSession } from "./(threads)/_components/anon-session";
 import { ThemeBodyWrapper } from "./(threads)/_components/theme/theme-body-wrapper";
 import { Theme } from "./(threads)/_components/theme/theme-store";
-import { ThemeSwitcherButton } from "./(threads)/_components/theme/theme-switcher-button";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
-import { PageRank, RankingControl } from "./_components/page-ranking";
 
 export const metadata: Metadata = {
   title: "YZ13",
@@ -68,11 +66,11 @@ export default async function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
       <ThemeBodyWrapper theme={theme}>
-        <div className="w-9 gap-4 flex flex-col h-fit absolute top-6 right-6 z-10">
+        {/* <div className="w-9 gap-4 flex flex-col h-fit absolute top-6 right-6 z-10">
           <ThemeSwitcherButton />
           <PageRank />
           <RankingControl />
-        </div>
+        </div> */}
         <MediaOverlay />
         <Analytics />
         <SpeedInsights />

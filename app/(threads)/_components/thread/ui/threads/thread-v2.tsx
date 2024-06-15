@@ -24,7 +24,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
     <section id={name} className={className}>
       {
         name &&
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 px-6 mb-2">
           {thread.pinned &&
             <BiStar className="text-warning-foreground" size={20} />
           }
@@ -38,17 +38,19 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
       />
       {
         hasMoreThanMax &&
-        <div className="w-full h-10 mt-5 flex items-center relative gap-3 hover:bg-accents-1 rounded-xl transition-colors">
-          <div className="w-9 h-9 flex justify-center items-center">
-            <BiDotsVerticalRounded size={18} className="text-secondary" />
+        <div className="px-6 pb-6">
+          <div className="w-full h-10 flex items-center relative gap-3 hover:bg-accents-1 rounded-xl transition-colors">
+            <div className="w-9 h-9 flex justify-center items-center">
+              <BiDotsVerticalRounded size={18} className="text-secondary" />
+            </div>
+            {
+              enableLink &&
+              <>
+                <Link href={`/${thread.thread_id}`} className="w-full absolute left-0 h-full top-0" />
+                <span className="text-sm">Show all</span>
+              </>
+            }
           </div>
-          {
-            enableLink &&
-            <>
-              <Link href={`/${thread.thread_id}`} className="w-full absolute left-0 h-full top-0" />
-              <span className="text-sm">Show all</span>
-            </>
-          }
         </div>
       }
     </section>

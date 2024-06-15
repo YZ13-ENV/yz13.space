@@ -26,14 +26,14 @@ const SubThreadV2 = ({
   const created_at = dayjs(sub_thread?.created_at).fromNow()
   const avatar_size = 36
   return (
-    <div className={cn("flex items-start group h-fit gap-3 relative", className)}>
+    <div className={cn("flex items-start group h-fit p-6 group gap-3 relative", className)}>
       {
         enableLine &&
         <div
-          style={{ width: `${avatar_size}px`, top: `${avatar_size / 2}px` }}
-          className="absolute w-fit h-full left-0 py-0 flex justify-center top-0 z-[-2]"
+          style={{ width: `${avatar_size}px`, height: "100%", top: `${avatar_size}px` }}
+          className="absolute w-fit h-full left-6 py-0 flex justify-center z-[-1]"
         >
-          <Separator orientation="vertical" className="w-[3px]" />
+          <Separator orientation="vertical" className="w-[3px] bg-accents-3" />
         </div>
       }
       <div className="w-9 h-full shrink-0 relative -space-y-4">
@@ -48,11 +48,11 @@ const SubThreadV2 = ({
       <div className="w-full flex flex-col gap-2">
         <div className="flex justify-between items-center gap-2">
           <span className="font-semibold text-base text-foreground line-clamp-1">
-            {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
+            {!!sub_thread?.author.length && sub_thread.author.map(item => item ? item.username : "").join(", ")}
           </span>
           <span className="text-xs text-secondary">{created_at}</span>
         </div>
-        <div className="py-2 px-2.5 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 transition-colors rounded-bl-2xl rounded-r-2xl space-y-2 border">
+        <div className="space-y-2">
           {
             enableLink
               ? <Link href={`/${sub_thread.thread_id}`}>

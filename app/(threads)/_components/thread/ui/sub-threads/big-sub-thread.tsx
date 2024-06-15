@@ -12,7 +12,7 @@ dayjs.extend(relativeTime)
 const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
   const created_at = dayjs(sub_thread?.created_at).fromNow()
   return (
-    <div className={cn("flex flex-col items-start py-3 group gap-3 relative", className)}>
+    <div className={cn("flex flex-col px-6 items-start py-3 group gap-3 relative", className)}>
       <div className="w-full flex items-center gap-2">
         <div className="w-fit shrink-0 -space-y-4">
           <TooltipProvider delayDuration={100}>
@@ -26,17 +26,17 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThr
         <div className="w-full flex justify-between items-center gap-2">
           <div className="flex flex-col">
             <span className="font-semibold text-base text-foreground line-clamp-1">
-              {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
+              {!!sub_thread?.author.length && sub_thread.author.map(item => item ? item.username : "").join(", ")}
             </span>
             <span className="text-xs text-accents-5">
-              {sub_thread?.author && sub_thread.author.map(item => item.position).join(", ")}
+              {!!sub_thread?.author.length && sub_thread.author.map(item => item ? item.position : "").join(", ")}
             </span>
           </div>
           <span className="text-xs text-secondary">{created_at}</span>
         </div>
       </div>
       <div className="w-full flex flex-col gap-3">
-        <div className="py-2 px-2.5 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 bg-background transition-colors rounded-bl-2xl space-y-2 rounded-r-2xl border">
+        <div className="space-y-2">
           {
             enableLink
               ? <Link href={`/${sub_thread.thread_id}`}>

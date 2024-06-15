@@ -1,3 +1,4 @@
+import { Separator } from "@/packages/ui/src/components/separator"
 import { cn } from "@repo/ui/cn"
 import { SubThread } from "@yz13/api/db/types"
 import dayjs from "dayjs"
@@ -31,7 +32,7 @@ const SubThreadsList = ({
   const first_part = useMemo(() => { return sorted.slice(0, 1) }, [sorted])
   const second_part = useMemo(() => { return sorted.slice(1, sorted.length) }, [sorted])
   return (
-    <div className={cn("w-full space-y-5", className)}>
+    <div className={cn("w-full", className)}>
       <div className="w-full">
         {
           first_part
@@ -39,7 +40,8 @@ const SubThreadsList = ({
               sub_thread => <SubThreadBig enableLink={enableLink} key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
             )
         }
-        <div className="w-full space-y-5 h-fit relative">
+        <Separator />
+        <div className="w-full h-fit relative">
           {
             second_part
               .map(
