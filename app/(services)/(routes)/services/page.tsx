@@ -11,7 +11,7 @@ import { registered_services } from "../../_components/registered-services"
 const page = () => {
   return (
     <SplitViewContainer>
-      <LeftSide ratio="1/3">
+      <LeftSide>
         <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
           <div className="space-y-2">
             <h2 className="text-4xl font-semibold">All services</h2>
@@ -23,7 +23,7 @@ const page = () => {
           </Link>
         </div>
       </LeftSide>
-      <RightSide ratio="2/3">
+      <RightSide>
         <RightContentContainer>
           <ul className="space-y-4">
             {

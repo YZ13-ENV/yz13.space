@@ -12,7 +12,9 @@ const layout = ({ children }: Props) => {
     <>
       <SplitViewContainer>
         <LeftSide>
-          <YZ13Info />
+          <div className="w-full h-full flex xl:items-center items-start justify-center">
+            <YZ13Info />
+          </div>
         </LeftSide>
         <RightSide>
           {children}

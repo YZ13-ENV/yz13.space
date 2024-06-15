@@ -10,7 +10,7 @@ const YZ13Info = async () => {
   const skills = await get<string[]>("skills")
   const contacts = await get<Contact[]>("contacts")
   return (
-    <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
+    <div className="xl:max-w-sm max-w-xl w-full space-y-5 p-6">
       <div className="w-16 aspect-square rounded-full bg-accents-1 relative">
         {
           gh_user &&

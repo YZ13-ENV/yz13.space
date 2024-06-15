@@ -46,7 +46,7 @@ const config = {
           md: "calc(var(--yz13-radius) - 2px)",
           sm: "calc(var(--yz13-radius) - 4px)",
         },
-        neutral: {
+        "yz-neutral": {
           50: "hsl(var(--yz13-neutral-50))",
           100: "hsl(var(--yz13-neutral-100))",
           200: "hsl(var(--yz13-neutral-200))",
