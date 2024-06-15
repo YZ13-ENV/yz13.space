@@ -1,10 +1,11 @@
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { BiHeart, BiShareAlt } from "react-icons/bi"
-import { LuBarChart, LuUsers } from "react-icons/lu"
+import { LuBarChart2, LuUsers } from "react-icons/lu"
 import { MdOutlineStarBorder, MdOutlineTag } from "react-icons/md"
 import { Attachments } from "../attachmets"
 import { SubThreadsProps } from "../threads/thread-v2"
+import { Button } from "./button"
 import { SubThread } from "./sub-thread"
 dayjs.extend(relativeTime)
 
@@ -14,10 +15,13 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "", tag }: S
   const created_at = dayjs(sub_thread?.created_at).fromNow()
   const hasAttachments = !!sub_thread.attachments.length
   const thread_id = sub_thread.thread_id
+  const likes_count = sub_thread.likes.length
+  const views_count = sub_thread.views.length
+  const authors_count = sub_thread.author.length
   return <SubThread
     key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
     direction="vertical"
-    className="gap-4"
+    className="gap-4 py-6"
   >
     <div className="flex items-center gap-2 w-full">
       <SubThread.Avatars avatars={avatars} direction="horizontal" />
@@ -35,30 +39,14 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "", tag }: S
       <div className="w-full flex items-center justify-between">
         {
           tag &&
-          <button className="flex items-center gap-2 text-xs text-secondary">
-            <MdOutlineTag size={16} />
-            <span>{tag}</span>
-          </button>
+          <Button icon={MdOutlineTag}>{tag}</Button>
         }
-        <button className="flex items-center gap-2 text-xs text-secondary">
-          <BiHeart size={16} />
-          <span>10</span>
-        </button>
-        <button className="flex items-center gap-2 text-xs text-secondary">
-          <LuBarChart size={16} />
-          <span>2</span>
-        </button>
-        <button className="flex items-center gap-2 text-xs text-secondary">
-          <LuUsers size={16} />
-          <span>2</span>
-        </button>
+        <Button icon={BiHeart}>{likes_count}</Button>
+        <Button icon={LuBarChart2}>{views_count}</Button>
+        <Button icon={LuUsers}>{authors_count}</Button>
         <div className="flex items-center gap-2">
-          <button className="flex items-center gap-2 text-xs text-secondary">
-            <MdOutlineStarBorder size={16} />
-          </button>
-          <button className="flex items-center gap-2 text-xs text-secondary">
-            <BiShareAlt size={16} />
-          </button>
+          <Button icon={MdOutlineStarBorder}></Button>
+          <Button icon={BiShareAlt}></Button>
         </div>
       </div>
     </div>

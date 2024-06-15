@@ -24,7 +24,7 @@ const SubThreadWrapper = ({ children, className = "", direction = "horizontal" }
         direction === "horizontal"
           ? "flex-row"
           : "flex-col",
-        "flex w-full p-6 relative",
+        "flex w-full px-6 relative",
         className
       )}
     >

@@ -11,6 +11,8 @@ import { SubThreadV2 } from "../sub-threads/sub-thread-v2"
 
 
 type ThreadProps = {
+  id: string
+  className?: string
   children?: ReactNode
 }
 
@@ -20,8 +22,10 @@ type Extensions = {
   List: typeof SubThreadsList
 }
 
-const ThreadWrapper = ({ children }: ThreadProps) => {
-  return <>{children}</>
+const ThreadWrapper = ({ children, id, className }: ThreadProps) => {
+  return <article id={id} className={className}>
+    {children}
+  </article>
 }
 
 const ThreadLink = ({ id }: { id: string }) => {
@@ -45,8 +49,10 @@ type ListProps = {
   className?: string
   sub_threads?: SubThread[]
   enableLink?: boolean
+  forceLine?: boolean
+  tag?: string
 }
-const SubThreadsList = ({ enableLink = false, thread_id, sub_threads = [], className = "" }: ListProps) => {
+const SubThreadsList = ({ forceLine = false, tag, enableLink = false, thread_id, sub_threads = [], className = "" }: ListProps) => {
   const sorted = sub_threads.sort((a, b) => {
     const a_date = dayjs(a.created_at)
     const b_date = dayjs(b.created_at)
@@ -55,19 +61,17 @@ const SubThreadsList = ({ enableLink = false, thread_id, sub_threads = [], class
   const first_part = sorted.slice(0, 1)
   const second_part = sorted.slice(1, sorted.length)
   return (
-    <ul className={cn("w-full", className)}>
+    <div className={cn("w-full", className)}>
       {
         first_part
           .map(
             sub_thread =>
-              <li
+              <SubThreadBig
                 key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
-              >
-                <SubThreadBig
-                  sub_thread={sub_thread}
-                  enableLink={enableLink}
-                />
-              </li>
+                tag={tag}
+                sub_thread={sub_thread}
+                enableLink={enableLink}
+              />
           )
       }
       <Separator />
@@ -77,17 +81,20 @@ const SubThreadsList = ({ enableLink = false, thread_id, sub_threads = [], class
             .map(
               (sub_thread, index, arr) => {
                 const isLast = index === arr.length - 1
-                return <SubThreadV2
-                  key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
-                  sub_thread={sub_thread}
-                  enableLink={enableLink}
-                  enableLine={!isLast}
-                />
+                return (
+                  <SubThreadV2
+                    key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
+                    className="first:pt-6 pb-6"
+                    sub_thread={sub_thread}
+                    enableLink={enableLink}
+                    enableLine={forceLine ? forceLine : !isLast}
+                  />
+                )
               }
             )
         }
       </div>
-    </ul>
+    </div>
   )
 }
 

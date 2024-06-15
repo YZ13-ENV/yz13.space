@@ -1,8 +1,6 @@
 import { FullThread, SubThread } from "@yz13/api/db/types"
-import Link from "next/link"
-import { BiDotsVerticalRounded } from "react-icons/bi"
-import { SubThreadsList } from "../sub-threads-list"
 import { SubThreadV2 } from "../sub-threads/sub-thread-v2"
+import { Thread as ThreadWrapper } from "./thread"
 
 type Props = {
   thread: FullThread
@@ -18,12 +16,12 @@ export type SubThreadsProps = {
   className?: string
 }
 const Thread = async ({ thread, max = 0, enableLink = false, className = "", component = SubThreadV2 }: Props) => {
-  const { name, threads } = thread
+  const { name, threads, thread_id } = thread
   const sub_threads = threads
   const hasMoreThanMax = sub_threads.length >= max && max >= 1
   return (
-    <section id={name?.toLowerCase()} className={className}>
-      <SubThreadsList
+    <ThreadWrapper id={name ? name?.toLowerCase() : String(thread_id)} className={className}>
+      <ThreadWrapper.List
         tag={thread.name}
         enableLink={enableLink}
         thread_id={thread.thread_id}
@@ -31,22 +29,9 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
       />
       {
         hasMoreThanMax &&
-        <div className="px-6 pb-6">
-          <div className="w-full h-10 flex items-center relative gap-3 hover:bg-accents-1 rounded-xl transition-colors">
-            <div className="w-9 h-9 flex justify-center items-center">
-              <BiDotsVerticalRounded size={18} className="text-secondary" />
-            </div>
-            {
-              enableLink &&
-              <>
-                <Link href={`/${thread.thread_id}`} className="w-full absolute left-0 h-full top-0" />
-                <span className="text-sm">Show all</span>
-              </>
-            }
-          </div>
-        </div>
+        <ThreadWrapper.Link id={String(thread_id)} />
       }
-    </section>
+    </ThreadWrapper>
   )
 }
 export { Thread }
