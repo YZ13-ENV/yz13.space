@@ -6,7 +6,7 @@ import {
 } from "@/packages/api/src/db/types";
 import { createClient } from "@/packages/supabase/src/supabase/server";
 import { getStorageItem } from "@/packages/supabase/src/supabase/storage";
-import { unstable_cache as cache, unstable_noStore } from "next/cache";
+import { unstable_cache as cache } from "next/cache";
 import { cookies } from "next/headers";
 
 export const GET = async (request: Request) => {
@@ -27,8 +27,9 @@ export const GET = async (request: Request) => {
     const members = team.data || [];
     const threads_response = await cached_threads_response();
     const threads: ThreadTree[] = threads_response.data || [];
-    if (!!threads_response.error) unstable_noStore();
+    if (!!threads_response.error) console.log(threads_response);
     const sub_threads_response = await cached_sub_threads_response();
+    if (!!sub_threads_response.error) console.log(sub_threads_response);
     const sub_threads: ThreadItem[] = sub_threads_response.data || [];
     const sub_threads_with_authors = sub_threads
       .map((sub_thread) => {

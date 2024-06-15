@@ -53,7 +53,6 @@ const page = async ({ searchParams }: Props) => {
               threads.map(
                 (thread) => <Thread
                   key={thread.thread_id + "-" + thread.created_at}
-                  className="py-6"
                   thread={thread}
                   max={3}
                   component={SubThreadV2}

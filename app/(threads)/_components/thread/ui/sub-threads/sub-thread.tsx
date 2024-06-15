@@ -1,34 +1,105 @@
-import { cn } from "@repo/ui/cn"
-import { TooltipProvider } from "@repo/ui/tooltip"
-import Link from "next/link"
-import { Author } from "../author"
-import { SubThreadStatistics } from "../sub-thread-statistics"
-import { SubThreadsProps } from "../threads/thread-v2"
+import { SubThread as SubThreadType } from "@/packages/api/src/db/types"
+import { cn } from "@/packages/ui/lib/utils"
+import { Separator } from "@/packages/ui/src/components/separator"
+import { ReactNode } from "react"
 
-const SubThread = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
+type SubThreadDirection = "horizontal" | "vertical"
+
+type SubThreadProps = {
+  children?: ReactNode
+  className?: string
+  direction?: SubThreadDirection
+}
+type Extensions = {
+  displayName: string
+  Line: typeof SubThreadLine
+  Avatars: typeof SubThreadAvatars
+  Text: typeof SubThreadText
+  Authors: typeof SubThreadAuthors
+}
+const SubThreadWrapper = ({ children, className = "", direction = "horizontal" }: SubThreadProps) => {
   return (
-    <div className={cn("flex items-start py-3 group gap-3 relative", className)}>
-      <div className="w-9 -space-y-4">
-        <TooltipProvider delayDuration={100}>
-          {
-            sub_thread?.author.map(
-              (author, i) => <Author key={author + "-" + i} author={author} />)
-          }
-        </TooltipProvider>
-      </div>
-      <div className="w-full flex flex-col gap-3">
-        <div className="p-2 rounded-tl-md group-hover:bg-accents-1 transition-colors rounded-bl-2xl rounded-r-2xl border">
-          {
-            enableLink
-              ? <Link href={`/${sub_thread.thread_id}`}>
-                <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-              </Link>
-              : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-          }
-        </div>
-        <SubThreadStatistics sub_thread={sub_thread} />
-      </div>
+    <div
+      className={cn(
+        direction === "horizontal"
+          ? "flex-row"
+          : "flex-col",
+        "flex w-full p-6 relative",
+        className
+      )}
+    >
+      {children}
     </div>
   )
 }
+
+const SubThreadAvatars = ({
+  avatars = [],
+  size = 36,
+  direction = "horizontal"
+}: { avatars?: string[], size?: number, direction?: SubThreadDirection }) => {
+  return (
+    <div
+      className={cn(
+        direction === "horizontal" ? "h-9 w-fit" : "w-9 h-fit",
+        "shrink-0 relative -space-y-4"
+      )}
+    >
+      {
+        avatars.map(
+          (avatar, i) =>
+            <img
+              key={avatar + "-" + i}
+              className="aspect-square shrink-0 rounded-full border-2 border-background bg-accents-2"
+              src={avatar}
+              width={size} height={size}
+              alt="author-photo"
+            />
+        )
+      }
+    </div>
+  )
+}
+
+const SubThreadAuthors = ({
+  authors = [],
+  showPositions = false
+}: { authors?: SubThreadType["author"], showPositions?: boolean }) => {
+  const names = authors.map((author, index) => author ? author.username : `Author#${index}`).join(", ")
+  const positions = authors.map((author, index) => author ? author.position : `Author position#${index}`).join(", ")
+  return (
+    <div className="flex flex-col">
+      <span className="font-semibold text-base text-foreground line-clamp-1">{names}</span>
+      {
+        showPositions &&
+        <span className="text-xs text-accents-5">{positions}</span>
+      }
+    </div>
+  )
+}
+
+const SubThreadText = ({ children = "" }: { children?: string }) => {
+  return <span className="group-hover:text-foreground transition-colors text-sm">{children}</span>
+}
+
+const SubThreadLine = ({ avatar_size = 24 }: { avatar_size?: number }) => {
+  return (
+    <div
+      style={{ width: `${avatar_size}px`, height: "100%", top: `${avatar_size}px` }}
+      className="absolute w-fit h-full left-7 py-0 flex justify-center z-[-1]"
+    >
+      <Separator orientation="vertical" className="w-[3px] bg-accents-3" />
+    </div>
+  )
+}
+
+const SubThread = SubThreadWrapper as typeof SubThreadWrapper & Extensions
+SubThread.displayName = "SubThread"
+SubThread.Line = SubThreadLine
+SubThread.Avatars = SubThreadAvatars
+SubThread.Text = SubThreadText
+SubThread.Authors = SubThreadAuthors
+// attachments
+// statistics
+
 export { SubThread }

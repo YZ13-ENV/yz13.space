@@ -1,6 +1,6 @@
 import { Separator } from "@/packages/ui/src/components/separator"
 import { cn } from "@repo/ui/cn"
-import { SubThread } from "@yz13/api/db/types"
+import { SubThread as SubThreadType } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import { useMemo } from "react"
 import { SubThreadBig } from "./sub-threads/big-sub-thread"
@@ -10,12 +10,14 @@ import { SubThreadsProps } from "./threads/thread-v2"
 
 type Props = {
   thread_id: number
-  sub_threads?: SubThread[]
+  sub_threads?: SubThreadType[]
   className?: string
   enableLink?: boolean
+  tag?: string
   component?: (props: SubThreadsProps) => JSX.Element
 }
 const SubThreadsList = ({
+  tag,
   enableLink = false,
   thread_id,
   className = "",
@@ -24,10 +26,7 @@ const SubThreadsList = ({
   const sorted = sub_threads.sort((a, b) => {
     const a_date = dayjs(a.created_at)
     const b_date = dayjs(b.created_at)
-    // from newer to older
     return b_date.diff(a_date)
-    // from older to newer
-    // return a_date.diff(b_date)
   })
   const first_part = useMemo(() => { return sorted.slice(0, 1) }, [sorted])
   const second_part = useMemo(() => { return sorted.slice(1, sorted.length) }, [sorted])
@@ -36,9 +35,7 @@ const SubThreadsList = ({
       <div className="w-full">
         {
           first_part
-            .map(
-              sub_thread => <SubThreadBig enableLink={enableLink} key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`} sub_thread={sub_thread} />
-            )
+            .map(sub_thread => <SubThreadBig sub_thread={sub_thread} tag={tag} />)
         }
         <Separator />
         <div className="w-full h-fit relative">
