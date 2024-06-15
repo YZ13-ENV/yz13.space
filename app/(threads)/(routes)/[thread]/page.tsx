@@ -1,6 +1,3 @@
-import { LeftSide } from "@/app/_components/left"
-import { RightSide } from "@/app/_components/right"
-import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { Separator } from "@repo/ui/separator"
 import { getFullThread, otherThreads } from "@yz13/api/db/threads"
 import { unstable_noStore } from "next/cache"
@@ -9,7 +6,6 @@ import { BiLeftArrowAlt } from "react-icons/bi"
 import { Footer } from "../../_components/footer"
 import { SubThreadV2 } from "../../_components/thread/ui/sub-threads/sub-thread-v2"
 import { Thread } from "../../_components/thread/ui/threads/thread-v2"
-import { YZ13Info } from "../../_components/yz13-info"
 
 type Props = {
   params: {
@@ -23,55 +19,48 @@ const page = async ({ params }: Props) => {
   const thread = await getFullThread(thread_id)
   const other_threads = await otherThreads(thread_id)
   return (
-    <SplitViewContainer>
-      <LeftSide showButton>
-        <YZ13Info />
-      </LeftSide>
-      <RightSide>
-        <div className="w-full">
-          <div className="border-t border-r">
-            <div className="flex items-center justify-start p-6 border-b">
-              <Link href="/" className="inline-flex items-center text-secondary gap-1">
-                <BiLeftArrowAlt size={16} className="text-inherit" />
-                <span className="text-sm text-inherit">Back</span>
-              </Link>
-            </div>
-            <div className="w-full space-y-3 py-6">
-              {
-                thread &&
-                <Thread thread={thread} component={SubThreadV2} />
-              }
-            </div>
-            {
-              !!other_threads.length &&
-              <>
-                <Separator />
-                <section>
-                  <div className="p-6 border-b">
-                    <h2 className="text-2xl font-semibold">Other</h2>
-                  </div>
-                  <div className="w-full">
-                    {
-                      other_threads.map(
-                        thread =>
-                          <Thread
-                            className="pt-6"
-                            key={thread.thread_id + "-" + thread.created_at}
-                            thread={thread}
-                            enableLink
-                            max={3}
-                          />
-                      )
-                    }
-                  </div>
-                </section>
-              </>
-            }
-            <Footer className="p-6 border-t" />
-          </div>
+    <div className="w-full">
+      <div className="border-t border-r">
+        <div className="flex items-center justify-start p-6 border-b">
+          <Link href="/" className="inline-flex items-center text-secondary gap-1">
+            <BiLeftArrowAlt size={16} className="text-inherit" />
+            <span className="text-sm text-inherit">Back</span>
+          </Link>
         </div>
-      </RightSide>
-    </SplitViewContainer>
+        <div className="w-full space-y-3 py-6">
+          {
+            thread &&
+            <Thread thread={thread} component={SubThreadV2} />
+          }
+        </div>
+        {
+          !!other_threads.length &&
+          <>
+            <Separator />
+            <section>
+              <div className="p-6 border-b">
+                <h2 className="text-2xl font-semibold">Other</h2>
+              </div>
+              <div className="w-full">
+                {
+                  other_threads.map(
+                    thread =>
+                      <Thread
+                        className="pt-6"
+                        key={thread.thread_id + "-" + thread.created_at}
+                        thread={thread}
+                        enableLink
+                        max={3}
+                      />
+                  )
+                }
+              </div>
+            </section>
+          </>
+        }
+        <Footer className="p-6 border-t" />
+      </div>
+    </div>
   )
 }
 export default page

@@ -46,6 +46,18 @@ const config = {
           md: "calc(var(--yz13-radius) - 2px)",
           sm: "calc(var(--yz13-radius) - 4px)",
         },
+        neutral: {
+          50: "hsl(var(--yz13-neutral-50))",
+          100: "hsl(var(--yz13-neutral-100))",
+          200: "hsl(var(--yz13-neutral-200))",
+          300: "hsl(var(--yz13-neutral-300))",
+          400: "hsl(var(--yz13-neutral-400))",
+          500: "hsl(var(--yz13-neutral-500))",
+          600: "hsl(var(--yz13-neutral-600))",
+          700: "hsl(var(--yz13-neutral-700))",
+          800: "hsl(var(--yz13-neutral-800))",
+          900: "hsl(var(--yz13-neutral-900))",
+        },
         success: {
           DEFAULT: "hsl(var(--yz13-success-accent))",
           100: "hsl(var(--yz13-success-100))",

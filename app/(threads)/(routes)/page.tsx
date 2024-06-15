@@ -1,6 +1,3 @@
-import { LeftSide } from "@/app/_components/left";
-import { RightSide } from "@/app/_components/right";
-import { SplitViewContainer } from "@/app/_components/split-view-container";
 import { getFullThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
 import { unstable_noStore } from "next/cache";
@@ -10,7 +7,7 @@ import { Footer } from "../_components/footer";
 import { SearchBar } from "../_components/search-bar";
 import { SubThreadV2 } from "../_components/thread/ui/sub-threads/sub-thread-v2";
 import { Thread } from "../_components/thread/ui/threads/thread-v2";
-import { YZ13Info } from "../_components/yz13-info";
+import { AdBanner } from "./ad-banner";
 import { nav_links } from "./nav-links";
 
 type Props = {
@@ -31,50 +28,44 @@ const page = async ({ searchParams }: Props) => {
     .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
   return (
     <>
-      <SplitViewContainer>
-        <LeftSide showButton>
-          <YZ13Info />
-        </LeftSide>
-        <RightSide>
-          <div className="w-full">
-            <div className="border-t border-r">
-              <div className="p-6 border-b w-full space-y-3">
-                <SearchBar />
-                <nav className="space-x-2">
-                  {
-                    nav_links.map(nav =>
-                      <Link
-                        key={nav.link}
-                        className="inline-flex transition-colors gap-1 hover:bg-accents-1 items-center text-foreground/80 hover:text-foreground px-2 py-1 text-sm hover:border-foreground rounded-md border"
-                        href={nav.link}
-                      >
-                        {nav.icon && nav.icon({ className: "text-inherit", size: 16 })}
-                        <span className="text-inherit">{nav.label}</span>
-                      </Link>
-                    )
-                  }
-                </nav>
-              </div>
-              <div className="w-full divide-y">
-                {
-                  threads.map(
-                    (thread) => <Thread
-                      key={thread.thread_id + "-" + thread.created_at}
-                      className="py-6"
-                      thread={thread}
-                      max={3}
-                      component={SubThreadV2}
-                      enableLink
-                    />
-                  )
-                }
-                <Contacts className="p-6" />
-                <Footer className="p-6" />
-              </div>
-            </div>
+      <AdBanner />
+      <div className="w-full">
+        <div className="border-t lg:border-l-0 border-l  border-r">
+          <div className="p-6 border-b w-full space-y-3">
+            <SearchBar />
+            <nav className="space-x-2">
+              {
+                nav_links.map(nav =>
+                  <Link
+                    key={nav.link}
+                    className="inline-flex transition-colors gap-1 hover:bg-accents-1 items-center text-foreground/80 hover:text-foreground px-2 py-1 text-sm hover:border-foreground rounded-md border"
+                    href={nav.link}
+                  >
+                    {nav.icon && nav.icon({ className: "text-inherit", size: 16 })}
+                    <span className="text-inherit">{nav.label}</span>
+                  </Link>
+                )
+              }
+            </nav>
           </div>
-        </RightSide>
-      </SplitViewContainer>
+          <div className="w-full divide-y">
+            {
+              threads.map(
+                (thread) => <Thread
+                  key={thread.thread_id + "-" + thread.created_at}
+                  className="py-6"
+                  thread={thread}
+                  max={3}
+                  component={SubThreadV2}
+                  enableLink
+                />
+              )
+            }
+            <Contacts className="p-6" />
+            <Footer className="p-6" />
+          </div>
+        </div>
+      </div>
     </>
   )
 }
