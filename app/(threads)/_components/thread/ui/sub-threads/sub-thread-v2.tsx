@@ -2,10 +2,11 @@ import { SubThread as SubThreadType } from "@/packages/api/src/db/types"
 import { cn } from "@/packages/ui/lib/utils"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { BiHeart, BiShareAlt } from "react-icons/bi"
-import { LuBarChart2, LuUsers } from "react-icons/lu"
+import { BiShareAlt } from "react-icons/bi"
+import { LuUsers } from "react-icons/lu"
 import { MdOutlineStarBorder, MdOutlineTag } from "react-icons/md"
 import { Attachments } from "../attachmets"
+import { SubThreadStatistics } from "../sub-thread-statistics"
 import { Button } from "./button"
 import { SubThread } from "./sub-thread"
 dayjs.extend(relativeTime)
@@ -62,8 +63,7 @@ const SubThreadV2 = ({
               tag &&
               <Button icon={MdOutlineTag}>{tag}</Button>
             }
-            <Button icon={BiHeart}>{likes_count}</Button>
-            <Button icon={LuBarChart2}>{views_count}</Button>
+            <SubThreadStatistics sub_thread={sub_thread} />
             <Button icon={LuUsers}>{authors_count}</Button>
             <div className="flex items-center gap-2">
               <Button icon={MdOutlineStarBorder}></Button>

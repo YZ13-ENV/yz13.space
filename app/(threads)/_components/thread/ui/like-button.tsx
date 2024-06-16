@@ -40,16 +40,19 @@ const LikeButton = ({ loading = false, value, onClick, variant = "not-liked" }: 
             }}
             variant="ghost"
             size="sm"
-            className={cn("gap-1 px-2 py-0 h-6", isLiked ? "text-error-foreground" : "text-inherit")}
+            className={cn("hover:bg-transparent gap-1 p-0", isLiked ? "text-error-foreground" : "text-inherit")}
           >
-            {
-              loading
-                ? <BiLoaderAlt size={16} className={cn("animate-spin", isLiked ? "text-error-foreground" : "text-inherit")} />
-                :
-                isLiked
-                  ? <BiSolidHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
-                  : <BiHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
-            }
+            <span className="relative flex items-center justify-center">
+              <span className="w-7 h-7 bg-transparent group-hover/tag:bg-yz-neutral-100 transition-colors rounded-full absolute" />
+              {
+                loading
+                  ? <BiLoaderAlt size={16} className={cn("animate-spin", isLiked ? "text-error-foreground" : "text-inherit")} />
+                  :
+                  isLiked
+                    ? <BiSolidHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
+                    : <BiHeart size={16} className={isLiked ? "text-error-foreground" : "text-inherit"} />
+              }
+            </span>
             <AnimatedNumbers
               className={isLiked ? "text-error-foreground" : "text-inherit"}
               includeComma

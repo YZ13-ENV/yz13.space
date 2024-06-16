@@ -1,10 +1,9 @@
 "use client"
-import { Button, ButtonProps } from "@repo/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
 import { useInViewport } from "ahooks"
 import { ElementRef, useEffect, useRef } from "react"
-import AnimatedNumbers from "react-animated-numbers"
-import { BiChart } from "react-icons/bi"
+import { LuBarChart2 } from "react-icons/lu"
+import { Button } from "./sub-threads/button"
 // const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
 // ssr: false,
 // loading: () => <span className="w-6 h-4 rounded-md bg-accents-2 animate-pulse inline-block" />
@@ -13,10 +12,9 @@ import { BiChart } from "react-icons/bi"
 type Props = {
   onClick?: () => void
   value: number
-  variant?: ButtonProps["variant"]
   onView?: () => void
 }
-const ViewButton = ({ value, onClick, variant, onView }: Props) => {
+const ViewButton = ({ value, onClick, onView }: Props) => {
   const ref = useRef<ElementRef<"button">>(null)
   const [inView] = useInViewport(ref)
   useEffect(() => {
@@ -28,24 +26,9 @@ const ViewButton = ({ value, onClick, variant, onView }: Props) => {
         <TooltipTrigger asChild>
           <Button
             ref={ref}
-            onClick={onClick}
-            variant={variant}
-            size="sm"
-            className="gap-1 px-2 py-0 h-6"
+            icon={LuBarChart2}
           >
-            <BiChart size={16} />
-            <AnimatedNumbers
-              includeComma
-              transitions={(index) => ({
-                type: "spring",
-                duration: index + 0.3,
-              })}
-              animateToNumber={value > 1000 ? value / 1000 : value}
-            />
-            {
-              value > 1000 &&
-              <span>k.</span>
-            }
+            {value}
           </Button>
         </TooltipTrigger>
         <TooltipContent className="rounded-lg" sideOffset={6}>{value} views</TooltipContent>
