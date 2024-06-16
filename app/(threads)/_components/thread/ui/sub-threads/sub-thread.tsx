@@ -86,9 +86,9 @@ const SubThreadLine = ({ avatar_size = 24 }: { avatar_size?: number }) => {
   return (
     <div
       style={{ width: `${avatar_size}px`, height: "100%", top: `${avatar_size}px` }}
-      className="absolute w-fit h-full left-7 py-0 flex justify-center z-[-1]"
+      className="absolute w-fit h-full left-[30px] py-0 flex justify-center z-[-1]"
     >
-      <Separator orientation="vertical" className="w-[3px] bg-accents-3" />
+      <Separator orientation="vertical" className="w-[3px] bg-accents-2 dark:bg-accents-3" />
     </div>
   )
 }

@@ -1,16 +1,17 @@
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { BiShareAlt } from "react-icons/bi"
 import { LuUsers } from "react-icons/lu"
-import { MdOutlineStarBorder, MdOutlineTag } from "react-icons/md"
+import { MdOutlineTag, MdStar, MdStarBorder } from "react-icons/md"
 import { Attachments } from "../attachmets"
 import { SubThreadStatistics } from "../sub-thread-statistics"
 import { SubThreadsProps } from "../threads/thread-v2"
+import { BtnIcon } from "./btn-icon"
 import { Button } from "./button"
+import { ShareButton } from "./share-button"
 import { SubThread } from "./sub-thread"
 dayjs.extend(relativeTime)
 
-const SubThreadBig = ({ enableLink = false, sub_thread, className = "", tag }: SubThreadsProps) => {
+const SubThreadBig = ({ sub_thread, tag, pinned = false }: SubThreadsProps) => {
   const avatars = sub_thread.author.map(author => author.avatar_url)
   const authors = sub_thread.author
   const created_at = dayjs(sub_thread?.created_at).fromNow()
@@ -38,13 +39,21 @@ const SubThreadBig = ({ enableLink = false, sub_thread, className = "", tag }: S
       <div className="w-full flex items-center justify-between">
         {
           tag &&
-          <Button icon={MdOutlineTag}>{tag}</Button>
+          <Button>
+            <BtnIcon icon={MdOutlineTag} />
+            {tag}
+          </Button>
         }
         <SubThreadStatistics sub_thread={sub_thread} />
-        <Button icon={LuUsers}>{authors_count}</Button>
+        <Button>
+          <BtnIcon icon={LuUsers} />
+          {authors_count}
+        </Button>
         <div className="flex items-center gap-2">
-          <Button icon={MdOutlineStarBorder}></Button>
-          <Button icon={BiShareAlt}></Button>
+          <Button>
+            <BtnIcon icon={pinned ? MdStar : MdStarBorder} />
+          </Button>
+          <ShareButton id={thread_id} />
         </div>
       </div>
     </div>

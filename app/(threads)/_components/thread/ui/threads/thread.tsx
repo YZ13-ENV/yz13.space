@@ -51,8 +51,17 @@ type ListProps = {
   enableLink?: boolean
   forceLine?: boolean
   tag?: string
+  pinned?: boolean
 }
-const SubThreadsList = ({ forceLine = false, tag, enableLink = false, thread_id, sub_threads = [], className = "" }: ListProps) => {
+const SubThreadsList = ({
+  forceLine = false,
+  tag,
+  enableLink = false,
+  thread_id,
+  sub_threads = [],
+  className = "",
+  pinned = false
+}: ListProps) => {
   const sorted = sub_threads.sort((a, b) => {
     const a_date = dayjs(a.created_at)
     const b_date = dayjs(b.created_at)
@@ -71,6 +80,7 @@ const SubThreadsList = ({ forceLine = false, tag, enableLink = false, thread_id,
                 tag={tag}
                 sub_thread={sub_thread}
                 enableLink={enableLink}
+                pinned={pinned}
               />
           )
       }
@@ -88,6 +98,7 @@ const SubThreadsList = ({ forceLine = false, tag, enableLink = false, thread_id,
                     sub_thread={sub_thread}
                     enableLink={enableLink}
                     enableLine={forceLine ? forceLine : !isLast}
+                    pinned={pinned}
                   />
                 )
               }

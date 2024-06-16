@@ -26,8 +26,11 @@ const ViewButton = ({ value, onClick, onView }: Props) => {
         <TooltipTrigger asChild>
           <Button
             ref={ref}
-            icon={LuBarChart2}
           >
+            <span className="relative flex items-center justify-center">
+              <LuBarChart2 size={16} className="z-[1]" />
+              <span className="w-7 h-7 bg-transparent group-hover/tag:bg-yz-neutral-100 transition-colors rounded-full absolute" />
+            </span>
             {value}
           </Button>
         </TooltipTrigger>

@@ -1,23 +1,16 @@
-import { SubThread as SubThreadType } from "@/packages/api/src/db/types"
 import { cn } from "@/packages/ui/lib/utils"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { BiShareAlt } from "react-icons/bi"
 import { LuUsers } from "react-icons/lu"
-import { MdOutlineStarBorder, MdOutlineTag } from "react-icons/md"
+import { MdOutlineTag } from "react-icons/md"
 import { Attachments } from "../attachmets"
 import { SubThreadStatistics } from "../sub-thread-statistics"
+import { SubThreadsProps } from "../threads/thread-v2"
+import { BtnIcon } from "./btn-icon"
 import { Button } from "./button"
+import { ShareButton } from "./share-button"
 import { SubThread } from "./sub-thread"
 dayjs.extend(relativeTime)
-
-export type SubThreadsProps = {
-  tag?: string
-  sub_thread: SubThreadType
-  enableLine?: boolean
-  enableLink?: boolean
-  className?: string
-}
 
 const SubThreadV2 = ({
   tag,
@@ -25,6 +18,7 @@ const SubThreadV2 = ({
   sub_thread,
   className = "",
   enableLine = false,
+  pinned = false,
 }: SubThreadsProps) => {
   const avatar_size = 36
   const avatars = sub_thread.author.map(author => author.avatar_url)
@@ -32,8 +26,6 @@ const SubThreadV2 = ({
   const created_at = dayjs(sub_thread?.created_at).fromNow()
   const hasAttachments = !!sub_thread.attachments.length
   const thread_id = sub_thread.thread_id
-  const likes_count = sub_thread.likes.length
-  const views_count = sub_thread.views.length
   const authors_count = sub_thread.author.length
   return (
     <SubThread
@@ -61,13 +53,18 @@ const SubThreadV2 = ({
           <div className="w-full flex items-center justify-between">
             {
               tag &&
-              <Button icon={MdOutlineTag}>{tag}</Button>
+              <Button>
+                <BtnIcon icon={MdOutlineTag} />
+                {tag}
+              </Button>
             }
             <SubThreadStatistics sub_thread={sub_thread} />
-            <Button icon={LuUsers}>{authors_count}</Button>
+            <Button>
+              <BtnIcon icon={LuUsers} />
+              {authors_count}
+            </Button>
             <div className="flex items-center gap-2">
-              <Button icon={MdOutlineStarBorder}></Button>
-              <Button icon={BiShareAlt}></Button>
+              <ShareButton id={thread_id} />
             </div>
           </div>
         </div>
