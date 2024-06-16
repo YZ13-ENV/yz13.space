@@ -41,8 +41,8 @@ const SubThreadAvatars = ({
   return (
     <div
       className={cn(
-        direction === "horizontal" ? "h-9 w-fit" : "w-9 h-fit",
-        "shrink-0 relative -space-y-4"
+        direction === "horizontal" ? "h-9 w-fit -space-x-4" : "w-9 h-fit -space-y-4",
+        "shrink-0 relative"
       )}
     >
       {
@@ -50,7 +50,7 @@ const SubThreadAvatars = ({
           (avatar, i) =>
             <img
               key={avatar + "-" + i}
-              className="aspect-square shrink-0 rounded-full border-2 border-background bg-accents-2"
+              className="aspect-square shrink-0 inline-block rounded-full border-2 border-background bg-accents-2"
               src={avatar}
               width={size} height={size}
               alt="author-photo"
