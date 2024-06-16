@@ -1,73 +1,78 @@
-import { SubThread } from "@/packages/api/src/db/types"
-import { cn } from "@repo/ui/cn"
-import { Separator } from "@repo/ui/separator"
-import { TooltipProvider } from "@repo/ui/tooltip"
+import { SubThread as SubThreadType } from "@/packages/api/src/db/types"
+import { cn } from "@/packages/ui/lib/utils"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import Link from "next/link"
+import { BiShareAlt } from "react-icons/bi"
+import { LuUsers } from "react-icons/lu"
+import { MdOutlineStarBorder, MdOutlineTag } from "react-icons/md"
 import { Attachments } from "../attachmets"
-import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
+import { Button } from "./button"
+import { SubThread } from "./sub-thread"
 dayjs.extend(relativeTime)
 
 export type SubThreadsProps = {
-  sub_thread: SubThread
+  tag?: string
+  sub_thread: SubThreadType
   enableLine?: boolean
   enableLink?: boolean
   className?: string
 }
 
 const SubThreadV2 = ({
+  tag,
   enableLink = false,
   sub_thread,
   className = "",
-  enableLine = false
+  enableLine = false,
 }: SubThreadsProps) => {
-  const created_at = dayjs(sub_thread?.created_at).fromNow()
   const avatar_size = 36
+  const avatars = sub_thread.author.map(author => author.avatar_url)
+  const authors = sub_thread.author
+  const created_at = dayjs(sub_thread?.created_at).fromNow()
+  const hasAttachments = !!sub_thread.attachments.length
+  const thread_id = sub_thread.thread_id
+  const likes_count = sub_thread.likes.length
+  const views_count = sub_thread.views.length
+  const authors_count = sub_thread.author.length
   return (
-    <div className={cn("flex items-start group h-fit gap-3 relative", className)}>
+    <SubThread
+      direction="horizontal"
+      className={cn("gap-2", className)}
+    >
       {
         enableLine &&
-        <div
-          style={{ width: `${avatar_size}px`, top: `${avatar_size / 2}px` }}
-          className="absolute w-fit h-full left-0 py-0 flex justify-center top-0 z-[-2]"
-        >
-          <Separator orientation="vertical" className="w-[3px]" />
-        </div>
+        <SubThread.Line />
       }
-      <div className="w-9 h-full shrink-0 relative -space-y-4">
-        <TooltipProvider delayDuration={100}>
-          {
-            sub_thread?.author &&
-            sub_thread.author.map(
-              (author, i) => <Author size={avatar_size} key={author + "-" + i} author={author} />)
-          }
-        </TooltipProvider>
-      </div>
-      <div className="w-full flex flex-col gap-2">
-        <div className="flex justify-between items-center gap-2">
-          <span className="font-semibold text-base text-foreground line-clamp-1">
-            {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
-          </span>
-          <span className="text-xs text-secondary">{created_at}</span>
+      <SubThread.Avatars avatars={avatars} direction="horizontal" />
+      <div className="space-y-4 w-full">
+        <div className="flex items-center gap-2 w-full">
+          <div className="flex items-center w-full justify-between">
+            <SubThread.Authors authors={authors} showPositions />
+            <span className="text-xs text-secondary">{created_at}</span>
+          </div>
         </div>
-        <div className="py-2 px-2.5 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 transition-colors rounded-bl-2xl rounded-r-2xl space-y-2 border">
+        <div className="w-full flex gap-4 flex-col">
+          <SubThread.Text>{sub_thread.text}</SubThread.Text>
           {
-            enableLink
-              ? <Link href={`/${sub_thread.thread_id}`}>
-                <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-              </Link>
-              : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-          }
-          {
-            sub_thread.attachments.length !== 0 &&
+            hasAttachments &&
             <Attachments attachments={sub_thread.attachments} />
           }
-          <SubThreadStatistics sub_thread={sub_thread} hideTime className="justify-start ml-1 gap-2" />
+          <div className="w-full flex items-center justify-between">
+            {
+              tag &&
+              <Button icon={MdOutlineTag}>{tag}</Button>
+            }
+            <SubThreadStatistics sub_thread={sub_thread} />
+            <Button icon={LuUsers}>{authors_count}</Button>
+            <div className="flex items-center gap-2">
+              <Button icon={MdOutlineStarBorder}></Button>
+              <Button icon={BiShareAlt}></Button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </SubThread>
   )
 }
 export { SubThreadV2 }

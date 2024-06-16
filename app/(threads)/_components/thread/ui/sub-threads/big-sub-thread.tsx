@@ -1,57 +1,53 @@
-import { cn } from "@repo/ui/cn"
-import { TooltipProvider } from "@repo/ui/tooltip"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import Link from "next/link"
+import { BiShareAlt } from "react-icons/bi"
+import { LuUsers } from "react-icons/lu"
+import { MdOutlineStarBorder, MdOutlineTag } from "react-icons/md"
 import { Attachments } from "../attachmets"
-import { Author } from "../author"
 import { SubThreadStatistics } from "../sub-thread-statistics"
 import { SubThreadsProps } from "../threads/thread-v2"
+import { Button } from "./button"
+import { SubThread } from "./sub-thread"
 dayjs.extend(relativeTime)
 
-const SubThreadBig = ({ enableLink = false, sub_thread, className = "" }: SubThreadsProps) => {
+const SubThreadBig = ({ enableLink = false, sub_thread, className = "", tag }: SubThreadsProps) => {
+  const avatars = sub_thread.author.map(author => author.avatar_url)
+  const authors = sub_thread.author
   const created_at = dayjs(sub_thread?.created_at).fromNow()
-  return (
-    <div className={cn("flex flex-col items-start py-3 group gap-3 relative", className)}>
-      <div className="w-full flex items-center gap-2">
-        <div className="w-fit shrink-0 -space-y-4">
-          <TooltipProvider delayDuration={100}>
-            {
-              sub_thread?.author &&
-              sub_thread?.author.map(
-                (author, i) => <Author size={42} key={author + "-" + i} author={author} />)
-            }
-          </TooltipProvider>
-        </div>
-        <div className="w-full flex justify-between items-center gap-2">
-          <div className="flex flex-col">
-            <span className="font-semibold text-base text-foreground line-clamp-1">
-              {sub_thread?.author && sub_thread.author.map(item => item.username).join(", ")}
-            </span>
-            <span className="text-xs text-accents-5">
-              {sub_thread?.author && sub_thread.author.map(item => item.position).join(", ")}
-            </span>
-          </div>
-          <span className="text-xs text-secondary">{created_at}</span>
-        </div>
-      </div>
-      <div className="w-full flex flex-col gap-3">
-        <div className="py-2 px-2.5 rounded-tl-md group-hover:bg-accents-1 group-hover:border-foreground duration-500 bg-background transition-colors rounded-bl-2xl space-y-2 rounded-r-2xl border">
-          {
-            enableLink
-              ? <Link href={`/${sub_thread.thread_id}`}>
-                <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-              </Link>
-              : <span className="group-hover:text-foreground transition-colors text-sm">{sub_thread?.text}</span>
-          }
-          {
-            sub_thread.attachments.length !== 0 &&
-            <Attachments attachments={sub_thread.attachments} />
-          }
-        </div>
-        <SubThreadStatistics sub_thread={sub_thread} hideTime format="HH:mm / DD MMMM YYYY" className="justify-start gap-2" />
+  const hasAttachments = !!sub_thread.attachments.length
+  const thread_id = sub_thread.thread_id
+  const authors_count = sub_thread.author.length
+  return <SubThread
+    key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
+    direction="vertical"
+    className="gap-4 py-6"
+  >
+    <div className="flex items-center gap-2 w-full">
+      <SubThread.Avatars avatars={avatars} direction="horizontal" />
+      <div className="flex items-center w-full justify-between">
+        <SubThread.Authors authors={authors} showPositions />
+        <span className="text-xs text-secondary">{created_at}</span>
       </div>
     </div>
-  )
+    <div className="w-full flex gap-4 flex-col">
+      <SubThread.Text>{sub_thread.text}</SubThread.Text>
+      {
+        hasAttachments &&
+        <Attachments attachments={sub_thread.attachments} />
+      }
+      <div className="w-full flex items-center justify-between">
+        {
+          tag &&
+          <Button icon={MdOutlineTag}>{tag}</Button>
+        }
+        <SubThreadStatistics sub_thread={sub_thread} />
+        <Button icon={LuUsers}>{authors_count}</Button>
+        <div className="flex items-center gap-2">
+          <Button icon={MdOutlineStarBorder}></Button>
+          <Button icon={BiShareAlt}></Button>
+        </div>
+      </div>
+    </div>
+  </SubThread>
 }
 export { SubThreadBig }

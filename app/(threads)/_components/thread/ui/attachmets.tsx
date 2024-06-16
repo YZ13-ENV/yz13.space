@@ -26,7 +26,8 @@ const Attachments = ({ attachments }: Props) => {
                         />
                         : <Image
                           src={url}
-                          className="!relative object-cover rounded-xl" fill alt="attachment"
+                          fill
+                          className="!relative object-cover rounded-xl" alt="attachment"
                         />
                     }
                   </MediaWrapper>

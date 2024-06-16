@@ -66,7 +66,7 @@ const Video = forwardRef<HTMLVideoElement, VideoProps>(
         <video
           ref={ref ? ref : video}
           src={src}
-          className={cn("relative", className)}
+          className={cn("relative w-full", className)}
           onTimeUpdate={checkTime}
           {...props}
         ></video>
