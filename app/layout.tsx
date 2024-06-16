@@ -11,11 +11,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { AnonSession } from "./(threads)/_components/anon-session";
-import { ThemeBodyWrapper } from "./(threads)/_components/theme/theme-body-wrapper";
-import { Theme } from "./(threads)/_components/theme/theme-store";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
 
 export const metadata: Metadata = {
@@ -60,12 +57,9 @@ type LayoutProps = Readonly<{
   children?: ReactNode
 }>
 export default async function RootLayout({ children }: LayoutProps) {
-  const cks = cookies()
-  const themeCookie = cks.get("theme")
-  const theme: Theme = themeCookie?.value as Theme || "light"
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
-      <ThemeBodyWrapper theme={theme}>
+      <body id="root">
         {/* <div className="w-9 gap-4 flex flex-col h-fit absolute top-6 right-6 z-10">
           <ThemeSwitcherButton />
           <PageRank />
@@ -76,7 +70,7 @@ export default async function RootLayout({ children }: LayoutProps) {
         <SpeedInsights />
         <AnonSession />
         {children}
-      </ThemeBodyWrapper>
+      </body>
     </html>
   );
 }
