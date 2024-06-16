@@ -12,8 +12,10 @@ type Props = {
 export type SubThreadsProps = {
   tag?: string
   sub_thread: SubThread
+  pinned?: boolean
   enableLink?: boolean
   className?: string
+  enableLine?: boolean
 }
 const Thread = async ({ thread, max = 0, enableLink = false, className = "", component = SubThreadV2 }: Props) => {
   const { name, threads, thread_id } = thread
@@ -26,6 +28,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
         enableLink={enableLink}
         thread_id={thread.thread_id}
         sub_threads={sub_threads}
+        pinned={thread.pinned}
       />
       {
         hasMoreThanMax &&
