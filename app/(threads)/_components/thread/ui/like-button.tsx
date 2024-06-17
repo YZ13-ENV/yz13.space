@@ -43,7 +43,7 @@ const LikeButton = ({ loading = false, value, onClick, variant = "not-liked" }: 
             className={cn("hover:bg-transparent gap-1 p-0 group/tag", isLiked ? "text-error-foreground" : "text-inherit")}
           >
             <span className="relative flex items-center justify-center">
-              <span className="w-7 h-7 bg-transparent group-hover/tag:bg-yz-neutral-100 transition-colors rounded-full absolute" />
+              <span className="w-7 h-7 bg-transparent group-hover/tag:bg-yz-neutral-100 transition-colors rounded-full absolute z-[-1]" />
               {
                 loading
                   ? <BiLoaderAlt size={16} className={cn("animate-spin z-[1]", isLiked ? "text-error-foreground" : "text-inherit")} />

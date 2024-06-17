@@ -21,7 +21,7 @@ const SearchBar = () => {
         <BiSearchAlt size={18} className="text-secondary" />
       </div>
       <Input
-        placeholder="Search by thread name"
+        placeholder="Search"
         className="rounded-lg pl-9"
         value={text}
         onChange={e => setText(e.target.value)}

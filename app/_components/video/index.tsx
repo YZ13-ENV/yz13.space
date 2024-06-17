@@ -60,7 +60,6 @@ const Video = forwardRef<HTMLVideoElement, VideoProps>(
     }, [video])
     const [durationHovered, setDurationHovered] = useState<boolean>(false)
     const progress = useMemo(() => { return ((currentTime / duration) * 100) }, [currentTime, duration])
-    const isLessThanMinute = duration < 60
     return (
       <>
         <video

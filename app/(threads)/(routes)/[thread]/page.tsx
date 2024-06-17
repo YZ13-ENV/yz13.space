@@ -27,7 +27,7 @@ const page = async ({ params }: Props) => {
             <span className="text-sm text-inherit">Back</span>
           </Link>
         </div>
-        <div className="w-full space-y-3 py-6">
+        <div className="w-full">
           {
             thread &&
             <Thread thread={thread} component={SubThreadV2} />

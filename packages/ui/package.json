@@ -12,8 +12,6 @@
     "./progress": "./src/components/progress.tsx",
     "./tooltip": "./src/components/tooltip.tsx",
     "./accordion": "./src/components/accordion.tsx",
-    "./input-otp": "./src/components/input-otp.tsx",
-    "./breadcrumb": "./src/components/breadcrumb.tsx",
     "./popover": "./src/components/popover.tsx",
     "./calendar": "./src/components/calendar.tsx",
     "./dropdown": "./src/components/dropdown-menu.tsx",
