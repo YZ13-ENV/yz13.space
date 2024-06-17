@@ -39,3 +39,90 @@
 .page-wrapper {
   min-height: var(--page-wrapper-height);
 }
+
+.two-attachments {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  & :first-child {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    & > img {
+      border-radius: 12px 0px 0px 12px;
+    }
+  }
+  & :last-child {
+    width: 100%;
+    height: 100%;
+    & > img {
+      border-radius: 0px 12px 12px 0px;
+    }
+  }
+}
+
+.three-attachments {
+  grid-template: "a a b" "a a c";
+  & :first-child {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    object-fit: cover;
+    grid-area: a;
+    grid-row: 1 / -1;
+    & > img {
+      border-radius: 12px 0px 0px 12px;
+    }
+  }
+  & :nth-child(2) {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    grid-area: b;
+    & > img {
+      border-radius: 0px 12px 0px 0px;
+    }
+  }
+  & :nth-child(3) {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    grid-area: c;
+    & > img {
+      border-radius: 0px 0px 12px 0px;
+    }
+  }
+}
+
+.four-attachments {
+  grid-template: "a a a b" "a a a c" "a a a d";
+
+  & :first-child {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    object-fit: cover;
+    grid-area: a;
+    grid-row: 1 / -1;
+    & > img {
+      border-radius: 12px 0px 0px 12px;
+    }
+  }
+  & :nth-child(2) {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    grid-area: b;
+    & > img {
+      border-radius: 0px 12px 0px 0px;
+    }
+  }
+  & :nth-child(3) {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    grid-area: c;
+  }
+  & :nth-child(4) {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    grid-area: d;
+    & > img {
+      border-radius: 0px 0px 12px 0px;
+    }
+  }
+}

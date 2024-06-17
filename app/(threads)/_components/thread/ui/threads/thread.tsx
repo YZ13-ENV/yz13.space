@@ -84,27 +84,32 @@ const SubThreadsList = ({
               />
           )
       }
-      <Separator />
-      <div className="w-full h-fit relative">
-        {
-          second_part
-            .map(
-              (sub_thread, index, arr) => {
-                const isLast = index === arr.length - 1
-                return (
-                  <SubThreadV2
-                    key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
-                    className="first:pt-6 pb-6"
-                    sub_thread={sub_thread}
-                    enableLink={enableLink}
-                    enableLine={forceLine ? forceLine : !isLast}
-                    pinned={pinned}
-                  />
+      {
+        !!second_part.length &&
+        <>
+          <Separator />
+          <div className="w-full h-fit relative">
+            {
+              second_part
+                .map(
+                  (sub_thread, index, arr) => {
+                    const isLast = index === arr.length - 1
+                    return (
+                      <SubThreadV2
+                        key={`thread#${thread_id}-sub-thread#${sub_thread.sub_thread_id}`}
+                        className="first:pt-6 pb-6"
+                        sub_thread={sub_thread}
+                        enableLink={enableLink}
+                        enableLine={forceLine ? forceLine : !isLast}
+                        pinned={pinned}
+                      />
+                    )
+                  }
                 )
-              }
-            )
-        }
-      </div>
+            }
+          </div>
+        </>
+      }
     </div>
   )
 }

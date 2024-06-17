@@ -39,7 +39,7 @@ const MediaOverlay = () => {
         <BiX size={24} />
       </Button>
       <div className="w-full h-fit lg:max-w-[70%] max-w-[90%]">
-        <MediaWrapper id={media} className="relative">
+        <MediaWrapper id={media} className="relative mx-auto">
           {
             isVideo
               ? <Video src={media} className="!relative object-cover" autoPlay muted loop />
