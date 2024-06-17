@@ -16,7 +16,7 @@ const Attachments = ({ attachments }: Props) => {
   const isThreeAttachments = sliced.length === 3
   const isFourAttachments = sliced.length === 4
   return (
-    <div className="w-full border rounded-xl group-hover:bg-accents-2 transition-colors bg-accents-1">
+    <div className="w-full border aspect-[4/3] rounded-xl group-hover:bg-accents-2 transition-colors bg-accents-1">
       {
         isSingleAttachment
           ? sliced
@@ -24,17 +24,19 @@ const Attachments = ({ attachments }: Props) => {
               url => {
                 const isVideo = url.endsWith(".mp4")
                 return (
-                  <MediaWrapper key={url} id={url} className="relative">
+                  <MediaWrapper key={url} id={url} className="relative h-full">
                     {
                       isVideo
                         ? <Video
                           src={url}
-                          className="relative object-cover rounded-xl" autoPlay muted loop
+                          className="relative object-cover h-full rounded-xl" autoPlay muted loop
                         />
                         : <Image
                           src={url}
                           fill
-                          className="!relative object-cover rounded-xl" alt="attachment"
+                          decoding="async"
+                          objectFit="cover"
+                          className="!relative object-cover h-full rounded-xl" alt="attachment"
                         />
                     }
                   </MediaWrapper>

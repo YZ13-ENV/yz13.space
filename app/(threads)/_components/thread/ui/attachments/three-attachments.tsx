@@ -9,12 +9,12 @@ type Props = {
 }
 const ThreeAttachments = ({ attachments = [] }: Props) => {
   return (
-    <div className="w-full grid three-attachments divide-x divide-y">
+    <div className="w-full h-full grid three-attachments divide-x divide-y">
       {
         attachments.map((url, index) => {
           const isVideo = url.endsWith(".mp4")
           return (
-            <MediaWrapper key={url} id={url} className="relative">
+            <MediaWrapper key={url} id={url} className="relative h-full">
               {
                 isVideo
                   ? <Video
