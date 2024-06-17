@@ -39,15 +39,17 @@ const page = () => {
   return (
     <SplitViewContainer>
       <LeftSide>
-        <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
-          <div className="space-y-2">
-            <h2 className="text-4xl font-semibold">Settings</h2>
-            <p className="text-secondary">Just settings :)</p>
+        <div className="flex items-center justify-center w-full h-full">
+          <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
+            <div className="space-y-2">
+              <h2 className="text-4xl font-semibold">Settings</h2>
+              <p className="text-secondary">Just settings :)</p>
+            </div>
+            <Link href="/" className="inline-flex hover:bg-accents-1 rounded-lg gap-2 items-center h-9 px-3 transition-colors">
+              <BiLeftArrowAlt size={16} />
+              <span className="text-sm">Go back</span>
+            </Link>
           </div>
-          <Link href="/" className="inline-flex hover:bg-accents-1 rounded-lg gap-2 items-center h-9 px-3 transition-colors">
-            <BiLeftArrowAlt size={16} />
-            <span className="text-sm">Go back</span>
-          </Link>
         </div>
       </LeftSide>
       <RightSide>
