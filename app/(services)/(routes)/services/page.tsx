@@ -1,6 +1,5 @@
 import { LeftSide } from "@/app/_components/left"
 import { RightSide } from "@/app/_components/right"
-import { RightContentContainer } from "@/app/_components/right-content-container"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { cn } from "@/packages/ui/lib/utils"
 import Link from "next/link"
@@ -12,27 +11,29 @@ const page = () => {
   return (
     <SplitViewContainer>
       <LeftSide>
-        <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
-          <div className="space-y-2">
-            <h2 className="text-4xl font-semibold">All services</h2>
-            <p className="text-secondary">List of all available services</p>
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
+            <div className="space-y-2">
+              <h2 className="text-4xl font-semibold">All services</h2>
+              <p className="text-secondary">List of all available services</p>
+            </div>
+            <Link href="/" className="inline-flex hover:bg-accents-1 rounded-lg gap-2 items-center h-9 px-3 transition-colors">
+              <BiLeftArrowAlt size={16} />
+              <span className="text-sm">Go back</span>
+            </Link>
           </div>
-          <Link href="/" className="inline-flex hover:bg-accents-1 rounded-lg gap-2 items-center h-9 px-3 transition-colors">
-            <BiLeftArrowAlt size={16} />
-            <span className="text-sm">Go back</span>
-          </Link>
         </div>
       </LeftSide>
       <RightSide>
-        <RightContentContainer>
-          <ul className="space-y-4">
+        <>
+          <ul>
             {
               registered_services.map(service => {
                 const isSingleRoute = service.routes.length === 1
                 const isExternal = service.isExternal ? service.isExternal : false
                 return (
                   <li key={service.service_id}>
-                    <section className="w-full border p-4 rounded-xl space-y-3">
+                    <section className="w-full border-r border-b p-4 space-y-3">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <h2 className="text-2xl font-bold">{service.title}</h2>
@@ -74,7 +75,7 @@ const page = () => {
               })
             }
           </ul>
-        </RightContentContainer>
+        </>
       </RightSide>
     </SplitViewContainer>
   )

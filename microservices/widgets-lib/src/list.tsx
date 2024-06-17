@@ -28,7 +28,7 @@ const ListItem = ({ author, created_at, text }: ListItemProps) => {
 const List = () => {
   const now = dayjs("2024-05-29")
   return (
-    <Wrapper className="aspect-square">
+    <Wrapper className="aspect-[4/3]">
       <div className="w-full max-w-80 h-fit p-2 bg-background border rounded-xl">
         <ListItem author="YZ13" created_at={now.toISOString()} text="I launched new service, where im gonna upload widgets" />
         <ListItem author="YZ13" created_at={now.toISOString()} text="I launched new service, where im gonna upload widgets" />

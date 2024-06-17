@@ -17,9 +17,7 @@ const Desktop = () => {
     if (ev.code === "Escape") router.push("/services")
   })
   return (
-    <div className="w-full cursor-none relative flex items-center justify-center h-screen overflow-hidden bg-transparent">
-      <div className="w-full h-full absolute left-0 top-0 bg-grid-neutral-100 dark:bg-grid-neutral-900 z-[-2]" />
-      <div className="w-full h-full absolute left-0 top-0 bg-gradient-to-r from-background via-transparent to-background z-[-1]" />
+    <div className="w-full relative flex items-center justify-center h-screen overflow-hidden bg-transparent">
       <VisitorSync users={users} onUsers={setUsers} />
       <div className="w-9 top-6 left-6 absolute">
         <VisitorsStack users={users} />

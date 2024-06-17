@@ -1,8 +1,7 @@
 import { Playground } from "@/microservices/playground/src"
-import { BrowserMini, CalendarEvents, List, MusicPlayer } from "@microservices/widgets-lib"
+import { BrowserMini, CalendarEvents, List } from "@microservices/widgets-lib"
 import { ReactNode } from "react"
 import { BiCalendar, BiListUl } from "react-icons/bi"
-import { BsMusicPlayer } from "react-icons/bs"
 import { HiMiniCursorArrowRipple } from "react-icons/hi2"
 import { IconType } from "react-icons/lib"
 import { LuKeyRound } from 'react-icons/lu'
@@ -74,12 +73,6 @@ const widgets_lib_service: Service = {
       entry: <CalendarEvents />,
       icon: BiCalendar,
       title: "Calendar"
-    },
-    {
-      route: "/music-player",
-      entry: <MusicPlayer />,
-      icon: BsMusicPlayer,
-      title: "Music player"
     }
   ]
 }
