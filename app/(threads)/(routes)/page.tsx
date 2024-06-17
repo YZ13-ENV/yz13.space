@@ -19,7 +19,17 @@ const page = async ({ searchParams }: Props) => {
   unstable_noStore()
   const filter = searchParams.filter
   const threads = (await getFullThreads())
-    .filter(thread => filter ? thread.name?.toLowerCase().includes(filter) : thread)
+    .filter(thread => {
+      const sub_threads = thread.threads
+      const onlyText = sub_threads.map(sub_thread => ({
+        thread_id: sub_thread.thread_id,
+        sub_thread_id: sub_thread.sub_thread_id,
+        text: sub_thread.text.toLowerCase()
+      }))
+      const matched = onlyText.filter(text => filter ? text.text.includes(filter) : text)
+      const isInMatch = matched.find(item => item.thread_id === thread.thread_id && !!(thread.threads.find(sub => sub.sub_thread_id === item.sub_thread_id)))
+      return filter ? !!isInMatch : thread
+    })
     .sort((a, b) => {
       const a_date = dayjs(a.created_at)
       const b_date = dayjs(b.created_at)

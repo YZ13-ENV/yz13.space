@@ -36,8 +36,17 @@ const SubThreadWrapper = ({ children, className = "", direction = "horizontal" }
 const SubThreadAvatars = ({
   avatars = [],
   size = 36,
-  direction = "horizontal"
-}: { avatars?: string[], size?: number, direction?: SubThreadDirection }) => {
+  direction = "horizontal",
+  max = 3
+}: {
+  max?: number
+  avatars?: string[],
+  size?: number,
+  direction?: SubThreadDirection
+}) => {
+  const sliced = avatars.slice(0, 3)
+  const isAboveMax = avatars.length > max
+  const howMuchHidden = avatars.length - 3
   return (
     <div
       className={cn(
@@ -46,7 +55,7 @@ const SubThreadAvatars = ({
       )}
     >
       {
-        avatars.map(
+        sliced.map(
           (avatar, i) =>
             <img
               key={avatar + "-" + i}
@@ -57,16 +66,40 @@ const SubThreadAvatars = ({
             />
         )
       }
+      {
+        isAboveMax &&
+        <div
+          style={{ width: `${size}px`, height: `${size}px` }}
+          className="aspect-square shrink-0 inline-block rounded-full border-2 border-background bg-accents-2"
+        >
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-sm">{howMuchHidden}</span>
+          </div>
+        </div>
+      }
     </div>
   )
 }
 
 const SubThreadAuthors = ({
   authors = [],
-  showPositions = false
-}: { authors?: SubThreadType["author"], showPositions?: boolean }) => {
-  const names = authors.map((author, index) => author ? author.username : `Author#${index}`).join(", ")
-  const positions = authors.map((author, index) => author ? author.position : `Author position#${index}`).join(", ")
+  showPositions = false,
+  max = 3
+}: {
+  authors?: SubThreadType["author"],
+  showPositions?: boolean
+  max?: number
+}) => {
+  const onlyNames = authors.map((author, index) => author ? author.username : `Author#${index}`)
+  const slicedNames = onlyNames.slice(0, 3)
+  const howMuchNamesHidden = onlyNames.length - 3
+  const isNameAboveMax = onlyNames.length > max
+  const names = isNameAboveMax ? slicedNames.join(", ") + ` + ${howMuchNamesHidden} other` : slicedNames.join(", ")
+  const onlyPositions = authors.map((author, index) => author ? author.position : `Author position#${index}`)
+  const slicesPositions = onlyPositions.slice(0, 3)
+  const howMuchPositionsHidden = onlyPositions.length - 3
+  const isPositionsAboveMax = onlyPositions.length > max
+  const positions = isPositionsAboveMax ? slicesPositions.join(", ") + ` + ${howMuchPositionsHidden} other` : slicesPositions.join(", ")
   return (
     <div className="flex flex-col">
       <span className="font-semibold text-base text-foreground line-clamp-1">{names}</span>

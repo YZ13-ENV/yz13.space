@@ -1,6 +1,7 @@
 import { cn } from "@/packages/ui/lib/utils"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import Link from "next/link"
 import { LuUsers } from "react-icons/lu"
 import { MdOutlineTag } from "react-icons/md"
 import { Attachments } from "../attachmets"
@@ -45,7 +46,9 @@ const SubThreadV2 = ({
           </div>
         </div>
         <div className="w-full flex gap-4 flex-col">
-          <SubThread.Text>{sub_thread.text}</SubThread.Text>
+          <Link href={`/${thread_id}`}>
+            <SubThread.Text>{sub_thread.text}</SubThread.Text>
+          </Link>
           {
             hasAttachments &&
             <Attachments attachments={sub_thread.attachments} />
