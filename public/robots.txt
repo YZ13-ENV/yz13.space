@@ -1,0 +1,4 @@
+Sitemap: https://www.yz13.space/sitemap.xml
+Crawl-delay: 5
+User-agent: *
+Allow: https://www.yz13.space
