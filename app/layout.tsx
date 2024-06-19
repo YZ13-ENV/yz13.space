@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     title: "YZ13",
     images: "https://yz13.space/thumbnail.png",
   },
+  robots: { index: true, follow: true },
   keywords: ["frontend", "web-developer", "developer", "yz13", "it", "ui", "design"],
   verification: {
     yandex: "294dbd367a5afd6b",
