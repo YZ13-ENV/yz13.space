@@ -17,8 +17,8 @@ import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
 
 export const metadata: Metadata = {
   title: "YZ13",
-  description: "Created by YZ13",
-  authors: { name: "YZ13", url: "https://github.com/yz13-env" },
+  description: "Hi, I'm a YZ13 web developer, hire me, i create cool websites",
+  authors: [{ name: "YZ13", url: "https://github.com/yz13-env" }],
   metadataBase: new URL('https://yz13.space'),
   alternates: {
     canonical: "/"
@@ -26,11 +26,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     countryName: "Russia",
-    description: "Portfolio website",
+    description: "Hi, I'm a YZ13 web developer, hire me, i create cool websites",
     locale: "RU",
     url: "https://yz13.space",
     title: "YZ13",
     images: "https://yz13.space/thumbnail.png",
+  },
+  keywords: ["frontend", "web-developer", "developer", "yz13", "it", "ui", "design"],
+  verification: {
+    yandex: "294dbd367a5afd6b",
+    google: "A13Xjy5RJQI1feutR723c-JBZbusKBc7qG-wCAI-y8A"
   },
   icons: {
     icon: "/favicon.ico"
@@ -38,14 +43,14 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "YZ13",
-    description: "The YZ13 portfolio website",
+    description: "Hi, I'm a YZ13 web developer, hire me, i create cool websites",
     siteId: "1794707806584446976",
     creator: "@YZ13_DEV",
     creatorId: "1794707806584446976",
     images: {
       url: "https://yz13.space/thumbnail.png"
     },
-  }
+  },
 };
 
 export const viewport: Viewport = {
@@ -60,11 +65,6 @@ export default async function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
       <body id="root">
-        {/* <div className="w-9 gap-4 flex flex-col h-fit absolute top-6 right-6 z-10">
-          <ThemeSwitcherButton />
-          <PageRank />
-          <RankingControl />
-        </div> */}
         <MediaOverlay />
         <Analytics />
         <SpeedInsights />
