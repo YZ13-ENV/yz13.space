@@ -1,35 +1,13 @@
-import { MediaWrapper } from "@/app/_components/media-overlay/ui/media-wrapper"
-import { Video } from "@/app/_components/video"
-import { SubThread } from "@/packages/api/src/db/types"
-import Image from "next/image"
+import { cn } from "@/packages/ui/lib/utils"
+import { AttachmentsGroupProps } from "."
+import { Attachment } from "./attachment"
 
 
-type Props = {
-  attachments?: SubThread["attachments"]
-}
-const FourAttachments = ({ attachments = [] }: Props) => {
+const FourAttachments = ({ attachments = [], className = "" }: AttachmentsGroupProps) => {
   return (
-    <div className="w-full h-full grid four-attachments divide-x divide-y">
+    <div className={cn("w-full h-full grid four-attachments divide-x divide-y", className)}>
       {
-        attachments.map((url, index) => {
-          const isVideo = url.endsWith(".mp4")
-          return (
-            <MediaWrapper key={url} id={url} className="relative h-full">
-              {
-                isVideo
-                  ? <Video
-                    src={url}
-                    className="relative object-cover rounded-none" autoPlay muted loop
-                  />
-                  : <Image
-                    src={url}
-                    fill
-                    className="!relative object-cover rounded-none" alt="attachment"
-                  />
-              }
-            </MediaWrapper>
-          )
-        })
+        attachments.map((url, index) => <Attachment key={url + "-" + index} url={url} />)
       }
     </div>
   )
