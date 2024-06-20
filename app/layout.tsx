@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { AnonSession } from "./(threads)/_components/anon-session";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
@@ -51,16 +52,21 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  colorScheme: "dark light",
-  themeColor: "#000000",
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000' },
+  ],
 }
 
 type LayoutProps = Readonly<{
   children?: ReactNode
 }>
 export default async function RootLayout({ children }: LayoutProps) {
+  const cookiesList = cookies()
+  const defaultLocale = "en-US"
+  const locale = cookiesList.get("locale")?.value || defaultLocale
   return (
-    <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
+    <html lang={locale} className={cn(GeistSans.variable, GeistMono.variable)}>
       <body id="root">
         <MediaOverlay />
         <Analytics />

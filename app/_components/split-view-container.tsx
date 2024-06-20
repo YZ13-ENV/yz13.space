@@ -9,8 +9,8 @@ type Props = {
 const SplitViewContainer = ({ children, className }: Props) => {
   return (
     <div className={cn(
-      "lg:mx-0 mx-auto lg:divide-x divide-x-0 w-full flex lg:flex-row flex-col min-h-screen",
-      "lg:max-w-full max-w-xl",
+      "lg:mx-0 mx-auto lg:divide-x divide-x-0 w-full flex md:flex-row flex-col min-h-screen",
+      "max-w-full",
       className
     )}
     >

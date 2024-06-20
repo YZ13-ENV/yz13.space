@@ -1,0 +1,27 @@
+{
+  "pricing": {
+    "components": {
+      "name": "components",
+      "description": "Just components",
+      "prefix": "pause or cancel anytime",
+      "price": 50,
+      "side": "left",
+      "sign": "$"
+    },
+    "pages": {
+      "name": "pages",
+      "prefix": "pause or cancel anytime",
+      "price": 75,
+      "side": "left",
+      "sign": "$"
+    },
+    "website": {
+      "name": "website",
+      "prefix": "starts at",
+      "price": 149,
+      "side": "left",
+      "sign": "$"
+    },
+    "button": "Contact me"
+  }
+}

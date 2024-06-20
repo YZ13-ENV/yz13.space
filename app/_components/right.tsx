@@ -15,7 +15,7 @@ const RightSide = ({ children, className = "" }: Props) => {
     <div className={cn(
       "lg:w-1/2 shrink-0 w-full min-h-screen h-fit pt-0",
       "transition-all duration-500",
-      "xl:w-1/2 lg:w-2/3",
+      "xl:w-1/2 lg:w-2/3 md:w-2/3",
       className
     )}>
       {children}
