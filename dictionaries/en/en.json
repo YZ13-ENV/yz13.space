@@ -6,21 +6,38 @@
       "prefix": "pause or cancel anytime",
       "price": 50,
       "side": "left",
-      "sign": "$"
+      "sign": "$",
+      "list": [
+        "React / Next.js / Tailwind CSS code",
+        "24-hour support response time",
+        "Pause or cancel anytime"
+      ]
     },
     "pages": {
       "name": "pages",
+      "description": "Just pages",
       "prefix": "pause or cancel anytime",
       "price": 75,
       "side": "left",
-      "sign": "$"
+      "sign": "$",
+      "list": [
+        "React / Next.js / Tailwind CSS code",
+        "24-hour support response time",
+        "Pause or cancel anytime"
+      ]
     },
     "website": {
       "name": "website",
+      "description": "Just website",
       "prefix": "starts at",
       "price": 149,
       "side": "left",
-      "sign": "$"
+      "sign": "$",
+      "list": [
+        "React / Next.js / Tailwind CSS code",
+        "24-hour support response time",
+        "Pause or cancel anytime"
+      ]
     },
     "button": "Contact me"
   }

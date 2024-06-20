@@ -1,8 +1,11 @@
 import { getDictionary } from "@/dictionaries/tools"
+import { cn } from "@/packages/ui/lib/utils"
 import { Button } from "@/packages/ui/src/components/button"
 import { Separator } from "@/packages/ui/src/components/separator"
 import { cookies } from "next/headers"
+import Link from "next/link"
 import { BiCheckCircle } from "react-icons/bi"
+import { nav_links } from "../(threads)/(routes)/nav-links"
 import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
 import { Logo } from "../_components/logo"
@@ -27,7 +30,10 @@ const page = async () => {
       const button = pricingDict.button
       const list = (cardDict.list || []) as string[]
       return (
-        <div className="h-96 aspect-[1/1.25] flex flex-col gap-2 rounded-xl border p-4">
+        <div className={cn(
+          "h-96 aspect-[1/1.25] flex flex-col gap-2 rounded-xl border p-4",
+          "hover:border-foreground hover:bg-yz-neutral-100/40 cursor-pointer transition-colors"
+        )}>
           <h4 className="text-lg font-semibold capitalize">{cardName}</h4>
           {
             prefix ?
@@ -76,31 +82,46 @@ const page = async () => {
         <div className="w-full h-20 flex items-center justify-center mb-20">
           <h1 className="text-4xl text-center font-bold">Works</h1>
         </div>
-        <div className="w-full p-6">
-          <span className="text-sm">Packages</span>
-          <ul className="">
-            <li className="w-full min-h-9 py-2 flex gap-4 border-b transition-colors hover:border-foreground">
-              <div className="h-24 aspect-video border rounded-lg"></div>
-              <div className="w-full flex flex-col">
-                <span className="text-base font-medium">Package name</span>
-                <span className="text-xs text-secondary">Package description</span>
-                <Button className="mt-auto w-fit">Visit</Button>
-              </div>
-            </li>
-          </ul>
+        <div className="px-6 w-full flex flex-wrap gap-2 items-start">
+          {
+            nav_links.map(nav =>
+              <Link
+                href={nav.link}
+                className="px-2 py-1 rounded-md border text-xs cursor-pointer inline-flex gap-1 items-center"
+              >
+                {nav.icon && nav.icon({ size: 14 })}
+                {nav.label}
+              </Link>
+            )
+          }
         </div>
-        <div className="w-full p-6">
-          <span className="text-sm">Builded sites</span>
-          <ul className="">
-            <li className="w-full min-h-9 py-2 flex gap-4 border-b transition-colors hover:border-foreground">
-              <div className="h-24 aspect-video border rounded-lg"></div>
-              <div className="w-full flex flex-col">
-                <span className="text-base font-medium">App name</span>
-                <span className="text-xs text-secondary">App description</span>
-                <Button className="mt-auto w-fit">Visit</Button>
-              </div>
-            </li>
-          </ul>
+        <div className="py-6 space-y-6">
+          <div className="w-full px-6">
+            <span className="text-sm">Packages</span>
+            <ul className="">
+              <li className="w-full min-h-9 py-2 flex gap-4 border-b transition-colors hover:border-foreground">
+                <div className="h-24 aspect-video border rounded-lg"></div>
+                <div className="w-full flex flex-col">
+                  <span className="text-base font-medium">Package name</span>
+                  <span className="text-xs text-secondary">Package description</span>
+                  <Button className="mt-auto w-fit">Visit</Button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="w-full px-6">
+            <span className="text-sm">Builded sites</span>
+            <ul className="">
+              <li className="w-full min-h-9 py-2 flex gap-4 border-b transition-colors hover:border-foreground">
+                <div className="h-24 aspect-video border rounded-lg"></div>
+                <div className="w-full flex flex-col">
+                  <span className="text-base font-medium">App name</span>
+                  <span className="text-xs text-secondary">App description</span>
+                  <Button className="mt-auto w-fit">Visit</Button>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         <Separator />
         <div className="w-full p-6">

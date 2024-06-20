@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest) {
   const cookiesLocale = cookies.get("locale")?.value;
   const response = NextResponse.next();
   if (!cookiesLocale) response.cookies.set("locale", locale);
-  if (shouldRedirectToWWW) return NextResponse.redirect(newUrl);
+  // if (shouldRedirectToWWW) return NextResponse.redirect(newUrl);
   const rewrites = await get<Rewrites[]>("rewrites");
   const matchedRewrite =
     rewrites && rewrites.length !== 0

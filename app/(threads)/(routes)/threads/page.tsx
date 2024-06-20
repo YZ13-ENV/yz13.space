@@ -2,13 +2,13 @@ import { getFullThreads } from "@yz13/api/db/threads";
 import dayjs from "dayjs";
 import { unstable_noStore } from "next/cache";
 import Link from "next/link";
-import { Contacts } from "../_components/contacts";
-import { Footer } from "../_components/footer";
-import { SearchBar } from "../_components/search-bar";
-import { SubThreadV2 } from "../_components/thread/ui/sub-threads/sub-thread-v2";
-import { Thread } from "../_components/thread/ui/threads/thread-v2";
-import { AdBanner } from "./ad-banner";
-import { nav_links } from "./nav-links";
+import { Contacts } from "../../_components/contacts";
+import { Footer } from "../../_components/footer";
+import { SearchBar } from "../../_components/search-bar";
+import { SubThreadV2 } from "../../_components/thread/ui/sub-threads/sub-thread-v2";
+import { Thread } from "../../_components/thread/ui/threads/thread-v2";
+import { AdBanner } from "../ad-banner";
+import { nav_links } from "../nav-links";
 
 type Props = {
   searchParams: {

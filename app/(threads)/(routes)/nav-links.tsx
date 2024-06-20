@@ -1,7 +1,5 @@
-import { IconType } from "react-icons/lib"
-import { TbRouteSquare } from "react-icons/tb"
-
-
+import { IconType } from "react-icons/lib";
+import { PiBagSimpleDuotone, PiBracketsCurlyDuotone, PiThreadsLogoDuotone } from "react-icons/pi";
 
 export type NavLink = {
   link: string
@@ -11,9 +9,19 @@ export type NavLink = {
 
 const nav_links: NavLink[] = [
   {
+    label: "Threads",
+    link: "/threads",
+    icon: PiThreadsLogoDuotone
+  },
+  {
+    label: "Works",
+    link: "/works",
+    icon: PiBagSimpleDuotone
+  },
+  {
     label: "Services",
     link: "/services",
-    icon: TbRouteSquare
+    icon: PiBracketsCurlyDuotone
   },
   // {
   //   label: "Changelog",
@@ -26,4 +34,5 @@ const nav_links: NavLink[] = [
   //   icon: BiCog
   // }
 ]
-export { nav_links }
+export { nav_links };
+

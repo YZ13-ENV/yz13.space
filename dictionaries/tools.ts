@@ -9,7 +9,9 @@ const dictionaries: Dictionaries = {
   ru: () => import("./ru/ru.json").then((module) => module.default),
 };
 
-export const getDictionary = async <T>(locale: keyof Dictionaries) => {
+export const getDictionary = async <T>(
+  locale: keyof Dictionaries
+): Promise<T | {}> => {
   const targetDict = dictionaries[locale];
   const defaultDict = dictionaries["en"];
   if (targetDict) return targetDict();
