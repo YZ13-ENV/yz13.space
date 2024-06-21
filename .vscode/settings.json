@@ -1,7 +1,8 @@
 {
+  "headwind.runOnSave": true,
   "eslint.workingDirectories": [
     {
-      "mode": "auto"
+      "mode": "auto",
     }
   ]
 }

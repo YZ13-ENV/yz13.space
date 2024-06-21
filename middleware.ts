@@ -32,14 +32,19 @@ export async function middleware(req: NextRequest) {
   const response = NextResponse.next();
   if (!cookiesLocale) response.cookies.set("locale", locale);
   // if (shouldRedirectToWWW) return NextResponse.redirect(newUrl);
-  const rewrites = await get<Rewrites[]>("rewrites");
-  const matchedRewrite =
-    rewrites && rewrites.length !== 0
-      ? rewrites.find((item) => item.from === pathname)
-      : undefined;
-  if (matchedRewrite) {
-    return NextResponse.redirect(new URL(matchedRewrite.to, req.url));
-  } else return response;
+  try {
+    const rewrites = await get<Rewrites[]>("rewrites");
+    const matchedRewrite =
+      rewrites && rewrites.length !== 0
+        ? rewrites.find((item) => item.from === pathname)
+        : undefined;
+    if (matchedRewrite) {
+      return NextResponse.redirect(new URL(matchedRewrite.to, req.url));
+    } else return response;
+  } catch (e) {
+    console.log(e);
+    return response;
+  }
 }
 
 export const config = {
