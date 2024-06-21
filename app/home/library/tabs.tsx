@@ -1,10 +1,13 @@
 "use client"
 import { cn } from "@/packages/ui/lib/utils"
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { LuFile, LuGlobe, LuPackage, LuWorkflow } from "react-icons/lu"
 
-const Tabs = () => {
+type Props = {
+  onTab?: (tab: string) => void
+}
+const Tabs = ({ onTab }: Props) => {
   const tabs = [
     {
       label: "Websites",
@@ -28,6 +31,9 @@ const Tabs = () => {
     },
   ]
   const [selectedTab, setSelectedTab] = useState<string>(tabs[0]?.value as string)
+  useEffect(() => {
+    if (onTab) onTab(selectedTab)
+  }, [selectedTab])
   return (
     <div className="h-fit p-1.5 bg-background w-fit max-w-full flex items-center justify-center rounded-full border">
       {
