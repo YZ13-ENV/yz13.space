@@ -2,9 +2,12 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import Link from "next/link"
 import { Logo } from "../_components/logo"
 
-const NavMenu = () => {
+type Props = {
+  className?: string
+}
+const NavMenu = ({ className = "" }: Props) => {
   return (
-    <NavigationMenu>
+    <NavigationMenu className={className}>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>

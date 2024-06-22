@@ -44,6 +44,12 @@
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
+.logo {
+  & > svg > path {
+    fill: hsl(var(--yz13-foreground));
+  }
+}
+
 .two-attachments {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   & :first-child {

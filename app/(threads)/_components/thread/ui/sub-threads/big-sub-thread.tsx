@@ -32,7 +32,7 @@ const SubThreadBig = ({ sub_thread, tag, pinned = false }: SubThreadsProps) => {
       </div>
     </div>
     <div className="w-full flex gap-4 flex-col">
-      <Link href={`/${thread_id}`}>
+      <Link href={`/threads/${thread_id}`}>
         <SubThread.Text>{sub_thread.text}</SubThread.Text>
       </Link>
       {
