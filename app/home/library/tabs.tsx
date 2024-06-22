@@ -1,36 +1,36 @@
 "use client"
 import { cn } from "@/packages/ui/lib/utils"
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { LuFile, LuGlobe, LuPackage, LuWorkflow } from "react-icons/lu"
 
 type Props = {
+  selectedTab?: string
   onTab?: (tab: string) => void
 }
-const Tabs = ({ onTab }: Props) => {
-  const tabs = [
-    {
-      label: "Websites",
-      icon: LuGlobe,
-      value: "websites"
-    },
-    {
-      label: "Pages",
-      icon: LuFile,
-      value: "pages"
-    },
-    {
-      label: "Components",
-      icon: LuWorkflow,
-      value: "components"
-    },
-    {
-      label: "Packages",
-      icon: LuPackage,
-      value: "packages"
-    },
-  ]
-  const [selectedTab, setSelectedTab] = useState<string>(tabs[0]?.value as string)
+export const tabs = [
+  {
+    label: "Websites",
+    icon: LuGlobe,
+    value: "websites"
+  },
+  {
+    label: "Pages",
+    icon: LuFile,
+    value: "pages"
+  },
+  {
+    label: "Components",
+    icon: LuWorkflow,
+    value: "components"
+  },
+  {
+    label: "Packages",
+    icon: LuPackage,
+    value: "packages"
+  },
+]
+const Tabs = ({ onTab, selectedTab = tabs[0]?.value as string }: Props) => {
   useEffect(() => {
     if (onTab) onTab(selectedTab)
   }, [selectedTab])
@@ -40,7 +40,7 @@ const Tabs = ({ onTab }: Props) => {
         tabs.map(tab => {
           const isSelected = selectedTab === tab.value
           return <span
-            onClick={() => setSelectedTab(tab.value)}
+            onClick={() => onTab && onTab(tab.value)}
             key={"tab-" + tab.value}
             className={cn(
               "inline-flex relative md:aspect-auto aspect-square select-none w-fit items-center justify-center cursor-pointer h-10 gap-2 px-4 py-2 rounded-full transition-colors delay-300",

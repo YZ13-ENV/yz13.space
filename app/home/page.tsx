@@ -41,7 +41,7 @@ const page = async () => {
         </div>
       </header>
       <div className="relative w-full mx-auto h-fit">
-        <div className="relative flex flex-col items-center w-full h-full gap-12 py-52">
+        <div className="relative flex flex-col items-center w-full h-full gap-12 py-56">
           <div className="absolute flex justify-center w-full top-6">
             <Link
               href="https://json.yz13.space"
