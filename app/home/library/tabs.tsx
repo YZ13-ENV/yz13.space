@@ -2,34 +2,12 @@
 import { cn } from "@/packages/ui/lib/utils"
 import { motion } from "framer-motion"
 import { useEffect } from "react"
-import { LuFile, LuGlobe, LuPackage, LuWorkflow } from "react-icons/lu"
+import { tabs } from "."
 
 type Props = {
   selectedTab?: string
   onTab?: (tab: string) => void
 }
-export const tabs = [
-  {
-    label: "Websites",
-    icon: LuGlobe,
-    value: "websites"
-  },
-  {
-    label: "Pages",
-    icon: LuFile,
-    value: "pages"
-  },
-  {
-    label: "Components",
-    icon: LuWorkflow,
-    value: "components"
-  },
-  {
-    label: "Packages",
-    icon: LuPackage,
-    value: "packages"
-  },
-]
 const Tabs = ({ onTab, selectedTab = tabs[0]?.value as string }: Props) => {
   useEffect(() => {
     if (onTab) onTab(selectedTab)

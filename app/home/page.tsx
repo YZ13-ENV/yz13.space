@@ -41,7 +41,7 @@ const page = async () => {
         </div>
       </header>
       <div className="relative w-full mx-auto h-fit">
-        <div className="relative flex flex-col items-center w-full h-full gap-12 py-56">
+        <div className="relative flex flex-col items-center w-full h-full gap-12 py-56 px-6">
           <div className="absolute flex justify-center w-full top-6">
             <Link
               href="https://json.yz13.space"
@@ -51,7 +51,7 @@ const page = async () => {
               <BiRightArrowAlt size={16} />
             </Link>
           </div>
-          <h1 className="font-extrabold text-center text-8xl">{hero.title}</h1>
+          <h1 className="font-extrabold max-w-5xl text-center text-8xl">{hero.title}</h1>
           <p className="text-lg text-secondary">{hero.description}</p>
           <div className="flex items-center gap-3">
             <Button variant="outline">{hero["action-secondary"]}</Button>
