@@ -3,6 +3,8 @@
 # dependencies
 /node_modules
 /.pnp
+/.vscode
+.vscode
 .pnp.js
 .yarn/install-state.gz
 

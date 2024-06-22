@@ -1,11 +1,11 @@
+import { Footer } from "@/app/(threads)/_components/footer"
+import { SubThreadV2 } from "@/app/(threads)/_components/thread/ui/sub-threads/sub-thread-v2"
+import { Thread } from "@/app/(threads)/_components/thread/ui/threads/thread-v2"
 import { Separator } from "@repo/ui/separator"
 import { getFullThread, otherThreads } from "@yz13/api/db/threads"
 import { unstable_noStore } from "next/cache"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
-import { Footer } from "../../_components/footer"
-import { SubThreadV2 } from "../../_components/thread/ui/sub-threads/sub-thread-v2"
-import { Thread } from "../../_components/thread/ui/threads/thread-v2"
 
 type Props = {
   params: {
@@ -22,7 +22,7 @@ const page = async ({ params }: Props) => {
     <div className="w-full">
       <div className="border-t border-r">
         <div className="flex items-center justify-start p-6 border-b">
-          <Link href="/" className="inline-flex items-center text-secondary gap-1">
+          <Link href="/threads" className="inline-flex items-center text-secondary gap-1">
             <BiLeftArrowAlt size={16} className="text-inherit" />
             <span className="text-sm text-inherit">Back</span>
           </Link>

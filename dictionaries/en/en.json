@@ -1,0 +1,68 @@
+{
+  "pricing": {
+    "components": {
+      "name": "components",
+      "description": "Just components",
+      "prefix": "pause or cancel anytime",
+      "price": 50,
+      "side": "left",
+      "sign": "$",
+      "list": [
+        "React / Next.js / Tailwind CSS code",
+        "24-hour support response time",
+        "Pause or cancel anytime"
+      ]
+    },
+    "pages": {
+      "name": "pages",
+      "description": "Just pages",
+      "prefix": "pause or cancel anytime",
+      "price": 75,
+      "side": "left",
+      "sign": "$",
+      "list": [
+        "React / Next.js / Tailwind CSS code",
+        "24-hour support response time",
+        "Pause or cancel anytime"
+      ]
+    },
+    "website": {
+      "name": "website",
+      "description": "Just website",
+      "prefix": "starts at",
+      "price": 149,
+      "side": "left",
+      "sign": "$",
+      "list": [
+        "React / Next.js / Tailwind CSS code",
+        "24-hour support response time",
+        "Pause or cancel anytime"
+      ]
+    },
+    "button": "Contact me"
+  },
+  "home": {
+    "hero": {
+      "title": "Help you get what you want",
+      "description": "Websites, pages, components",
+      "action-secondary": "Book call",
+      "action-primary": "Explore works"
+    },
+    "templates": {
+      "title": "Choose a template",
+      "description": "Prepared a few templates, pick one that you like or we can create new one from scratch",
+      "categories": [
+        "Commercial",
+        "Blog"
+      ]
+    },
+    "ready": {
+      "title": "Ready for work?",
+      "description": "Book a call, we ready to start",
+      "action": "Book a call"
+    },
+    "footer": {
+      "description": "Build by YZ13, the source code is available on Github"
+    }
+  }
+}

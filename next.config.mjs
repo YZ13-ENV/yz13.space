@@ -5,6 +5,8 @@ const nextConfig = {
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
   experimental: {
     optimizeCss: true,
+    appDocumentPreloading: true,
+    cssChunking: "loose",
     swcMinify: true,
   },
   compress: true,
