@@ -5,11 +5,11 @@ import { placeholderCount } from "./common"
 
 
 
-const pages = async (): Promise<number[]> => {
+const pages = (): Promise<number[]> => {
   return new Promise((res, rej) => {
     setTimeout(() => {
       res(placeholderCount)
-    }, 5000)
+    }, 1000)
   })
 }
 const PagesList = async () => {

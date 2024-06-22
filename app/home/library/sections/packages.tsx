@@ -1,11 +1,11 @@
 import { placeholderCount } from "./common"
 
 
-const packages = async (): Promise<number[]> => {
+const packages = (): Promise<number[]> => {
   return new Promise((res, rej) => {
     setTimeout(() => {
       res(placeholderCount)
-    }, 5000)
+    }, 1000)
   })
 }
 

@@ -6,7 +6,7 @@ const PlaceholderSkeleton = () => {
         placeholderCount.map(
           item =>
             <div
-              key={`website-skeleton#${item}`}
+              key={`item-skeleton#${item}`}
               className="flex items-center aspect-video justify-center bg-yz-neutral-200 rounded-xl border w-full h-full animate-pulse"
             >
             </div>

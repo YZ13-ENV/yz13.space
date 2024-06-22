@@ -2,7 +2,7 @@
 import { cn } from "@/packages/ui/lib/utils"
 import { motion } from "framer-motion"
 import { useEffect } from "react"
-import { tabs } from "."
+import { tabs } from "./const"
 
 type Props = {
   selectedTab?: string
