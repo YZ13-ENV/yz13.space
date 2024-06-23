@@ -9,6 +9,7 @@
     "./gh/types": "./src/gh/types.ts",
     "./db": "./src/db/index.ts",
     "./db/team": "./src/db/team.ts",
+    "./db/works": "./src/db/works.ts",
     "./db/project": "./src/db/project.ts",
     "./db/threads": "./src/db/threads.ts",
     "./db/page-rank": "./src/db/page-rank.ts",

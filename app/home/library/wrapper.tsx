@@ -41,7 +41,7 @@ const LibraryWrapper = ({ children }: Props) => {
         <Carousel
           setApi={setApi}
         >
-          <CarouselContent>
+          <CarouselContent className="h-full">
             {children}
           </CarouselContent>
         </Carousel>
