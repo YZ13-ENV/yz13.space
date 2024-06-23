@@ -1,3 +1,5 @@
+"use server"
+import { getWorksByType } from "@/packages/api/src/db/works"
 import { placeholderCount } from "./common"
 
 
@@ -10,19 +12,26 @@ const packages = (): Promise<number[]> => {
 }
 
 const PackagesList = async () => {
-  const list = await packages()
+  const list = await getWorksByType("package")
+  const packages = (list.data || [])
   return (
     <>
       {
-        list.map(
-          item =>
-            <div
-              key={`website#${item}`}
-              className="flex items-center aspect-video justify-center rounded-xl border bg-background w-full h-full hover:border-foreground"
-            >
-              <span className="select-none">Package - 1</span>
-            </div>
-        )
+        !!packages.length
+          ?
+          packages
+            .map(
+              item =>
+                <div
+                  key={`package#${item}`}
+                  className="flex items-center aspect-video justify-center rounded-xl border bg-background w-full h-full hover:border-foreground"
+                >
+                  <span className="select-none">Package - 1</span>
+                </div>
+            )
+          : <div className="w-full h-full flex justify-center border border-dashed rounded-xl row-span-full col-span-full items-center">
+            <span className="text-sm text-secondary">No packages yet</span>
+          </div>
       }
     </>
   )

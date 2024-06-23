@@ -1,11 +1,10 @@
 import { Footer } from "@/app/(threads)/_components/footer"
-import { SubThreadV2 } from "@/app/(threads)/_components/thread/ui/sub-threads/sub-thread-v2"
-import { Thread } from "@/app/(threads)/_components/thread/ui/threads/thread-v2"
-import { Separator } from "@repo/ui/separator"
-import { getFullThread, otherThreads } from "@yz13/api/db/threads"
-import { unstable_noStore } from "next/cache"
 import Link from "next/link"
+import { Suspense } from "react"
 import { BiLeftArrowAlt } from "react-icons/bi"
+import { Skeleton } from "../skeleton"
+import { OtherThreads } from "./other-threads"
+import { ThreadWrapper } from "./thread"
 
 type Props = {
   params: {
@@ -13,11 +12,8 @@ type Props = {
   }
 }
 
-const page = async ({ params }: Props) => {
-  unstable_noStore()
+const page = ({ params }: Props) => {
   const thread_id = parseInt(params.thread)
-  const thread = await getFullThread(thread_id)
-  const other_threads = await otherThreads(thread_id)
   return (
     <div className="w-full">
       <div className="border-t border-r">
@@ -28,36 +24,13 @@ const page = async ({ params }: Props) => {
           </Link>
         </div>
         <div className="w-full">
-          {
-            thread &&
-            <Thread thread={thread} component={SubThreadV2} />
-          }
+          <Suspense fallback={<Skeleton prefix="-target-" length={1} />}>
+            <ThreadWrapper id={thread_id} />
+          </Suspense>
         </div>
-        {
-          !!other_threads.length &&
-          <>
-            <Separator />
-            <section>
-              <div className="p-6 border-b">
-                <h2 className="text-2xl font-semibold">Other</h2>
-              </div>
-              <div className="w-full">
-                {
-                  other_threads.map(
-                    thread =>
-                      <Thread
-                        className="pt-6"
-                        key={thread.thread_id + "-" + thread.created_at}
-                        thread={thread}
-                        enableLink
-                        max={3}
-                      />
-                  )
-                }
-              </div>
-            </section>
-          </>
-        }
+        <Suspense fallback={<Skeleton prefix="-other-" length={3} />}>
+          <OtherThreads id={thread_id} />
+        </Suspense>
         <Footer className="p-6 border-t" />
       </div>
     </div>

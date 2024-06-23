@@ -4,7 +4,7 @@ import { cn } from "@repo/ui/cn"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip"
 import { useTimeout } from "ahooks"
 import { useEffect, useState } from "react"
-import AnimatedNumbers from "react-animated-numbers"
+// import AnimatedNumbers from "react-animated-numbers"
 import { BiHeart, BiLoaderAlt, BiSolidHeart } from "react-icons/bi"
 // const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
 //   ssr: false,
@@ -40,7 +40,7 @@ const LikeButton = ({ loading = false, value, onClick, variant = "not-liked" }: 
             }}
             variant="ghost"
             size="sm"
-            className={cn("hover:bg-transparent gap-1 p-0 group/tag", isLiked ? "text-error-foreground" : "text-inherit")}
+            className={cn("hover:bg-transparent gap-1 p-0 group/tag", isLiked ? "text-error-foreground" : "text-secondary")}
           >
             <span className="relative flex items-center justify-center">
               <span className="w-7 h-7 bg-transparent group-hover/tag:bg-yz-neutral-100 transition-colors rounded-full absolute z-[-1]" />
@@ -53,15 +53,18 @@ const LikeButton = ({ loading = false, value, onClick, variant = "not-liked" }: 
                     : <BiHeart size={16} className={cn("z-[1]", isLiked ? "text-error-foreground" : "text-inherit")} />
               }
             </span>
-            <AnimatedNumbers
-              className={isLiked ? "text-error-foreground" : "text-inherit"}
-              includeComma
-              transitions={(index) => ({
-                type: "spring",
-                duration: index + 0.3,
-              })}
-              animateToNumber={value > 1000 ? value / 1000 : value}
-            />
+            <span
+              className={cn(
+                "",
+                isLiked ? "text-error-foreground" : "text-inherit"
+              )}
+            // includeComma
+            // transitions={(index) => ({
+            //   type: "spring",
+            //   duration: index + 0.3,
+            // })}
+            // animateToNumber={value > 1000 ? value / 1000 : value}
+            >{value > 1000 ? value / 1000 : value}</span>
             {
               value > 1000 &&
               <span>k.</span>

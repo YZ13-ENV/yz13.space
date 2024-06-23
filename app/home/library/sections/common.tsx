@@ -7,9 +7,8 @@ const PlaceholderSkeleton = () => {
           item =>
             <div
               key={`item-skeleton#${item}`}
-              className="flex items-center aspect-video justify-center bg-yz-neutral-200 rounded-xl border w-full h-full animate-pulse"
-            >
-            </div>
+              className="aspect-[4/2.5] bg-yz-neutral-200 rounded-xl border w-full h-full animate-pulse"
+            />
         )
       }
     </>
