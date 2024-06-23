@@ -57,4 +57,30 @@ const YZ13Info = async () => {
     </div>
   )
 }
-export { YZ13Info }
+
+const YZ13InfoSkeleton = () => {
+  return (
+    <div className="xl:max-w-sm max-w-full w-full space-y-5 p-6">
+      <div className="w-16 aspect-square rounded-full animate-pulse bg-accents-1 relative" />
+      <div className="flex flex-col gap-1">
+        <h1 className="h-6 w-36 rounded-md bg-yz-neutral-200 animate-pulse" />
+        <p className="w-16 h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+      </div>
+      <div className="flex flex-col gap-1">
+        <span className="w-16 h-5 rounded-md mb-1 bg-yz-neutral-200 animate-pulse" />
+        <p className="w-full h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+        <p className="w-1/2 h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+      </div>
+      <div className="flex flex-col gap-2">
+        <span className="w-16 h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+        <ul className="space-y-1">
+          <li className="w-full h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+          <li className="w-full h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+          <li className="w-full h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+export { YZ13Info, YZ13InfoSkeleton }
