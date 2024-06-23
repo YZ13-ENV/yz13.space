@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { Contacts } from "../../_components/contacts";
+import { Contacts, ContactsSkeleton } from "../../_components/contacts";
 import { Footer } from "../../_components/footer";
 import { SearchBar } from "../../_components/search-bar";
 import { AdBanner } from "../ad-banner";
@@ -41,7 +41,9 @@ const page = async ({ searchParams }: Props) => {
             <Suspense fallback={<Skeleton />}>
               <ThreadsList filter={filter} />
             </Suspense>
-            <Contacts className="p-6" />
+            <Suspense fallback={<ContactsSkeleton />}>
+              <Contacts className="p-6" />
+            </Suspense>
             <Footer className="p-6" />
           </div>
         </div>
