@@ -1,15 +1,29 @@
 import { Header } from "@/app/home/header"
 import { cn } from "@/packages/ui/lib/utils"
+import { Input } from "@/packages/ui/src/components/input"
 import { BiGitCommit } from "react-icons/bi"
+import { LuSearch } from "react-icons/lu"
 
 const page = () => {
 
   const recent_tasks = Array.from({ length: 5 }).map((_, i) => i)
+  const current_projects = Array.from({ length: 20 }).map((_, i) => i)
   return (
     <>
       <Header />
-      <div className="max-w-7xl flex gap-6 mx-auto w-full p-6">
-        <div className="w-1/3 h-96 space-y-3">
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="relative w-full">
+          <div className="absolute w-10 aspect-square flex items-center justify-center left-0">
+            <LuSearch size={18} />
+          </div>
+          <Input
+            className="pl-10 h-10 text-base rounded-lg"
+            placeholder="Search"
+          />
+        </div>
+      </div>
+      <div className="max-w-7xl flex gap-6 mx-auto w-full h-full p-6">
+        <div className="w-1/3 h-full space-y-3 sticky top-6">
           <h3 className="text-sm uppercase text-secondary">
             Recent tasks
           </h3>
@@ -44,8 +58,23 @@ const page = () => {
             }
           </ul>
         </div>
-        <div className="w-2/3 h-96">
-          <div className="w-full h-full rounded-xl bg-yz-neutral-100" />
+        <div className="w-2/3 h-fit space-y-3">
+          <h3 className="text-sm uppercase text-secondary">
+            Current projects
+          </h3>
+          <ul className="space-y-3">
+            {
+              current_projects.map(
+                project =>
+                  <li
+                    key={`current-project#${project}`}
+                    className="w-full p-3 rounded-xl border h-20 hover:border-foreground transition-colors"
+                  >
+
+                  </li>
+              )
+            }
+          </ul>
         </div>
       </div>
     </>
