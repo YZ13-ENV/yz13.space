@@ -27,4 +27,18 @@ const Contacts = async ({ className = "" }: Props) => {
     </section>
   )
 }
-export { Contacts }
+
+const ContactsSkeleton = () => {
+  return (
+    <section className="p-6">
+      <h2 className="w-36 rounded-md h-5 mb-2 bg-yz-neutral-200 animate-pulse" />
+      <ul className="space-y-1">
+        <li className="w-full h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+        <li className="w-full h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+        <li className="w-full h-5 rounded-md bg-yz-neutral-200 animate-pulse" />
+      </ul>
+    </section>
+  )
+}
+
+export { Contacts, ContactsSkeleton }
