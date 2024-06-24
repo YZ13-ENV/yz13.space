@@ -10,7 +10,7 @@ const UserProfile = ({ user }: Props) => {
   const hasAvatar = !!metadata.avatar_url
   const avatar_url = metadata.avatar_url
   return (
-    <div className="w-9 aspect-square rounded-full relative flex items-center justify-center">
+    <div className="relative flex items-center justify-center rounded-full w-9 aspect-square">
       {
         hasAvatar
           ? <Image src={avatar_url} className="rounded-full" fill alt="user-avatar" />

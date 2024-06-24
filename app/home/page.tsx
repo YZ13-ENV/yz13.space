@@ -6,7 +6,6 @@ import Link from "next/link"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { Header } from "./header"
 import { Library } from "./library"
-import { Templates } from "./templates"
 
 const page = async () => {
   const cookiesList = cookies()
@@ -38,25 +37,30 @@ const page = async () => {
             <BiRightArrowAlt size={16} />
           </Link>
         </div>
-        <h1 className="font-extrabold max-w-5xl text-center text-6xl lg:text-8xl">{hero.title}</h1>
+        <h1 className="max-w-5xl text-6xl font-extrabold text-center lg:text-8xl">{hero.title}</h1>
         <p className="text-lg text-secondary">{hero.description}</p>
         <div className="flex items-center gap-3">
-          <Button variant="outline">{hero["action-secondary"]}</Button>
-          <Button variant="default">{hero["action-primary"]}</Button>
+          <Button variant="outline" disabled>
+            {hero["action-secondary"]}
+          </Button>
+          <Button variant="default" asChild>
+            <Link href="/works">
+              {hero["action-primary"]}
+            </Link>
+          </Button>
         </div>
       </div>
       <div className="z-10 w-full pt-20 mx-auto space-y-12">
         <Library />
-        <Templates />
-
-        <div className="flex max-w-4xl mx-auto flex-col w-full gap-4 px-6 py-12 h-fit">
-          <p className="text-2xl inline-flex flex-col font-semibold text-secondary">
+        {/* <Templates /> */}
+        <div className="flex flex-col w-full max-w-4xl gap-4 px-6 py-12 mx-auto h-fit">
+          <p className="inline-flex flex-col text-2xl font-semibold text-secondary">
             <b className="text-foreground shrink-0">{ready.title}</b>
             {ready.description}
           </p>
-          <Button className="w-fit">{ready.action}</Button>
+          <Button disabled className="w-fit">{ready.action}</Button>
         </div>
-        <footer className="w-full max-w-4xl mx-auto px-6 py-12 h-fit">
+        <footer className="w-full max-w-4xl px-6 py-12 mx-auto h-fit">
           <span className="text-secondary">
             {footer.description}
           </span>

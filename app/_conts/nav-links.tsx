@@ -1,6 +1,6 @@
 import { isDev } from "@/packages/api/src/const";
 import { IconType } from "react-icons/lib";
-import { PiBagSimpleDuotone, PiBracketsCurlyDuotone, PiThreadsLogoDuotone } from "react-icons/pi";
+import { PiBagSimpleDuotone, PiBracketsCurlyDuotone, PiCurrencyDollarDuotone, PiHouseSimpleDuotone, PiThreadsLogoDuotone } from "react-icons/pi";
 
 export type NavLink = {
   link: string
@@ -12,6 +12,11 @@ const inDev = ["/works"]
 
 const nav_links: NavLink[] = [
   {
+    label: "Home",
+    link: "/home",
+    icon: PiHouseSimpleDuotone
+  },
+  {
     label: "Threads",
     link: "/threads",
     icon: PiThreadsLogoDuotone
@@ -20,6 +25,11 @@ const nav_links: NavLink[] = [
     label: "Works",
     link: "/works",
     icon: PiBagSimpleDuotone
+  },
+  {
+    label: "Pricing",
+    link: "/pricing",
+    icon: PiCurrencyDollarDuotone
   },
   {
     label: "Services",

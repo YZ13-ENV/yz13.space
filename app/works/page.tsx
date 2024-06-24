@@ -3,9 +3,7 @@ import { cn } from "@/packages/ui/lib/utils"
 import { Button } from "@/packages/ui/src/components/button"
 import { Separator } from "@/packages/ui/src/components/separator"
 import { cookies } from "next/headers"
-import Link from "next/link"
 import { BiCheckCircle } from "react-icons/bi"
-import { nav_links } from "../(threads)/(routes)/nav-links"
 import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
 import { Header } from "../home/header"
@@ -15,7 +13,6 @@ import { Header } from "../home/header"
 const page = async () => {
   const cookiesList = cookies()
   const locale = (cookiesList.get("locale")?.value || "").slice(0, 2)
-  const localeCode = locale.toUpperCase()
   const dict: any = await getDictionary(locale)
   const pricingDict = dict?.pricing
   const Pricing = () => {
@@ -49,7 +46,7 @@ const page = async () => {
             description &&
             <p className="text-sm text-secondary">{description}</p>
           }
-          <ul className="space-y-2 py-4">
+          <ul className="py-4 space-y-2">
             {
               list.map((item, i) =>
                 <li key={dictKey + "/" + item + "-" + i}>
@@ -66,7 +63,7 @@ const page = async () => {
       )
     }
     return (
-      <div className="w-full h-fit flex items-center gap-4 overflow-x-auto no-scrollbar">
+      <div className="flex items-center w-full gap-4 overflow-x-auto h-fit no-scrollbar">
         <PricingCard dictKey="components" />
         <PricingCard dictKey="pages" />
         <PricingCard dictKey="website" />
@@ -78,9 +75,9 @@ const page = async () => {
       <div className="w-full px-6">
         <span className="text-sm">Packages</span>
         <ul className="">
-          <li className="w-full min-h-9 py-2 flex gap-4 border-b transition-colors hover:border-foreground">
-            <div className="h-24 aspect-video border rounded-lg"></div>
-            <div className="w-full flex flex-col">
+          <li className="flex w-full gap-4 py-2 transition-colors border-b min-h-9 hover:border-foreground">
+            <div className="h-24 border rounded-lg aspect-video"></div>
+            <div className="flex flex-col w-full">
               <span className="text-base font-medium">Package name</span>
               <span className="text-xs text-secondary">Package description</span>
               <Button className="mt-auto w-fit">Visit</Button>
@@ -95,9 +92,9 @@ const page = async () => {
       <div className="w-full px-6">
         <span className="text-sm">Builded sites</span>
         <ul className="">
-          <li className="w-full min-h-9 py-2 flex gap-4 border-b transition-colors hover:border-foreground">
-            <div className="h-24 aspect-video border rounded-lg"></div>
-            <div className="w-full flex flex-col">
+          <li className="flex w-full gap-4 py-2 transition-colors border-b min-h-9 hover:border-foreground">
+            <div className="h-24 border rounded-lg aspect-video"></div>
+            <div className="flex flex-col w-full">
               <span className="text-base font-medium">App name</span>
               <span className="text-xs text-secondary">App description</span>
               <Button className="mt-auto w-fit">Visit</Button>
@@ -110,37 +107,30 @@ const page = async () => {
   return (
     <>
       <Header />
-      <div className="max-w-3xl h-fit mx-auto w-full z-10 pt-20">
-        <div className="w-full h-20 flex items-center justify-center mb-20">
-          <h1 className="text-4xl text-center font-bold">Works</h1>
+      <div className="relative w-full max-w-5xl mx-auto mt-20">
+        <div className="relative flex flex-col items-center justify-center w-full gap-2 border aspect-video">
+          <div className="absolute top-0 left-0 w-full h-16 border-b"></div>
+          <div className="absolute bottom-0 left-0 w-full h-16 border-t"></div>
+          <div className="absolute top-0 left-0 w-16 h-full border-r"></div>
+          <div className="absolute top-0 right-0 w-16 h-full border-l"></div>
+          <h1 className="text-5xl font-bold">
+            Explore my works
+          </h1>
+          <p className="text-xl text-center text-secondary">
+            Hope you like it
+          </p>
         </div>
-        <div className="px-6 w-full flex flex-wrap gap-2 items-start">
-          {
-            nav_links.map(nav =>
-              <Link
-                key={nav.link}
-                href={nav.link}
-                className="px-2 py-1 rounded-md border text-xs cursor-pointer inline-flex gap-1 items-center"
-              >
-                {nav.icon && nav.icon({ size: 14 })}
-                {nav.label}
-              </Link>
-            )
-          }
-        </div>
-        <div className="py-6 space-y-6">
-          <div className="w-full aspect-video rounded-xl border border-dashed flex items-center justify-center">
+      </div>
+      <div className="relative w-full max-w-5xl mx-auto">
+        <div className="space-y-6">
+          <div className="flex items-center justify-center w-full border-x aspect-video">
             <span className="text-sm text-secondary">
               Здесь будут отображаться работы
             </span>
           </div>
         </div>
         <Separator />
-        {/* <div className="w-full p-6">
-          <Pricing />
-        </div>
-        <Separator /> */}
-        <div className="w-full space-y-6 p-6">
+        <div className="w-full p-6 space-y-6 border-x">
           <Contacts />
           <Footer />
         </div>
