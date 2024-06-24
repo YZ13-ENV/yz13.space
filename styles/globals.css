@@ -45,7 +45,7 @@
 }
 
 .logo {
-  & > svg > path {
+  & > path {
     fill: hsl(var(--yz13-foreground));
   }
 }
