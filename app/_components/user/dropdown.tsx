@@ -1,5 +1,6 @@
 "use client"
 import { createClient } from "@/packages/supabase/src/supabase/client"
+import { cn } from "@/packages/ui/lib/utils"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/packages/ui/src/components/dropdown-menu"
 import { Separator } from "@/packages/ui/src/components/separator"
 import { User } from "@supabase/supabase-js"
@@ -24,12 +25,15 @@ const UserDropdown = ({ children, user }: Props) => {
   }
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild={!!children}>
+      <DropdownMenuTrigger
+        asChild={!!children}
+        className={cn("transition-all", open ? "outline-offset-1 outline outline-foreground" : "")}
+      >
         {children}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 gap-0 p-0 space-y-0 rounded-xl h-fit">
         <DropdownMenuLabel className="flex flex-col p-3">
-          <span className="text-lg">{name}</span>
+          <span className="text-lg line-clamp-1">{name}</span>
           <span className="text-sm text-secondary">{email}</span>
         </DropdownMenuLabel>
         <Separator />

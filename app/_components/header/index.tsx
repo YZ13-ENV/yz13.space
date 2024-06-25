@@ -25,6 +25,9 @@ const Header = async ({ className = "" }: HeaderProps) => {
   const localeCode = locale.toUpperCase()
   const sp = createClient(cks)
   const { data: { user } } = await sp.auth.getUser()
+  const metadata = user?.user_metadata
+  const type = metadata?.type || "user"
+  const isAdmin = type === "admin"
   const isLogged = !!user
   return (
     <header className={cn("w-full h-16 md:bg-transparent bg-background z-10", className)}>
@@ -37,7 +40,11 @@ const Header = async ({ className = "" }: HeaderProps) => {
         </div>
         <div className="z-10 flex items-center gap-3">
           <div className="gap-3 md:flex hidden items-center">
-            <Button disabled size="sm" variant="outline">Contact</Button>
+            <Button size="sm" variant="outline">
+              <Link href="/contact">
+                Contact
+              </Link>
+            </Button>
             <Separator orientation="vertical" className="h-8" />
           </div>
           {
@@ -45,13 +52,16 @@ const Header = async ({ className = "" }: HeaderProps) => {
               ?
               <>
                 <div className="flex divide-x">
-                  <LangSelector defaultLocale={locale} />
-                  <Button size="sm" variant="outline" className="gap-2 !border-r rounded-l-none" asChild>
-                    <Link href="/dashboard">
-                      <LuLayoutGrid size={16} />
-                      <span className="md:inline hidden">Dashboard</span>
-                    </Link>
-                  </Button>
+                  <LangSelector defaultLocale={locale} className={isAdmin ? "rounded-r-none" : ""} />
+                  {
+                    isAdmin &&
+                    <Button size="sm" variant="outline" className="gap-2 !border-r rounded-l-none" asChild>
+                      <Link href="/dashboard">
+                        <LuLayoutGrid size={16} />
+                        <span className="md:inline hidden">Dashboard</span>
+                      </Link>
+                    </Button>
+                  }
                 </div>
                 <Profile
                   desktop={

@@ -1,11 +1,10 @@
-import { Header } from "@/app/home/header"
 import { cn } from "@/packages/ui/lib/utils"
 import { Input } from "@/packages/ui/src/components/input"
 import { BiGitCommit } from "react-icons/bi"
 import { LuSearch } from "react-icons/lu"
+import { Header } from "../_components/header"
 
 const page = () => {
-
   const recent_tasks = Array.from({ length: 5 }).map((_, i) => i)
   const current_projects = Array.from({ length: 20 }).map((_, i) => i)
   return (

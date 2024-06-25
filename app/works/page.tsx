@@ -1,7 +1,6 @@
 import { getDictionary } from "@/dictionaries/tools"
 import { cn } from "@/packages/ui/lib/utils"
 import { Button } from "@/packages/ui/src/components/button"
-import { Separator } from "@/packages/ui/src/components/separator"
 import { cookies } from "next/headers"
 import { BiCheckCircle } from "react-icons/bi"
 import { Contacts } from "../(threads)/_components/contacts"
@@ -108,11 +107,7 @@ const page = async () => {
     <>
       <Header />
       <div className="relative w-full max-w-5xl mx-auto mt-20">
-        <div className="relative flex flex-col items-center justify-center w-full gap-2 border aspect-video">
-          <div className="absolute top-0 left-0 w-full h-16 border-b"></div>
-          <div className="absolute bottom-0 left-0 w-full h-16 border-t"></div>
-          <div className="absolute top-0 left-0 w-16 h-full border-r"></div>
-          <div className="absolute top-0 right-0 w-16 h-full border-l"></div>
+        <div className="relative flex flex-col items-center justify-center w-full gap-2 aspect-video">
           <h1 className="text-5xl font-bold">
             Explore my works
           </h1>
@@ -123,14 +118,13 @@ const page = async () => {
       </div>
       <div className="relative w-full max-w-5xl mx-auto">
         <div className="space-y-6">
-          <div className="flex items-center justify-center w-full border-x aspect-video">
+          <div className="flex items-center justify-center w-full aspect-video">
             <span className="text-sm text-secondary">
               Здесь будут отображаться работы
             </span>
           </div>
         </div>
-        <Separator />
-        <div className="w-full p-6 space-y-6 border-x">
+        <div className="w-full p-6 space-y-6 rounded-t-3xl border bg-yz-neutral-100">
           <Contacts />
           <Footer />
         </div>
