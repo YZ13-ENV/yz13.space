@@ -15,21 +15,22 @@ const Nav = ({ className = "" }: NavProps) => {
       className
     )}>
       {
-        nav_links.map(nav => {
-          const isMatch = nav.link === pathname
-          return <Link
-            key={nav.link}
-            href={nav.link}
-            className={cn(
-              "px-2 py-1 rounded-md border text-xs cursor-pointer inline-flex gap-1 items-center",
-              isMatch ? "text-background border-foreground bg-foreground" : "bg-background"
-            )}
-          >
-            {nav.icon && nav.icon({ size: 14 })}
-            {nav.label}
-          </Link>
-        }
-        )
+        nav_links
+          .map(nav => {
+            const isMatch = nav.link === pathname
+            return <Link
+              key={nav.link}
+              href={nav.link}
+              className={cn(
+                "px-2 py-1 rounded-md border text-xs cursor-pointer inline-flex gap-1 items-center",
+                isMatch ? "text-background border-foreground bg-foreground" : "bg-background"
+              )}
+            >
+              {nav.icon && nav.icon({ size: 14 })}
+              {nav.label}
+            </Link>
+          }
+          )
       }
     </nav>
   )

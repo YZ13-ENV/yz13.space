@@ -1,5 +1,5 @@
 import { cn } from "@/packages/ui/lib/utils"
-import { Header } from "../home/header"
+import { Header } from "../_components/header"
 import { Pricing } from "./prices"
 
 const page = () => {

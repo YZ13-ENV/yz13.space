@@ -8,7 +8,7 @@ export type NavLink = {
   icon?: IconType
 }
 
-const inDev = ["/works"]
+const inDev = ["/works", "/pricing", "/home"]
 
 const nav_links: NavLink[] = [
   {

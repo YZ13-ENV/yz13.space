@@ -11,7 +11,8 @@ const UnLogged = () => {
         <GithubButton />
         <Separator />
         <button
-          className="flex items-center justify-center w-full h-12 gap-2 font-medium rounded-xl"
+          disabled
+          className="flex items-center justify-center w-full h-12 gap-2 font-medium rounded-xl disabled:opacity-60"
         >
           Sign in with Email
         </button>

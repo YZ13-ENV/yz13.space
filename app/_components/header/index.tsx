@@ -2,13 +2,19 @@ import { createClient } from "@/packages/supabase/src/supabase/server"
 import { cn } from "@/packages/ui/lib/utils"
 import { Button } from "@/packages/ui/src/components/button"
 import { Separator } from "@/packages/ui/src/components/separator"
+import dynamic from "next/dynamic"
 import { cookies } from "next/headers"
 import Link from "next/link"
-import { LuGlobe, LuLayoutGrid } from "react-icons/lu"
-import { Logo } from "../_components/logo"
-import { UserDropdown } from "../_components/user/dropdown"
-import { UserProfile } from "../_components/user/user"
-import { NavMenu } from "./nav-menu"
+import { LuLayoutGrid } from "react-icons/lu"
+import { NavMenu } from "../../home/nav-menu"
+import { Logo } from "../logo"
+import { UserDropdown } from "../user/dropdown"
+import { UserProfile } from "../user/user"
+import { FullScreenMenu } from "./fullscreen-menu"
+import { LangSelector } from "./lang-selector"
+const Profile = dynamic(() => import("./profile"), {
+  ssr: false
+})
 
 type HeaderProps = {
   className?: string
@@ -21,7 +27,7 @@ const Header = async ({ className = "" }: HeaderProps) => {
   const { data: { user } } = await sp.auth.getUser()
   const isLogged = !!user
   return (
-    <header className={cn("w-full h-16", className)}>
+    <header className={cn("w-full h-16 md:bg-transparent bg-background z-10", className)}>
       <div className="z-10 flex items-center justify-between w-full h-full px-6 mx-auto max-w-screen-2xl">
         <div className="flex items-center gap-6">
           <Link href="/">
@@ -30,32 +36,44 @@ const Header = async ({ className = "" }: HeaderProps) => {
           <NavMenu className="hidden md:flex" />
         </div>
         <div className="z-10 flex items-center gap-3">
-          <Button disabled size="sm" variant="outline">Contact</Button>
-          <Separator orientation="vertical" className="h-8" />
+          <div className="gap-3 md:flex hidden items-center">
+            <Button disabled size="sm" variant="outline">Contact</Button>
+            <Separator orientation="vertical" className="h-8" />
+          </div>
           {
             isLogged
               ?
               <>
                 <div className="flex divide-x">
-                  <Button size="sm" variant="outline" className="gap-2 rounded-r-none">
-                    <LuGlobe size={16} />
-                    {locale}
-                  </Button>
+                  <LangSelector defaultLocale={locale} />
                   <Button size="sm" variant="outline" className="gap-2 !border-r rounded-l-none" asChild>
                     <Link href="/dashboard">
                       <LuLayoutGrid size={16} />
-                      Dashboard
+                      <span className="md:inline hidden">Dashboard</span>
                     </Link>
                   </Button>
                 </div>
-                <UserDropdown user={user}>
-                  <UserProfile user={user} />
-                </UserDropdown>
+                <Profile
+                  desktop={
+                    <UserDropdown user={user}>
+                      <UserProfile user={user} />
+                    </UserDropdown>
+                  }
+                  mobile={<FullScreenMenu user={user} />}
+                />
               </>
               :
               <>
-                <Button size="sm" variant="outline">Login</Button>
-                <Button className="hidden md:flex" size="sm" variant="default">Sign up for free</Button>
+                <Button size="sm" variant="outline" asChild>
+                  <Link href="/login">
+                    Login
+                  </Link>
+                </Button>
+                <Button className="hidden md:flex" size="sm" variant="default" asChild>
+                  <Link href="/login">
+                    Sign up for free
+                  </Link>
+                </Button>
               </>
           }
         </div>

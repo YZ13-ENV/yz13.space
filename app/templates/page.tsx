@@ -2,7 +2,7 @@ import { Button } from "@/packages/ui/src/components/button"
 import { Input } from "@/packages/ui/src/components/input"
 import { Separator } from "@/packages/ui/src/components/separator"
 import { BiDollar } from "react-icons/bi"
-import { Header } from "../home/header"
+import { Header } from "../_components/header"
 
 const page = () => {
   return (

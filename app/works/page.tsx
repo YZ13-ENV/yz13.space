@@ -6,7 +6,7 @@ import { cookies } from "next/headers"
 import { BiCheckCircle } from "react-icons/bi"
 import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
-import { Header } from "../home/header"
+import { Header } from "../_components/header"
 
 
 

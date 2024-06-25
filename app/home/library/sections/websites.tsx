@@ -1,8 +1,12 @@
 "use server"
 import { getWorksByType } from "@/packages/api/src/db/works"
+import { getStorageItem } from "@/packages/supabase/src/supabase/storage"
 import { cn } from "@/packages/ui/lib/utils"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import Image from "next/image"
+import Link from "next/link"
+import { BiImage } from "react-icons/bi"
 import { placeholderCount } from "./common"
 
 dayjs.extend(relativeTime)
@@ -24,24 +28,41 @@ const WebsitesList = async () => {
           ?
           websites.map(website => {
             const created_at = dayjs(website.created_at).fromNow()
+            const href = website.link
+            const link = website.thumbnail
+            const thumbnail = link ? getStorageItem(["media", link]) : null
             return (
-              <div key={`website#${website.id}`} className="w-full">
+              <div key={`website#${website.id}`} className="w-full relative group h-fit border-r hover:bg-yz-neutral-100">
                 <div
                   className={cn(
-                    "flex items-center aspect-[4/2.5] justify-center rounded-xl border bg-background w-full h-full",
-                    "hover:border-foreground hover:bg-yz-neutral-100 cursor-pointer transition-colors"
+                    "flex items-center aspect-[4/3] justify-center bg-transparent w-full h-full",
+                    "cursor-pointer transition-colors shrink-0 relative"
                   )}
                 >
-                  <span className="select-none">Website - 1</span>
+                  {
+                    thumbnail
+                      ? <>
+                        {
+                          href
+                            ? <Link href={href}>
+                              <Image src={thumbnail} fill alt="thumbnail" />
+                            </Link>
+                            : <Image src={thumbnail} fill alt="thumbnail" />
+                        }
+                      </>
+                      : <BiImage size={24} />
+                  }
                 </div>
-                <div className="flex py-2 w-full justify-between items-center">
+                <div
+                  className="flex p-2 shrink-0 w-full justify-between absolute left-0 transition-all group-hover:bottom-0 -bottom-[100%] border-t bg-background items-center"
+                >
                   <span className="text-sm">{website.name}</span>
                   <span className="text-xs text-secondary">{created_at}</span>
                 </div>
               </div>
             )
           })
-          : <div className="w-full h-full flex justify-center border border-dashed rounded-xl row-span-full col-span-full items-center">
+          : <div className="w-full h-full flex justify-center border border-dashed rounded-none row-span-full col-span-full items-center">
             <span className="text-sm text-secondary">No websites yet</span>
           </div>
       }
