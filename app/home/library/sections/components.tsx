@@ -32,7 +32,7 @@ const ComponentsList = async () => {
                   <span className="select-none">Component - 1</span>
                 </div>
             )
-          : <div className="w-full h-full flex justify-center border border-dashed rounded-xl row-span-full col-span-full items-center">
+          : <div className="w-full h-full flex justify-center border border-dashed rounded-none row-span-full col-span-full items-center">
             <span className="text-sm text-secondary">No components yet</span>
           </div>
       }

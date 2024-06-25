@@ -28,7 +28,7 @@ const LibraryWrapper = ({ children }: Props) => {
   return (
     <>
       <div
-        className={cn("relative w-full px-6 transition-all max-w-7xl mx-auto")}
+        className={cn("relative w-full transition-all max-h-screen max-w-7xl mx-auto")}
       >
         <div className="w-full h-44 flex items-center justify-center">
           <Tabs onTab={newTab => {

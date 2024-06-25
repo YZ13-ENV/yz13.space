@@ -1,12 +1,8 @@
 import { getDictionary } from "@/dictionaries/tools"
-import { cn } from "@/packages/ui/lib/utils"
 import { Button } from "@/packages/ui/src/components/button"
 import { cookies } from "next/headers"
-import Link from "next/link"
-import { BiRightArrowAlt } from "react-icons/bi"
-import { Header } from "./header"
+import { Header } from "../_components/header"
 import { Library } from "./library"
-import { Templates } from "./templates"
 
 const page = async () => {
   const cookiesList = cookies()
@@ -18,14 +14,22 @@ const page = async () => {
   const footer = homeDict.footer
   return (
     <>
-      <div className="absolute top-0 left-0 w-full h-screen">
+      {/* <div className="absolute top-0 left-0 w-full h-screen">
         <div className="relative w-full h-full">
           <video src="/bg-animation.webm" className="object-cover opacity-30 z-[1] w-full h-full grayscale" autoPlay muted loop playsInline />
           <div className="absolute top-0 left-0 z-0 w-full h-full bg-gradient-to-b from-background via-transparent to-background backdrop-blur-3xl" />
         </div>
-      </div>
+      </div> */}
       <Header />
-      <div className={cn(
+      <div className="relative w-full max-w-5xl mx-auto mt-20">
+        {/* <Connector className="absolute -left-[100%] top-0 w-full" /> */}
+        {/* <Connector className="absolute rotate-180 -right-[100%] top-0 w-full" /> */}
+        <div className="relative flex flex-col items-center justify-center w-full gap-2 aspect-video">
+          <h1 className="text-5xl text-center font-bold">{hero.title}</h1>
+          <p className="text-xl text-center text-secondary">{hero.description}</p>
+        </div>
+      </div>
+      {/* <div className={cn(
         "relative w-full mx-auto h-[80dvh]",
         "flex flex-col justify-center items-center gap-12 px-6"
       )}>
@@ -38,29 +42,40 @@ const page = async () => {
             <BiRightArrowAlt size={16} />
           </Link>
         </div>
-        <h1 className="font-extrabold max-w-5xl text-center text-6xl lg:text-8xl">{hero.title}</h1>
+        <h1 className="max-w-5xl text-6xl font-extrabold text-center lg:text-8xl">{hero.title}</h1>
         <p className="text-lg text-secondary">{hero.description}</p>
         <div className="flex items-center gap-3">
-          <Button variant="outline">{hero["action-secondary"]}</Button>
-          <Button variant="default">{hero["action-primary"]}</Button>
+          <Button variant="outline" disabled>
+            {hero["action-secondary"]}
+          </Button>
+          <Button variant="default" asChild>
+            <Link href="/works">
+              {hero["action-primary"]}
+            </Link>
+          </Button>
         </div>
-      </div>
-      <div className="z-10 w-full pt-20 mx-auto space-y-12">
-        <Library />
-        <Templates />
-
-        <div className="flex max-w-4xl mx-auto flex-col w-full gap-4 px-6 py-12 h-fit">
-          <p className="text-2xl inline-flex flex-col font-semibold text-secondary">
-            <b className="text-foreground shrink-0">{ready.title}</b>
-            {ready.description}
-          </p>
-          <Button className="w-fit">{ready.action}</Button>
+      </div> */}
+      <div className="z-10 w-full mx-auto divide-y">
+        <div className="w-full max-w-5xl mx-auto border-x border-t rounded-3xl">
+          <Library />
         </div>
-        <footer className="w-full max-w-4xl mx-auto px-6 py-12 h-fit">
-          <span className="text-secondary">
-            {footer.description}
-          </span>
-        </footer>
+        {/* <Templates /> */}
+        <div className="w-full max-w-5xl mx-auto border-x">
+          <div className="w-full flex flex-col gap-3 p-6">
+            <p className="inline-flex flex-col text-2xl font-semibold text-secondary">
+              <b className="text-foreground shrink-0">{ready.title}</b>
+              {ready.description}
+            </p>
+            <Button disabled className="w-fit">{ready.action}</Button>
+          </div>
+        </div>
+        <div className="w-full max-w-5xl mx-auto border-x">
+          <footer className="w-full p-6 mx-auto h-fit">
+            <span className="text-secondary">
+              {footer.description}
+            </span>
+          </footer>
+        </div>
       </div>
     </>
   )

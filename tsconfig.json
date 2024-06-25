@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@repo/typescript-config/nextjs.json",
   "display": "Default",
   "compilerOptions": {
     "declaration": true,
@@ -12,9 +13,7 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "module": "NodeNext",
     "moduleDetection": "force",
-    "moduleResolution": "NodeNext",
     "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,

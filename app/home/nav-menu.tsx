@@ -10,24 +10,44 @@ const NavMenu = ({ className = "" }: Props) => {
     <NavigationMenu className={className}>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent className="flex gap-4 p-4 h-fit">
-            <div className="flex items-center justify-center h-56 border rounded-lg w-44">
-              <Logo size={48} />
+          <NavigationMenuTrigger>Overview</NavigationMenuTrigger>
+          <NavigationMenuContent className="p-4 h-fit">
+            <div className="relative flex w-full gap-4">
+              <div className="absolute flex flex-col items-center justify-center h-full border rounded-lg w-44">
+                <Logo size={48} />
+                <span className="font-semibold">YZ13</span>
+              </div>
+              <div className="pl-48 w-fit shrink-0">
+                <div className="w-72">
+                  <Link href="/works" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+                    <span className="text-sm font-medium text-foreground">Works</span>
+                    <span className="text-sm text-secondary">View my works</span>
+                  </Link>
+                  <Link href="/templates" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+                    <span className="text-sm font-medium text-foreground">Templates</span>
+                    <span className="text-sm text-secondary">View my templates</span>
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div className="w-72 shrink-0">
-              <div className="flex flex-col w-full p-4 rounded-lg h-fit hover:bg-yz-neutral-100">
-                <span className="text-sm font-medium text-foreground">Works</span>
-                <span className="text-sm text-secondary">View my works</span>
-              </div>
-              <div className="flex flex-col w-full p-4 rounded-lg h-fit hover:bg-yz-neutral-100">
-                <span className="text-sm font-medium text-foreground">Templates</span>
-                <span className="text-sm text-secondary">View my templates</span>
-              </div>
-              <div className="flex flex-col w-full p-4 rounded-lg h-fit hover:bg-yz-neutral-100">
-                <span className="text-sm font-medium text-foreground">Works</span>
-                <span className="text-sm text-secondary">View my works</span>
-              </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+          <NavigationMenuContent className="h-fit bg-background">
+            <div className="w-72">
+              <Link href="/home" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+                <span className="text-sm font-medium text-foreground">Components</span>
+                <span className="text-sm text-secondary">Can ship components for you</span>
+              </Link>
+              <Link href="/home" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+                <span className="text-sm font-medium text-foreground">Pages</span>
+                <span className="text-sm text-secondary">Can ship pages for you</span>
+              </Link>
+              <Link href="/home" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+                <span className="text-sm font-medium text-foreground">Websites</span>
+                <span className="text-sm text-secondary">Can ship websites for you</span>
+              </Link>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>

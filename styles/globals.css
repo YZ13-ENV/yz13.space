@@ -44,8 +44,13 @@
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
+.connector {
+  & > path {
+    stroke: hsl(var(--yz13-neutral-300));
+  }
+}
 .logo {
-  & > svg > path {
+  & > path {
     fill: hsl(var(--yz13-foreground));
   }
 }
