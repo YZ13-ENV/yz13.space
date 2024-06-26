@@ -10,6 +10,13 @@ const NavMenu = ({ className = "" }: Props) => {
     <NavigationMenu className={className}>
       <NavigationMenuList>
         <NavigationMenuItem>
+          <Link href="/home" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Home
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
           <NavigationMenuTrigger>Overview</NavigationMenuTrigger>
           <NavigationMenuContent className="p-4 h-fit">
             <div className="relative flex w-full gap-4">
@@ -51,13 +58,13 @@ const NavMenu = ({ className = "" }: Props) => {
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <Link href="/pricing" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Pricing
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
       </NavigationMenuList>
     </NavigationMenu>
   )

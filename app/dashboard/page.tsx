@@ -1,12 +1,23 @@
+import { createClient } from "@/packages/supabase/src/supabase/server"
 import { cn } from "@/packages/ui/lib/utils"
 import { Input } from "@/packages/ui/src/components/input"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 import { BiGitCommit } from "react-icons/bi"
 import { LuSearch } from "react-icons/lu"
 import { Header } from "../_components/header"
 
-const page = () => {
+const page = async () => {
   const recent_tasks = Array.from({ length: 5 }).map((_, i) => i)
   const current_projects = Array.from({ length: 20 }).map((_, i) => i)
+  const cks = cookies()
+  const sp = createClient(cks)
+  const { data: { user } } = await sp.auth.getUser()
+  const isLogged = !!user
+  const metadata = user?.user_metadata
+  const type = metadata ? metadata?.type : "user"
+  const isAdmin = type === "admin"
+  if (!isLogged || !isAdmin) return redirect("/home")
   return (
     <>
       <Header />
@@ -21,8 +32,8 @@ const page = () => {
           />
         </div>
       </div>
-      <div className="max-w-7xl flex gap-6 mx-auto w-full h-full p-6">
-        <div className="w-1/3 h-full space-y-3 sticky top-6">
+      <div className="max-w-7xl flex lg:flex-row flex-col gap-6 mx-auto w-full h-full p-6">
+        <div className="lg:w-1/3 w-full h-full space-y-3 lg:sticky static top-6">
           <h3 className="text-sm uppercase text-secondary">
             Recent tasks
           </h3>
@@ -57,7 +68,7 @@ const page = () => {
             }
           </ul>
         </div>
-        <div className="w-2/3 h-fit space-y-3">
+        <div className="lg:w-2/3 w-full h-fit space-y-3">
           <h3 className="text-sm uppercase text-secondary">
             Current projects
           </h3>

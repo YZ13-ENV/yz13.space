@@ -25,7 +25,7 @@ const Tabs = ({ onTab, selectedTab = tabs[0]?.value as string }: Props) => {
               isSelected ? "bg-transparent text-background" : "bg-transparent text-foreground"
             )}
           >
-            {tab.icon({ size: 18, className: "md:w-[18px] w-[14px] shrink-0 z-[1]" })}
+            {tab.icon({ size: 20, className: "md:w-[18px] w-[14px] shrink-0 z-[1]" })}
             <span className="text-inherit z-[1] sm:inline hidden md:text-base text-sm">{tab.label}</span>
             {
               isSelected &&

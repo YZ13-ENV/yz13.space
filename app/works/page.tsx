@@ -108,7 +108,7 @@ const page = async () => {
       <Header />
       <div className="relative w-full max-w-5xl mx-auto mt-20">
         <div className="relative flex flex-col items-center justify-center w-full gap-2 aspect-video">
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-5xl text-center font-bold">
             Explore my works
           </h1>
           <p className="text-xl text-center text-secondary">
@@ -124,7 +124,7 @@ const page = async () => {
             </span>
           </div>
         </div>
-        <div className="w-full p-6 space-y-6 rounded-t-3xl border bg-yz-neutral-100">
+        <div className="w-full p-6 space-y-6 rounded-t-3xl border">
           <Contacts />
           <Footer />
         </div>

@@ -22,7 +22,7 @@ const page = () => {
         {/* <Connector className="absolute -left-[100%] top-0 w-full" /> */}
         {/* <Connector className="absolute rotate-180 -right-[100%] top-0 w-full" /> */}
         <div className="relative flex flex-col items-center justify-center w-full gap-2 aspect-video">
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-5xl text-center font-bold">
             Find a plan that fit you
           </h1>
           <p className="text-xl text-center text-secondary">
@@ -34,13 +34,13 @@ const page = () => {
         <Pricing />
       </div>
       <div className="w-full max-w-5xl mx-auto border">
-        <div className="flex w-full divide-x">
-          <div className="w-1/3 p-6">
+        <div className="flex w-full flex-col lg:flex-row divide-y lg:divide-x">
+          <div className="lg:w-1/3 w-full p-6">
             <h3 className="text-4xl font-bold">
               Frequently asked questions.
             </h3>
           </div>
-          <div className="w-2/3">
+          <div className="lg:w-2/3 w-full">
             <ul className="divide-y">
               <li className="w-full h-24"></li>
               <li className="w-full h-24"></li>

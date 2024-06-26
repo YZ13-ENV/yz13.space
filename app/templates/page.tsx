@@ -1,7 +1,7 @@
 import { Button } from "@/packages/ui/src/components/button"
 import { Input } from "@/packages/ui/src/components/input"
 import { Separator } from "@/packages/ui/src/components/separator"
-import { BiDollar } from "react-icons/bi"
+import { BiSearch } from "react-icons/bi"
 import { Header } from "../_components/header"
 
 const page = () => {
@@ -17,19 +17,26 @@ const page = () => {
           everyone can find favorite template
         </p>
       </div>
-      <div className="w-full max-w-7xl mx-auto flex py-6 h-fit">
-        <aside className="max-w-80 w-full p-3 space-y-3">
-          <Input placeholder="Search" />
+      <div className="w-full max-w-7xl mx-auto flex lg:flex-row flex-col py-6 h-fit">
+        <aside className="lg:max-w-80 max-w-full w-full p-3 space-y-3">
+          <div className="relative w-full">
+            <div className="w-9 absolute left-0 aspect-square flex items-center justify-center">
+              <BiSearch size={18} className="text-secondary" />
+            </div>
+            <Input placeholder="Search" className="pl-9" />
+          </div>
           <Separator />
-          <Button className="w-full justify-start" variant="secondary">Paid</Button>
+          {/* <Button className="w-full justify-start" variant="secondary">Paid</Button> */}
           <Button className="w-full justify-start" variant="secondary">Free</Button>
           <Separator />
           <Button className="w-full justify-start" variant="secondary">Commercial</Button>
           <Button className="w-full justify-start" variant="secondary">Blog</Button>
         </aside>
-        <div className="w-full h-full p-3 grid grid-cols-3 gap-6 auto-rows-auto">
-
-          <div className="w-full aspect-[4/3] border relative rounded-xl">
+        <div className="w-full h-full p-3 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 auto-rows-auto">
+          <div className="col-span-full row-span-full h-96 flex items-center justify-center">
+            <span className="text-sm text-secondary">Шаблоны будут тут</span>
+          </div>
+          {/* <div className="w-full aspect-[4/3] border relative rounded-xl">
             <span className="absolute top-3 right-3 border bg-background rounded-full w-6 h-6 flex items-center justify-center">
               <BiDollar className="text-secondary" size={16} />
             </span>
@@ -38,7 +45,7 @@ const page = () => {
             >
               <span className="text-sm text-secondary">Template name</span>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>

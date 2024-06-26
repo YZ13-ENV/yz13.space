@@ -45,6 +45,10 @@ const Header = async ({ className = "" }: HeaderProps) => {
                 Contact
               </Link>
             </Button>
+            {
+              !isLogged &&
+              <LangSelector defaultLocale={locale} />
+            }
             <Separator orientation="vertical" className="h-8" />
           </div>
           {

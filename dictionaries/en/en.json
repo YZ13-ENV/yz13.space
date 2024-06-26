@@ -62,7 +62,7 @@
       "action": "Book a call"
     },
     "footer": {
-      "description": "Build by YZ13, the source code is available on Github"
+      "description": "Build by <a class='underline' href='https://github.com/yz13-env'>YZ13</a>, the source code is available on <a class='underline' href='https://github.com/yz13-env/yz13.space'>Github</a>"
     }
   }
 }

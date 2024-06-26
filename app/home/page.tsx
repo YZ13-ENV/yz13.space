@@ -1,6 +1,7 @@
 import { getDictionary } from "@/dictionaries/tools"
 import { Button } from "@/packages/ui/src/components/button"
 import { cookies } from "next/headers"
+import Link from "next/link"
 import { Header } from "../_components/header"
 import { Library } from "./library"
 
@@ -56,7 +57,7 @@ const page = async () => {
         </div>
       </div> */}
       <div className="z-10 w-full mx-auto divide-y">
-        <div className="w-full max-w-5xl mx-auto border-x border-t rounded-3xl">
+        <div className="w-full max-w-5xl mx-auto">
           <Library />
         </div>
         {/* <Templates /> */}
@@ -66,14 +67,18 @@ const page = async () => {
               <b className="text-foreground shrink-0">{ready.title}</b>
               {ready.description}
             </p>
-            <Button disabled className="w-fit">{ready.action}</Button>
+            <Button className="w-fit" asChild>
+              <Link href="/contact">
+                {ready.action}
+              </Link>
+            </Button>
           </div>
         </div>
         <div className="w-full max-w-5xl mx-auto border-x">
-          <footer className="w-full p-6 mx-auto h-fit">
-            <span className="text-secondary">
-              {footer.description}
-            </span>
+          <footer
+            className="w-full p-6 mx-auto h-fit"
+            dangerouslySetInnerHTML={{ __html: footer.description }}
+          >
           </footer>
         </div>
       </div>
