@@ -1,6 +1,6 @@
 import { BiHomeAlt2 } from "react-icons/bi"
 import { IconType } from "react-icons/lib"
-import { PiBagSimpleDuotone, PiGlobeSimpleDuotone, PiLayoutDuotone, PiMoneyWavyDuotone } from "react-icons/pi"
+import { PiBagSimpleDuotone, PiGlobeSimpleDuotone, PiLayoutDuotone } from "react-icons/pi"
 
 export type NavGroupLink = {
   type: "group"
@@ -69,12 +69,12 @@ const default_nav: NavLink[] = [
       }
     ]
   },
-  {
-    type: "single",
-    label: "Pricing",
-    icon: PiMoneyWavyDuotone,
-    value: "/pricing"
-  }
+  // {
+  //   type: "single",
+  //   label: "Pricing",
+  //   icon: PiMoneyWavyDuotone,
+  //   value: "/pricing"
+  // }
 ]
 
 const default_layout: NavLayout = {

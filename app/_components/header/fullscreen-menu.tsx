@@ -25,7 +25,6 @@ const FullScreenMenu = ({ user }: Props) => {
   const type = metadata.type || "user"
   const isAdmin = type === "admin"
   const pathname = usePathname()
-  const nav = null
   const router = useRouter()
   const layout = getLayoutNav(pathname)
   const signOut = async () => {

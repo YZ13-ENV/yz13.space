@@ -4,9 +4,10 @@ import { cn } from "@/packages/ui/lib/utils"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/packages/ui/src/components/dropdown-menu"
 import { Separator } from "@/packages/ui/src/components/separator"
 import { User } from "@supabase/supabase-js"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ReactNode, useState } from "react"
-import { LuCog, LuLayoutGrid, LuLogOut } from "react-icons/lu"
+import { LuLayoutGrid, LuLogOut } from "react-icons/lu"
 
 type Props = {
   children?: ReactNode
@@ -17,6 +18,8 @@ const UserDropdown = ({ children, user }: Props) => {
   const metadata = user.user_metadata
   const name = metadata.name
   const email = metadata.email
+  const type = metadata.type || "user"
+  const isAdmin = type === "admin"
   const router = useRouter()
   const signOut = async () => {
     const sp = createClient()
@@ -38,14 +41,19 @@ const UserDropdown = ({ children, user }: Props) => {
         </DropdownMenuLabel>
         <Separator />
         <div className="w-full p-2">
-          <DropdownMenuItem className="gap-2 h-9">
-            <LuLayoutGrid size={14} />
-            Dashboard
-          </DropdownMenuItem>
-          <DropdownMenuItem className="gap-2 h-9">
+          {
+            isAdmin &&
+            <DropdownMenuItem className="gap-2 h-9" asChild>
+              <Link href="/dashboard">
+                <LuLayoutGrid size={14} />
+                Dashboard
+              </Link>
+            </DropdownMenuItem>
+          }
+          {/* <DropdownMenuItem className="gap-2 h-9">
             <LuCog size={14} />
             Account settings
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </div>
         <Separator />
         <div className="w-full p-2">
