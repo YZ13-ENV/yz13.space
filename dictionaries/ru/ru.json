@@ -59,7 +59,7 @@
       "action": "Запланировать созвон"
     },
     "footer": {
-      "description": "Создано YZ13, исходный код доступен на Github"
+      "description": "Создано <a class='underline' href='https://github.com/yz13-env'>YZ13</a>, исходный код доступен <a class='underline' href='https://github.com/yz13-env/yz13.space'>Github</a>"
     }
   }
 }
