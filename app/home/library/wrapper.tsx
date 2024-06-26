@@ -38,13 +38,15 @@ const LibraryWrapper = ({ children }: Props) => {
             selectedTab={tab}
           />
         </div>
-        <Carousel
-          setApi={setApi}
-        >
-          <CarouselContent className="h-full">
-            {children}
-          </CarouselContent>
-        </Carousel>
+        <div className="rounded-t-3xl border-x border-t">
+          <Carousel
+            setApi={setApi}
+          >
+            <CarouselContent className="h-full">
+              {children}
+            </CarouselContent>
+          </Carousel>
+        </div>
       </div>
     </>
   )

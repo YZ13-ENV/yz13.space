@@ -17,8 +17,8 @@ const page = () => {
           everyone can find favorite template
         </p>
       </div>
-      <div className="w-full max-w-7xl mx-auto flex py-6 h-fit">
-        <aside className="max-w-80 w-full p-3 space-y-3">
+      <div className="w-full max-w-7xl mx-auto flex lg:flex-row flex-col py-6 h-fit">
+        <aside className="lg:max-w-80 max-w-full w-full p-3 space-y-3">
           <Input placeholder="Search" />
           <Separator />
           <Button className="w-full justify-start" variant="secondary">Paid</Button>
@@ -27,7 +27,7 @@ const page = () => {
           <Button className="w-full justify-start" variant="secondary">Commercial</Button>
           <Button className="w-full justify-start" variant="secondary">Blog</Button>
         </aside>
-        <div className="w-full h-full p-3 grid grid-cols-3 gap-6 auto-rows-auto">
+        <div className="w-full h-full p-3 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 auto-rows-auto">
 
           <div className="w-full aspect-[4/3] border relative rounded-xl">
             <span className="absolute top-3 right-3 border bg-background rounded-full w-6 h-6 flex items-center justify-center">

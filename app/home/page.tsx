@@ -56,7 +56,7 @@ const page = async () => {
         </div>
       </div> */}
       <div className="z-10 w-full mx-auto divide-y">
-        <div className="w-full max-w-5xl mx-auto border-x border-t rounded-3xl">
+        <div className="w-full max-w-5xl mx-auto">
           <Library />
         </div>
         {/* <Templates /> */}

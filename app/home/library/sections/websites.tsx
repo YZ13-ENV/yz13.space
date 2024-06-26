@@ -32,7 +32,7 @@ const WebsitesList = async () => {
             const link = website.thumbnail
             const thumbnail = link ? getStorageItem(["media", link]) : null
             return (
-              <div key={`website#${website.id}`} className="w-full relative group h-fit border-r hover:bg-yz-neutral-100">
+              <div key={`website#${website.id}`} className="w-full overflow-hidden relative group h-fit border rounded-xl hover:bg-yz-neutral-100">
                 <div
                   className={cn(
                     "flex items-center aspect-[4/3] justify-center bg-transparent w-full h-full",
@@ -45,16 +45,16 @@ const WebsitesList = async () => {
                         {
                           href
                             ? <Link href={href}>
-                              <Image src={thumbnail} fill alt="thumbnail" />
+                              <Image className="rounded-xl" src={thumbnail} fill alt="thumbnail" />
                             </Link>
-                            : <Image src={thumbnail} fill alt="thumbnail" />
+                            : <Image className="rounded-xl" src={thumbnail} fill alt="thumbnail" />
                         }
                       </>
                       : <BiImage size={24} />
                   }
                 </div>
                 <div
-                  className="flex p-2 shrink-0 w-full justify-between absolute left-0 transition-all group-hover:bottom-0 -bottom-[100%] border-t bg-background items-center"
+                  className="flex p-2 shrink-0 w-full justify-between rounded-b-xl absolute left-0 transition-all group-hover:bottom-0 -bottom-[100%] border-t bg-background items-center"
                 >
                   <span className="text-sm">{website.name}</span>
                   <span className="text-xs text-secondary">{created_at}</span>

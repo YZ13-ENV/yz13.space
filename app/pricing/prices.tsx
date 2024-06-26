@@ -57,10 +57,10 @@ const Pricing = async ({ locale = 'en-US' }: Props) => {
     )
   }
   return (
-    <div className="flex items-center w-full overflow-x-auto divide-x h-fit no-scrollbar">
-      <PricingCard className="w-1/3 border-0 rounded-none" dictKey="components" />
-      <PricingCard className="w-1/3 border-0 rounded-none" dictKey="pages" />
-      <PricingCard className="w-1/3 border-0 rounded-none" dictKey="website" />
+    <div className="flex lg:flex-row flex-col items-center w-full overflow-x-auto divide-y lg:divide-x h-fit no-scrollbar">
+      <PricingCard className="lg:w-1/3 w-full border-0 rounded-none" dictKey="components" />
+      <PricingCard className="lg:w-1/3 w-full border-0 rounded-none" dictKey="pages" />
+      <PricingCard className="lg:w-1/3 w-full border-0 rounded-none" dictKey="website" />
     </div>
   )
 }
