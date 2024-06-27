@@ -18,6 +18,7 @@
     "./db/web-vitals": "./src/db/web-vitals.ts",
     "./db/types": "./src/db/types.ts",
     "./edge/types": "./src/edge/types.ts",
+    "./templates": "./src/templates/index.ts",
     "./helpers": "./src/helpers/index.ts",
     "./helpers/random-number": "./src/helpers/random-number.ts",
     "./helpers/random-string": "./src/helpers/random-string.ts"

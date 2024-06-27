@@ -1,10 +1,17 @@
+import { getTemplates } from "@/packages/api/src/templates"
 import { Button } from "@/packages/ui/src/components/button"
 import { Input } from "@/packages/ui/src/components/input"
 import { Separator } from "@/packages/ui/src/components/separator"
-import { BiSearch } from "react-icons/bi"
+import { uniq } from "lodash"
+import Link from "next/link"
+import { BiDollar, BiSearch } from "react-icons/bi"
 import { Header } from "../_components/header"
 
-const page = () => {
+const page = async () => {
+  const templates = await getTemplates()
+  const allCategories: string[][] = templates.map(template => template.categories)
+  const categories = uniq(allCategories.reduce((a, b) => [...a, ...b]))
+  const templateTypes: string[] = uniq(templates.map(template => template.type))
   return (
     <>
       <Header />
@@ -26,27 +33,52 @@ const page = () => {
             <Input placeholder="Search" className="pl-9" />
           </div>
           <Separator />
-          {/* <Button className="w-full justify-start" variant="secondary">Paid</Button> */}
-          <Button className="w-full justify-start" variant="secondary">Free</Button>
+          {
+            templateTypes.map(
+              type =>
+                <Button key={type} className="w-full justify-start capitalize" variant="secondary">{type}</Button>
+            )
+          }
           <Separator />
-          <Button className="w-full justify-start" variant="secondary">Commercial</Button>
-          <Button className="w-full justify-start" variant="secondary">Blog</Button>
+          {
+            categories.map(
+              category =>
+                <Button key={category} className="w-full justify-start capitalize" variant="secondary">{category}</Button>
+            )
+          }
         </aside>
         <div className="w-full h-full p-3 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 auto-rows-auto">
-          <div className="col-span-full row-span-full h-96 flex items-center justify-center">
-            <span className="text-sm text-secondary">Шаблоны будут тут</span>
-          </div>
-          {/* <div className="w-full aspect-[4/3] border relative rounded-xl">
-            <span className="absolute top-3 right-3 border bg-background rounded-full w-6 h-6 flex items-center justify-center">
-              <BiDollar className="text-secondary" size={16} />
-            </span>
-            <div
-              className="absolute left-0 bottom-0 border-r border-t py-1 px-1.5 bg-background rounded-tr-xl rounded-bl-xl"
-            >
-              <span className="text-sm text-secondary">Template name</span>
-            </div>
-          </div> */}
-
+          {
+            !!templates.length
+              ? templates.map(
+                template => {
+                  const isPaid = template.type === "paid"
+                  const name = template.name
+                  const href = template.href
+                  const authors = (template.authors) as string[]
+                  return (
+                    <div key={template.id} className="w-full aspect-[4/3] border relative rounded-xl">
+                      <Link href={href} className="w-full block h-full rounded-xl" />
+                      {
+                        isPaid &&
+                        <span className="absolute top-3 right-3 border bg-background rounded-full w-6 h-6 flex items-center justify-center">
+                          <BiDollar className="text-secondary" size={16} />
+                        </span>
+                      }
+                      <div
+                        className="absolute left-0 bottom-0 w-full items-center flex justify-between border-t py-1 px-3 bg-background rounded-b-xl"
+                      >
+                        <span className="text-sm text-secondary">{name}</span>
+                        <span className="text-xs text-secondary">{authors.join(", ")}</span>
+                      </div>
+                    </div>
+                  )
+                })
+              :
+              <div className="col-span-full row-span-full h-96 flex items-center justify-center">
+                <span className="text-sm text-secondary">Шаблоны будут тут</span>
+              </div>
+          }
         </div>
       </div>
     </>
