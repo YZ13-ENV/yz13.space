@@ -1,0 +1,20 @@
+{
+  "labels": [
+    {
+      "label": "Сайты",
+      "value": "websites"
+    },
+    {
+      "label": "Страницы",
+      "value": "pages"
+    },
+    {
+      "label": "Компоненты",
+      "value": "components"
+    },
+    {
+      "label": "Пакеты",
+      "value": "packages"
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 "use client"
-import { cn } from "@/packages/ui/lib/utils"
 import { Carousel, CarouselApi, CarouselContent } from "@/packages/ui/src/components/carousel"
 import { ReactNode, useEffect, useState } from "react"
-import { tabs } from "./const"
+import { ServerTab, tabs } from "./const"
 import { Tabs } from "./tabs"
 
 type Props = {
   children?: ReactNode
+  providedTabs?: ServerTab[]
 }
-const LibraryWrapper = ({ children }: Props) => {
+const LibraryWrapper = ({ children, providedTabs }: Props) => {
   const [tab, setTab] = useState<string>(tabs[0]?.value as string)
   const [api, setApi] = useState<CarouselApi>()
   const scrollCarousel = (target: string) => {
@@ -27,14 +27,14 @@ const LibraryWrapper = ({ children }: Props) => {
   }, [api])
   return (
     <>
-      <div
-        className={cn("relative w-full transition-all max-h-screen max-w-7xl mx-auto")}
-      >
-        <div className="w-full h-44 flex items-center justify-center">
-          <Tabs onTab={newTab => {
-            setTab(newTab)
-            scrollCarousel(newTab)
-          }}
+      <div className="relative w-full transition-all space-y-6">
+        <div className="w-full h-fit flex items-center justify-start">
+          <Tabs
+            providedTabs={providedTabs}
+            onTab={newTab => {
+              setTab(newTab)
+              scrollCarousel(newTab)
+            }}
             selectedTab={tab}
           />
         </div>

@@ -1,0 +1,20 @@
+{
+  "labels": [
+    {
+      "label": "Websites",
+      "value": "websites"
+    },
+    {
+      "label": "Pages",
+      "value": "pages"
+    },
+    {
+      "label": "Components",
+      "value": "components"
+    },
+    {
+      "label": "Packages",
+      "value": "packages"
+    }
+  ]
+}

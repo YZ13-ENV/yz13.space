@@ -28,7 +28,7 @@ const page = async () => {
       <RightSide className="divide-y">
         <Header />
         <AdBanner />
-        <div className="p-6">
+        <div className="p-6 space-y-6">
           <Library />
         </div>
         <div className="w-full flex flex-col gap-3 p-6">
