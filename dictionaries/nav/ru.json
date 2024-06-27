@@ -1,0 +1,24 @@
+{
+  "labels": [
+    {
+      "label": "Главная",
+      "link": "/home"
+    },
+    {
+      "label": "Блог",
+      "link": "/threads"
+    },
+    {
+      "label": "Работы",
+      "link": "/works"
+    },
+    {
+      "label": "Цены",
+      "link": "/pricing"
+    },
+    {
+      "label": "Сервисы",
+      "link": "/services"
+    }
+  ]
+}

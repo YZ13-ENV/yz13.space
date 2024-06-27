@@ -1,5 +1,5 @@
 import { LeftSide } from "@/app/_components/left"
-import { Nav } from "@/app/_components/nav"
+import { Nav } from "@/app/_components/nav/nav"
 import { RightSide } from "@/app/_components/right"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { isDev } from "@/packages/api/src/const"

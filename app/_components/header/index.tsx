@@ -1,5 +1,5 @@
+import { Nav } from "@/app/_components/nav"
 import { cn } from "@/packages/ui/lib/utils"
-import { Nav } from "../nav"
 import { User } from "./user-profile"
 
 type HeaderProps = {

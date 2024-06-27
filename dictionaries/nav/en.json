@@ -1,0 +1,24 @@
+{
+  "labels": [
+    {
+      "label": "Home",
+      "link": "/home"
+    },
+    {
+      "from": "Threads",
+      "link": "/threads"
+    },
+    {
+      "from": "Works",
+      "link": "/works"
+    },
+    {
+      "from": "Pricing",
+      "link": "/pricing"
+    },
+    {
+      "from": "Services",
+      "link": "/services"
+    }
+  ]
+}

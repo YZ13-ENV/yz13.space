@@ -7,6 +7,7 @@ export type NavLink = {
   label: string
   icon?: IconType
 }
+export type ServerNavLink = Omit<NavLink, "icon"> & { icon?: JSX.Element | undefined }
 
 const inDev = ["/works", "/pricing", "/home"]
 

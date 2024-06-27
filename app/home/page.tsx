@@ -1,4 +1,7 @@
+import { Locales, getDict } from "@/dictionaries/tools"
 import { Button } from "@/packages/ui/src/components/button"
+import { Metadata } from "next"
+import { cookies } from "next/headers"
 import Link from "next/link"
 import { AdBanner } from "../(threads)/(routes)/ad-banner"
 import { Header } from "../_components/header"
@@ -7,6 +10,12 @@ import { RightSide } from "../_components/right"
 import { SplitViewContainer } from "../_components/split-view-container"
 import { Library } from "./library"
 
+export async function generateMetadata(): Promise<Metadata> {
+  const cks = cookies()
+  const locale = (cks.get("locale")?.value || "").slice(0, 2) as Locales
+  const localeMetadata: Metadata = await getDict("metadata", locale)
+  return localeMetadata
+}
 const page = async () => {
   return (
     <SplitViewContainer>

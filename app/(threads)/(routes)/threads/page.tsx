@@ -1,4 +1,4 @@
-import { Nav } from "@/app/_components/nav";
+import { Nav } from "@/app/_components/nav/nav";
 import { Suspense } from "react";
 import { Contacts, ContactsSkeleton } from "../../_components/contacts";
 import { Footer } from "../../_components/footer";
