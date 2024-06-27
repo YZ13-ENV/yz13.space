@@ -1,6 +1,6 @@
 import { cn } from "@/packages/ui/lib/utils"
+import { Header } from "../_components/header"
 import { LeftSide } from "../_components/left"
-import { Nav } from "../_components/nav"
 import { RightSide } from "../_components/right"
 import { SplitViewContainer } from "../_components/split-view-container"
 import { Pricing } from "./prices"
@@ -31,9 +31,7 @@ const page = () => {
         </div>
       </LeftSide>
       <RightSide className="divide-y">
-        <div className="w-full min-h-16 flex items-center px-6 py-2">
-          <Nav />
-        </div>
+        <Header />
         <div className="w-full">
           <Pricing />
         </div>

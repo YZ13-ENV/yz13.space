@@ -1,5 +1,5 @@
+import { Header } from "@/app/_components/header"
 import { LeftSide } from "@/app/_components/left"
-import { Nav } from "@/app/_components/nav"
 import { RightSide } from "@/app/_components/right"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { cn } from "@/packages/ui/lib/utils"
@@ -13,7 +13,7 @@ const page = () => {
     <SplitViewContainer>
       <LeftSide>
         <div className="w-full h-full flex items-center justify-center">
-          <div className="lg:max-w-sm max-w-xl w-full space-y-5 p-6">
+          <div className="lg:max-w-sm md:max-w-xl max-w-full w-full space-y-5 p-6">
             <div className="space-y-2">
               <h2 className="text-4xl font-semibold">All services</h2>
               <p className="text-secondary">List of all available services</p>
@@ -26,9 +26,7 @@ const page = () => {
         </div>
       </LeftSide>
       <RightSide className="divide-y">
-        <div className="w-full h-16 flex items-center px-6">
-          <Nav />
-        </div>
+        <Header />
         <ul className="divide-y">
           {
             registered_services.map(service => {
