@@ -21,16 +21,18 @@ const Pricing = async ({ locale = 'en-US' }: Props) => {
     const list = (cardDict.list || []) as string[]
     return (
       <div className={cn(
-        "h-96 aspect-[1/1.25] flex flex-col gap-2 rounded-xl border p-4",
+        "h-96 aspect-[1/1.25] flex flex-col gap-2 rounded-xl p-6",
         "hover:bg-yz-neutral-100/40 cursor-pointer transition-colors",
         className
       )}>
-        <h4 className="text-lg font-semibold capitalize">{cardName}</h4>
-        {
-          prefix ?
-            <span className="text-sm">{prefix}</span>
-            : <span className="text-sm">pause or cancel anytime</span>
-        }
+        <div className="flex flex-col w-full mb-4">
+          <h4 className="text-lg font-semibold capitalize">{cardName}</h4>
+          {
+            prefix ?
+              <span className="text-sm">{prefix}</span>
+              : <span className="text-sm">pause or cancel anytime</span>
+          }
+        </div>
         <span className="text-4xl font-bold text-foreground">
           {side === "left" && pricingSign}
           {(pricing).toLocaleString()}
@@ -57,10 +59,10 @@ const Pricing = async ({ locale = 'en-US' }: Props) => {
     )
   }
   return (
-    <div className="flex lg:flex-row flex-col items-center w-full overflow-x-auto divide-y lg:divide-x h-fit no-scrollbar">
-      <PricingCard className="lg:w-1/3 w-full border-0 rounded-none" dictKey="components" />
-      <PricingCard className="lg:w-1/3 w-full border-0 rounded-none" dictKey="pages" />
-      <PricingCard className="lg:w-1/3 w-full border-0 rounded-none" dictKey="website" />
+    <div className="flex lg:flex-row flex-col items-center w-full overflow-x-auto divide-y divide-x-0 lg:divide-y-0 lg:divide-x h-fit no-scrollbar">
+      <PricingCard className="lg:w-1/3 w-full rounded-none" dictKey="components" />
+      <PricingCard className="lg:w-1/3 w-full rounded-none" dictKey="pages" />
+      <PricingCard className="lg:w-1/3 w-full rounded-none" dictKey="website" />
     </div>
   )
 }

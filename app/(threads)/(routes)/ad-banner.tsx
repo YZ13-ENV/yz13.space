@@ -7,7 +7,7 @@ import { BiRightArrowAlt } from "react-icons/bi"
 const AdBanner = () => {
   return (
     <div
-      className="w-full relative min-h-20 p-6 flex justify-between items-center gap-4 lg:border-0 border-x border-t"
+      className="w-full relative min-h-20 p-6 flex justify-between items-center gap-4"
     >
       <div className="flex flex-col w-fit">
         <h2 className="text-lg font-semibold">JSON Store is out</h2>

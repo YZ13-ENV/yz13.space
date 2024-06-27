@@ -1,5 +1,8 @@
 import { cn } from "@/packages/ui/lib/utils"
 import { Header } from "../_components/header"
+import { LeftSide } from "../_components/left"
+import { RightSide } from "../_components/right"
+import { SplitViewContainer } from "../_components/split-view-container"
 import { Pricing } from "./prices"
 
 const page = () => {
@@ -16,12 +19,9 @@ const page = () => {
     )
   }
   return (
-    <>
-      <Header />
-      <div className="relative w-full max-w-5xl mx-auto mt-20">
-        {/* <Connector className="absolute -left-[100%] top-0 w-full" /> */}
-        {/* <Connector className="absolute rotate-180 -right-[100%] top-0 w-full" /> */}
-        <div className="relative flex flex-col items-center justify-center w-full gap-2 aspect-video">
+    <SplitViewContainer>
+      <LeftSide>
+        <div className="relative flex flex-col items-center justify-center w-full gap-2 p-6 min-h-[50dvh]">
           <h1 className="text-5xl text-center font-bold">
             Find a plan that fit you
           </h1>
@@ -29,30 +29,33 @@ const page = () => {
             Help you get what you want
           </p>
         </div>
-      </div>
-      <div className="w-full max-w-5xl mx-auto border-x border-t rounded-t-3xl">
-        <Pricing />
-      </div>
-      <div className="w-full max-w-5xl mx-auto border">
-        <div className="flex w-full flex-col lg:flex-row divide-y lg:divide-x">
-          <div className="lg:w-1/3 w-full p-6">
-            <h3 className="text-4xl font-bold">
-              Frequently asked questions.
-            </h3>
-          </div>
-          <div className="lg:w-2/3 w-full">
-            <ul className="divide-y">
-              <li className="w-full h-24"></li>
-              <li className="w-full h-24"></li>
-              <li className="w-full h-24"></li>
-              <li className="w-full h-24"></li>
-              <li className="w-full h-24"></li>
-              <li className="w-full h-24"></li>
-            </ul>
+      </LeftSide>
+      <RightSide className="divide-y">
+        <Header />
+        <div className="w-full">
+          <Pricing />
+        </div>
+        <div className="w-full">
+          <div className="flex w-full flex-col lg:flex-row divide-x-0 divide-y lg:divide-y-0 lg:divide-x">
+            <div className="lg:w-1/3 w-full p-6">
+              <h3 className="text-4xl font-bold">
+                Frequently asked questions.
+              </h3>
+            </div>
+            <div className="lg:w-2/3 w-full">
+              <ul className="divide-y">
+                <li className="w-full h-24"></li>
+                <li className="w-full h-24"></li>
+                <li className="w-full h-24"></li>
+                <li className="w-full h-24"></li>
+                <li className="w-full h-24"></li>
+                <li className="w-full h-24"></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </>
+      </RightSide>
+    </SplitViewContainer>
   )
 }
 export default page
