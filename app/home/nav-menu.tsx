@@ -43,17 +43,17 @@ const NavMenu = ({ className = "" }: Props) => {
           <NavigationMenuTrigger>Services</NavigationMenuTrigger>
           <NavigationMenuContent className="h-fit bg-background">
             <div className="w-72">
-              <Link href="/home" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
-                <span className="text-sm font-medium text-foreground">Components</span>
-                <span className="text-sm text-secondary">Can ship components for you</span>
+              <Link href="/library/websites" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+                <span className="text-sm font-medium text-foreground">Websites</span>
+                <span className="text-sm text-secondary">Can ship websites for you</span>
               </Link>
-              <Link href="/home" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+              <Link href="/library/pages" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
                 <span className="text-sm font-medium text-foreground">Pages</span>
                 <span className="text-sm text-secondary">Can ship pages for you</span>
               </Link>
-              <Link href="/home" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
-                <span className="text-sm font-medium text-foreground">Websites</span>
-                <span className="text-sm text-secondary">Can ship websites for you</span>
+              <Link href="/library/components" className="flex flex-col w-full p-4 transition-colors rounded-lg h-fit hover:bg-yz-neutral-100">
+                <span className="text-sm font-medium text-foreground">Components</span>
+                <span className="text-sm text-secondary">Can ship components for you</span>
               </Link>
             </div>
           </NavigationMenuContent>
