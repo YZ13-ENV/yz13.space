@@ -10,8 +10,7 @@ const page = async () => {
   const metadata = user?.user_metadata
   const type = metadata ? metadata?.type : "user"
   const isAdmin = type === "admin"
-  if (isLogged && isAdmin) return redirect("/dashboard")
-  if (isLogged && !isAdmin) return redirect("/home")
+  if (isLogged) redirect("/home")
   if (!isLogged)
     return redirect("/threads")
 }
