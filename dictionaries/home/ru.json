@@ -1,1 +1,12 @@
-{}
+{
+  "hero": {
+    "title": "Превращаю задумки в реальность",
+    "description": "веб разработчик"
+  },
+  "ready-banner": {
+    "title": "Готовы к сотрудничеству?",
+    "description": "Согласуем встречу и сразу начнем",
+    "action": "Назначить встречу"
+  },
+  "footer": "Создано <a class='underline' href='https://github.com/yz13-env'>YZ13</a>, исходный код доступен на <a class='underline' href='https://github.com/yz13-env/yz13.space'>Github</a>"
+}

@@ -1,7 +1,6 @@
-import { Locales, getDict } from "@/dictionaries/tools"
+import { getDict, getLocale } from "@/dictionaries/tools"
 import { Button } from "@/packages/ui/src/components/button"
 import { Metadata } from "next"
-import { cookies } from "next/headers"
 import Link from "next/link"
 import { AdBanner } from "../(threads)/(routes)/ad-banner"
 import { Header } from "../_components/header"
@@ -11,18 +10,21 @@ import { SplitViewContainer } from "../_components/split-view-container"
 import { Library } from "./library"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const cks = cookies()
-  const locale = (cks.get("locale")?.value || "").slice(0, 2) as Locales
+  const locale = getLocale()
   const localeMetadata: Metadata = await getDict("metadata", locale)
   return localeMetadata
 }
 const page = async () => {
+  const locale = getLocale()
+  const homeDict = await getDict<any>("home", locale)
+  const readyBanner = homeDict["ready-banner"]
+  const hero = homeDict.hero
   return (
     <SplitViewContainer>
       <LeftSide>
         <div className="relative w-full h-full min-h-[50dvh] p-6 max-w-5xl mx-auto gap-2 flex flex-col items-center justify-center">
-          <h1 className="text-5xl text-center font-bold">Help you get what you want</h1>
-          <p className="text-xl text-center text-secondary">web developer</p>
+          <h1 className="text-5xl text-center font-bold">{hero.title}</h1>
+          <p className="text-xl text-center text-secondary">{hero.description}</p>
         </div>
       </LeftSide>
       <RightSide className="divide-y">
@@ -33,18 +35,18 @@ const page = async () => {
         </div>
         <div className="w-full flex flex-col gap-3 p-6">
           <p className="inline-flex flex-col text-2xl font-semibold text-secondary">
-            <b className="text-foreground shrink-0">Ready for work?</b>
-            Book a call, we ready to start
+            <b className="text-foreground shrink-0">{readyBanner.title}</b>
+            {readyBanner.description}
           </p>
           <Button className="w-fit" asChild>
             <Link href="/contact">
-              Book a call
+              {readyBanner.action}
             </Link>
           </Button>
         </div>
         <footer
           className="w-full p-6 mx-auto h-fit"
-          dangerouslySetInnerHTML={{ __html: "Build by <a class='underline' href='https://github.com/yz13-env'>YZ13</a>, the source code is available on <a class='underline' href='https://github.com/yz13-env/yz13.space'>Github</a>" }}
+          dangerouslySetInnerHTML={{ __html: homeDict.footer }}
         >
         </footer>
       </RightSide>

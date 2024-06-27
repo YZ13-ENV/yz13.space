@@ -1,1 +1,12 @@
-{}
+{
+  "hero": {
+    "title": "Help you get what you want",
+    "description": "web developer"
+  },
+  "ready-banner": {
+    "title": "Ready for work?",
+    "description": "Book a call, we ready to start",
+    "action": "Book a call"
+  },
+  "footer": "Build by <a class='underline' href='https://github.com/yz13-env'>YZ13</a>, the source code is available on <a class='underline' href='https://github.com/yz13-env/yz13.space'>Github</a>"
+}
