@@ -1,13 +1,13 @@
-import { getDictionary } from "@/dictionaries/tools"
+import { Locales, getDict } from "@/dictionaries/tools"
 import { cn } from "@/packages/ui/lib/utils"
 import { BiCheckCircle } from "react-icons/bi"
 import { Button } from "../(threads)/_components/thread/ui/sub-threads/button"
 
 type Props = {
-  locale?: string
+  locale?: Locales
 }
-const Pricing = async ({ locale = 'en-US' }: Props) => {
-  const dict: any = await getDictionary(locale)
+const Pricing = async ({ locale = 'en' }: Props) => {
+  const dict: any = await getDict("price", locale)
   const pricingDict = dict?.pricing
   const PricingCard = ({ dictKey, className = "" }: { dictKey: string, className?: string }) => {
     const cardDict = pricingDict[dictKey]
