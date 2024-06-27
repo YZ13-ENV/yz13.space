@@ -1,0 +1,24 @@
+{
+  "title": "YZ13",
+  "description": "YZ13 - веб разработчик",
+  "openGraph": {
+    "type": "website",
+    "countryName": "Россия",
+    "description": "Привет, я YZ13 - веб разработчик, создаю крутые сайты",
+    "locale": "RU",
+    "url": "https://yz13.space",
+    "title": "YZ13",
+    "images": "https://yz13.space/thumbnail.png"
+  },
+  "twitter": {
+    "card": "summary",
+    "title": "YZ13",
+    "description": "Привет, я YZ13 - веб разработчик, создаю крутые сайты",
+    "siteId": "1794707806584446976",
+    "creator": "@YZ13_DEV",
+    "creatorId": "1794707806584446976",
+    "images": {
+      "url": "https://yz13.space/thumbnail.png"
+    }
+  }
+}

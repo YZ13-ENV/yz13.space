@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   authors: [{ name: "YZ13", url: "https://github.com/yz13-env" }],
   metadataBase: new URL('https://yz13.space'),
   alternates: {
-    canonical: "/"
+    canonical: "/home"
   },
   openGraph: {
     type: "website",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     yandex: "294dbd367a5afd6b"
   },
   robots: { index: true, follow: true },
-  keywords: ["frontend", "web-developer", "developer", "yz13", "it", "ui", "design", "разработчик", "фронтенд"],
+  keywords: ["frontend", "web-developer", "developer", "yz13", "yz", "yz13 lab", "yz13 space", "it", "ui", "design", "разработчик", "фронтенд"],
   icons: {
     icon: "/favicon.ico"
   },

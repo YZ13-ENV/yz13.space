@@ -1,19 +1,15 @@
+import { cookies } from "next/headers";
 import "server-only";
 
-type Dictionaries = {
-  [key: string]: () => Promise<{}>;
+export type Locales = "en" | "ru";
+
+const getDict = <T extends any>(dict: string, locale: Locales): Promise<T> =>
+  import(`./${dict}/${locale}.json`).then((module) => module.default);
+
+const getLocale = (): Locales => {
+  const cks = cookies();
+  const locale = (cks.get("locale")?.value || "").slice(0, 2) as Locales;
+  return locale;
 };
 
-const dictionaries: Dictionaries = {
-  en: () => import("./en/en.json").then((module) => module.default),
-  ru: () => import("./ru/ru.json").then((module) => module.default),
-};
-
-export const getDictionary = async <T>(
-  locale: keyof Dictionaries
-): Promise<T | {}> => {
-  const targetDict = dictionaries[locale];
-  const defaultDict = dictionaries["en"];
-  if (targetDict) return targetDict();
-  return (defaultDict as () => Promise<T>)();
-};
+export { getDict, getLocale };

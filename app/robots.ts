@@ -4,8 +4,9 @@ export default function (): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: ["/threads", "/home"],
+      allow: ["/threads", "/home", "/works"],
+      disallow: ["/settings", "/services"],
     },
-    sitemap: "https://yz13.space/sitemap.xml",
+    sitemap: "https://www.yz13.space/sitemap.xml",
   };
 }

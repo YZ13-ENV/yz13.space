@@ -3,7 +3,8 @@ import { Suspense } from "react"
 import { tabs } from "./const"
 import { PlaceholderSkeleton } from "./sections/common"
 
-const LibraryContent = () => {
+const LibraryContent = async () => {
+
   return (
     <>
       {
@@ -11,7 +12,7 @@ const LibraryContent = () => {
           .map((tab, index) =>
             <CarouselItem key={tab.value + `#${index}`}>
               <div
-                className="grid w-full grid-cols-2 auto-rows-auto p-4 lg:grid-cols-3 gap-4 h-full divide-x divide-y"
+                className="grid w-full grid-cols-2 auto-rows-auto lg:grid-cols-3 gap-4 h-full divide-x divide-y"
               >
                 <Suspense fallback={<PlaceholderSkeleton />}>
                   {tab.content && tab.content}
