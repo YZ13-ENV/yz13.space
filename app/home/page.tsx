@@ -24,18 +24,18 @@ const page = async () => {
         </div>
         <div className="w-full flex flex-col gap-3 p-6">
           <p className="inline-flex flex-col text-2xl font-semibold text-secondary">
-            <b className="text-foreground shrink-0">ready</b>
-            abs
+            <b className="text-foreground shrink-0">Ready for work?</b>
+            Book a call, we ready to start
           </p>
           <Button className="w-fit" asChild>
             <Link href="/contact">
-              action
+              Book a call
             </Link>
           </Button>
         </div>
         <footer
           className="w-full p-6 mx-auto h-fit"
-          dangerouslySetInnerHTML={{ __html: "footer.description" }}
+          dangerouslySetInnerHTML={{ __html: "Build by <a class='underline' href='https://github.com/yz13-env'>YZ13</a>, the source code is available on <a class='underline' href='https://github.com/yz13-env/yz13.space'>Github</a>" }}
         >
         </footer>
       </RightSide>
