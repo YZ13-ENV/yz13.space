@@ -6,7 +6,6 @@ import dynamic from "next/dynamic"
 import { cookies } from "next/headers"
 import Link from "next/link"
 import { LuLayoutGrid } from "react-icons/lu"
-import { NavMenu } from "../../home/nav-menu"
 import { Logo } from "../logo"
 import { UserDropdown } from "../user/dropdown"
 import { UserProfile } from "../user/user"
@@ -36,7 +35,7 @@ const Header = async ({ className = "" }: HeaderProps) => {
           <Link href="/">
             <Logo size={42} lang={localeCode} withTitle />
           </Link>
-          <NavMenu className="hidden md:flex" />
+          {/* <NavMenu className="hidden md:flex" /> */}
         </div>
         <div className="z-10 flex items-center gap-3">
           <div className="gap-3 md:flex hidden items-center">

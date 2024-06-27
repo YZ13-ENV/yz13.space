@@ -2,10 +2,16 @@ import { getDictionary } from "@/dictionaries/tools"
 import { cn } from "@/packages/ui/lib/utils"
 import { Button } from "@/packages/ui/src/components/button"
 import { cookies } from "next/headers"
+import { Suspense } from "react"
 import { BiCheckCircle } from "react-icons/bi"
 import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
-import { Header } from "../_components/header"
+import { YZ13Info, YZ13InfoSkeleton } from "../(threads)/_components/yz13-info"
+import { User } from "../_components/header/user-profile"
+import { LeftSide } from "../_components/left"
+import { Nav } from "../_components/nav"
+import { RightSide } from "../_components/right"
+import { SplitViewContainer } from "../_components/split-view-container"
 
 
 
@@ -104,32 +110,32 @@ const page = async () => {
     )
   }
   return (
-    <>
-      <Header />
-      <div className="relative w-full max-w-5xl mx-auto mt-20">
-        <div className="relative flex flex-col items-center justify-center w-full gap-2 aspect-video">
-          <h1 className="text-5xl text-center font-bold">
-            Explore my works
-          </h1>
-          <p className="text-xl text-center text-secondary">
-            Hope you like it
-          </p>
+    <SplitViewContainer>
+      <LeftSide>
+        <div className="w-full h-full flex xl:items-center items-start justify-center">
+          <Suspense fallback={<YZ13InfoSkeleton />}>
+            <YZ13Info />
+          </Suspense>
         </div>
-      </div>
-      <div className="relative w-full max-w-5xl mx-auto">
-        <div className="space-y-6">
-          <div className="flex items-center justify-center w-full aspect-video">
+      </LeftSide>
+      <RightSide className="divide-y">
+        <div className="w-full h-16 flex items-center justify-between px-6">
+          <Nav />
+          <User />
+        </div>
+        <div className="space-y-6 w-full h-screen">
+          <div className="flex items-center justify-center w-full h-full">
             <span className="text-sm text-secondary">
               Здесь будут отображаться работы
             </span>
           </div>
         </div>
-        <div className="w-full p-6 space-y-6 rounded-t-3xl border">
+        <div className="w-full p-6 space-y-6">
           <Contacts />
           <Footer />
         </div>
-      </div>
-    </>
+      </RightSide>
+    </SplitViewContainer>
   )
 }
 export default page
