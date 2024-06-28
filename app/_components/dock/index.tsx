@@ -12,7 +12,6 @@ const Dock = () => {
       <Separator className="h-2/3" orientation="vertical" />
       <Works />
       <Owner />
-      <Separator className="h-2/3" orientation="vertical" />
       <User />
     </DockWrapper>
   )

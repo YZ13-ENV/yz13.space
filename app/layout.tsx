@@ -1,3 +1,4 @@
+import { getDict, getLocale } from "@/dictionaries/tools";
 import { isDev } from "@/packages/api/src/const";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
@@ -31,7 +32,7 @@ const EN_FONT = Inter({
   variable: "--font-sans"
 })
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "YZ13",
   description: "Hi, I'm a YZ13 web developer, hire me, i create cool websites",
   authors: [{ name: "YZ13", url: "https://github.com/yz13-env" }],
@@ -68,6 +69,15 @@ export const metadata: Metadata = {
     },
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = getLocale()
+  const localeMetadata: Metadata = await getDict("metadata", locale)
+  return {
+    ...metadata,
+    ...localeMetadata
+  }
+}
 
 export const viewport: Viewport = {
   themeColor: [

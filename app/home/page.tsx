@@ -1,19 +1,12 @@
 import { getDict, getLocale } from "@/dictionaries/tools"
 import { Button } from "@/packages/ui/src/components/button"
-import { Metadata } from "next"
 import Link from "next/link"
 import { AdBanner } from "../(threads)/(routes)/ad-banner"
 import { Header } from "../_components/header"
 import { LeftSide } from "../_components/left"
 import { RightSide } from "../_components/right"
 import { SplitViewContainer } from "../_components/split-view-container"
-import { Library } from "./library"
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = getLocale()
-  const localeMetadata: Metadata = await getDict("metadata", locale)
-  return localeMetadata
-}
 const page = async () => {
   const locale = getLocale()
   const homeDict = await getDict<any>("home", locale)
@@ -30,8 +23,13 @@ const page = async () => {
       <RightSide className="divide-y">
         <Header />
         <AdBanner />
-        <div className="p-6 space-y-6">
-          <Library />
+        <div className="w-full p-6 space-y-3">
+          <p className="text-2xl font-semibold">
+            Привет, я YZ13 занимаюсь веб разработкой, очень люблю свое дело, если стало интересно - посмотрите мои работы
+          </p>
+          <p className="text-2xl font-semibold">
+            Мне нравится использовать темы в стиле ч/б.
+          </p>
         </div>
         <div className="w-full flex flex-col gap-3 p-6">
           <p className="inline-flex flex-col text-2xl font-semibold text-secondary">

@@ -3,10 +3,11 @@ import { Locales, getDict } from "@/dictionaries/tools"
 import { createClient } from "@/packages/supabase/src/supabase/server"
 import { Button } from "@/packages/ui/src/components/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/packages/ui/src/components/popover"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@repo/ui/command"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@repo/ui/command"
 import { cookies } from "next/headers"
 import Link from "next/link"
 import { LuLogIn, LuLogOut, LuMenu, LuUser, LuUserPlus } from "react-icons/lu"
+import { SimpleTooltip } from "../simple-tooltip"
 
 const Menu = async ({ className = "" }: { className?: string }) => {
   const cks = cookies()
@@ -25,9 +26,11 @@ const Menu = async ({ className = "" }: { className?: string }) => {
   })
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button size="icon" variant="ghost"><LuMenu size={18} /></Button>
-      </PopoverTrigger>
+      <SimpleTooltip text="Меню" sideOffset={10}>
+        <PopoverTrigger asChild>
+          <Button size="icon" variant="ghost"><LuMenu size={18} /></Button>
+        </PopoverTrigger>
+      </SimpleTooltip>
       <PopoverContent
         sideOffset={24}
         className="rounded-xl p-0 border-yz-neutral-300 bg-yz-neutral-100 !border shadow-sm"
@@ -68,7 +71,6 @@ const Menu = async ({ className = "" }: { className?: string }) => {
                   <CommandItem className="hover:bg-yz-neutral-50 rounded-lg cursor-pointer">
                     <LuUser className="mr-2 h-4 w-4" />
                     <span>Profile</span>
-                    <CommandShortcut>⌘P</CommandShortcut>
                   </CommandItem>
                   <CommandItem className="hover:bg-yz-neutral-50 rounded-lg cursor-pointer">
                     <LuLogOut className="mr-2 h-4 w-4" />
