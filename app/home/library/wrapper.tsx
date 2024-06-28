@@ -12,6 +12,7 @@ const LibraryWrapper = ({ children, providedTabs }: Props) => {
   const [tab, setTab] = useState<string>(tabs[0]?.value as string)
   const [api, setApi] = useState<CarouselApi>()
   const scrollCarousel = (target: string) => {
+    setTab(target)
     if (api) {
       const targetIndex = tabs.findIndex(item => item.value === target)
       if (targetIndex > -1) api.scrollTo(targetIndex, false)
@@ -31,10 +32,7 @@ const LibraryWrapper = ({ children, providedTabs }: Props) => {
         <div className="w-full h-fit flex items-center justify-start">
           <Tabs
             providedTabs={providedTabs}
-            onTab={newTab => {
-              setTab(newTab)
-              scrollCarousel(newTab)
-            }}
+            onTab={scrollCarousel}
             selectedTab={tab}
           />
         </div>

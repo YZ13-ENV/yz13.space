@@ -1,0 +1,25 @@
+@tailwind components;
+
+@layer components {
+  .dock-wrapper {
+    --dock-width: 36px;
+    z-index: 20;
+    position: fixed;
+    min-width: var(--dock-width);
+    height: 46px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    left: calc(50% - (var(--dock-width) / 2));
+    bottom: 24px;
+    @apply rounded-xl border-yz-neutral-300 bg-yz-neutral-100 !border shadow-sm;
+  }
+  .dock-work-header {
+    @apply w-full h-12;
+  }
+  .dock-work-content {
+    height: calc(100% - 48px);
+    @apply w-full;
+  }
+}

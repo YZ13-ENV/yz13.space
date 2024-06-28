@@ -1,3 +1,4 @@
+import { isDev } from "@/packages/api/src/const";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
@@ -9,12 +10,26 @@ import "@repo/ui/css/vars";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from 'geist/font/mono';
-import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { AnonSession } from "./(threads)/_components/anon-session";
+import { Body } from "./_components/body";
+import { Dock } from "./_components/dock";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
+
+const RU_FONT = Inter({
+  subsets: ["cyrillic", "latin"],
+  fallback: ["Inter"],
+  variable: "--font-sans"
+})
+
+const EN_FONT = Inter({
+  subsets: ["cyrillic", "latin"],
+  fallback: ["Inter"],
+  variable: "--font-sans"
+})
 
 export const metadata: Metadata = {
   title: "YZ13",
@@ -68,15 +83,20 @@ export default async function RootLayout({ children }: LayoutProps) {
   const cookiesList = cookies()
   const defaultLocale = "en-US"
   const locale = cookiesList.get("locale")?.value || defaultLocale
+  const isEN = locale === "en-US"
   return (
-    <html lang={locale} className={cn(GeistSans.variable, GeistMono.variable)}>
-      <body id="root">
+    <html lang={locale} className={cn(isEN ? EN_FONT.variable : RU_FONT.variable, GeistMono.variable)}>
+      <Body>
         <MediaOverlay />
         <Analytics />
         <SpeedInsights />
         <AnonSession />
+        {
+          isDev &&
+          <Dock />
+        }
         {children}
-      </body>
+      </Body>
     </html>
   );
 }
