@@ -1,11 +1,14 @@
 import { getDict, getLocale } from "@/dictionaries/tools"
-import { Button } from "@/packages/ui/src/components/button"
 import Link from "next/link"
-import { AdBanner } from "../(threads)/(routes)/ad-banner"
-import { Header } from "../_components/header"
+import { CatchPhrase } from "../_components/illustration/catch-phrase"
+import { Logo } from "../_components/illustration/logo"
+import { Position } from "../_components/illustration/position"
+import { Username } from "../_components/illustration/username"
+import { YLetter } from "../_components/illustration/y-letter"
 import { LeftSide } from "../_components/left"
 import { RightSide } from "../_components/right"
 import { SplitViewContainer } from "../_components/split-view-container"
+import { nav_links } from "../_conts/nav-links"
 
 const page = async () => {
   const locale = getLocale()
@@ -14,12 +17,39 @@ const page = async () => {
   const hero = homeDict.hero
   return (
     <SplitViewContainer>
-      <LeftSide>
-        <div className="relative w-full h-full min-h-[50dvh] p-6 max-w-5xl mx-auto gap-2 flex flex-col items-center justify-center">
-          <h1 className="text-5xl text-center font-bold">{hero.title}</h1>
-          <p className="text-xl text-center text-secondary">{hero.description}</p>
+      <LeftSide className="h-dvh">
+        <div id="illustration" className="w-full h-full p-6">
+          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed">
+            <Logo id="illustration-logo" className="w-full h-full" />
+          </div>
+          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
+            <Username id="username" className="w-full h-full" />
+          </div>
+          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
+            <Position id="position" className="w-full h-full" />
+          </div>
+          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed">
+            <YLetter id="y-letter" className="w-full h-full" />
+          </div>
+          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
+            <CatchPhrase id="catch-phrase" className="w-full h-full" />
+          </div>
         </div>
       </LeftSide>
+      <RightSide className="p-6 flex flex-col">
+        {
+          nav_links.map(
+            item =>
+              <Link key={item.link} href={item.link} className="w-full size-responsive-link">{item.label}</Link>
+          )
+        }
+      </RightSide>
+    </SplitViewContainer>
+  )
+}
+export default page
+
+/*
       <RightSide className="divide-y">
         <Header />
         <AdBanner />
@@ -48,7 +78,4 @@ const page = async () => {
         >
         </footer>
       </RightSide>
-    </SplitViewContainer>
-  )
-}
-export default page
+ */
