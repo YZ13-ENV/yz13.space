@@ -26,7 +26,7 @@ const config = {
         screen: "100dvh",
       },
       fontFamily: {
-        sans: "var(--font-geist-sans)",
+        sans: "var(--font-sans)",
         mono: "var(--font-geist-mono)",
       },
       colors: {

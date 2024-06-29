@@ -5,20 +5,16 @@
       "link": "/home"
     },
     {
-      "from": "Threads",
+      "label": "Threads",
       "link": "/threads"
     },
     {
-      "from": "Works",
+      "label": "Works",
       "link": "/works"
     },
     {
-      "from": "Pricing",
+      "label": "Pricing",
       "link": "/pricing"
-    },
-    {
-      "from": "Services",
-      "link": "/services"
     }
   ]
 }

@@ -32,10 +32,10 @@ const WebsitesList = async () => {
             const link = website.thumbnail
             const thumbnail = link ? getStorageItem(["media", link]) : null
             return (
-              <div key={`website#${website.id}`} className="w-full overflow-hidden relative group h-fit border rounded-xl hover:bg-yz-neutral-100">
+              <div key={`website#${website.id}`} className="w-full overflow-hidden relative group h-full border rounded-xl hover:bg-yz-neutral-100">
                 <div
                   className={cn(
-                    "flex items-center aspect-[4/3] justify-center bg-transparent w-full h-full",
+                    "flex items-center justify-center bg-transparent w-full h-full",
                     "cursor-pointer transition-colors shrink-0 relative"
                   )}
                 >

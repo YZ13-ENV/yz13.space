@@ -8,7 +8,7 @@ const getDict = <T extends any>(dict: string, locale: Locales): Promise<T> =>
 
 const getLocale = (): Locales => {
   const cks = cookies();
-  const locale = (cks.get("locale")?.value || "").slice(0, 2) as Locales;
+  const locale = (cks.get("locale")?.value || "en-US").slice(0, 2) as Locales;
   return locale;
 };
 
