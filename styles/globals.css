@@ -143,3 +143,9 @@
     }
   }
 }
+.size-responsive-link {
+  font-weight: bold;
+  line-height: 10dvw;
+  font-size: 10dvw;
+  @apply text-secondary hover:text-foreground transition-colors;
+}
