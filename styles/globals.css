@@ -1,4 +1,5 @@
 @import url("./dock/dock.css");
+@import url("./illustration.css");
 @tailwind components;
 
 .attachments-grid {

@@ -1,0 +1,54 @@
+#home-illustration {
+  & #cover {
+    width: 100%;
+    height: 100%;
+    & > #top {
+      & line {
+        stroke: hsl(var(--yz13-foreground));
+      }
+      & circle {
+        stroke: hsl(var(--yz13-foreground));
+        fill: hsl(var(--yz13-neutral-400));
+      }
+      & rect {
+        stroke: hsl(var(--yz13-foreground));
+        /* fill: hsl(var(--yz13-foreground)); */
+      }
+      & path {
+        stroke: hsl(var(--yz13-foreground));
+        fill: hsl(var(--yz13-neutral-400));
+      }
+    }
+    & > #middle {
+      & #web-1,
+      #web-3 {
+        fill: hsl(var(--yz13-foreground));
+      }
+      & #web-2 {
+        fill: hsl(var(--yz13-neutral-600));
+      }
+      & rect {
+        stroke: hsl(var(--yz13-foreground));
+      }
+      & line {
+        stroke: hsl(var(--yz13-foreground));
+      }
+      & circle {
+        fill: hsl(var(--yz13-neutral-400));
+        stroke: hsl(var(--yz13-foreground));
+      }
+      & #y-letter {
+        fill: hsl(var(--yz13-neutral-400));
+        stroke: hsl(var(--yz13-foreground));
+      }
+    }
+    & > #bottom {
+      & rect {
+        stroke: hsl(var(--yz13-foreground));
+      }
+      & path {
+        fill: hsl(var(--yz13-foreground));
+      }
+    }
+  }
+}
