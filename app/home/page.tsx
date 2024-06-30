@@ -12,9 +12,16 @@ import { nav_links } from "../_conts/nav-links"
 
 const page = async () => {
   const locale = getLocale()
-  const homeDict = await getDict<any>("home", locale)
-  const readyBanner = homeDict["ready-banner"]
-  const hero = homeDict.hero
+  const navDict = await getDict("nav", locale) as { labels: { label: string, link: string }[] }
+  const local_nav_links = nav_links.map(nav => {
+    const target = navDict.labels.find(item => item.link === nav.link)
+    if (target) {
+      return {
+        ...nav,
+        label: target.label
+      }
+    } else return nav
+  })
   return (
     <SplitViewContainer>
       <LeftSide className="h-dvh">
@@ -38,7 +45,7 @@ const page = async () => {
       </LeftSide>
       <RightSide className="p-6 flex flex-col">
         {
-          nav_links.map(
+          local_nav_links.map(
             item =>
               <Link key={item.link} href={item.link} className="w-full size-responsive-link">{item.label}</Link>
           )
