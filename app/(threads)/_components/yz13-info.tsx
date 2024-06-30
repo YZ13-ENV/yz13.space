@@ -1,3 +1,4 @@
+import { getLocale } from "@/dictionaries/tools"
 import { get } from "@vercel/edge-config"
 import { Contact } from "@yz13/api/edge/types"
 import { user } from "@yz13/api/gh"
@@ -9,6 +10,7 @@ const YZ13Info = async () => {
   const gh_user = await user.getUser()
   const skills = await get<string[]>("skills")
   const contacts = await get<Contact[]>("contacts")
+  const locale = getLocale()
   return (
     <div className="xl:max-w-sm max-w-full w-full space-y-5 p-6">
       <div className="w-16 aspect-square rounded-full bg-accents-1 relative">

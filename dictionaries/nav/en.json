@@ -1,4 +1,8 @@
 {
+    "group": {
+    "nav": "Navigation",
+    "profile": "Profile"
+  },
   "labels": [
     {
       "label": "Home",

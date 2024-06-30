@@ -1,4 +1,6 @@
 {
   "login": "Login",
-  "signup": "Sign up for free"
+  "profile": "Profile",
+  "signup": "Sign up for free",
+  "signout": "Log out"
 }
