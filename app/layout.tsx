@@ -1,5 +1,4 @@
 import { getDict, getLocale } from "@/dictionaries/tools";
-import { isDev } from "@/packages/api/src/const";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
@@ -13,7 +12,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from 'geist/font/mono';
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { AnonSession } from "./(threads)/_components/anon-session";
 import { Body } from "./_components/body";
@@ -90,10 +88,8 @@ type LayoutProps = Readonly<{
   children?: ReactNode
 }>
 export default async function RootLayout({ children }: LayoutProps) {
-  const cookiesList = cookies()
-  const defaultLocale = "en-US"
-  const locale = cookiesList.get("locale")?.value || defaultLocale
-  const isEN = locale === "en-US"
+  const locale = getLocale()
+  const isEN = locale === "en"
   return (
     <html lang={locale} className={cn(isEN ? EN_FONT.variable : RU_FONT.variable, GeistMono.variable)}>
       <Body>
@@ -101,10 +97,7 @@ export default async function RootLayout({ children }: LayoutProps) {
         <Analytics />
         <SpeedInsights />
         <AnonSession />
-        {
-          isDev &&
-          <Dock />
-        }
+        <Dock />
         {children}
       </Body>
     </html>
