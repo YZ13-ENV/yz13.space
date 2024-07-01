@@ -24,6 +24,11 @@ export type CommandResponse = {
   result: Result;
 };
 
+type ComponentResult = {
+  type: "component";
+  payload: ReactNode;
+};
+
 type ListResult<T extends any> = {
   type: "list";
   payload: T[];
@@ -39,7 +44,11 @@ type NumberResult = {
   payload: number;
 };
 
-export type Result = ListResult<any> | StringResult | NumberResult;
+export type Result =
+  | ComponentResult
+  | ListResult<any>
+  | StringResult
+  | NumberResult;
 
 const registered_packages = {
   yz13,

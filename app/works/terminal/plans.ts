@@ -13,5 +13,11 @@ const plans: Plan[] = [
     name: "Redesign",
     created_at: dayjs().toISOString(),
   },
+  {
+    id: "terminal",
+    checked: false,
+    name: "Create on work page a terminal",
+    created_at: dayjs().toISOString(),
+  },
 ];
 export { plans, type Plan };

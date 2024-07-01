@@ -4,6 +4,7 @@ import { useDebounceEffect } from "ahooks"
 import dayjs from "dayjs"
 import { keys } from "lodash"
 import { useState } from "react"
+import { LuFunctionSquare } from "react-icons/lu"
 import { TerminalInput } from "./input"
 import { CommandPending, CommandRequest, CommandResponse, registered_packages } from "./registered-commands"
 
@@ -19,18 +20,41 @@ const Terminal = () => {
     const commandCall = splitCommand[1] as keyof typeof registered_packages[typeof packageCall]
     const isCallRootPackage = splitCommand.length === 1 && !!packageCall
     const isCommandCall = !!packageCall && !!commandCall
-    console.log(isCallRootPackage, isCommandCall)
     if (isCallRootPackage) {
       const packageCommands = keys(registered_packages[packageCall])
-      const commands = packageCommands.join(" ")
+      const commandsComponent = (
+        <div className="w-full">
+          <ul>
+            {
+              packageCommands.map(
+                cmd => {
+                  const type = typeof registered_packages[packageCall][cmd as keyof typeof registered_packages[typeof packageCall]]
+                  const isFunc = type === "function"
+                  return <li key={commandId + "#" + cmd}>
+                    <div className="w-full inline-flex items-center gap-1.5">
+                      <span className="inline-flex justify-center aspect-square items-center">
+                        {
+                          isFunc &&
+                          <LuFunctionSquare size={16} />
+                        }
+                      </span>
+                      <span className="text-sm">{cmd} / {type}</span>
+                    </div>
+                  </li>
+                }
+              )
+            }
+          </ul>
+        </div>
+      )
       const response: CommandResponse = {
         command: commandToParse,
         created_at: dayjs().toISOString(),
         id: commandId,
         type: "response",
         result: {
-          type: "string",
-          payload: commands
+          type: "component",
+          payload: commandsComponent
         }
       }
       addLog(response)
@@ -38,22 +62,14 @@ const Terminal = () => {
     if (isCommandCall) {
       try {
         const cmd_res = registered_packages[packageCall][commandCall]()
-        const isArray = Array.isArray(cmd_res) ? "list" : false
-        const recordedType = typeof cmd_res
-        if (isArray === "list" || recordedType === "string" || recordedType === 'number') {
-          const response: CommandResponse = {
-            command: commandToParse,
-            created_at: dayjs().toISOString(),
-            id: commandId,
-            type: "response",
-            // @ts-ignore
-            result: {
-              type: isArray === "list" ? isArray : recordedType as CommandResponse["result"]["type"],
-              payload: cmd_res
-            }
-          }
-          addLog(response)
+        const response: CommandResponse = {
+          command: commandToParse,
+          created_at: dayjs().toISOString(),
+          id: commandId,
+          type: "response",
+          result: cmd_res
         }
+        addLog(response)
       } catch (e) {
         const response: CommandResponse = {
           command: commandToParse,
@@ -62,7 +78,7 @@ const Terminal = () => {
           type: "response",
           result: {
             type: "string",
-            payload: "Error"
+            payload: "Error while invoking func"
           }
         }
         addLog(response)
@@ -104,6 +120,7 @@ const Terminal = () => {
                 const isString = response.type === 'string'
                 const isNumber = response.type === 'number'
                 const isList = response.type === 'list'
+                const isComponent = response.type === 'component'
                 if (isString) return (
                   <span key={log + `#${type}` + index} className="font-mono text-sm">
                     {time} {response.payload}
@@ -119,6 +136,7 @@ const Terminal = () => {
                     {time} {typeof response.payload}
                   </span>
                 )
+                if (isComponent) return response.payload
               }
             }
           )
