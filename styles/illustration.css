@@ -33,6 +33,10 @@
       & path {
         stroke: hsl(var(--yz13-foreground));
         fill: hsl(var(--yz13-neutral-400));
+        @apply transition-colors;
+      }
+      & path:hover {
+        fill: hsl(var(--yz13-neutral-600));
       }
     }
   }
@@ -49,6 +53,10 @@
       circle {
         stroke: hsl(var(--yz13-foreground));
         fill: hsl(var(--yz13-neutral-400));
+        @apply transition-colors;
+      }
+      & path:hover {
+        fill: hsl(var(--yz13-neutral-600));
       }
     }
   }
@@ -60,12 +68,24 @@
       }
       & path {
         fill: hsl(var(--yz13-neutral-400));
+        @apply transition-colors;
+      }
+      & path:hover {
+        fill: hsl(var(--yz13-foreground));
       }
       & path:first-of-type {
         fill: hsl(var(--yz13-foreground));
+        @apply transition-colors;
+      }
+      & path:first-of-type:hover {
+        fill: hsl(var(--yz13-neutral-400));
       }
       & path:last-of-type {
         fill: hsl(var(--yz13-foreground));
+        @apply transition-colors;
+      }
+      & path:last-of-type:hover {
+        fill: hsl(var(--yz13-neutral-400));
       }
     }
   }
@@ -81,6 +101,10 @@
       & path {
         stroke: hsl(var(--yz13-foreground));
         fill: hsl(var(--yz13-neutral-400));
+        @apply transition-colors;
+      }
+      & path:hover {
+        fill: hsl(var(--yz13-neutral-600));
       }
     }
   }

@@ -12,7 +12,7 @@ const YZ13Info = async () => {
   const contacts = await get<Contact[]>("contacts")
   const locale = getLocale()
   return (
-    <div className="xl:max-w-sm max-w-full w-full space-y-5 p-6">
+    <div className="xl:max-w-sm max-w-full w-full space-y-5">
       <div className="w-16 aspect-square rounded-full bg-accents-1 relative">
         {
           gh_user &&
@@ -62,7 +62,7 @@ const YZ13Info = async () => {
 
 const YZ13InfoSkeleton = () => {
   return (
-    <div className="xl:max-w-sm max-w-full w-full space-y-5 p-6">
+    <div className="xl:max-w-sm max-w-full w-full space-y-5">
       <div className="w-16 aspect-square rounded-full animate-pulse bg-accents-1 relative" />
       <div className="flex flex-col gap-1">
         <h1 className="h-6 w-36 rounded-md bg-yz-neutral-200 animate-pulse" />

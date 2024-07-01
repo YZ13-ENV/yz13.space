@@ -1,4 +1,4 @@
-import * as randomNumber from "./random-number";
-import * as randomString from "./random-string";
+import { randomNumber } from "./random-number";
+import { randomString } from "./random-string";
 
 export { randomNumber, randomString };
