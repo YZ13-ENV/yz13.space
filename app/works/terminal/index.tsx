@@ -24,7 +24,7 @@ const Terminal = () => {
       const packageCommands = keys(registered_packages[packageCall])
       const commandsComponent = (
         <div className="w-full">
-          <ul>
+          <ul className="pl-6">
             {
               packageCommands.map(
                 cmd => {

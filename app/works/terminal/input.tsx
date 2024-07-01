@@ -17,7 +17,8 @@ const TerminalInput = ({ onCommand }: Props) => {
       <Input
         placeholder="type yz13 to show commands"
         spellCheck={false}
-        className="h-5 text-sm p-0 !border-0 rounded-none !outline-none !ring-0" autoFocus
+        className="h-5 text-sm p-0 !border-0 rounded-none !outline-none !ring-0 shadow-none"
+        autoFocus
         onKeyUp={e => {
           const key = e.key
           if (key === "Enter") {

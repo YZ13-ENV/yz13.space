@@ -1,4 +1,5 @@
 import * as json from "@/package.json";
+import { randomString } from "@/packages/api/src/helpers";
 import { LuCheck, LuMinus } from "react-icons/lu";
 import { plans } from "../plans";
 import { CommandResponse } from "../registered-commands";
@@ -6,9 +7,10 @@ import { CommandResponse } from "../registered-commands";
 
 const yz13 = {
   plans: (): CommandResponse["result"] => {
+    const componentID = "#" + randomString(10)
     const type = "component"
     const component = (
-      <div className="space-y-1">
+      <div key={componentID} className="space-y-1">
         <span className="text-sm font-mono">Current plans</span>
         <ul>
           {
