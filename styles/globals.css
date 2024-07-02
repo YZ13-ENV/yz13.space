@@ -149,6 +149,3 @@
   font-size: 10dvw;
   @apply text-secondary hover:text-foreground transition-colors;
 }
-#terminal > * {
-  @apply font-mono;
-}

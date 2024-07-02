@@ -6,7 +6,6 @@ import { Header } from "../_components/header"
 import { LeftSide } from "../_components/left"
 import { RightSide } from "../_components/right"
 import { SplitViewContainer } from "../_components/split-view-container"
-import { Terminal } from "./terminal"
 
 const page = async () => {
   return (
@@ -25,7 +24,6 @@ const page = async () => {
       </LeftSide>
       <RightSide className="divide-y">
         <Header />
-        <Terminal />
         <div className="w-full p-6 space-y-6">
           <Contacts />
           <Footer />

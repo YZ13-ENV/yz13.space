@@ -1,5 +1,0 @@
-
-
-const internal = {
-  clear: () => null
-}
