@@ -1,3 +1,4 @@
+import { Locales, getDict } from "@/dictionaries/tools"
 import { getFullThreads } from "@/packages/api/src/db/threads"
 import dayjs from "dayjs"
 import { unstable_noStore } from "next/cache"
@@ -7,10 +8,12 @@ import { Thread } from "../../_components/thread/ui/threads/thread-v2"
 
 type Props = {
   filter?: string
-  lang?: string
+  lang?: Locales
 }
-const ThreadsList = async ({ filter, lang }: Props) => {
+const ThreadsList = async ({ filter, lang = "en" }: Props) => {
   unstable_noStore()
+  const threadsDict = await getDict<any>("threads", lang)
+  const placeholder = threadsDict.list.placeholder
   const threads = (await getFullThreads(lang))
     .filter(thread => {
       const sub_threads = thread.threads
@@ -35,7 +38,7 @@ const ThreadsList = async ({ filter, lang }: Props) => {
     .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
   if (!threads.length) return (
     <div className="w-full aspect-video flex justify-center items-center">
-      <span className="text-sm text-secondary">No threads</span>
+      <span className="text-sm text-secondary">{placeholder}</span>
     </div>
   )
   return (

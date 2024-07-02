@@ -1,3 +1,4 @@
+import { Locales } from "@/dictionaries/tools"
 import { Separator } from "@/packages/ui/src/components/separator"
 import { Menu } from "./menu"
 import { Owner } from "./owner"
@@ -5,14 +6,14 @@ import { User } from "./user"
 import { Works } from "./works"
 import { DockWrapper } from "./wrapper"
 
-const Dock = () => {
+const Dock = ({ lang: provided_lang }: { lang?: Locales }) => {
   return (
     <DockWrapper>
-      <Menu />
+      <Menu lang={provided_lang} />
       <Separator className="h-2/3" orientation="vertical" />
-      <Works />
+      <Works lang={provided_lang} />
       {/* <DockTerminal /> */}
-      <Owner />
+      <Owner lang={provided_lang} />
       <User />
     </DockWrapper>
   )

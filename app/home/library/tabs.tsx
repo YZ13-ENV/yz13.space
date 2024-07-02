@@ -28,6 +28,7 @@ const Tabs = ({ onTab, selectedTab = tabs[0]?.value as string, providedTabs = []
               )}
             >
               {tab.icon}
+
               <span className="text-inherit z-[1] sm:inline hidden md:text-base text-sm">{tab.label}</span>
               {
                 isSelected &&

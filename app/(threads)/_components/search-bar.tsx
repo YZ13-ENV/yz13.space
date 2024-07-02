@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { BiSearchAlt } from "react-icons/bi"
 
-const SearchBar = () => {
+const SearchBar = ({ placeholder = "" }: { placeholder?: string }) => {
   const searchParams = useSearchParams()
   const filter = searchParams.get("filter") || ""
   const [text, setText] = useState<string>(filter)
@@ -39,7 +39,7 @@ const SearchBar = () => {
         <BiSearchAlt size={18} className="text-secondary" />
       </div>
       <Input
-        placeholder="Search"
+        placeholder={placeholder}
         className="rounded-lg pl-9"
         value={text}
         onChange={e => setText(e.target.value)}

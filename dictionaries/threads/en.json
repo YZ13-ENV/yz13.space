@@ -1,0 +1,10 @@
+{
+  "name": "Blog",
+  "search": {
+    "name": "Search",
+    "placeholder": "Search"
+  },
+  "list": {
+    "placeholder": "No threads"
+  }
+}

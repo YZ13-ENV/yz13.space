@@ -1,12 +1,17 @@
 "use client"
-import { tabs } from "@/app/home/library/const"
+import { ServerTab, tabs } from "@/app/home/library/const"
 import { Carousel, CarouselApi, CarouselContent } from "@repo/ui/carousel"
 import { cn } from "@repo/ui/cn"
 import { easeInOut, motion } from "framer-motion"
 import { ReactNode, useEffect, useState } from "react"
 
-const Wrapper = ({ children }: { children?: ReactNode }) => {
-  const [selectedTab, setTab] = useState<string>(tabs[0]?.value as string)
+type Props = {
+  providedTabs?: ServerTab[]
+  children?: ReactNode
+}
+
+const Wrapper = ({ children, providedTabs = [] }: Props) => {
+  const [selectedTab, setTab] = useState<string>(providedTabs[0]?.value as string)
   const [api, setApi] = useState<CarouselApi>()
   const scrollCarousel = (target: string) => {
     setTab(target)
@@ -27,7 +32,7 @@ const Wrapper = ({ children }: { children?: ReactNode }) => {
     <div className="w-full h-full divide-y border-yz-neutral-300 bg-yz-neutral-100 !border shadow-sm rounded-xl">
       <div className="flex dock-work-header p-2 shrink-0">
         {
-          tabs.map(
+          providedTabs.map(
             tab => {
               const isSelected = selectedTab === tab.value
               return (
@@ -39,7 +44,7 @@ const Wrapper = ({ children }: { children?: ReactNode }) => {
                     isSelected ? "text-foreground scale-100" : "text-secondary scale-90 hover:text-foreground"
                   )}
                 >
-                  {tab.icon({ size: 14, className: "z-[1]" })}
+                  {tab.icon}
                   <span className="text-inherit z-[1] text-sm">{tab.label}</span>
                   {
                     isSelected &&

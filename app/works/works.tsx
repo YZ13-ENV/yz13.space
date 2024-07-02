@@ -1,10 +1,12 @@
 import { getWorksByType } from "@/packages/api/src/db/works"
 import { getStorageItem } from "@/packages/supabase/src/supabase/storage"
 import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
 import Image from "next/image"
 import Link from "next/link"
 import { LuGlobe } from "react-icons/lu"
 
+dayjs.extend(relativeTime)
 const Works = async () => {
   const list = await getWorksByType("website")
   const websites = (list.data || [])
