@@ -1,0 +1,14 @@
+{
+  "menu": {
+    "search": "Type for search",
+    "name": "Menu",
+    "nav": "Navigation",
+    "profile": "Profile"
+  },
+  "works": {
+    "name": "Works"
+  },
+  "owner": {
+    "name": "Developer"
+  }
+}

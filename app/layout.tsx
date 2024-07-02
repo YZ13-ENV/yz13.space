@@ -1,5 +1,4 @@
 import { getDict, getLocale } from "@/dictionaries/tools";
-import { isDev } from "@/packages/api/src/const";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
@@ -16,9 +15,7 @@ import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import { AnonSession } from "./(threads)/_components/anon-session";
 import { Body } from "./_components/body";
-import { Dock } from "./_components/dock";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
-import page from "./dev/page";
 
 const RU_FONT = Inter({
   subsets: ["cyrillic", "latin"],
@@ -99,15 +96,7 @@ export default async function RootLayout({ children }: LayoutProps) {
         <Analytics />
         <SpeedInsights />
         <AnonSession />
-        {
-          isDev
-            ? <>
-
-              <Dock />
-              {children}
-            </>
-            : page()
-        }
+        {children}
       </Body>
     </html>
   );

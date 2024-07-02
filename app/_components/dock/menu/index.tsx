@@ -1,5 +1,5 @@
 import { nav_links } from "@/app/_conts/nav-links"
-import { getDict, getLocale } from "@/dictionaries/tools"
+import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { createClient } from "@/packages/supabase/src/supabase/server"
 import { Button } from "@/packages/ui/src/components/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/packages/ui/src/components/popover"
@@ -13,30 +13,36 @@ import { LuLogIn, LuMenu, LuUserPlus } from "react-icons/lu"
 import { SimpleTooltip } from "../../simple-tooltip"
 import { SignOut } from "./signout"
 
-const Menu = async ({ className = "" }: { className?: string }) => {
+const Menu = async ({ className = "", lang: provided_lang }: { className?: string, lang?: Locales }) => {
   const cks = cookies()
   const sp = createClient(cks)
   const { data: { user } } = await sp.auth.getUser()
   const locale = getLocale()
-  const date = dayjs().locale(locale)
+  const lang = provided_lang ? provided_lang : locale
+  const date = dayjs().locale(lang)
   const time = date.format("HH:mm")
   const today_date = date.format("DD MMMM YYYY")
-  const navDict = await getDict("nav", locale) as { group: { [key: string]: string }, labels: { label: string, link: string }[] }
+  const navDict = await getDict("nav", lang) as { group: { [key: string]: string }, labels: { label: string, link: string }[] }
   const local_nav_links = nav_links.map(nav => {
     const target = navDict.labels.find(item => item.link === nav.link)
     if (target) {
       return {
         ...nav,
+        link: nav.link + (provided_lang ? `?lang=${provided_lang}` : ""),
         label: target.label
       }
-    } else return nav
+    } else return { ...nav, link: nav.link + (provided_lang ? `?lang=${provided_lang}` : "") }
   })
-  const nav_group_title = navDict.group.nav
-  const nav_group_profile = navDict.group.profile
-  const auth_button = await getDict<{ signout: string, profile: string, login: string, signup: string }>("auth-buttons", locale)
+  const dockDict = await getDict<any>("dock", lang)
+  const menu = dockDict.menu
+  const menuName = menu.name
+  const menuNavName = menu.nav
+  const menuProfileName = menu.profile
+  const menuSearch = menu.search
+  const auth_button = await getDict<{ signout: string, profile: string, login: string, signup: string }>("auth-buttons", lang)
   return (
     <Popover>
-      <SimpleTooltip text="Меню" sideOffset={10}>
+      <SimpleTooltip text={menuName} sideOffset={10}>
         <PopoverTrigger asChild>
           <Button className="h-9 aspect-square" size="icon" variant="ghost"><LuMenu size={18} /></Button>
         </PopoverTrigger>
@@ -46,7 +52,7 @@ const Menu = async ({ className = "" }: { className?: string }) => {
         className="rounded-xl p-0 border-yz-neutral-300 bg-yz-neutral-100 !border shadow-sm"
       >
         <Command className="">
-          <CommandInput disabled placeholder="Type a command or search..." />
+          <CommandInput disabled placeholder={menuSearch} />
           <CommandItem className="gap-1">
             <span className="px-2 py-1 rounded-md border text-xs cursor-pointer inline-flex gap-1 items-center bg-background">
               {time}
@@ -57,7 +63,7 @@ const Menu = async ({ className = "" }: { className?: string }) => {
           </CommandItem>
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
-            <CommandGroup heading={nav_group_title}>
+            <CommandGroup heading={menuNavName}>
               {
                 local_nav_links.map(nav =>
                   <CommandItem
@@ -77,11 +83,11 @@ const Menu = async ({ className = "" }: { className?: string }) => {
             {
               user
                 ?
-                <CommandGroup heading={nav_group_profile}>
+                <CommandGroup heading={menuProfileName}>
                   <SignOut>{auth_button.signout}</SignOut>
                 </CommandGroup>
                 :
-                <CommandGroup heading={nav_group_profile}>
+                <CommandGroup heading={menuProfileName}>
                   <CommandItem className="hover:bg-yz-neutral-50 rounded-lg cursor-pointer" asChild>
                     <Link href="/login">
                       <LuLogIn className="mr-2 h-4 w-4" />
