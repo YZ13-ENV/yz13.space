@@ -16,7 +16,7 @@ const page = async () => {
           <div className="w-full">
             <h1 className="lg:text-9xl md:text-7xl text-9xl font-bold">Works</h1>
           </div>
-          <div className="w-full">
+          <div className="w-full lg:px-6 px-0">
             <Suspense fallback={<YZ13InfoSkeleton />}>
               <YZ13Info />
             </Suspense>

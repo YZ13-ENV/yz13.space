@@ -11,6 +11,7 @@ const Dock = () => {
       <Menu />
       <Separator className="h-2/3" orientation="vertical" />
       <Works />
+      {/* <DockTerminal /> */}
       <Owner />
       <User />
     </DockWrapper>

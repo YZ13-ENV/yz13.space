@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { router } from "./commands/router.package";
 import { yz13 } from "./commands/yz13.package";
 import { Plan } from "./plans";
 
@@ -44,13 +45,22 @@ type NumberResult = {
   payload: number;
 };
 
-export type Result =
+type WithFunc<T> = {
+  executed?: boolean;
+  props?: T;
+  func?: (props?: T) => void;
+};
+
+export type Result = (
   | ComponentResult
   | ListResult<any>
   | StringResult
-  | NumberResult;
+  | NumberResult
+) &
+  WithFunc<any>;
 
 const registered_packages = {
   yz13,
+  router,
 };
 export { registered_packages };

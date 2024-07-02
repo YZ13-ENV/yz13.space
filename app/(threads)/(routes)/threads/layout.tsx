@@ -34,14 +34,14 @@ const layout = ({ children }: Props) => {
               </div>
             </div>
             <div className="w-full h-2/3 space-y-3">
-              <span className="text-lg font-semibold">Last threads</span>
+              <span className="text-lg font-semibold">Changelog</span>
               <ul className="space-y-1.5">
-                <li className="w-full h-9">
+                {/* <li className="w-full h-9">
                   <button className="w-full h-full flex gap-2 items-center rounded-lg hover:px-2 transition-all hover:bg-yz-neutral-100">
                     <span className="text-secondary">12 Nov, 12:00</span>
                     <span className="line-clamp-1">New service is out</span>
                   </button>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
