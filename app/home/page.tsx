@@ -1,4 +1,4 @@
-import { getDict, getLocale } from "@/dictionaries/tools"
+import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import Link from "next/link"
 import { CatchPhrase } from "../_components/illustration/catch-phrase"
 import { Logo } from "../_components/illustration/logo"
@@ -10,17 +10,25 @@ import { RightSide } from "../_components/right"
 import { SplitViewContainer } from "../_components/split-view-container"
 import { nav_links } from "../_conts/nav-links"
 
-const page = async () => {
+type Props = {
+  searchParams: {
+    lang?: string
+  }
+}
+const page = async ({ searchParams }: Props) => {
+  const searchParamLang = searchParams.lang
   const locale = getLocale()
-  const navDict = await getDict("nav", locale) as { labels: { label: string, link: string }[] }
+  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const navDict = await getDict("nav", lang) as { labels: { label: string, link: string }[] }
   const local_nav_links = nav_links.map(nav => {
     const target = navDict.labels.find(item => item.link === nav.link)
     if (target) {
       return {
         ...nav,
+        link: nav.link + (searchParamLang ? `?lang=${searchParamLang}` : ""),
         label: target.label
       }
-    } else return nav
+    } else return { ...nav, link: nav.link + (searchParamLang ? `?lang=${searchParamLang}` : "") }
   })
   return (
     <SplitViewContainer>

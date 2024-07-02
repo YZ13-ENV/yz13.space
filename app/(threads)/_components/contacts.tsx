@@ -1,3 +1,4 @@
+import { Locales, getDict } from "@/dictionaries/tools"
 import { cn } from "@/packages/ui/lib/utils"
 import { get } from "@vercel/edge-config"
 import { Contact } from "@yz13/api/edge/types"
@@ -5,12 +6,15 @@ import Link from "next/link"
 
 type Props = {
   className?: string
+  lang?: Locales
 }
-const Contacts = async ({ className = "" }: Props) => {
+const Contacts = async ({ className = "", lang = "en" }: Props) => {
   const contacts = await get<Contact[]>("contacts")
+  const contactDict = await getDict<any>("contact", lang)
+  const name = contactDict.name
   return (
     <section className={cn("space-y-3", className)}>
-      <h2 className="text-sm text-secondary uppercase">contact</h2>
+      <h2 className="text-sm text-secondary uppercase">{name}</h2>
       <ul className="divide-y">
         {
           contacts &&

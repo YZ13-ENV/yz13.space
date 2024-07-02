@@ -1,0 +1,10 @@
+{
+  "name": "Блог",
+  "search": {
+    "name": "Поиск",
+    "placeholder": "Поиск"
+  },
+  "list": {
+    "placeholder": "Нет записей"
+  }
+}

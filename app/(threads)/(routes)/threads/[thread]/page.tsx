@@ -6,7 +6,6 @@ import { RightSide } from "@/app/_components/right"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
 import { getLocale } from "@/dictionaries/tools"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { Suspense } from "react"
 import { BiLeftArrowAlt } from "react-icons/bi"
 import { Changelog, ChangelogSkeleton } from "../changelog"
@@ -26,10 +25,9 @@ type Props = {
 
 const page = ({ params, searchParams }: Props) => {
   const thread_id = parseInt(params.thread)
-  const filter = searchParams.filter
-  const lang = searchParams.lang
+  const searchParamLang = searchParams.lang
   const locale = getLocale()
-  if (!lang) redirect(`/threads/${thread_id}?lang=${locale}`)
+  const lang = searchParamLang ? searchParamLang : locale
   return (
     <SplitViewContainer>
       <LeftSide>

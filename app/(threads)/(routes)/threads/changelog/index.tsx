@@ -1,12 +1,17 @@
+import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { getChangelog } from "@/packages/api/src/db/changelog"
 import dayjs from "dayjs"
 
 
-const Changelog = async ({ lang }: { lang?: string }) => {
+const Changelog = async ({ lang: providedLang }: { lang?: Locales }) => {
+  const locale = getLocale()
+  const lang = providedLang ? providedLang : locale
   const changelogs = await getChangelog(lang)
+  const changelogDict = await getDict<any>("changelog", lang)
+  const name = changelogDict.name
   return (
     <div className="w-full h-2/3 space-y-3">
-      <span className="text-lg font-semibold">Changelog</span>
+      <span className="text-lg font-semibold">{name}</span>
       <ul className="space-y-1.5">
         {
           changelogs.map(changelog => {
