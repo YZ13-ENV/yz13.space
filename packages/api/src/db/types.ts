@@ -63,6 +63,7 @@ export type ThreadItem = {
   views: string[];
   created_at: string;
   author: string[];
+  lang: string[];
 };
 
 export type ThreadTree = {
@@ -71,6 +72,13 @@ export type ThreadTree = {
   created_at: string;
   name?: string;
   pinned: boolean;
+};
+
+export type ChangelogRecord = {
+  id: string;
+  title: string;
+  created_at: string;
+  lang: string[];
 };
 
 export type ComponentsThreadTree = ThreadTree;

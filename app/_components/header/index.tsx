@@ -7,7 +7,7 @@ type HeaderProps = {
 const Header = async ({ className = "" }: HeaderProps) => {
   return (
     <header className={cn(
-      "w-full min-h-16 sticky top-0 py-2 gap-4 flex items-center bg-background justify-start px-6",
+      "w-full min-h-16 sticky z-10 top-0 py-2 gap-4 flex items-center bg-background justify-start px-6",
       className
     )}>
       <Nav className="w-full overflow-x-auto flex-nowrap no-scrollbar" />

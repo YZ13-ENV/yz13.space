@@ -12,8 +12,26 @@ const SearchBar = () => {
   const pathname = usePathname()
   const router = useRouter()
   useDebounceEffect(() => {
-    if (text !== "") router.push(`${pathname}?filter=${text}`)
-    if (text === "") router.push(pathname)
+    const params = searchParams.toString()
+    const hasFilter = searchParams.has("filter")
+    console.log(hasFilter, text)
+    if (hasFilter) {
+      const oldFilter = `filter=${searchParams.get("filter")}`
+      console.log(params, oldFilter, params.replace(oldFilter, ""))
+      if (!text) {
+        const updated_params = params.replace(oldFilter, "")
+        const link = `${pathname}?${updated_params}`
+        router.push(link)
+      } else {
+        const newFilter = `filter=${text}`
+        const updated_params = params.replace(oldFilter, newFilter)
+        const link = `${pathname}?${updated_params}`
+        router.push(link)
+      }
+    } else {
+      const link = pathname + ("?" + params) + (text ? `&filter=${text}` : "")
+      if (text !== "") router.push(link)
+    }
   }, [text, setText], { wait: 1000 })
   return (
     <div className="relative">

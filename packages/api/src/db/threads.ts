@@ -11,11 +11,13 @@ const getThreads = async (): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
   return result;
 };
 
-const getFullThreads = async (): Promise<FullThread[]> => {
+const getFullThreads = async (lang?: string): Promise<FullThread[]> => {
   const url = isDev ? "http://localhost:3000" : "https://www.yz13.space";
   const path = "/api/threads";
+  const fetchURL = new URL(path, url);
+  if (lang) fetchURL.searchParams.set("lang", lang);
   try {
-    const response = await fetch(url + path, { method: "GET" });
+    const response = await fetch(fetchURL.toString(), { method: "GET" });
     if (response.ok) {
       const json = await response.json();
       return json;

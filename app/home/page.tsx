@@ -26,7 +26,7 @@ const page = async () => {
     <SplitViewContainer>
       <LeftSide className="h-dvh">
         <div id="illustration" className="w-full h-full p-6">
-          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed">
+          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed aspect-square shrink-0">
             <Logo id="illustration-logo" className="w-full h-full" />
           </div>
           <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
@@ -35,7 +35,7 @@ const page = async () => {
           <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
             <Position id="position" className="w-full h-full" />
           </div>
-          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed">
+          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed aspect-square shrink-0">
             <YLetter id="y-letter" className="w-full h-full" />
           </div>
           <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
@@ -47,7 +47,13 @@ const page = async () => {
         {
           local_nav_links.map(
             item =>
-              <Link key={item.link} href={item.link} className="w-full size-responsive-link">{item.label}</Link>
+              <Link
+                key={item.link}
+                href={item.link}
+                className="w-full hover:text-foreground text-secondary xl:text-9xl text-8xl font-bold transition-colors"
+              >
+                {item.label}
+              </Link>
           )
         }
       </RightSide>

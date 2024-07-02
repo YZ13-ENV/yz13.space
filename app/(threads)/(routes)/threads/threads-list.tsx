@@ -7,10 +7,11 @@ import { Thread } from "../../_components/thread/ui/threads/thread-v2"
 
 type Props = {
   filter?: string
+  lang?: string
 }
-const ThreadsList = async ({ filter }: Props) => {
+const ThreadsList = async ({ filter, lang }: Props) => {
   unstable_noStore()
-  const threads = (await getFullThreads())
+  const threads = (await getFullThreads(lang))
     .filter(thread => {
       const sub_threads = thread.threads
       const onlyText = sub_threads.map(sub_thread => ({
@@ -19,7 +20,11 @@ const ThreadsList = async ({ filter }: Props) => {
         text: sub_thread.text.toLowerCase()
       }))
       const matched = onlyText.filter(text => filter ? text.text.includes(filter) : text)
-      const isInMatch = matched.find(item => item.thread_id === thread.thread_id && !!(thread.threads.find(sub => sub.sub_thread_id === item.sub_thread_id)))
+      const isInMatch = matched.find(item => {
+        const matchedId = item.thread_id === thread.thread_id
+        const hasSubThreads = !!(thread.threads.find(sub => sub.sub_thread_id === item.sub_thread_id))
+        return matchedId && hasSubThreads
+      })
       return filter ? !!isInMatch : thread
     })
     .sort((a, b) => {
@@ -28,6 +33,11 @@ const ThreadsList = async ({ filter }: Props) => {
       return b_date.diff(a_date)
     })
     .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
+  if (!threads.length) return (
+    <div className="w-full aspect-video flex justify-center items-center">
+      <span className="text-sm text-secondary">No threads</span>
+    </div>
+  )
   return (
     <>
       {
