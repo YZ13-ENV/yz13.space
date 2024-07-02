@@ -18,7 +18,7 @@ const Owner = () => {
       <PopoverContent
         sideOffset={24}
         side="top"
-        className="border lg:w-96 w-screen p-0 bg-yz-neutral-100 rounded-xl shadow-none"
+        className="border lg:w-96 w-screen p-6 bg-yz-neutral-100 rounded-xl shadow-none"
       >
         <Suspense fallback={<YZ13InfoSkeleton />}>
           <YZ13Info />

@@ -1,7 +1,12 @@
+import { Suspense } from "react"
+import { YZ13Info, YZ13InfoSkeleton } from "../(threads)/_components/yz13-info"
+
 const page = () => {
   return (
-    <div className="w-full h-screen flex items-center justify-center">
-      <span className="text-sm text-secondary">In dev, release soon.</span>
+    <div className="w-full h-screen flex p-6 items-center justify-center">
+      <Suspense fallback={<YZ13InfoSkeleton />}>
+        <YZ13Info />
+      </Suspense>
     </div>
   )
 }

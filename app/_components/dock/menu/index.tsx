@@ -9,8 +9,9 @@ import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import { cookies } from "next/headers"
 import Link from "next/link"
-import { LuLogIn, LuLogOut, LuMenu, LuUser, LuUserPlus } from "react-icons/lu"
-import { SimpleTooltip } from "../simple-tooltip"
+import { LuLogIn, LuMenu, LuUserPlus } from "react-icons/lu"
+import { SimpleTooltip } from "../../simple-tooltip"
+import { SignOut } from "./signout"
 
 const Menu = async ({ className = "" }: { className?: string }) => {
   const cks = cookies()
@@ -37,7 +38,7 @@ const Menu = async ({ className = "" }: { className?: string }) => {
     <Popover>
       <SimpleTooltip text="Меню" sideOffset={10}>
         <PopoverTrigger asChild>
-          <Button size="icon" variant="ghost"><LuMenu size={18} /></Button>
+          <Button className="h-9 aspect-square" size="icon" variant="ghost"><LuMenu size={18} /></Button>
         </PopoverTrigger>
       </SimpleTooltip>
       <PopoverContent
@@ -77,14 +78,7 @@ const Menu = async ({ className = "" }: { className?: string }) => {
               user
                 ?
                 <CommandGroup heading={nav_group_profile}>
-                  <CommandItem className="hover:bg-yz-neutral-50 rounded-lg cursor-pointer">
-                    <LuUser className="mr-2 h-4 w-4" />
-                    <span>{auth_button.profile}</span>
-                  </CommandItem>
-                  <CommandItem className="hover:bg-yz-neutral-50 rounded-lg cursor-pointer">
-                    <LuLogOut className="mr-2 h-4 w-4" />
-                    <span>{auth_button.signout}</span>
-                  </CommandItem>
+                  <SignOut>{auth_button.signout}</SignOut>
                 </CommandGroup>
                 :
                 <CommandGroup heading={nav_group_profile}>

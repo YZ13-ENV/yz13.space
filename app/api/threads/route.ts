@@ -8,10 +8,14 @@ import { createClient } from "@/packages/supabase/src/supabase/server";
 import { getStorageItem } from "@/packages/supabase/src/supabase/storage";
 import { unstable_cache as cache } from "next/cache";
 import { cookies } from "next/headers";
+import { NextRequest } from "next/server";
 
-export const GET = async (request: Request) => {
+export const GET = async (request: NextRequest) => {
+  const { searchParams } = request.nextUrl;
+  const lang = searchParams.get("lang");
   const cks = cookies();
   const client = createClient(cks);
+  const hasLangParam = !!lang;
   try {
     const cached_threads_response = cache(
       async () => client.from("threads").select(),
@@ -30,7 +34,13 @@ export const GET = async (request: Request) => {
     if (!!threads_response.error) console.log(threads_response);
     const sub_threads_response = await cached_sub_threads_response();
     if (!!sub_threads_response.error) console.log(sub_threads_response);
-    const sub_threads: ThreadItem[] = sub_threads_response.data || [];
+    const sub_threads: ThreadItem[] = (sub_threads_response.data || []).filter(
+      (sub_thread: ThreadItem) => {
+        if (hasLangParam) {
+          return sub_thread.lang.includes(lang);
+        } else return sub_thread;
+      }
+    );
     const sub_threads_with_authors = sub_threads
       .map((sub_thread) => {
         const authors = sub_thread.author.map((author) => {
@@ -50,12 +60,14 @@ export const GET = async (request: Request) => {
         };
       })
       .filter((member) => !!member);
-    const ready_threads = threads.map((thread) => {
-      const relative_sub_threads = sub_threads_with_authors.filter(
-        (sub_thread) => thread.threads.includes(sub_thread.sub_thread_id)
-      );
-      return { ...thread, threads: relative_sub_threads };
-    });
+    const ready_threads = threads
+      .map((thread) => {
+        const relative_sub_threads = sub_threads_with_authors.filter(
+          (sub_thread) => thread.threads.includes(sub_thread.sub_thread_id)
+        );
+        return { ...thread, threads: relative_sub_threads };
+      })
+      .filter((thread) => !!thread.threads.length);
     return new Response(JSON.stringify(ready_threads, null, 2), {
       headers: {
         "Content-Type": "application/json",
