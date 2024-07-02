@@ -4,7 +4,7 @@ import { Header } from "@/app/_components/header"
 import { LeftSide } from "@/app/_components/left"
 import { RightSide } from "@/app/_components/right"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
-import { getLocale } from "@/dictionaries/tools"
+import { Locales, getLocale } from "@/dictionaries/tools"
 import Link from "next/link"
 import { Suspense } from "react"
 import { BiLeftArrowAlt } from "react-icons/bi"
@@ -27,7 +27,7 @@ const page = ({ params, searchParams }: Props) => {
   const thread_id = parseInt(params.thread)
   const searchParamLang = searchParams.lang
   const locale = getLocale()
-  const lang = searchParamLang ? searchParamLang : locale
+  const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <SplitViewContainer>
       <LeftSide>
