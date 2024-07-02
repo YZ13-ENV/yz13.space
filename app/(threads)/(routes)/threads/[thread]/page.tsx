@@ -1,5 +1,6 @@
 import { Contacts, ContactsSkeleton } from "@/app/(threads)/_components/contacts"
 import { Footer } from "@/app/(threads)/_components/footer"
+import { Dock } from "@/app/_components/dock"
 import { Header } from "@/app/_components/header"
 import { LeftSide } from "@/app/_components/left"
 import { RightSide } from "@/app/_components/right"
@@ -29,43 +30,46 @@ const page = ({ params, searchParams }: Props) => {
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
-    <SplitViewContainer>
-      <LeftSide>
-        <div className="p-6 h-screen">
-          <div className="w-full h-1/3">
-            <div className="w-full">
-              <h1 className="xl:text-9xl lg:text-8xl md:text-7xl text-8xl font-bold">Blog</h1>
+    <>
+      <Dock />
+      <SplitViewContainer>
+        <LeftSide>
+          <div className="p-6 h-screen">
+            <div className="w-full h-1/3">
+              <div className="w-full">
+                <h1 className="xl:text-9xl lg:text-8xl md:text-7xl text-8xl font-bold">Blog</h1>
+              </div>
             </div>
-          </div>
-          <Suspense fallback={<ChangelogSkeleton />}>
-            <Changelog lang={lang} />
-          </Suspense>
-        </div>
-      </LeftSide>
-      <RightSide>
-        <div className="w-full divide-y">
-          <Header />
-          <div className="flex items-center justify-start p-6">
-            <Link href="/threads" className="inline-flex items-center text-secondary gap-1">
-              <BiLeftArrowAlt size={16} className="text-inherit" />
-              <span className="text-sm text-inherit">Back</span>
-            </Link>
-          </div>
-          <div className="w-full">
-            <Suspense fallback={<Skeleton prefix="-target-" length={1} />}>
-              <ThreadWrapper id={thread_id} />
+            <Suspense fallback={<ChangelogSkeleton />}>
+              <Changelog lang={lang} />
             </Suspense>
           </div>
-          <Suspense fallback={<Skeleton prefix="-other-" length={3} />}>
-            <OtherThreads id={thread_id} />
-          </Suspense>
-          <Suspense fallback={<ContactsSkeleton />}>
-            <Contacts className="p-6" />
-          </Suspense>
-          <Footer className="p-6" />
-        </div>
-      </RightSide>
-    </SplitViewContainer>
+        </LeftSide>
+        <RightSide>
+          <div className="w-full divide-y">
+            <Header />
+            <div className="flex items-center justify-start p-6">
+              <Link href="/threads" className="inline-flex items-center text-secondary gap-1">
+                <BiLeftArrowAlt size={16} className="text-inherit" />
+                <span className="text-sm text-inherit">Back</span>
+              </Link>
+            </div>
+            <div className="w-full">
+              <Suspense fallback={<Skeleton prefix="-target-" length={1} />}>
+                <ThreadWrapper id={thread_id} />
+              </Suspense>
+            </div>
+            <Suspense fallback={<Skeleton prefix="-other-" length={3} />}>
+              <OtherThreads id={thread_id} />
+            </Suspense>
+            <Suspense fallback={<ContactsSkeleton />}>
+              <Contacts className="p-6" />
+            </Suspense>
+            <Footer className="p-6" />
+          </div>
+        </RightSide>
+      </SplitViewContainer>
+    </>
   )
 }
 export default page

@@ -69,10 +69,11 @@ const metadata: Metadata = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = getLocale()
-  const localeMetadata: Metadata = await getDict("metadata", locale)
+  const localeMetadata = await getDict<any>("metadata", locale)
+  const layout = localeMetadata.layout
   return {
     ...metadata,
-    ...localeMetadata
+    ...layout
   }
 }
 
