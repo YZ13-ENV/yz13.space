@@ -3,6 +3,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 import { Database } from "../supabase";
 
+const isDev = process.env.NODE_ENV === "development";
 export const createClient = (
   request: NextRequest
 ): {
@@ -20,6 +21,11 @@ export const createClient = (
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      cookieOptions: {
+        domain: isDev ? "localhost" : ".yz13.space",
+        sameSite: "lax",
+        secure: !isDev,
+      },
       cookies: {
         get(name: string) {
           return request.cookies.get(name)?.value;

@@ -3,7 +3,6 @@ import { Logo } from "@/app/_components/logo"
 import { Nav } from "@/app/_components/nav"
 import { RightSide } from "@/app/_components/right"
 import { SplitViewContainer } from "@/app/_components/split-view-container"
-import { isDev } from "@/packages/api/src/const"
 import { Button } from "@/packages/ui/src/components/button"
 import { Input } from "@/packages/ui/src/components/input"
 import Link from "next/link"
@@ -13,12 +12,6 @@ const page = () => {
     <SplitViewContainer>
       <LeftSide>
         <div className="flex flex-col items-center relative justify-center w-full h-screen">
-          {
-            !isDev &&
-            <div className="w-full absolute backdrop-blur-sm flex bg-background/40 items-center justify-center z-50 h-full">
-              <span className="text-sm">Section in dev</span>
-            </div>
-          }
           <Logo size={96} />
           <h1 className="max-w-sm mx-auto text-4xl font-bold text-center">
             Create your YZ13&nbsp;Account
