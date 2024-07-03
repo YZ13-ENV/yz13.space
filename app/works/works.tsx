@@ -24,7 +24,7 @@ const Works = async () => {
                     <div className="w-full aspect-video">
                       {
                         thumbnail &&
-                        <Image className="w-full aspect-video" src={thumbnail} width={600} height={500} alt="website-thumbnail" />
+                        <Image className="w-full aspect-video" src={thumbnail} width={900} height={600} alt="website-thumbnail" />
                       }
                     </div>
                   </div>

@@ -1,5 +1,7 @@
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
+import { Metadata } from "next"
 import Link from "next/link"
+import { Dock } from "../_components/dock"
 import { CatchPhrase } from "../_components/illustration/catch-phrase"
 import { Logo } from "../_components/illustration/logo"
 import { Position } from "../_components/illustration/position"
@@ -9,6 +11,10 @@ import { LeftSide } from "../_components/left"
 import { RightSide } from "../_components/right"
 import { SplitViewContainer } from "../_components/split-view-container"
 import { nav_links } from "../_conts/nav-links"
+
+const metadata: Metadata = {
+  title: "YZ13 - "
+}
 
 type Props = {
   searchParams: {
@@ -31,41 +37,44 @@ const page = async ({ searchParams }: Props) => {
     } else return { ...nav, link: nav.link + (searchParamLang ? `?lang=${searchParamLang}` : "") }
   })
   return (
-    <SplitViewContainer>
-      <LeftSide className="h-dvh">
-        <div id="illustration" className="w-full h-full p-6">
-          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed aspect-square shrink-0">
-            <Logo id="illustration-logo" className="w-full h-full" />
+    <>
+      <Dock />
+      <SplitViewContainer>
+        <LeftSide className="h-dvh">
+          <div id="illustration" className="w-full h-full p-6">
+            <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed aspect-square shrink-0">
+              <Logo id="illustration-logo" className="w-full h-full" />
+            </div>
+            <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
+              <Username id="username" className="w-full h-full" />
+            </div>
+            <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
+              <Position id="position" className="w-full h-full" />
+            </div>
+            <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed aspect-square shrink-0">
+              <YLetter id="y-letter" className="w-full h-full" />
+            </div>
+            <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
+              <CatchPhrase id="catch-phrase" className="w-full h-full" />
+            </div>
           </div>
-          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
-            <Username id="username" className="w-full h-full" />
-          </div>
-          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
-            <Position id="position" className="w-full h-full" />
-          </div>
-          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2 border-dashed aspect-square shrink-0">
-            <YLetter id="y-letter" className="w-full h-full" />
-          </div>
-          <div className="w-full h-full rounded-[3.75rem] border-foreground border-2">
-            <CatchPhrase id="catch-phrase" className="w-full h-full" />
-          </div>
-        </div>
-      </LeftSide>
-      <RightSide className="p-6 flex flex-col">
-        {
-          local_nav_links.map(
-            item =>
-              <Link
-                key={item.link}
-                href={item.link}
-                className="w-full hover:text-foreground text-secondary xl:text-9xl text-8xl font-bold transition-colors"
-              >
-                {item.label}
-              </Link>
-          )
-        }
-      </RightSide>
-    </SplitViewContainer>
+        </LeftSide>
+        <RightSide className="p-6 flex flex-col">
+          {
+            local_nav_links.map(
+              item =>
+                <Link
+                  key={item.link}
+                  href={item.link}
+                  className="w-full hover:text-foreground text-secondary xl:text-9xl text-8xl font-bold transition-colors"
+                >
+                  {item.label}
+                </Link>
+            )
+          }
+        </RightSide>
+      </SplitViewContainer>
+    </>
   )
 }
 export default page

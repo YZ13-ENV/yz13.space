@@ -1,8 +1,10 @@
-import { isDev } from "../const";
-import { ChangelogRecord } from "./types";
+import { emptyApiResponse } from "../helpers/empty-api-response";
+import { APIResponse, ChangelogRecord } from "./types";
 
-const getChangelog = async (lang?: string): Promise<ChangelogRecord[]> => {
-  const url = isDev ? "http://localhost:3000" : "https://www.yz13.space";
+const getChangelog = async (
+  lang?: string
+): Promise<APIResponse<ChangelogRecord[]>> => {
+  const url = "https://www.api.yz13.space";
   const path = "/api/changelog";
   const fetchURL = new URL(path, url);
   if (lang) fetchURL.searchParams.set("lang", lang);
@@ -11,10 +13,10 @@ const getChangelog = async (lang?: string): Promise<ChangelogRecord[]> => {
     if (response.ok) {
       const json = await response.json();
       return json;
-    } else return [];
+    } else return emptyApiResponse([]);
   } catch (e) {
     console.log(e);
-    return [];
+    return emptyApiResponse([]);
   }
 };
 export { getChangelog };
