@@ -3,7 +3,7 @@ import { SVGProps } from "./catch-phrase"
 const Username = ({ className = "", ...props }: SVGProps) => {
   return (
     <svg className={className} width="640" height="252" viewBox="0 0 640 252" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <rect x="1" y="1" width="638" height="250" rx="60" stroke="black" stroke-width="2" />
+      <rect x="1" y="1" width="638" height="250" rx="60" stroke="black" strokeWidth="2" />
       <line x1="48" y1="31.5" x2="590" y2="31.5" stroke="black" strokeDasharray="2 2" />
       <line x1="48" y1="218.5" x2="590" y2="218.5" stroke="black" strokeDasharray="2 2" />
       <line x1="48.5" y1="32" x2="48.5" y2="219" stroke="black" strokeDasharray="2 2" />

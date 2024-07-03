@@ -1,7 +1,6 @@
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";
-import { isDev } from "../const";
 import { FullThread, ThreadItem, ThreadTree } from "./types";
 
 const getThreads = async (): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
@@ -12,7 +11,7 @@ const getThreads = async (): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
 };
 
 const getFullThreads = async (lang?: string): Promise<FullThread[]> => {
-  const url = isDev ? "http://localhost:3000" : "https://www.yz13.space";
+  const url = "https://www.api.yz13.space";
   const path = "/api/threads";
   const fetchURL = new URL(path, url);
   if (lang) fetchURL.searchParams.set("lang", lang);
@@ -29,7 +28,7 @@ const getFullThreads = async (lang?: string): Promise<FullThread[]> => {
 };
 
 const getFullThread = async (id: number): Promise<FullThread | null> => {
-  const url = isDev ? "http://localhost:3000" : "https://www.yz13.space";
+  const url = "https://www.api.yz13.space";
   const path = `/api/thread/${id}`;
   try {
     const response = await fetch(url + path, { method: "GET" });

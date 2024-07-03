@@ -1,4 +1,12 @@
 @tailwind components;
+
+.favicon {
+  & > path {
+    stroke: hsl(var(--yz13-foreground));
+    fill: hsl(var(--yz13-neutral-400));
+  }
+}
+
 #illustration {
   --spacing: 24px;
   height: 100%;

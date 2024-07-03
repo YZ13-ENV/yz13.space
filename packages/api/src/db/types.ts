@@ -10,6 +10,14 @@ export type Vitals = {
   path: string;
 };
 
+export type APIResponse<T> = {
+  error: string | null;
+  data: T;
+  count: number | null;
+  status: number;
+  statusText?: string;
+};
+
 export type MemberLink = {
   label: string;
   icon: string;

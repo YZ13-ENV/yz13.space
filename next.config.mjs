@@ -18,5 +18,13 @@ const nextConfig = {
       }
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://www.api.yz13.space/:path*"
+      }
+    ]
+  }
 };
 export default nextConfig

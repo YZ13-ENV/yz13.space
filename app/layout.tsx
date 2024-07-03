@@ -52,7 +52,20 @@ const metadata: Metadata = {
   robots: { index: true, follow: true },
   keywords: ["frontend", "web-developer", "developer", "yz13", "yz", "yz13 lab", "yz13 space", "it", "ui", "design", "разработчик", "фронтенд"],
   icons: {
-    icon: "/favicon.ico"
+    icon: [
+      {
+        rel: "icon",
+        type: "image/png",
+        media: '(prefers-color-scheme: light)',
+        url: "/icon-light.png"
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        media: '(prefers-color-scheme: dark)',
+        url: "/icon-dark.png"
+      },
+    ]
   },
   twitter: {
     card: "summary",

@@ -31,8 +31,8 @@ const page = async ({ searchParams }: Props) => {
       <Dock />
       <SplitViewContainer>
         <LeftSide>
-          <div className="p-6 h-screen">
-            <div className="w-full h-1/3">
+          <div className="p-6 xl:h-screen h-fit">
+            <div className="w-full xl:h-1/3 h-fit">
               <div className="w-full">
                 <h1 className="xl:text-9xl lg:text-8xl md:text-7xl text-8xl font-bold">{name}</h1>
               </div>
