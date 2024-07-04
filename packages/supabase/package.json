@@ -6,7 +6,8 @@
     "./client": "./src/supabase/client.ts",
     "./middleware": "./src/supabase/middleware.ts",
     "./server": "./src/supabase/server.ts",
-    "./storage": "./src/supabase/storage.ts"
+    "./storage": "./src/supabase/storage.ts",
+    "./database": "./src/supabase.ts"
   },
   "dependencies": {
     "@repo/typescript-config": "workspace:*",

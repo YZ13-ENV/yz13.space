@@ -12,6 +12,7 @@
     "./dialog": "./src/components/dialog.tsx",
     "./command": "./src/components/command.tsx",
     "./progress": "./src/components/progress.tsx",
+    "./textarea": "./src/components/textarea.tsx",
     "./tooltip": "./src/components/tooltip.tsx",
     "./accordion": "./src/components/accordion.tsx",
     "./popover": "./src/components/popover.tsx",

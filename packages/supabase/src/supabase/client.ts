@@ -3,7 +3,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "../supabase";
 
 const isDev = process.env.NODE_ENV === "development";
-export const createClient = (): SupabaseClient<Database, "public", any> =>
+export const createClient = (): SupabaseClient<Database> =>
   createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

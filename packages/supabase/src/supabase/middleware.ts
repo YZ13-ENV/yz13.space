@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV === "development";
 export const createClient = (
   request: NextRequest
 ): {
-  supabase: SupabaseClient<Database, "public", any>;
+  supabase: SupabaseClient<Database>;
   response: NextResponse<unknown>;
 } => {
   // Create an unmodified response
