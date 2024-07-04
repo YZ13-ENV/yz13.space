@@ -40,7 +40,7 @@ const page = async ({ searchParams }: Props) => {
   return (
     <>
       {
-        user && isAdmin &&
+        (user && isAdmin) &&
         <NewThreadOverlay>
           <NewThreadForm user={user} />
         </NewThreadOverlay>
@@ -57,7 +57,10 @@ const page = async ({ searchParams }: Props) => {
                 <div className="space-y-3 w-full max-w-sm">
                   <div className="flex items-center justify-between">
                     <span className="text-lg text-secondary">{search.name}</span>
-                    <NewThreadTrigger />
+                    {
+                      (user && isAdmin) &&
+                      <NewThreadTrigger />
+                    }
                   </div>
                   <SearchBar placeholder={search.placeholder} />
                 </div>
