@@ -1,6 +1,6 @@
 import { Separator } from "@/packages/ui/src/components/separator"
 import { cn } from "@repo/ui/cn"
-import { SubThread as SubThreadType } from "@yz13/api/db/types"
+import { FullSubThread } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import { useMemo } from "react"
 import { SubThreadBig } from "./sub-threads/big-sub-thread"
@@ -10,7 +10,7 @@ import { SubThreadsProps } from "./threads/thread-v2"
 
 type Props = {
   thread_id: number
-  sub_threads?: SubThreadType[]
+  sub_threads?: FullSubThread[]
   className?: string
   enableLink?: boolean
   tag?: string

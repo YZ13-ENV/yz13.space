@@ -1,9 +1,9 @@
-import { ThreadItem } from "@yz13/api/db/types";
+import { SubThread } from "@yz13/api/db/types";
 import { BiChart, BiHeart } from "react-icons/bi";
 import { VscGroupByRefType } from "react-icons/vsc";
 
 type Props = {
-  sub_threads?: ThreadItem[]
+  sub_threads?: SubThread[]
 }
 const ThreadSummary = ({ sub_threads = [] }: Props) => {
   const total_likes = sub_threads.map(item => item.likes).map(item => item.length).reduce((a, b) => a + b)

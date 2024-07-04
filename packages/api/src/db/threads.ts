@@ -1,9 +1,9 @@
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";
-import { FullThread, ThreadItem, ThreadTree } from "./types";
+import { FullThread, SubThread, Thread } from "./types";
 
-const getThreads = async (): Promise<PostgrestSingleResponse<ThreadTree[]>> => {
+const getThreads = async (): Promise<PostgrestSingleResponse<Thread[]>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
   const result = await supabase.from("threads").select();
@@ -44,33 +44,24 @@ const getFullThread = async (id: number): Promise<FullThread | null> => {
 
 const getThread = async (
   thread_id: number
-): Promise<PostgrestSingleResponse<ThreadTree>> => {
+): Promise<PostgrestSingleResponse<Thread>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const result = await supabase
-    .from("threads")
-    .select()
-    .eq("thread_id", thread_id)
-    .single();
-  return result;
+  return supabase.from("threads").select().eq("thread_id", thread_id).single();
 };
 
 const getSubThreads = async (
   thread_id: number
-): Promise<PostgrestSingleResponse<ThreadItem[]>> => {
+): Promise<PostgrestSingleResponse<SubThread[]>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
-  const result = await supabase
-    .from("sub_threads")
-    .select()
-    .eq("thread_id", thread_id);
-  return result;
+  return supabase.from("sub_threads").select().eq("thread_id", thread_id);
 };
 
 const getSubThread = async (
   thread_id: number,
   sub_thread_id: number
-): Promise<PostgrestSingleResponse<ThreadItem | null>> => {
+): Promise<PostgrestSingleResponse<SubThread | null>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
   return supabase
@@ -84,7 +75,7 @@ const getSubThread = async (
 const getLikes = async (
   thread_id: number,
   sub_thread_id: number
-): Promise<PostgrestSingleResponse<{ likes: ThreadItem["likes"] } | null>> => {
+): Promise<PostgrestSingleResponse<{ likes: SubThread["likes"] } | null>> => {
   const cookie = cookies();
   const supabase = createClient(cookie);
   return supabase

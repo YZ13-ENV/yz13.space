@@ -21,6 +21,12 @@ const getTeamMember = async (
     .select()
     .eq("username", member)
     .single();
-  return result;
+  return {
+    count: null,
+    data: null,
+    error: null,
+    status: 200,
+    statusText: "",
+  };
 };
 export { getTeamMember, getTeamMembers };
