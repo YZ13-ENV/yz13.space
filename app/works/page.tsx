@@ -5,9 +5,9 @@ import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
 import { Dock } from "../_components/dock"
 import { Header } from "../_components/header"
-import { LeftSide } from "../_components/left"
-import { RightSide } from "../_components/right"
-import { SplitViewContainer } from "../_components/split-view-container"
+import { LeftSide } from "../_components/split-view/left"
+import { RightSide } from "../_components/split-view/right"
+import { SplitViewContainer } from "../_components/split-view/split-view-container"
 import { Works } from "./works"
 
 type Props = {
@@ -26,7 +26,7 @@ const page = async ({ searchParams }: Props) => {
   return (
     <>
       <Dock lang={searchParamLang as Locales | undefined} />
-      <SplitViewContainer className="lg:divide-x lg:divide-y-0 divide-x-0 divide-y">
+      <SplitViewContainer>
         <LeftSide>
           <div className="p-6 space-y-6">
             <div className="w-full">

@@ -1,20 +1,24 @@
 "use client"
-
-import { isDev } from "@/packages/api/src/const"
 import { createClient } from "@/packages/supabase/src/supabase/client"
 import { cn } from "@/packages/ui/lib/utils"
+import { useRouter } from "next/navigation"
+import { getURL } from "./get-url"
 
-const GithubButton = () => {
+type Props = {
+  continue?: string
+}
+const GithubButton = ({ continue: continueLink = "" }: Props) => {
+  const router = useRouter()
   const signInWithGithub = async () => {
-    const callback_url = isDev ? "http://localhost:3000" : "https://www.yz13.space"
+    const continue_flow = continueLink ? `?continue=${continueLink}` : ""
     const sp = createClient()
     const { data, error } = await sp.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: callback_url + "/auth/callback"
+        redirectTo: getURL() + "/auth/callback" + continue_flow
       }
     })
-    console.log(data, error)
+    if (data.url) router.push(data.url)
   }
   return (
     <button

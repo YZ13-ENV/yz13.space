@@ -1,11 +1,11 @@
-import { SubThread, ThreadItem } from "@yz13/api/db/types"
+import { SubThread } from "@yz13/api/db/types"
 import { FourAttachments } from "./four-attachments"
 import { OneAttachment } from "./one-attachemt"
 import { ThreeAttachments } from "./three-attachments"
 import { TwoAttachments } from "./two-attachments"
 
 type Props = {
-  attachments: ThreadItem["attachments"]
+  attachments: SubThread["attachments"]
 }
 
 export type AttachmentsGroupProps = {

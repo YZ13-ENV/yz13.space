@@ -1,6 +1,6 @@
 "use client"
 import { likeSubThread, onSubThread, viewSubThread } from "@yz13/api/db/client-threads"
-import { SubThread } from "@yz13/api/db/types"
+import { FullSubThread, SubThread } from "@yz13/api/db/types"
 import { useLocalStorageState } from "ahooks"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
@@ -9,7 +9,7 @@ import { LikeButton } from "./like-button"
 import { ViewButton } from "./view-button"
 
 type Props = {
-  sub_thread: SubThread
+  sub_thread: FullSubThread
 }
 dayjs.extend(relativeTime)
 const SubThreadStatistics = ({ sub_thread }: Props) => {

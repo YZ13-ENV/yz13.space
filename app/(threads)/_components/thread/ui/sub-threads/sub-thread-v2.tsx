@@ -22,7 +22,7 @@ const SubThreadV2 = ({
   pinned = false,
 }: SubThreadsProps) => {
   const avatar_size = 36
-  const avatars = sub_thread.author.map(author => author.avatar_url)
+  const avatars = sub_thread.author.map(author => author.avatar_url).filter(avatar => avatar !== null)
   const authors = sub_thread.author
   const created_at = dayjs(sub_thread?.created_at).fromNow()
   const hasAttachments = !!sub_thread.attachments.length
@@ -47,7 +47,7 @@ const SubThreadV2 = ({
         </div>
         <div className="w-full flex gap-4 flex-col">
           <Link href={`/threads/${thread_id}`}>
-            <SubThread.Text>{sub_thread.text}</SubThread.Text>
+            <SubThread.Text>{sub_thread.text || ""}</SubThread.Text>
           </Link>
           {
             hasAttachments &&

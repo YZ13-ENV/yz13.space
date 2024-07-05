@@ -3,12 +3,12 @@ import {
   RealtimePostgresChangesPayload,
 } from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/client";
-import { SubThread, ThreadItem } from "./types";
+import { SubThread } from "./types";
 
 const getLikesClient = async (
   thread_id: number,
   sub_thread_id: number
-): Promise<PostgrestSingleResponse<{ likes: ThreadItem["likes"] } | null>> => {
+): Promise<PostgrestSingleResponse<{ likes: SubThread["likes"] } | null>> => {
   const supabase = createClient();
   const result = await supabase
     .from("sub_threads")
@@ -23,7 +23,7 @@ const likeSubThread = async (
   thread_id: number,
   sub_thread_id: number,
   uid: string
-): Promise<PostgrestSingleResponse<ThreadItem | null>> => {
+): Promise<PostgrestSingleResponse<SubThread | null>> => {
   const supabase = createClient();
   const likes_res = await getLikesClient(thread_id, sub_thread_id);
   const likes = likes_res.data ? likes_res.data?.likes : [];
@@ -43,7 +43,7 @@ const likeSubThread = async (
 const getViewsClient = async (
   thread_id: number,
   sub_thread_id: number
-): Promise<PostgrestSingleResponse<{ views: ThreadItem["views"] } | null>> => {
+): Promise<PostgrestSingleResponse<{ views: SubThread["views"] } | null>> => {
   const supabase = createClient();
   const result = await supabase
     .from("sub_threads")
@@ -58,7 +58,7 @@ const viewSubThread = async (
   thread_id: number,
   sub_thread_id: number,
   uid: string
-): Promise<PostgrestSingleResponse<ThreadItem | null>> => {
+): Promise<PostgrestSingleResponse<SubThread | null>> => {
   const supabase = createClient();
   const views_res = await getViewsClient(thread_id, sub_thread_id);
   const views = views_res.data ? views_res.data?.views : [];
@@ -78,12 +78,12 @@ const viewSubThread = async (
 const onSubThreads = (
   channel: string,
   thread_id: number,
-  onPayload: (payload: RealtimePostgresChangesPayload<ThreadItem>) => void
+  onPayload: (payload: RealtimePostgresChangesPayload<SubThread>) => void
 ) => {
   const supabase = createClient();
   const channels = supabase
     .channel(channel)
-    .on<ThreadItem>(
+    .on<SubThread>(
       "postgres_changes",
       {
         event: "*",

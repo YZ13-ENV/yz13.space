@@ -1,6 +1,6 @@
-import { SubThread } from "@/packages/api/src/db/types"
 import { cn } from "@/packages/ui/lib/utils"
-import { Separator } from "@/packages/ui/src/components/separator"
+import { Separator } from "@repo/ui/separator"
+import { FullSubThread } from "@yz13/api/db/types"
 import dayjs from "dayjs"
 import Link from "next/link"
 import { ReactNode } from "react"
@@ -47,7 +47,7 @@ const ThreadLink = ({ id }: { id: string }) => {
 type ListProps = {
   thread_id: number
   className?: string
-  sub_threads?: SubThread[]
+  sub_threads?: FullSubThread[]
   enableLink?: boolean
   forceLine?: boolean
   tag?: string

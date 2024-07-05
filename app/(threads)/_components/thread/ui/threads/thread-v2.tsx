@@ -1,4 +1,4 @@
-import { FullThread, SubThread } from "@yz13/api/db/types"
+import { FullSubThread, FullThread } from "@yz13/api/db/types"
 import { SubThreadV2 } from "../sub-threads/sub-thread-v2"
 import { Thread as ThreadWrapper } from "./thread"
 
@@ -11,7 +11,7 @@ type Props = {
 }
 export type SubThreadsProps = {
   tag?: string
-  sub_thread: SubThread
+  sub_thread: FullSubThread
   pinned?: boolean
   enableLink?: boolean
   className?: string
@@ -24,7 +24,7 @@ const Thread = async ({ thread, max = 0, enableLink = false, className = "", com
   return (
     <ThreadWrapper id={name ? name?.toLowerCase() : String(thread_id)} className={className}>
       <ThreadWrapper.List
-        tag={thread.name}
+        tag={thread.name || "unnamed"}
         enableLink={enableLink}
         thread_id={thread.thread_id}
         sub_threads={sub_threads}

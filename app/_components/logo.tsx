@@ -1,19 +1,12 @@
 "use client"
-import dark from "@/public/redesign/yz-dark.svg"
-import light from "@/public/redesign/yz-light.svg"
-import { useMemo } from "react"
-import { useMediaQuery } from "react-responsive"
 type Props = {
   size?: number
   lang?: string
   withTitle?: boolean
 }
 const Logo = ({ size = 36, lang, withTitle = false }: Props) => {
-  const isPreferDark = useMediaQuery({ query: "(prefers-color-scheme: dark)" })
-  const logo = useMemo(() => { return isPreferDark ? dark : light }, [isPreferDark])
   return (
     <div
-      aria-label={isPreferDark ? "dark" : "light"}
       className="relative flex items-center gap-2"
     >
       <svg className="logo" width={size} height={size} viewBox="0 0 232 128" fill="none" xmlns="http://www.w3.org/2000/svg">

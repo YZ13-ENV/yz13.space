@@ -20,7 +20,7 @@ const ThreadsList = async ({ filter, lang = "en" }: Props) => {
       const onlyText = sub_threads.map(sub_thread => ({
         thread_id: sub_thread.thread_id,
         sub_thread_id: sub_thread.sub_thread_id,
-        text: sub_thread.text.toLowerCase()
+        text: (sub_thread.text || "").toLowerCase()
       }))
       const matched = onlyText.filter(text => filter ? text.text.includes(filter) : text)
       const isInMatch = matched.find(item => {

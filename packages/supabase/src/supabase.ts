@@ -9,87 +9,60 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      page_rank: {
-        Row: {
-          created_at: string;
-          disliked: boolean | null;
-          id: number;
-          liked: boolean | null;
-          path: string | null;
-          uid: string | null;
-        };
-        Insert: {
-          created_at?: string;
-          disliked?: boolean | null;
-          id?: number;
-          liked?: boolean | null;
-          path?: string | null;
-          uid?: string | null;
-        };
-        Update: {
-          created_at?: string;
-          disliked?: boolean | null;
-          id?: number;
-          liked?: boolean | null;
-          path?: string | null;
-          uid?: string | null;
-        };
-        Relationships: [];
-      };
-      real_time_messages: {
+      changelog: {
         Row: {
           created_at: string;
           id: number;
-          text: string | null;
-          uid: string | null;
+          lang: string[];
+          title: string;
         };
         Insert: {
           created_at?: string;
           id?: number;
-          text?: string | null;
-          uid?: string | null;
+          lang?: string[];
+          title: string;
         };
         Update: {
           created_at?: string;
           id?: number;
-          text?: string | null;
-          uid?: string | null;
+          lang?: string[];
+          title?: string;
         };
         Relationships: [];
       };
       sub_threads: {
         Row: {
-          attachments: Json | null;
+          attachments: string[];
           author: string[];
           created_at: string;
           lang: string[];
-          likes: Json | null;
+          likes: string[];
           sub_thread_id: number;
           text: string | null;
           thread_id: number;
-          views: Json | null;
+          views: string[];
         };
         Insert: {
-          attachments?: Json | null;
+          attachments?: string[];
           author?: string[];
           created_at?: string;
           lang?: string[];
-          likes?: Json | null;
+          likes?: string[];
           sub_thread_id?: number;
           text?: string | null;
           thread_id?: number;
-          views?: Json | null;
+          views?: string[];
         };
         Update: {
-          attachments?: Json | null;
+          attachments?: string[];
           author?: string[];
           created_at?: string;
           lang?: string[];
-          likes?: Json | null;
+          likes?: string[];
           sub_thread_id?: number;
           text?: string | null;
           thread_id?: number;
-          views?: Json | null;
+          views?: string[];
         };
         Relationships: [
           {
@@ -140,7 +113,8 @@ export type Database = {
           name: string | null;
           pinned: boolean;
           thread_id: number;
-          threads: number[] | null;
+          threads: number[];
+          lang: string[];
         };
         Insert: {
           created_at?: string;
@@ -148,8 +122,10 @@ export type Database = {
           pinned?: boolean;
           thread_id?: number;
           threads?: number[] | null;
+          lang?: string[];
         };
         Update: {
+          lang?: string[];
           created_at?: string;
           name?: string | null;
           pinned?: boolean;
@@ -176,27 +152,6 @@ export type Database = {
           id?: string;
           image?: string | null;
           name?: string | null;
-        };
-        Relationships: [];
-      };
-      visitors: {
-        Row: {
-          created_at: string;
-          uid: string;
-          updated_at: string | null;
-          username: string | null;
-        };
-        Insert: {
-          created_at?: string;
-          uid?: string;
-          updated_at?: string | null;
-          username?: string | null;
-        };
-        Update: {
-          created_at?: string;
-          uid?: string;
-          updated_at?: string | null;
-          username?: string | null;
         };
         Relationships: [];
       };

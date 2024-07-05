@@ -1,4 +1,4 @@
-import { SubThread as SubThreadType } from "@/packages/api/src/db/types"
+import { FullSubThread } from "@/packages/api/src/db/types"
 import { cn } from "@/packages/ui/lib/utils"
 import { Separator } from "@/packages/ui/src/components/separator"
 import { ReactNode } from "react"
@@ -86,7 +86,7 @@ const SubThreadAuthors = ({
   showPositions = false,
   max = 3
 }: {
-  authors?: SubThreadType["author"],
+  authors?: FullSubThread["author"],
   showPositions?: boolean
   max?: number
 }) => {
