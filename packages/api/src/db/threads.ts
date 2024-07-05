@@ -12,7 +12,7 @@ const getThreads = async (): Promise<PostgrestSingleResponse<Thread[]>> => {
 
 const getFullThreads = async (lang?: string): Promise<FullThread[]> => {
   const url = "https://www.api.yz13.space";
-  const path = "/api/threads";
+  const path = "/threads";
   const fetchURL = new URL(path, url);
   if (lang) fetchURL.searchParams.set("lang", lang);
   try {
@@ -29,7 +29,7 @@ const getFullThreads = async (lang?: string): Promise<FullThread[]> => {
 
 const getFullThread = async (id: number): Promise<FullThread | null> => {
   const url = "https://www.api.yz13.space";
-  const path = `/api/thread/${id}`;
+  const path = `/thread/${id}`;
   try {
     const response = await fetch(url + path, { method: "GET" });
     if (response.ok) {

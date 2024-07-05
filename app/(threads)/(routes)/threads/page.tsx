@@ -1,8 +1,8 @@
 import { Dock } from "@/app/_components/dock";
 import { Header } from "@/app/_components/header";
-import { LeftSide } from "@/app/_components/left";
-import { RightSide } from "@/app/_components/right";
-import { SplitViewContainer } from "@/app/_components/split-view-container";
+import { LeftSide } from "@/app/_components/split-view/left";
+import { RightSide } from "@/app/_components/split-view/right";
+import { SplitViewContainer } from "@/app/_components/split-view/split-view-container";
 import { Locales, getDict, getLocale } from "@/dictionaries/tools";
 import { createClient } from "@/packages/supabase/src/supabase/server";
 import { cookies } from "next/headers";
@@ -72,16 +72,14 @@ const page = async ({ searchParams }: Props) => {
           </div>
         </LeftSide>
         <RightSide>
-          <div className="w-full divide-y">
-            <Header lang={lang} />
-            <Suspense fallback={<Skeleton />}>
-              <ThreadsList filter={filter} lang={lang} />
-            </Suspense>
-            <Suspense fallback={<ContactsSkeleton />}>
-              <Contacts className="p-6" lang={lang} />
-            </Suspense>
-            <Footer className="p-6" />
-          </div>
+          <Header lang={lang} />
+          <Suspense fallback={<Skeleton />}>
+            <ThreadsList filter={filter} lang={lang} />
+          </Suspense>
+          <Suspense fallback={<ContactsSkeleton />}>
+            <Contacts className="p-6" lang={lang} />
+          </Suspense>
+          <Footer className="p-6" />
         </RightSide>
       </SplitViewContainer>
     </>

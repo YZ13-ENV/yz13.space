@@ -149,3 +149,22 @@
   font-size: 10dvw;
   @apply text-secondary hover:text-foreground transition-colors;
 }
+
+.split-view-container {
+  --padding: 16px;
+  @apply lg:flex-row flex-col w-full flex min-h-screen max-w-full bg-yz-neutral-300 p-4 gap-4;
+
+  & .left-view {
+    max-height: calc(100dvh - var(--padding) * 2);
+    @media (min-width: 1280px) {
+      width: calc(50% - var(--padding) / 2);
+    }
+    @apply lg:sticky lg:top-4 rounded-xl bg-background;
+  }
+  & .right-view {
+    @media (min-width: 1280px) {
+      width: calc(50% - var(--padding) / 2);
+    }
+    @apply rounded-xl bg-background;
+  }
+}

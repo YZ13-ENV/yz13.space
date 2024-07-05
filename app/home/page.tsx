@@ -7,9 +7,9 @@ import { Logo } from "../_components/illustration/logo"
 import { Position } from "../_components/illustration/position"
 import { Username } from "../_components/illustration/username"
 import { YLetter } from "../_components/illustration/y-letter"
-import { LeftSide } from "../_components/left"
-import { RightSide } from "../_components/right"
-import { SplitViewContainer } from "../_components/split-view-container"
+import { LeftSide } from "../_components/split-view/left"
+import { RightSide } from "../_components/split-view/right"
+import { SplitViewContainer } from "../_components/split-view/split-view-container"
 import { nav_links } from "../_conts/nav-links"
 
 const metadata: Metadata = {
