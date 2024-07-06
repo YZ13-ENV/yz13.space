@@ -7,7 +7,8 @@ export async function GET(request: Request) {
   const code = searchParams.get("code");
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get("continue") || "/";
-  const nextIsExternalLink = next.startsWith("https://");
+  const nextIsExternalLink =
+    next.startsWith("http://") || next.startsWith("https://");
 
   if (code) {
     const cookieStore = cookies();
