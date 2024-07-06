@@ -10,9 +10,9 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     icons: [
       {
-        src: "/favicon.ico",
+        src: "/yz-light.png",
         sizes: "any",
-        type: "image/x-icon",
+        type: "image/png",
       },
     ],
     shortcuts: [
@@ -21,9 +21,9 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/threads",
         icons: [
           {
-            src: "/favicon.ico",
+            src: "/yz-light.png",
             sizes: "any",
-            type: "image/x-icon",
+            type: "image/png",
             purpose: "any",
           },
         ],
@@ -33,9 +33,9 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/works",
         icons: [
           {
-            src: "/favicon.ico",
+            src: "/yz-light.png",
             sizes: "any",
-            type: "image/x-icon",
+            type: "image/png",
             purpose: "any",
           },
         ],

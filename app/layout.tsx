@@ -57,13 +57,13 @@ const metadata: Metadata = {
         rel: "icon",
         type: "image/png",
         media: '(prefers-color-scheme: light)',
-        url: "/icon-light.png"
+        url: "/yz-light.png"
       },
       {
         rel: "icon",
         type: "image/png",
         media: '(prefers-color-scheme: dark)',
-        url: "/icon-dark.png"
+        url: "/yz-dark.png"
       },
     ]
   },
