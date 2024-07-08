@@ -1,4 +1,7 @@
-import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import {
+  PostgrestResponse,
+  PostgrestSingleResponse,
+} from "@supabase/supabase-js";
 import { createClient } from "@yz13/supabase/server";
 import { cookies } from "next/headers";
 import { FullThread, SubThread, Thread } from "./types";
@@ -10,7 +13,9 @@ const getThreads = async (): Promise<PostgrestSingleResponse<Thread[]>> => {
   return result;
 };
 
-const getFullThreads = async (lang?: string): Promise<FullThread[]> => {
+const getFullThreads = async (
+  lang?: string
+): Promise<PostgrestResponse<FullThread>> => {
   const url = "https://www.api.yz13.space";
   const path = "/threads";
   const fetchURL = new URL(path, url);
@@ -20,14 +25,29 @@ const getFullThreads = async (lang?: string): Promise<FullThread[]> => {
     if (response.ok) {
       const json = await response.json();
       return json;
-    } else return [];
+    } else
+      return {
+        error: null,
+        data: [],
+        count: null,
+        status: 200,
+        statusText: "",
+      };
   } catch (e) {
     console.log(e);
-    return [];
+    return {
+      error: null,
+      data: [],
+      count: null,
+      status: 200,
+      statusText: "",
+    };
   }
 };
 
-const getFullThread = async (id: number): Promise<FullThread | null> => {
+const getFullThread = async (
+  id: number
+): Promise<PostgrestSingleResponse<FullThread | null>> => {
   const url = "https://www.api.yz13.space";
   const path = `/thread/${id}`;
   try {
@@ -35,10 +55,23 @@ const getFullThread = async (id: number): Promise<FullThread | null> => {
     if (response.ok) {
       const json = await response.json();
       return json;
-    } else return null;
+    } else
+      return {
+        error: null,
+        data: null,
+        count: null,
+        status: 200,
+        statusText: "",
+      };
   } catch (e) {
     console.log(e);
-    return null;
+    return {
+      error: null,
+      data: null,
+      count: null,
+      status: 200,
+      statusText: "",
+    };
   }
 };
 
@@ -88,7 +121,8 @@ const getLikes = async (
 
 const otherThreads = async (thread_id: number): Promise<FullThread[]> => {
   const threads = await getFullThreads();
-  return threads.filter((thread) => thread.thread_id !== thread_id);
+  const data = threads.data || [];
+  return data.filter((thread) => thread.thread_id !== thread_id);
 };
 
 export {

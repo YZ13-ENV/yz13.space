@@ -8,7 +8,7 @@ type Props = {
 }
 const ThreadWrapper = async ({ id }: Props) => {
   unstable_noStore()
-  const thread = await getFullThread(id)
+  const thread = (await getFullThread(id)).data
   if (!thread) return null
   return (
     <Thread thread={thread} component={SubThreadV2} />
