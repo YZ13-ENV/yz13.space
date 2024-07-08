@@ -1,5 +1,6 @@
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { get } from "@vercel/edge-config"
+import Image from "next/image"
 import { Suspense } from "react"
 import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
@@ -7,7 +8,6 @@ import { Dock } from "../_components/dock"
 import { Header } from "../_components/header"
 import { LeftSide } from "../_components/split-view/left"
 import { RightSide } from "../_components/split-view/right"
-import { SplitViewContainer } from "../_components/split-view/split-view-container"
 import { Works } from "./works"
 
 type Props = {
@@ -25,12 +25,17 @@ const page = async ({ searchParams }: Props) => {
   const feedbacks = features?.feedbacks || false
   return (
     <>
+      <Image
+        src="/yz-light.png"
+        className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
+        width={36} height={36} alt="logo"
+      />
       <Dock lang={searchParamLang as Locales | undefined} />
-      <SplitViewContainer>
+      <div className="max-w-3xl w-full mx-auto">
         <LeftSide>
           <div className="p-6 space-y-6">
             <div className="w-full">
-              <h1 className="xl:text-9xl lg:text-8xl md:text-7xl text-8xl font-bold">{name}</h1>
+              <h1 className="text-7xl font-bold">{name}</h1>
             </div>
             {
               feedbacks &&
@@ -55,7 +60,7 @@ const page = async ({ searchParams }: Props) => {
             <Footer />
           </div>
         </RightSide>
-      </SplitViewContainer>
+      </div>
     </>
   )
 }

@@ -2,10 +2,10 @@ import { Dock } from "@/app/_components/dock";
 import { Header } from "@/app/_components/header";
 import { LeftSide } from "@/app/_components/split-view/left";
 import { RightSide } from "@/app/_components/split-view/right";
-import { SplitViewContainer } from "@/app/_components/split-view/split-view-container";
 import { Locales, getDict, getLocale } from "@/dictionaries/tools";
 import { createClient } from "@/packages/supabase/src/supabase/server";
 import { cookies } from "next/headers";
+import Image from "next/image";
 import { Suspense } from "react";
 import { Contacts, ContactsSkeleton } from "../../_components/contacts";
 import { Footer } from "../../_components/footer";
@@ -39,6 +39,11 @@ const page = async ({ searchParams }: Props) => {
   const isAdmin = userType === "admin"
   return (
     <>
+      <Image
+        src="/yz-light.png"
+        className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
+        width={36} height={36} alt="logo"
+      />
       {
         (user && isAdmin) &&
         <NewThreadOverlay>
@@ -46,12 +51,12 @@ const page = async ({ searchParams }: Props) => {
         </NewThreadOverlay>
       }
       <Dock />
-      <SplitViewContainer>
+      <div className="max-w-3xl w-full mx-auto">
         <LeftSide>
-          <div className="p-6 xl:h-screen h-fit">
+          <div className="p-6 h-fit">
             <div className="w-full xl:h-1/3 h-fit">
               <div className="w-full">
-                <h1 className="xl:text-9xl lg:text-8xl md:text-7xl text-8xl font-bold">{name}</h1>
+                <h1 className="text-7xl font-bold">{name}</h1>
               </div>
               <div className="w-full h-fit flex gap-3 xl:flex-row py-6 flex-col">
                 <div className="space-y-3 w-full max-w-sm">
@@ -81,7 +86,7 @@ const page = async ({ searchParams }: Props) => {
           </Suspense>
           <Footer className="p-6" />
         </RightSide>
-      </SplitViewContainer>
+      </div>
     </>
   )
 }

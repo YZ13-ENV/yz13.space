@@ -1,4 +1,6 @@
 import { Separator } from "@/packages/ui/src/components/separator"
+import { Button } from "@repo/ui/button"
+import Link from "next/link"
 import { GithubButton } from "./github-button"
 import { GoogleButton } from "./google-button"
 
@@ -6,6 +8,7 @@ type Props = {
   continue?: string
 }
 const UnLogged = ({ continue: continueLink }: Props) => {
+  const signUpLink = "/signup" + (continueLink ? `?continue=${continueLink}` : "")
   return (
     <>
       <h1 className="text-4xl font-bold">Login in to YZ13</h1>
@@ -19,6 +22,11 @@ const UnLogged = ({ continue: continueLink }: Props) => {
         >
           Sign in with Email
         </button>
+        <Button variant="ghost" asChild>
+          <Link href={signUpLink}>
+            Looking for a demo?
+          </Link>
+        </Button>
       </div>
     </>
   )

@@ -25,7 +25,7 @@ const GoogleButton = ({ continue: continueLink = "" }: Props) => {
     <button
       onClick={signInWithGoogle}
       className={cn(
-        "flex items-center justify-center w-full h-12 gap-2 font-medium rounded-xl bg-foreground text-background",
+        "flex items-center justify-center w-full h-12 gap-2 font-medium rounded-xl bg-foreground hover:bg-foreground/70 text-background",
         "hover:bg-foreground/90"
       )}
     >
