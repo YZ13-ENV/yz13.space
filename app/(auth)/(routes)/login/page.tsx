@@ -1,15 +1,12 @@
-import { Nav } from "@/app/_components/nav"
-import { LeftSide } from "@/app/_components/split-view/left"
-import { RightSide } from "@/app/_components/split-view/right"
-import { SplitViewContainer } from "@/app/_components/split-view/split-view-container"
 import { createClient } from "@/packages/supabase/src/supabase/server"
 import { cookies } from "next/headers"
-import Link from "next/link"
+import Image from "next/image"
 import { Logged } from "./logged"
 import { UnLogged } from "./unlogged"
 
 type Props = {
   searchParams: {
+    lang?: string
     continue?: string
   }
 }
@@ -19,25 +16,22 @@ const page = async ({ searchParams }: Props) => {
   const { data: { user } } = await sp.auth.getUser()
   const isLogged = !!user
   const continueLink = searchParams.continue
-  const signUpLink = "/signup" + (continueLink ? `?continue=${continueLink}` : "")
   return (
-    <SplitViewContainer>
-      <LeftSide>
-        <div className="flex relative flex-col items-center justify-center w-full h-screen">
-          {
-            isLogged
-              ? <Logged user={user} />
-              : <UnLogged continue={continueLink} />
-          }
-        </div>
-      </LeftSide>
-      <RightSide>
-        <div className="w-full flex items-center justify-center relative lg:h-screen h-fit">
-          <Nav className="w-full absolute p-6 top-0 left-0" />
-          <Link href={signUpLink} className="text-sm">or create account</Link>
-        </div>
-      </RightSide>
-    </SplitViewContainer>
+    <div className="max-w-3xl w-full mx-auto h-screen">
+      <div className="w-full absolute top-0 left-0 flex justify-center p-6">
+        <Image
+          src="/yz-light.png"
+          width={36} height={36} alt="logo"
+        />
+      </div>
+      <div className="flex relative flex-col items-center h-full justify-center w-full">
+        {
+          isLogged
+            ? <Logged user={user} />
+            : <UnLogged continue={continueLink} />
+        }
+      </div>
+    </div>
   )
 }
 export default page
