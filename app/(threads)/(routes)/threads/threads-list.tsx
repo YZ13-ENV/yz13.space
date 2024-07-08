@@ -14,7 +14,7 @@ const ThreadsList = async ({ filter, lang = "en" }: Props) => {
   unstable_noStore()
   const threadsDict = await getDict<any>("threads", lang)
   const placeholder = threadsDict.list.placeholder
-  const threads = (await getFullThreads(lang))
+  const threads = ((await getFullThreads(lang)).data || [])
     .filter(thread => {
       const sub_threads = thread.threads
       const onlyText = sub_threads.map(sub_thread => ({
