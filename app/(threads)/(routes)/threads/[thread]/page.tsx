@@ -4,8 +4,8 @@ import { Dock } from "@/app/_components/dock"
 import { Header } from "@/app/_components/header"
 import { LeftSide } from "@/app/_components/split-view/left"
 import { RightSide } from "@/app/_components/split-view/right"
-import { SplitViewContainer } from "@/app/_components/split-view/split-view-container"
 import { Locales, getLocale } from "@/dictionaries/tools"
+import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
 import { BiLeftArrowAlt } from "react-icons/bi"
@@ -31,13 +31,18 @@ const page = ({ params, searchParams }: Props) => {
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <>
+      <Image
+        src="/yz-light.png"
+        className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
+        width={36} height={36} alt="logo"
+      />
       <Dock />
-      <SplitViewContainer>
+      <div className="max-w-3xl w-full mx-auto">
         <LeftSide>
-          <div className="p-6 h-screen">
+          <div className="p-6 h-fit">
             <div className="w-full h-1/3">
               <div className="w-full">
-                <h1 className="xl:text-9xl lg:text-8xl md:text-7xl text-8xl font-bold">Blog</h1>
+                <h1 className="text-7xl font-bold">Blog</h1>
               </div>
             </div>
             <Suspense fallback={<ChangelogSkeleton />}>
@@ -68,7 +73,7 @@ const page = ({ params, searchParams }: Props) => {
             <Footer className="p-6" />
           </div>
         </RightSide>
-      </SplitViewContainer>
+      </div>
     </>
   )
 }

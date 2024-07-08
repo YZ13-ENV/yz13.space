@@ -1,5 +1,6 @@
-import { getWorksByType } from "@/packages/api/src/db/works"
-import { getStorageItem } from "@/packages/supabase/src/supabase/storage"
+import { cn } from "@/packages/ui/lib/utils"
+import { getWorksByType } from "@yz13/api/db/works"
+import { getStorageItem } from "@yz13/supabase/storage"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Image from "next/image"
@@ -7,7 +8,7 @@ import Link from "next/link"
 import { LuGlobe } from "react-icons/lu"
 
 dayjs.extend(relativeTime)
-const Works = async () => {
+const Works = async ({ itemClassName = "" }: { itemClassName?: string }) => {
   const list = await getWorksByType("website")
   const websites = (list.data || [])
   return (
@@ -18,7 +19,7 @@ const Works = async () => {
             const link = site.thumbnail
             const thumbnail = link ? getStorageItem(["media", link]) : null
             return (
-              <div key={"site#" + site.id} className="w-full p-4 space-y-4">
+              <div key={"site#" + site.id} className={cn("w-full p-4 space-y-4", itemClassName)}>
                 <div className="w-full aspect-video">
                   <div className="w-full aspect-video relative rounded-xl border overflow-hidden">
                     <div className="w-full aspect-video">
