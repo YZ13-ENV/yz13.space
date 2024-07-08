@@ -37,6 +37,12 @@ const page = async ({ searchParams }: Props) => {
     } else return { ...nav, link: nav.link + (searchParamLang ? `?lang=${searchParamLang}` : "") }
   })
   const contacts = await get<Contact[]>("contacts")
+  const dictionaries = await get<{ [key: string]: any }>("dictionaries")
+  const bannerURL = await get<string | undefined>("home-banner-url")
+  const section = "home"
+  const dict = dictionaries ? dictionaries[lang][section] : (await getDict<any>("home", lang))[section]
+  const title = (dict.title || "")
+  const description = (dict.description || "")
   return (
     <>
       <Image
@@ -48,16 +54,14 @@ const page = async ({ searchParams }: Props) => {
       <div className="max-w-3xl w-full mx-auto p-6">
         <div className="w-full rounded-3xl bg-transparent h-fit flex flex-col sm:flex-row gap-6">
           <div className="sm:w-1/2 w-full h-fit space-y-3">
-            <div className="w-full flex justify-between">
-              <span>About</span>
-              <div className="flex items-center gap-2">
-                {/* <span>1</span> */}
-                {/* <span>2</span> */}
-              </div>
+            <div className="w-full aspect-video rounded-xl relative bg-background border">
+              {
+                bannerURL &&
+                <Image src={bannerURL} className="rounded-xl" fill alt="home-banner" />
+              }
             </div>
-            <div className="w-full aspect-video rounded-xl bg-background border" />
-            <div className="w-full flex flex-col gap-1.5 py-3">
-              <h1 className="text-4xl font-medium">Vladimir/@YZ13</h1>
+            <section className="w-full flex flex-col gap-1.5 py-3">
+              <h1 className="text-4xl font-medium">{title}</h1>
               <div className="w-full flex mt-1 flex-wrap gap-2 items-start">
                 {
                   contacts &&
@@ -78,22 +82,20 @@ const page = async ({ searchParams }: Props) => {
                 }
               </div>
               <div className="w-full mt-3">
-                <p className="text-secondary">
-                  Hello, im a frontend developer. I love create beautiful sites, so check out my works.
-                </p>
+                <p className="text-secondary">{description}</p>
               </div>
-            </div>
+            </section>
             <Separator />
-            <span className="inline-block">Works</span>
             <Suspense fallback={<div className="w-full aspect-video bg-yz-neutral-100 animate-pulse" />}>
               <Works itemClassName="p-0" />
             </Suspense>
           </div>
           <div className="sm:w-1/2 w-full space-y-3 h-fit">
-            <span>Changelog</span>
-            <Suspense fallback={<ChangelogSkeleton />}>
-              <Changelog hideTitle lang={lang} />
-            </Suspense>
+            <section>
+              <Suspense fallback={<ChangelogSkeleton />}>
+                <Changelog lang={lang} />
+              </Suspense>
+            </section>
           </div>
         </div>
       </div>

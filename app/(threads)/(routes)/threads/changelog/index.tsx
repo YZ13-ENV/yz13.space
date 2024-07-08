@@ -14,7 +14,7 @@ const Changelog = async ({ lang: providedLang, hideTitle = false }: { lang?: Loc
     <div className="w-full xl:h-2/3 h-fit space-y-3">
       {
         !hideTitle &&
-        <span className="text-lg font-semibold">{name}</span>
+        <span className="text-lg">{name}</span>
       }
       <ul className="space-y-1.5">
         {
