@@ -1,0 +1,13 @@
+.dynamic-logo {
+  & path {
+    fill: black;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dynamic-logo {
+    & path {
+      fill: white;
+    }
+  }
+}

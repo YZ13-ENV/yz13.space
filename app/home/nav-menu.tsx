@@ -1,6 +1,6 @@
+import { Logo } from "@/components/logo"
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/packages/ui/src/components/navigation-menu"
 import Link from "next/link"
-import { Logo } from "../_components/logo"
 
 type Props = {
   className?: string
@@ -21,7 +21,7 @@ const NavMenu = ({ className = "" }: Props) => {
           <NavigationMenuContent className="p-4 h-fit">
             <div className="relative flex w-full gap-4">
               <div className="absolute flex flex-col items-center justify-center h-full border rounded-lg w-44">
-                <Logo size={48} />
+                <Logo width={48} height={48} />
                 <span className="font-semibold">YZ13</span>
               </div>
               <div className="pl-48 w-fit shrink-0">

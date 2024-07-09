@@ -1,38 +1,26 @@
-import { get } from "@vercel/edge-config";
-import Negotiator from "negotiator";
+import { geolocation } from "@vercel/edge";
 import { NextResponse, type NextRequest } from "next/server";
 
-type Rewrites = {
-  from: string;
-  to: string;
-};
-
-export async function middleware(req: NextRequest) {
-  const cookies = req.cookies;
-  const headers = req.headers;
-  const locales = ["en-US", "ru-RU"];
-  const default_locale = "en-US";
-  let negotiator = new Negotiator({
-    headers: headers as unknown as Negotiator.Headers,
-  });
-  const locale = negotiator.language(locales) || default_locale;
-  const { pathname } = req.nextUrl;
-  const cookiesLocale = cookies.get("locale")?.value;
+export function middleware(request: NextRequest) {
+  const { country } = geolocation(request);
+  const countryCode = country || "en";
+  const cookies = request.cookies;
+  const hasLocaleCookie = cookies.has("locale");
+  const localeCookie = cookies.get("locale");
+  const noMatch = !hasLocaleCookie || localeCookie?.value !== countryCode;
   const response = NextResponse.next();
-  if (!cookiesLocale) response.cookies.set("locale", locale);
-  try {
-    const rewrites = await get<Rewrites[]>("rewrites");
-    const matchedRewrite =
-      rewrites && rewrites.length !== 0
-        ? rewrites.find((item) => item.from === pathname)
-        : undefined;
-    if (matchedRewrite) {
-      return NextResponse.redirect(new URL(matchedRewrite.to, req.url));
-    } else return response;
-  } catch (e) {
-    console.log(e);
+  // write country code as locale -> en, ru, ...etc.
+  if (noMatch) {
+    const isProd = process.env.NODE_ENV === "production";
+    const url = isProd ? ".yz13.space" : "localhost";
+    response.cookies.set("locale", countryCode, {
+      domain: url,
+      secure: isProd,
+      sameSite: "lax",
+    });
     return response;
   }
+  return response;
 }
 
 export const config = {

@@ -5,7 +5,7 @@ const getChangelog = async (
   lang?: string
 ): Promise<APIResponse<ChangelogRecord[]>> => {
   const url = "https://www.api.yz13.space";
-  const path = "/api/changelog";
+  const path = "/changelog";
   const fetchURL = new URL(path, url);
   if (lang) fetchURL.searchParams.set("lang", lang);
   try {
