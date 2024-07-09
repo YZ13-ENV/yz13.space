@@ -1,3 +1,4 @@
+import { Header } from "@/components/header"
 import { getTemplates } from "@/packages/api/src/templates"
 import { Button } from "@/packages/ui/src/components/button"
 import { Input } from "@/packages/ui/src/components/input"
@@ -5,7 +6,6 @@ import { Separator } from "@/packages/ui/src/components/separator"
 import { uniq } from "lodash"
 import Link from "next/link"
 import { BiDollar, BiSearch } from "react-icons/bi"
-import { Header } from "../_components/header"
 
 const page = async () => {
   const templates = await getTemplates()

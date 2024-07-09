@@ -1,3 +1,5 @@
+import { Dock } from "@/components/dock"
+import { Logo } from "@/components/logo"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { Separator } from "@repo/ui/separator"
 import { get } from "@vercel/edge-config"
@@ -8,7 +10,6 @@ import Link from "next/link"
 import { Suspense } from "react"
 import * as bs from "react-icons/bs"
 import { Changelog, ChangelogSkeleton } from "../(threads)/(routes)/threads/changelog"
-import { Dock } from "../_components/dock"
 import { nav_links } from "../_conts/nav-links"
 import { Works } from "../works/works"
 
@@ -45,11 +46,13 @@ const page = async ({ searchParams }: Props) => {
   const description = (dict.description || "")
   return (
     <>
-      <Image
-        src="/yz-light.png"
+      <Logo
+        width={36} height={36}
         className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
-        width={36} height={36} alt="logo"
       />
+      {/* <Overlay> */}
+      {/* <Menu /> */}
+      {/* </Overlay> */}
       <Dock />
       <div className="max-w-3xl w-full mx-auto p-6">
         <div className="w-full rounded-3xl bg-transparent h-fit flex flex-col sm:flex-row gap-6">

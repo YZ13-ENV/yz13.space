@@ -30,13 +30,14 @@ const DockWrapper = ({ children }: Props) => {
   }, [ref])
   return (
     <motion.div
+      layout
       initial={{ width: "36px" }}
       animate={{ width: "fit-content" }}
       // @ts-expect-error
       style={{ "--dock-width": `${width}px` }}
       ref={ref}
       id="dock"
-      className="dock-wrapper">
+      className="dock-wrapper bg-background">
       {
         show &&
         children

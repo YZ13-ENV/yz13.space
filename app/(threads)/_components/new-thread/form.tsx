@@ -2,7 +2,6 @@
 import { cn } from "@/packages/ui/lib/utils"
 import { Button } from "@repo/ui/button"
 import { User } from "@supabase/supabase-js"
-import { cubicBezier, motion } from "framer-motion"
 import Image from "next/image"
 import { useState } from "react"
 import { BiLoaderAlt, BiUpArrowAlt, BiX } from "react-icons/bi"
@@ -12,6 +11,7 @@ import { useNewThreadControl } from "./store/control.store"
 
 type Props = {
   user: User
+  withAnimation?: boolean
 }
 
 const langs = [
@@ -25,12 +25,12 @@ const langs = [
   }
 ]
 
-const NewThreadForm = ({ user }: Props) => {
+const NewThreadForm = ({ user, withAnimation = false }: Props) => {
   const setOpen = useNewThreadControl(state => state.setOpen)
   const metadata = user.user_metadata
   const name = metadata.name
   const avatar_url = metadata.avatar_url
-  const [animated, setAnimated] = useState<boolean>(false)
+  const [animated, setAnimated] = useState<boolean>(!withAnimation)
   const [languages, setLanguages] = useState<string[]>([])
   const [text, setText] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
@@ -62,20 +62,8 @@ const NewThreadForm = ({ user }: Props) => {
     }
   }
   return (
-    <motion.div
-      layout
-      transition={{
-        type: "spring",
-        duration: .750,
-        delay: 0,
-        easings: cubicBezier(.96, .00, .66, 1),
-        bounce: .45
-      }}
-      initial={{ height: "60px" }}
-      animate={{ height: "fit-content", minHeight: "60px" }}
+    <div
       onClick={e => e.stopPropagation()}
-      onAnimationComplete={() => setAnimated(true)}
-      className="max-w-xl border w-full rounded-2xl max-h-full bg-background h-fit"
     >
       {
         animated &&
@@ -130,7 +118,7 @@ const NewThreadForm = ({ user }: Props) => {
           </div>
         </>
       }
-    </motion.div>
+    </div>
   )
 }
 export { NewThreadForm }
