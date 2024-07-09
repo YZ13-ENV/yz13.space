@@ -1,32 +1,67 @@
 "use server";
-import { PostgrestSingleResponse } from "@supabase/supabase-js";
-import { createClient } from "@yz13/supabase/server";
-import { cookies } from "next/headers";
+import {
+  PostgrestResponse,
+  PostgrestSingleResponse,
+} from "@supabase/supabase-js";
 import { TeamMember } from "./types";
 
-const getTeamMembers = async (): Promise<
-  PostgrestSingleResponse<TeamMember[]>
-> => {
-  const cookie = cookies();
-  const supabase = createClient(cookie);
-  return await supabase.from("team_members").select();
+const getTeamMembers = async (): Promise<PostgrestResponse<TeamMember[]>> => {
+  const url = "https://www.api.yz13.space";
+  const path = "/team";
+  const fetchURL = new URL(path, url);
+  try {
+    const response = await fetch(fetchURL.toString(), { method: "GET" });
+    if (response.ok) {
+      const json = await response.json();
+      return json;
+    } else
+      return {
+        count: null,
+        data: [],
+        error: null,
+        status: 400,
+        statusText: "",
+      };
+  } catch (e) {
+    console.log(e);
+    return {
+      count: null,
+      data: [],
+      error: null,
+      status: 400,
+      statusText: "",
+    };
+  }
 };
 const getTeamMember = async (
   member: string
 ): Promise<PostgrestSingleResponse<TeamMember | null>> => {
-  const cookie = cookies();
-  const supabase = createClient(cookie);
-  const result = await supabase
-    .from("team_members")
-    .select()
-    .eq("username", member)
-    .single();
-  return {
-    count: null,
-    data: null,
-    error: null,
-    status: 200,
-    statusText: "",
-  };
+  const url = "https://www.api.yz13.space";
+  const path = "/changelog";
+  const fetchURL = new URL(path, url);
+  fetchURL.searchParams.set("id", member);
+  try {
+    const response = await fetch(fetchURL.toString(), { method: "GET" });
+    if (response.ok) {
+      const json = await response.json();
+      return json;
+    } else
+      return {
+        count: null,
+        data: null,
+        error: null,
+        status: 400,
+        statusText: "",
+      };
+  } catch (e) {
+    console.log(e);
+    return {
+      count: null,
+      data: null,
+      error: null,
+      status: 400,
+      statusText: "",
+    };
+  }
 };
 export { getTeamMember, getTeamMembers };
