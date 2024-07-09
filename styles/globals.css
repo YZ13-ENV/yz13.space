@@ -168,3 +168,18 @@
     @apply rounded-xl bg-background;
   }
 }
+
+.light-mode-thumbnail {
+  display: block;
+}
+.dark-mode-thumbnail {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  .light-mode-thumbnail {
+    display: none;
+  }
+  .dark-mode-thumbnail {
+    display: block;
+  }
+}

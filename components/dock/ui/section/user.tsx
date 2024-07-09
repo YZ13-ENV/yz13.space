@@ -13,7 +13,11 @@ const User = async () => {
   const name = metadata?.name
   const hasAvatar = !!metadata?.avatar_url
   const avatar_url = metadata?.avatar_url
-  if (!user) return null
+  if (!user) return (
+    <div className="w-9 aspect-square flex justify-center items-center">
+      <BiUser size={16} />
+    </div>
+  )
   return (
     <div className="w-9 aspect-square flex justify-center items-center">
       <div

@@ -1,11 +1,11 @@
 import { Dock } from "@/components/dock"
+import { DynamicImage } from "@/components/dynamic-image"
 import { Logo } from "@/components/logo"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { Separator } from "@repo/ui/separator"
 import { get } from "@vercel/edge-config"
 import { Contact } from "@yz13/api/edge/types"
 import { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
 import * as bs from "react-icons/bs"
@@ -39,7 +39,7 @@ const page = async ({ searchParams }: Props) => {
   })
   const contacts = await get<Contact[]>("contacts")
   const dictionaries = await get<{ [key: string]: any }>("dictionaries")
-  const bannerURL = await get<string | undefined>("home-banner-url")
+  const banner = await get<{ dark: string, light: string }>("home-banner")
   const section = "home"
   const dict = dictionaries ? dictionaries[lang][section] : (await getDict<any>("home", lang))[section]
   const title = (dict.title || "")
@@ -59,8 +59,8 @@ const page = async ({ searchParams }: Props) => {
           <div className="sm:w-1/2 w-full h-fit space-y-3">
             <div className="w-full aspect-video rounded-xl relative bg-background border">
               {
-                bannerURL &&
-                <Image src={bannerURL} className="rounded-xl" fill alt="home-banner" />
+                banner &&
+                <DynamicImage image={banner} className="rounded-xl" />
               }
             </div>
             <section className="w-full flex flex-col gap-1.5 py-3">

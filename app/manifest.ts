@@ -13,13 +13,13 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: "/brand/yz-light.svg",
         sizes: "any",
-        type: "image/xml+svg",
+        type: "image/svg+xml",
         purpose: "any",
       },
       {
         src: "/brand/yz-dark.svg",
         sizes: "any",
-        type: "image/xml+svg",
+        type: "image/svg+xml",
         purpose: "any",
       },
     ],
@@ -31,7 +31,7 @@ export default function manifest(): MetadataRoute.Manifest {
           {
             src: "/brand/yz-light.svg",
             sizes: "any",
-            type: "image/xml+svg",
+            type: "image/svg+xml",
             purpose: "any",
           },
         ],
@@ -43,7 +43,7 @@ export default function manifest(): MetadataRoute.Manifest {
           {
             src: "/brand/yz-dark.svg",
             sizes: "any",
-            type: "image/xml+svg",
+            type: "image/svg+xml",
             purpose: "any",
           },
         ],
