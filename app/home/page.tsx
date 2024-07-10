@@ -1,17 +1,14 @@
 import { Dock } from "@/components/dock"
-import { DynamicImage } from "@/components/dynamic-image"
 import { Logo } from "@/components/logo"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { Separator } from "@repo/ui/separator"
 import { get } from "@vercel/edge-config"
-import { Contact } from "@yz13/api/edge/types"
 import { Metadata } from "next"
-import Link from "next/link"
 import { Suspense } from "react"
-import * as bs from "react-icons/bs"
 import { Changelog, ChangelogSkeleton } from "../(threads)/(routes)/threads/changelog"
-import { nav_links } from "../_conts/nav-links"
 import { Works } from "../works/works"
+import { Banner, BannerSkeleton } from "./banner"
+import { Contacts, ContactsSkeleton } from "./contacts"
 
 const metadata: Metadata = {
   title: "YZ13 - "
@@ -26,20 +23,7 @@ const page = async ({ searchParams }: Props) => {
   const searchParamLang = searchParams.lang
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
-  const navDict = await getDict("nav", lang) as { labels: { label: string, link: string }[] }
-  const local_nav_links = nav_links.map(nav => {
-    const target = navDict.labels.find(item => item.link === nav.link)
-    if (target) {
-      return {
-        ...nav,
-        link: nav.link + (searchParamLang ? `?lang=${searchParamLang}` : ""),
-        label: target.label
-      }
-    } else return { ...nav, link: nav.link + (searchParamLang ? `?lang=${searchParamLang}` : "") }
-  })
-  const contacts = await get<Contact[]>("contacts")
   const dictionaries = await get<{ [key: string]: any }>("dictionaries")
-  const banner = await get<{ dark: string, light: string }>("home-banner")
   const section = "home"
   const dict = dictionaries ? dictionaries[lang][section] : (await getDict<any>("home", lang))[section]
   const title = (dict.title || "")
@@ -57,39 +41,22 @@ const page = async ({ searchParams }: Props) => {
       <div className="max-w-3xl w-full mx-auto p-6">
         <div className="w-full rounded-3xl bg-transparent h-fit flex flex-col sm:flex-row gap-6">
           <div className="sm:w-1/2 w-full h-fit space-y-3">
-            <div className="w-full aspect-video rounded-xl relative bg-background border">
-              {
-                banner &&
-                <DynamicImage image={banner} className="rounded-xl" />
-              }
-            </div>
+            <Suspense fallback={<BannerSkeleton />}>
+              <Banner />
+            </Suspense>
             <section className="w-full flex flex-col gap-1.5 py-3">
               <h1 className="text-4xl font-medium">{title}</h1>
               <div className="w-full flex mt-1 flex-wrap gap-2 items-start">
-                {
-                  contacts &&
-                  contacts.map(contact => {
-                    // @ts-ignore
-                    const icon = (bs[contact.icon as keyof bs] as IconType)({ size: 14 })
-                    return (
-                      <Link key={`with-icon-${contact.value_label}`}
-                        href={contact.value}
-                        className="flex w-fit px-2 py-1 rounded-full border bg-background items-center justify-start gap-2"
-                      >
-                        {icon}
-                        <span className="text-xs">{contact.label}</span>
-                      </Link>
-                    )
-                  }
-                  )
-                }
+                <Suspense fallback={<ContactsSkeleton />}>
+                  <Contacts />
+                </Suspense>
               </div>
               <div className="w-full mt-3">
                 <p className="text-secondary">{description}</p>
               </div>
             </section>
             <Separator />
-            <Suspense fallback={<div className="w-full aspect-video bg-yz-neutral-100 animate-pulse" />}>
+            <Suspense fallback={<div className="w-full aspect-video bg-yz-neutral-300 rounded-xl animate-pulse" />}>
               <Works itemClassName="p-0" />
             </Suspense>
           </div>

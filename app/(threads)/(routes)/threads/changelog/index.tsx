@@ -8,6 +8,11 @@ const Changelog = async ({ lang: providedLang, hideTitle = false }: { lang?: Loc
   const lang = providedLang ? providedLang : locale
   const changelogs = await getChangelog(lang)
   const logs = (changelogs.data || [])
+    .sort((a, b) => {
+      const a_date = dayjs(a.created_at)
+      const b_date = dayjs(b.created_at)
+      return b_date.diff(a_date)
+    })
   const changelogDict = await getDict<any>("changelog", lang)
   const name = changelogDict.name
   return (

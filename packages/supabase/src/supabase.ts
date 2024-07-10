@@ -110,27 +110,27 @@ export type Database = {
       threads: {
         Row: {
           created_at: string;
+          lang: string[];
           name: string | null;
           pinned: boolean;
           thread_id: number;
           threads: number[];
-          lang: string[];
         };
         Insert: {
           created_at?: string;
+          lang?: string[];
           name?: string | null;
           pinned?: boolean;
           thread_id?: number;
-          threads?: number[] | null;
-          lang?: string[];
+          threads?: number[];
         };
         Update: {
-          lang?: string[];
           created_at?: string;
+          lang?: string[];
           name?: string | null;
           pinned?: boolean;
           thread_id?: number;
-          threads?: number[] | null;
+          threads?: number[];
         };
         Relationships: [];
       };
@@ -162,7 +162,7 @@ export type Database = {
           id: number;
           link: string | null;
           name: string | null;
-          thumbnail: string | null;
+          thumbnail: Json;
           type: string;
         };
         Insert: {
@@ -171,7 +171,7 @@ export type Database = {
           id?: number;
           link?: string | null;
           name?: string | null;
-          thumbnail?: string | null;
+          thumbnail?: Json;
           type?: string;
         };
         Update: {
@@ -180,7 +180,7 @@ export type Database = {
           id?: number;
           link?: string | null;
           name?: string | null;
-          thumbnail?: string | null;
+          thumbnail?: Json;
           type?: string;
         };
         Relationships: [];

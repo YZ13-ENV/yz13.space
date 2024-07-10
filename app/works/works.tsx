@@ -1,9 +1,9 @@
+import { DynamicImage } from "@/components/dynamic-image"
 import { cn } from "@/packages/ui/lib/utils"
 import { getWorksByType } from "@yz13/api/db/works"
 import { getStorageItem } from "@yz13/supabase/storage"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import Image from "next/image"
 import Link from "next/link"
 import { LuGlobe } from "react-icons/lu"
 
@@ -16,16 +16,21 @@ const Works = async ({ itemClassName = "" }: { itemClassName?: string }) => {
       {
         websites.map(
           site => {
-            const link = site.thumbnail
-            const thumbnail = link ? getStorageItem(["media", link]) : null
+            const thumb = site.thumbnail as { dark: string, light: string }
+            const dark = getStorageItem(["media", thumb?.dark])
+            const light = getStorageItem(["media", thumb?.light])
+            const thumbnail = {
+              dark: dark,
+              light: light
+            }
             return (
               <div key={"site#" + site.id} className={cn("w-full p-4 space-y-4", itemClassName)}>
                 <div className="w-full aspect-video">
                   <div className="w-full aspect-video relative rounded-xl border overflow-hidden">
-                    <div className="w-full aspect-video">
+                    <div className="relative w-full aspect-video">
                       {
                         thumbnail &&
-                        <Image className="w-full aspect-video" src={thumbnail} width={900} height={600} alt="website-thumbnail" />
+                        <DynamicImage image={thumbnail} className="object-fill" />
                       }
                     </div>
                   </div>
