@@ -18,7 +18,7 @@ const SignOut = ({ children }: Props) => {
     router.refresh()
   }
   return (
-    <CommandItem className="hover:bg-yz-neutral-50 rounded-lg justify-start font-normal cursor-pointer" asChild>
+    <CommandItem className="hover:bg-yz-neutral-100 rounded-lg justify-start font-normal cursor-pointer" asChild>
       <Button onClick={() => {
         console.log("sign-out")
         getSignOut()

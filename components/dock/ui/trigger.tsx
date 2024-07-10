@@ -12,7 +12,7 @@ const Trigger = ({ children, content, className = '' }: TriggerProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon">{children}</Button>
+        <Button variant="ghost" size="icon" className="rounded-full">{children}</Button>
       </PopoverTrigger>
       <PopoverContent sideOffset={24} className={cn("p-0 shadow-none border-0 w-[32rem]", className)}>
         {content}

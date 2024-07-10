@@ -37,7 +37,7 @@ const DockWrapper = ({ children }: Props) => {
       style={{ "--dock-width": `${width}px` }}
       ref={ref}
       id="dock"
-      className="dock-wrapper bg-background">
+      className="dock-wrapper rounded-full bg-background">
       {
         show &&
         children
