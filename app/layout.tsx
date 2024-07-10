@@ -50,20 +50,33 @@ const metadata: Metadata = {
     yandex: "294dbd367a5afd6b"
   },
   robots: { index: true, follow: true },
-  keywords: ["frontend", "web-developer", "developer", "yz13", "yz", "yz13 lab", "yz13 space", "it", "ui", "design", "разработчик", "фронтенд"],
+  keywords: [
+    "frontend",
+    "web-developer",
+    "developer",
+    "yz13",
+    "yz",
+    "yz13 lab",
+    "yz13 space",
+    "it",
+    "ui",
+    "design",
+    "разработчик",
+    "фронтенд"
+  ],
   icons: {
     icon: [
       {
         rel: "icon",
         type: "image/png",
         media: '(prefers-color-scheme: light)',
-        url: "/yz-light.png"
+        url: "/brand/yz-light.svg"
       },
       {
         rel: "icon",
         type: "image/png",
         media: '(prefers-color-scheme: dark)',
-        url: "/yz-dark.png"
+        url: "/brand/yz-dark.svg"
       },
     ]
   },

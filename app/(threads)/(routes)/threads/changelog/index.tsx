@@ -1,6 +1,9 @@
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
-import { getChangelog } from "@/packages/api/src/db/changelog"
+import { cn } from "@repo/ui/cn"
+import { getChangelog } from "@yz13/api/db/changelog"
 import dayjs from "dayjs"
+import "dayjs/locale/en"
+import "dayjs/locale/ru"
 
 
 const Changelog = async ({ lang: providedLang, hideTitle = false }: { lang?: Locales, hideTitle?: boolean }) => {
@@ -24,11 +27,19 @@ const Changelog = async ({ lang: providedLang, hideTitle = false }: { lang?: Loc
       <ul className="space-y-1.5">
         {
           logs.map(changelog => {
-            const created_at = dayjs(changelog.created_at).format("DD MMMM, HH:mm")
-            return <li key={`changelog#${changelog.id}`} className="w-full h-9">
-              <button className="w-full h-full flex gap-2 items-center rounded-lg transition-all">
-                <span className="xl:text-base text-sm text-secondary shrink-0">{created_at}</span>
-                <span className="xl:text-base text-start text-sm line-clamp-1">{changelog.title}</span>
+            const created_at = dayjs(changelog.created_at).locale(lang).format("DD MMMM, HH:mm")
+            return <li key={`changelog#${changelog.id}`} className="w-full group h-9">
+              <button className="w-full h-full transition-all">
+                <span className="xl:text-base w-full text-sm text-secondary text-left float-left space-x-2 shrink-0">
+                  <span className="inline">{created_at}</span>
+                  <span
+                    className={cn(
+                      "xl:text-base text-start text-sm group-hover:text-foreground transition-colors"
+                    )}
+                  >
+                    {changelog.title}
+                  </span>
+                </span>
               </button>
             </li>
           }

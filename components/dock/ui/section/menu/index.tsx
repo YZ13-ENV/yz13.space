@@ -36,7 +36,7 @@ const Menu = async ({ className = "", lang: provided_lang }: { className?: strin
   const auth_button = await getDict<{ signout: string, profile: string, login: string, signup: string }>("auth-buttons", lang)
   return (
     <div
-      className="rounded-xl p-0 border-yz-neutral-300 bg-yz-neutral-100 !border shadow-sm"
+      className="rounded-xl p-0 border-yz-neutral-300 bg-background !border shadow-sm"
     >
       <Command className="">
         <CommandInput disabled placeholder={menuSearch} />
@@ -48,7 +48,7 @@ const Menu = async ({ className = "", lang: provided_lang }: { className?: strin
               local_nav_links.map(nav =>
                 <CommandItem
                   key={`command-${nav.link}`}
-                  className="gap-2 cursor-pointer hover:bg-yz-neutral-50 rounded-lg"
+                  className="gap-2 cursor-pointer hover:bg-yz-neutral-100 rounded-lg"
                   asChild
                 >
                   <Link href={nav.link}>
@@ -68,13 +68,13 @@ const Menu = async ({ className = "", lang: provided_lang }: { className?: strin
               </CommandGroup>
               :
               <CommandGroup heading={menuProfileName}>
-                <CommandItem className="hover:bg-yz-neutral-50 rounded-lg cursor-pointer" asChild>
+                <CommandItem className="hover:bg-yz-neutral-100 rounded-lg cursor-pointer" asChild>
                   <Link href="/login">
                     <LuLogIn className="mr-2 h-4 w-4" />
                     <span>{auth_button.login}</span>
                   </Link>
                 </CommandItem>
-                <CommandItem className="hover:bg-yz-neutral-50 rounded-lg cursor-pointer" asChild>
+                <CommandItem className="hover:bg-yz-neutral-100 rounded-lg cursor-pointer" asChild>
                   <Link href="/signup">
                     <LuUserPlus className="mr-2 h-4 w-4" />
                     <span>{auth_button.signup}</span>

@@ -1,4 +1,6 @@
 import { Dock } from "@/components/dock"
+import { ExperienceList } from "@/components/experience"
+import { ExperienceListSkeleton } from "@/components/experience/ui/skeleton"
 import { Logo } from "@/components/logo"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { Separator } from "@repo/ui/separator"
@@ -55,8 +57,16 @@ const page = async ({ searchParams }: Props) => {
                 <p className="text-secondary">{description}</p>
               </div>
             </section>
+            <Suspense fallback={<ExperienceListSkeleton />}>
+              <ExperienceList lang={lang} />
+            </Suspense>
             <Separator />
-            <Suspense fallback={<div className="w-full aspect-video bg-yz-neutral-300 rounded-xl animate-pulse" />}>
+            <Suspense fallback={
+              <div className="w-full space-y-4">
+                <div className="w-full aspect-video bg-yz-neutral-300 rounded-xl animate-pulse" />
+                <div className="w-full h-9 rounded-xl bg-yz-neutral-300 animate-pulse" />
+              </div>
+            }>
               <Works itemClassName="p-0" />
             </Suspense>
           </div>

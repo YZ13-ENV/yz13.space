@@ -30,6 +30,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      experience: {
+        Row: {
+          created_at: string;
+          description: string | null;
+          from: string;
+          id: number;
+          lang: string[];
+          name: string;
+          not_ended: boolean;
+          to: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          description?: string | null;
+          from: string;
+          id?: number;
+          lang?: string[];
+          name?: string;
+          not_ended?: boolean;
+          to?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          description?: string | null;
+          from?: string;
+          id?: number;
+          lang?: string[];
+          name?: string;
+          not_ended?: boolean;
+          to?: string | null;
+        };
+        Relationships: [];
+      };
       sub_threads: {
         Row: {
           attachments: string[];

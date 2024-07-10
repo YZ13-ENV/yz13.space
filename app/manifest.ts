@@ -11,15 +11,15 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     icons: [
       {
-        src: "/brand/yz-light.svg",
+        src: "/brand/yz-light-128.png",
         sizes: "any",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "any",
       },
       {
-        src: "/brand/yz-dark.svg",
+        src: "/brand/yz-dark-128.png",
         sizes: "any",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "any",
       },
     ],
@@ -29,9 +29,15 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/threads",
         icons: [
           {
-            src: "/brand/yz-light.svg",
+            src: "/brand/yz-light-32.png",
             sizes: "any",
-            type: "image/svg+xml",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/brand/yz-dark-32.png",
+            sizes: "any",
+            type: "image/png",
             purpose: "any",
           },
         ],
@@ -41,9 +47,15 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/works",
         icons: [
           {
-            src: "/brand/yz-dark.svg",
+            src: "/brand/yz-light-32.png",
             sizes: "any",
-            type: "image/svg+xml",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/brand/yz-dark-32.png",
+            sizes: "any",
+            type: "image/png",
             purpose: "any",
           },
         ],
