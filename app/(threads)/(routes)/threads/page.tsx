@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { Contacts, ContactsSkeleton } from "../../_components/contacts";
 import { Footer } from "../../_components/footer";
+import { AnimatedWrapper } from "../../_components/new-thread/animated-wrapper";
 import { NewThreadForm } from "../../_components/new-thread/form";
 import { NewThreadTrigger } from "../../_components/new-thread/new-thread-trigger";
 import { NewThreadOverlay } from "../../_components/new-thread/overlay";
@@ -44,7 +45,9 @@ const page = async ({ searchParams }: Props) => {
       {
         (user && isAdmin) &&
         <NewThreadOverlay>
-          <NewThreadForm user={user} />
+          <AnimatedWrapper>
+            <NewThreadForm user={user} />
+          </AnimatedWrapper>
         </NewThreadOverlay>
       }
       <Dock />

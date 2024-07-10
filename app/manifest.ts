@@ -16,12 +16,6 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png",
         purpose: "any",
       },
-      {
-        src: "/brand/yz-dark-128.png",
-        sizes: "any",
-        type: "image/png",
-        purpose: "any",
-      },
     ],
     shortcuts: [
       {
@@ -34,12 +28,6 @@ export default function manifest(): MetadataRoute.Manifest {
             type: "image/png",
             purpose: "any",
           },
-          {
-            src: "/brand/yz-dark-32.png",
-            sizes: "any",
-            type: "image/png",
-            purpose: "any",
-          },
         ],
       },
       {
@@ -48,12 +36,6 @@ export default function manifest(): MetadataRoute.Manifest {
         icons: [
           {
             src: "/brand/yz-light-32.png",
-            sizes: "any",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "/brand/yz-dark-32.png",
             sizes: "any",
             type: "image/png",
             purpose: "any",
