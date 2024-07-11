@@ -6,18 +6,11 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "YZ13",
     background_color: "#fff",
     description: "Developers website",
-    display_override: ["minimal-ui", "browser", "standalone"],
     start_url: "/",
     display: "standalone",
     icons: [
       {
         src: "/brand/yz-light-128.png",
-        sizes: "any",
-        type: "image/png",
-        purpose: "any",
-      },
-      {
-        src: "/brand/yz-dark-128.png",
         sizes: "any",
         type: "image/png",
         purpose: "any",
@@ -34,12 +27,6 @@ export default function manifest(): MetadataRoute.Manifest {
             type: "image/png",
             purpose: "any",
           },
-          {
-            src: "/brand/yz-dark-32.png",
-            sizes: "any",
-            type: "image/png",
-            purpose: "any",
-          },
         ],
       },
       {
@@ -48,12 +35,6 @@ export default function manifest(): MetadataRoute.Manifest {
         icons: [
           {
             src: "/brand/yz-light-32.png",
-            sizes: "any",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "/brand/yz-dark-32.png",
             sizes: "any",
             type: "image/png",
             purpose: "any",

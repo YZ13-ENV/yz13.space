@@ -59,7 +59,7 @@ const SubThreadAvatars = ({
           (avatar, i) =>
             <img
               key={avatar + "-" + i}
-              className="aspect-square shrink-0 inline-block rounded-full border-2 border-background bg-accents-2"
+              className="aspect-square shrink-0 inline-block rounded-full border-2 border-yz-neutral-100 bg-yz-neutral-300"
               src={avatar}
               width={size} height={size}
               alt="author-photo"

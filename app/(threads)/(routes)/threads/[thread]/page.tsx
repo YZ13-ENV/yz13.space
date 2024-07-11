@@ -3,7 +3,10 @@ import { Footer } from "@/app/(threads)/_components/footer"
 import { Dock } from "@/components/dock"
 import { Header } from "@/components/header"
 import { Logo } from "@/components/logo"
+import { metadata as layoutMetadata } from "@/const/metadata"
 import { Locales, getLocale } from "@/dictionaries/tools"
+import { getFullThread } from "@yz13/api/db/threads"
+import { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 import { BiLeftArrowAlt } from "react-icons/bi"
@@ -22,6 +25,18 @@ type Props = {
   }
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = parseInt(params.thread)
+  const thread = (await getFullThread(id)).data
+  const name = thread?.name || "Thread"
+  if (!thread) return layoutMetadata
+  return {
+    ...layoutMetadata,
+    title: name,
+    description: `There is all posts on ${name} thread`
+  }
+}
+
 const page = ({ params, searchParams }: Props) => {
   const thread_id = parseInt(params.thread)
   const searchParamLang = searchParams.lang
@@ -29,18 +44,15 @@ const page = ({ params, searchParams }: Props) => {
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <>
-      <Logo
-        width={36} height={36}
-        className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
-      />
+      <Link href="/threads">
+        <Logo
+          width={36} height={36}
+          className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
+        />
+      </Link>
       <Dock />
       <div className="max-w-3xl w-full mx-auto">
         <div className="p-6 h-fit">
-          <div className="w-full h-1/3">
-            <div className="w-full">
-              <h1 className="text-7xl font-bold">Blog</h1>
-            </div>
-          </div>
           <Suspense fallback={<ChangelogSkeleton />}>
             <Changelog lang={lang} />
           </Suspense>

@@ -1,12 +1,21 @@
 import { Dock } from "@/components/dock"
 import { Header } from "@/components/header"
 import { Logo } from "@/components/logo"
+import { metadata as layoutMetadata } from "@/const/metadata"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { get } from "@vercel/edge-config"
+import { Metadata } from "next"
+import Link from "next/link"
 import { Suspense } from "react"
 import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
 import { Works } from "./works"
+
+export const metadata: Metadata = {
+  ...layoutMetadata,
+  title: "Works",
+  description: "Explore my works, hope yoy like some of them"
+}
 
 type Props = {
   searchParams: {
@@ -23,28 +32,14 @@ const page = async ({ searchParams }: Props) => {
   const feedbacks = features?.feedbacks || false
   return (
     <>
-      <Logo
-        width={36} height={36}
-        className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
-      />
+      <Link href="/home">
+        <Logo
+          width={36} height={36}
+          className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
+        />
+      </Link>
       <Dock lang={searchParamLang as Locales | undefined} />
       <div className="max-w-3xl w-full mx-auto">
-        <div className="p-6 space-y-6">
-          <div className="w-full">
-            <h1 className="text-7xl font-bold">{name}</h1>
-          </div>
-          {
-            feedbacks &&
-            <div className="w-full h-64 rounded-xl border p-6">
-              <div style={{ height: "calc(100% - 36px)" }} className="w-full h-full">
-                <span className="text-4xl font-semibold text-foreground">...</span>
-              </div>
-              <div className="w-full h-9 flex justify-end">
-                <div className="w-9 aspect-square rounded-full bg-yz-neutral-100" />
-              </div>
-            </div>
-          }
-        </div>
         <Header lang={lang} />
         <Suspense fallback={<div className="w-full aspect-video bg-yz-neutral-100 animate-pulse" />}>
           <Works />

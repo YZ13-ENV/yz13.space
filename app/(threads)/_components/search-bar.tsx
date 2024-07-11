@@ -14,7 +14,7 @@ const SearchBar = ({ placeholder = "" }: { placeholder?: string }) => {
   useDebounceEffect(() => {
     const params = searchParams.toString()
     const hasFilter = searchParams.has("filter")
-    console.log(hasFilter, text)
+    // console.log(hasFilter, text)
     if (hasFilter) {
       const oldFilter = `filter=${searchParams.get("filter")}`
       console.log(params, oldFilter, params.replace(oldFilter, ""))
@@ -40,7 +40,7 @@ const SearchBar = ({ placeholder = "" }: { placeholder?: string }) => {
       </div>
       <Input
         placeholder={placeholder}
-        className="rounded-lg pl-9"
+        className="rounded-lg pl-9 bg-background"
         value={text}
         onChange={e => setText(e.target.value)}
       />
