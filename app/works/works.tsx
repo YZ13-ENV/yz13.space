@@ -30,7 +30,7 @@ const Works = async ({ itemClassName = "" }: { itemClassName?: string }) => {
                     <div className="relative w-full aspect-video">
                       {
                         thumbnail &&
-                        <DynamicImage image={thumbnail} className="object-fill" />
+                        <DynamicImage image={thumbnail} className="object-fill" alt="works-dynamic-image" />
                       }
                     </div>
                   </div>
