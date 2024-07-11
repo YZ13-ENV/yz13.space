@@ -1,6 +1,7 @@
 import { Dock } from "@/components/dock";
 import { Header } from "@/components/header";
 import { Logo } from "@/components/logo";
+import { metadata as layoutMetadata } from "@/const/metadata";
 import { Locales, getDict, getLocale } from "@/dictionaries/tools";
 import { createClient } from "@/packages/supabase/src/supabase/server";
 import { Metadata } from "next";
@@ -26,7 +27,9 @@ type Props = {
 }
 
 export const metadata: Metadata = {
-  title: "Threads"
+  ...layoutMetadata,
+  title: "Threads",
+  description: "See all threads"
 }
 
 const page = async ({ searchParams }: Props) => {

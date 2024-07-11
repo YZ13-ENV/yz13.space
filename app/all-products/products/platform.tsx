@@ -1,21 +1,7 @@
-import { IconType } from "react-icons/lib"
 import { LuCircleDollarSign, LuPencil, LuShoppingCart } from "react-icons/lu"
+import { ProductsSection } from "./types"
 
-type ProductStatus = "in-dev" | "in-plans" | "in-beta" | "public"
 
-export type Product = {
-  category: string
-  status: ProductStatus
-  icon: IconType
-  name: string
-  description: string
-}
-
-export type ProductsSection = {
-  name: string
-  category: string
-  products: Product[]
-}
 
 export const platform: ProductsSection = {
   name: "Platform",

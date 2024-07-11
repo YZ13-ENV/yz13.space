@@ -46,7 +46,7 @@ const page = async () => {
     return (
       <li key={deployment.uid} className="w-full group cursor-pointer">
         <div
-          className="w-full p-3 flex flex-col gap-1.5 bg-background first:rounded-t-2xl last:rounded-b-2xl justify-between"
+          className="w-full p-3 flex flex-col gap-1.5 bg-background border rounded-2xl justify-between"
         >
           <div className="flex w-full justify-between items-center">
             <span className="text-sm line-clamp-1 font-medium group-hover:text-foreground transition-colors">
@@ -93,8 +93,8 @@ const page = async () => {
           Deployments performance
         </h1>
       </div>
-      <div className="w-full border rounded-2xl">
-        <ul className="w-full divide-y">
+      <div className="w-full">
+        <ul className="w-full space-y-2">
           {
             deployments.map((deployment, index, arr) => {
               const isLast = arr.length === (index + 1)

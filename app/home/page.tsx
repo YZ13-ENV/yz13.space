@@ -1,19 +1,21 @@
-import { Dock } from "@/components/dock"
-import { ExperienceList } from "@/components/experience"
-import { ExperienceListSkeleton } from "@/components/experience/ui/skeleton"
-import { Logo } from "@/components/logo"
-import { Locales, getDict, getLocale } from "@/dictionaries/tools"
-import { Separator } from "@repo/ui/separator"
-import { get } from "@vercel/edge-config"
-import { Metadata } from "next"
-import { Suspense } from "react"
-import { Changelog, ChangelogSkeleton } from "../(threads)/(routes)/threads/changelog"
-import { Works } from "../works/works"
-import { Banner, BannerSkeleton } from "./banner"
-import { Contacts, ContactsSkeleton } from "./contacts"
+import { Dock } from "@/components/dock";
+import { ExperienceList } from "@/components/experience";
+import { ExperienceListSkeleton } from "@/components/experience/ui/skeleton";
+import { Logo } from "@/components/logo";
+import { metadata as layoutMetadata } from "@/const/metadata";
+import { Locales, getDict, getLocale } from "@/dictionaries/tools";
+import { Separator } from "@repo/ui/separator";
+import { get } from "@vercel/edge-config";
+import { Metadata } from "next";
+import { Suspense } from "react";
+import { Changelog, ChangelogSkeleton } from "../(threads)/(routes)/threads/changelog";
+import { Works } from "../works/works";
+import { Banner, BannerSkeleton } from "./banner";
+import { Contacts, ContactsSkeleton } from "./contacts";
 
-const metadata: Metadata = {
-  title: "YZ13 - "
+export const metadata: Metadata = {
+  ...layoutMetadata,
+  title: "Home"
 }
 
 type Props = {

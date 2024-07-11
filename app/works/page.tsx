@@ -1,13 +1,21 @@
 import { Dock } from "@/components/dock"
 import { Header } from "@/components/header"
 import { Logo } from "@/components/logo"
+import { metadata as layoutMetadata } from "@/const/metadata"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { get } from "@vercel/edge-config"
+import { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 import { Contacts } from "../(threads)/_components/contacts"
 import { Footer } from "../(threads)/_components/footer"
 import { Works } from "./works"
+
+export const metadata: Metadata = {
+  ...layoutMetadata,
+  title: "Works",
+  description: "Explore my works, hope yoy like some of them"
+}
 
 type Props = {
   searchParams: {
