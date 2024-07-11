@@ -1,5 +1,5 @@
 import { cn } from "@repo/ui/cn"
-import Image from "next/image"
+import Image, { ImageProps } from "next/image"
 
 
 type DynamicImageProps = {
@@ -9,8 +9,8 @@ type DynamicImageProps = {
   }
   alt?: string
   className?: string
-}
-const DynamicImage = async ({ image, alt = "", className }: DynamicImageProps) => {
+} & Omit<ImageProps, "src">
+const DynamicImage = async ({ image, alt = "", className, ...props }: DynamicImageProps) => {
   const { dark, light } = image
   const getBASE64 = async (url: string): Promise<`data:image/${string}`> => {
     const res = await fetch(url, { method: "GET" })
@@ -23,6 +23,7 @@ const DynamicImage = async ({ image, alt = "", className }: DynamicImageProps) =
   return (
     <>
       <Image
+        {...props}
         src={dark}
         placeholder={darkPlaceholder}
         className={cn("dark-mode-thumbnail", className)}
@@ -30,6 +31,7 @@ const DynamicImage = async ({ image, alt = "", className }: DynamicImageProps) =
         alt={alt || "dark-img"}
       />
       <Image
+        {...props}
         src={light}
         placeholder={lightPlaceholder}
         className={cn("light-mode-thumbnail", className)}
