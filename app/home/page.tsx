@@ -31,17 +31,17 @@ const page = async ({ searchParams }: Props) => {
   const section = "home"
   const dict = dictionaries ? dictionaries[lang][section] : (await getDict<any>("home", lang))[section]
   const title = (dict.title || "")
-  const description = (dict.description || "")
+  const description: string = (dict.description || "")
+  const descriptionList = description.split(" ")
   return (
     <>
       <Logo
         width={36} height={36}
         className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
       />
-      {/* <Overlay> */}
-      {/* <Menu /> */}
-      {/* </Overlay> */}
-      <Dock />
+      <Suspense fallback={<></>}>
+        <Dock />
+      </Suspense>
       <div className="max-w-3xl w-full mx-auto p-6">
         <div className="w-full rounded-3xl bg-transparent h-fit flex flex-col sm:flex-row gap-6">
           <div className="sm:w-1/2 w-full h-fit space-y-3">
@@ -56,7 +56,18 @@ const page = async ({ searchParams }: Props) => {
                 </Suspense>
               </div>
               <div className="w-full mt-3">
-                <p className="text-secondary">{description}</p>
+                <p className="text-secondary inline-flex flex-wrap items-start gap-y-0 gap-x-1">
+                  {
+                    descriptionList.map(
+                      (item, index) => <span
+                        key={`${item}#${index}`}
+                        className="hover:text-foreground transition-colors cursor-default"
+                      >
+                        {item}
+                      </span>
+                    )
+                  }
+                </p>
               </div>
             </section>
             <Suspense fallback={<ExperienceListSkeleton />}>
