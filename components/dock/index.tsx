@@ -1,10 +1,12 @@
 import { NewThreadForm } from "@/app/(threads)/_components/new-thread/form"
 import { Locales } from "@/dictionaries/tools"
 import { createClient } from "@/packages/supabase/src/supabase/server"
-import { Separator } from "@repo/ui/separator"
 import { cookies } from "next/headers"
+import Link from "next/link"
 import { BsThreads } from "react-icons/bs"
 import { LuMenu } from "react-icons/lu"
+import { MdOutlineFolder } from "react-icons/md"
+import { Contacts } from "./ui/section/contacts"
 import { Menu } from "./ui/section/menu"
 import { User } from "./ui/section/user"
 import { Trigger } from "./ui/trigger"
@@ -21,7 +23,12 @@ const Dock = async ({ lang = "en" }: { lang?: Locales }) => {
       <Trigger className="lg:w-80 w-screen" content={<Menu />}>
         <LuMenu size={16} />
       </Trigger>
-      <Separator orientation="vertical" className="h-2/3" />
+      <Trigger asChild>
+        <Link href="/files">
+          <MdOutlineFolder size={16} />
+        </Link>
+      </Trigger>
+      <Contacts />
       {
         (user && isAdmin) &&
         <Trigger content={

@@ -49,7 +49,7 @@ const page = async ({ searchParams }: Props) => {
               <Banner />
             </Suspense>
             <section className="w-full flex flex-col gap-1.5 py-3">
-              <h1 className="text-4xl font-medium">{title}</h1>
+              <h5 className="font-medium">{title}</h5>
               <div className="w-full flex mt-1 flex-wrap gap-2 items-start">
                 <Suspense fallback={<ContactsSkeleton />}>
                   <Contacts />
