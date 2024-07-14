@@ -22,7 +22,7 @@ const buttonVariants = cva(
         "success-default":
           "bg-success-foreground text-success-background shadow-sm hover:bg-success-foreground/80",
         outline:
-          "border border-border bg-background shadow-sm hover:bg-accents-2/70 hover:text-accents-7",
+          "border border-border bg-inherit shadow-sm hover:bg-accents-2/70 hover:text-accents-7",
         secondary:
           "rounded-lg bg-yz-neutral-300/50 backdrop-sm text-accents-7 shadow-sm hover:bg-yz-neutral-300",
         ghost: "hover:bg-accents-2/70 hover:text-accents-7",

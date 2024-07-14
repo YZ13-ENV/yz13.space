@@ -29,7 +29,7 @@ const DockWrapper = ({ children }: Props) => {
     if (div) updateDockWidth()
   }, [ref])
   return (
-    <motion.div
+    <motion.footer
       layout
       initial={{ width: "36px" }}
       animate={{ width: "fit-content" }}
@@ -42,7 +42,7 @@ const DockWrapper = ({ children }: Props) => {
         show &&
         children
       }
-    </motion.div>
+    </motion.footer>
   )
 }
 export { DockWrapper }

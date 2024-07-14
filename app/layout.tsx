@@ -8,6 +8,7 @@ import { cn } from "@repo/ui/cn";
 import "@repo/ui/css";
 import "@repo/ui/css/typography";
 import "@repo/ui/css/vars";
+import { TooltipProvider } from "@repo/ui/tooltip";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from 'geist/font/mono';
@@ -56,11 +57,13 @@ export default async function RootLayout({ children }: LayoutProps) {
   return (
     <html lang={locale} className={cn(isEN ? EN_FONT.variable : RU_FONT.variable, GeistMono.variable)}>
       <Body>
-        <MediaOverlay />
-        <Analytics />
-        <SpeedInsights />
-        <AnonSession />
-        {children}
+        <TooltipProvider>
+          <MediaOverlay />
+          <Analytics />
+          <SpeedInsights />
+          <AnonSession />
+          {children}
+        </TooltipProvider>
       </Body>
     </html>
   );
