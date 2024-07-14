@@ -1,12 +1,16 @@
 import { DynamicImage } from "@/components/dynamic-image"
+import { cn } from "@repo/ui/cn"
 import { get } from "@vercel/edge-config"
 
-const Banner = async () => {
+const Banner = async ({ className = "" }: { className?: string }) => {
   const banner = await get<{ dark: string, light: string }>("home-banner")
   return (
     <div
       itemScope itemType="http://schema.org/ImageObject"
-      className="w-full aspect-video shrink-0 rounded-xl relative bg-background border"
+      className={cn(
+        "w-full aspect-video shrink-0 rounded-xl relative bg-background border",
+        className
+      )}
     >
       {
         banner &&

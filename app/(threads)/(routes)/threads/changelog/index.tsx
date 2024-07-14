@@ -9,11 +9,16 @@ import Link from "next/link"
 
 type ChangelogProps = {
   max?: number
-  lang?: Locales,
+  lang?: Locales
   hideTitle?: boolean
+  title: ({ name }: { name: string }) => JSX.Element
 }
 
-const Changelog = async ({ lang: providedLang, hideTitle = false, max = 7 }: ChangelogProps) => {
+export const LocalizedTitle = ({ name }: { name: string }) => {
+  return <span className="text-lg">{name}</span>
+}
+
+const Changelog = async ({ title: providedTitle, lang: providedLang, hideTitle = false, max = 7 }: ChangelogProps) => {
   const locale = getLocale()
   const lang = providedLang ? providedLang : locale
   const changelogs = await getChangelog(lang)
@@ -26,11 +31,11 @@ const Changelog = async ({ lang: providedLang, hideTitle = false, max = 7 }: Cha
   const changelogDict = await getDict<any>("changelog", lang)
   const name = changelogDict.name
   const isMoreThanMax = logs.length >= (max + 1)
+  const title = providedTitle
   return (
     <div className="w-full xl:h-2/3 h-fit space-y-3">
       {
-        !hideTitle &&
-        <span className="text-lg">{name}</span>
+        !hideTitle && title({ name })
       }
       <ul className="space-y-1.5">
         {
