@@ -11,7 +11,7 @@ type ChangelogProps = {
   max?: number
   lang?: Locales
   hideTitle?: boolean
-  title: ({ name }: { name: string }) => JSX.Element
+  title?: ({ name }: { name: string }) => JSX.Element
 }
 
 export const LocalizedTitle = ({ name }: { name: string }) => {
@@ -35,7 +35,7 @@ const Changelog = async ({ title: providedTitle, lang: providedLang, hideTitle =
   return (
     <div className="w-full xl:h-2/3 h-fit space-y-3">
       {
-        !hideTitle && title({ name })
+        !hideTitle && title && title({ name })
       }
       <ul className="space-y-1.5">
         {
