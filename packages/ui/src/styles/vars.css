@@ -29,7 +29,7 @@
 
   --yz13-link-color: var(--yz13-success);
   --yz13-link-style: none;
-  --yz13-secondary: var(--accents-5);
+  --yz13-secondary: var(--yz13-neutral-700);
   --yz13-code: var(--yz13-purple);
   --dropdown-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.02);
   --dropdown-triangle-stroke: #fff;
@@ -129,7 +129,7 @@
     /* component expressiveness */
     --yz13-link-color: hsl(var(--yz13-foreground));
     --yz13-link-style: underline;
-    --yz13-secondary: var(--accents-5);
+    --yz13-secondary: var(--yz13-neutral-700);
     --yz13-code: var(--yz13-cyan);
     --dropdown-box-shadow: 0 0 0 1px #333;
     --dropdown-triangle-stroke: #333;
@@ -209,7 +209,7 @@
   /* component expressiveness */
   --yz13-link-color: hsl(var(--yz13-foreground));
   --yz13-link-style: underline;
-  --yz13-secondary: var(--accents-5);
+  --yz13-secondary: var(--yz13-neutral-700);
   --yz13-code: var(--yz13-cyan);
   --dropdown-box-shadow: 0 0 0 1px #333;
   --dropdown-triangle-stroke: #333;

@@ -1,5 +1,6 @@
 {
   "name": "Blog",
+  "new-thread-button": "New Thread",
   "search": {
     "name": "Search",
     "placeholder": "Search"

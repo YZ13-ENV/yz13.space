@@ -1,5 +1,6 @@
 {
   "name": "Блог",
+  "new-thread-button": "Новый пост",
   "search": {
     "name": "Поиск",
     "placeholder": "Поиск"

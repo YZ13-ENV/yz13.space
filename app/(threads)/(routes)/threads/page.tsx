@@ -1,5 +1,4 @@
 import { Dock } from "@/components/dock";
-import { Header } from "@/components/header";
 import { Logo } from "@/components/logo";
 import { metadata as layoutMetadata } from "@/const/metadata";
 import { Locales, getDict, getLocale } from "@/dictionaries/tools";
@@ -38,7 +37,7 @@ const page = async ({ searchParams }: Props) => {
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   const threadsDict = await getDict<any>("threads", lang)
-  const name = threadsDict.name
+  const label = threadsDict["new-thread-button"]
   const search = threadsDict.search
   const cks = cookies()
   const sp = createClient(cks)
@@ -71,7 +70,7 @@ const page = async ({ searchParams }: Props) => {
                 <span className="text-lg text-secondary">{search.name}</span>
                 {
                   (user && isAdmin) &&
-                  <NewThreadTrigger />
+                  <NewThreadTrigger label={label} />
                 }
               </div>
               <SearchBar placeholder={search.placeholder} />
@@ -81,7 +80,7 @@ const page = async ({ searchParams }: Props) => {
             <Changelog lang={lang} />
           </Suspense>
         </div>
-        <Header lang={lang} />
+        {/* <Header lang={lang} /> */}
         <Suspense fallback={<Skeleton />}>
           <ThreadsList filter={filter} lang={lang} />
         </Suspense>

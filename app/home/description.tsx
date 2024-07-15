@@ -1,8 +1,8 @@
 "use client"
 import { cn } from "@repo/ui/cn"
-import { useInterval } from "ahooks"
+import { useDebounceEffect, useInterval } from "ahooks"
 import { cubicBezier, motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 const Description = ({ description = [] }: { description?: string[] }) => {
   const [index, setIndex] = useState<number | null>(null)
@@ -16,9 +16,9 @@ const Description = ({ description = [] }: { description?: string[] }) => {
       if (!isLastIndex) setIndex(index + 1)
     } else setIndex(0)
   }, stopAnimation ? undefined : 1000)
-  useEffect(() => {
+  useDebounceEffect(() => {
     if (isOut) setStopAnimation(false)
-  }, [isOut])
+  }, [isOut], { wait: 3000 })
   return (
     <p
       className="text-secondary inline-flex flex-wrap text-lg items-start gap-y-0 gap-x-1"
@@ -36,6 +36,7 @@ const Description = ({ description = [] }: { description?: string[] }) => {
         description.map(
           (item, textIndex) => {
             const isMatch = index === textIndex
+            const isPast = index ? index > textIndex : false
             return <span
               onMouseEnter={() => setIndex(textIndex)}
               key={`${item}#${textIndex}`}
@@ -46,7 +47,7 @@ const Description = ({ description = [] }: { description?: string[] }) => {
             >
               <span className={cn(
                 "z-10 transition-colors hover:text-foreground",
-                isMatch ? "text-foreground" : ""
+                isMatch ? "text-foreground" : isPast ? "text-secondary" : ""
               )}>{item}</span>
               {
                 isMatch &&
