@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  border-right: none;
+  border-bottom: none;
+  position: relative;
+  @apply border-2 border-yz-neutral-300;
+}
+
+.grid-guides {
+  display: contents;
+}
+
+.grid-guide {
+  inset: 0px;
+  position: absolute;
+  grid-column-start: var(--x);
+  grid-column-end: span 1;
+  grid-row-start: var(--y);
+  grid-row-end: span 1;
+  border-left: none;
+  border-top: none;
+  @apply border-2 border-yz-neutral-300;
+}

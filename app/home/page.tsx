@@ -5,14 +5,17 @@ import { Logo } from "@/components/logo";
 import { metadata as layoutMetadata } from "@/const/metadata";
 import { Locales, getDict, getLocale } from "@/dictionaries/tools";
 import { showStatus } from "@/feature-flags/status.feature";
+import { shotTechStack } from "@/feature-flags/tech-stack.feature";
 import { Separator } from "@repo/ui/separator";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { Changelog, ChangelogSkeleton, LocalizedTitle } from "../(threads)/(routes)/threads/changelog";
+import { Footer } from "../(threads)/_components/footer";
 import { Works, WorksSkeleton } from "../works/works";
 import { Contacts, ContactsSkeleton } from "./contacts";
 import { Description } from "./description";
 import { Status } from "./status";
+import { TechStack } from "./tech-stack";
 
 export const metadata: Metadata = {
   ...layoutMetadata,
@@ -35,6 +38,7 @@ const page = async ({ searchParams }: Props) => {
   const position = (dict.position || "")
   const descriptionList = description.split(" ")
   const status = await showStatus()
+  const techStack = await shotTechStack()
   return (
     <>
       <Logo
@@ -42,7 +46,7 @@ const page = async ({ searchParams }: Props) => {
         className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
       />
       <Suspense fallback={<></>}>
-        <Dock />
+        <Dock lang={searchParamLang as Locales | undefined} />
       </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6">
         <div className="w-full rounded-3xl bg-transparent h-fit flex flex-col gap-6">
@@ -67,6 +71,16 @@ const page = async ({ searchParams }: Props) => {
           <Suspense fallback={<ContactsSkeleton />}>
             <Contacts lang={lang} title={LocalizedTitle} />
           </Suspense>
+          {
+            techStack
+              ?
+              <>
+                <Separator />
+                <TechStack />
+                <Separator />
+              </>
+              : <Separator />
+          }
           <Suspense fallback={<ExperienceListSkeleton />}>
             <ExperienceList lang={lang} title={LocalizedTitle} />
           </Suspense>
@@ -81,6 +95,10 @@ const page = async ({ searchParams }: Props) => {
             <Works itemClassName="p-0" lang={lang} title={LocalizedTitle} />
           </Suspense>
         </div>
+        <div className="mt-12">
+          <Footer />
+        </div>
+        <div className="h-20 w-full"></div>
       </div>
     </>
   )

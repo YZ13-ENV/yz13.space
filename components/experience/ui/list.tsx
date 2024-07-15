@@ -1,6 +1,5 @@
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
 import { cn } from "@repo/ui/cn"
-import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import "dayjs/locale/en"
 import "dayjs/locale/ru"
@@ -24,7 +23,6 @@ const ExperienceList = async ({ lang: providedLang = "en", title: providedTitle,
   const title = providedTitle
   return (
     <>
-      <Separator />
       <div className="w-full h-fit space-y-3">
         {
           !hideTitle && title && title({ name })
