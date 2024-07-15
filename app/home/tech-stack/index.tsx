@@ -7,14 +7,14 @@ import { TailwindIcon } from "@/components/pixel-stack/tailwind-icon"
 import { TypeScriptIcon } from "@/components/pixel-stack/typescript-icon"
 import { ViteIcon } from "@/components/pixel-stack/vite-icon"
 import { cn } from "@repo/ui/cn"
+import { useDebounceEffect, useInterval } from "ahooks"
 import { cubicBezier, motion, useSpring } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 const stack = [
   {
     label: "Next",
     value: "next",
-    color: "#000",
     icon: NextIcon,
     y: -1 * 28
   },
@@ -50,7 +50,6 @@ const stack = [
     label: "Shadcn",
     value: "shadcn",
     icon: ShadcnIcon,
-    color: "#000",
     y: -6 * 28
   },
 ]
@@ -62,6 +61,27 @@ const TechStack = () => {
     setSelected(null)
     setSelected(id)
   }
+  const [index, setIndex] = useState<number | null>(null)
+  const [stopAnimation, setStopAnimation] = useState<boolean>(true)
+  const [isOut, setIsOut] = useState<boolean>(true)
+  const totalIndex = (stack.length - 1)
+  const isAutoMode = useMemo(() => { return index !== null }, [index])
+  useInterval(() => {
+    if (index !== null) {
+      const isLastIndex = totalIndex === index
+      if (isLastIndex) setIndex(0)
+      if (!isLastIndex) setIndex(index + 1)
+    } else setIndex(0)
+  }, stopAnimation ? undefined : 3000)
+  useEffect(() => {
+    if (index !== null) {
+      const target = stack.find((_, targetIndex) => index === targetIndex)
+      if (target) pick(target.value)
+    }
+  }, [index])
+  useDebounceEffect(() => {
+    if (isOut) setStopAnimation(false)
+  }, [isOut], { wait: 3000 })
   useEffect(() => {
     if (selected) {
       const target = stack.find(item => item.value === selected)
@@ -71,12 +91,20 @@ const TechStack = () => {
   return (
     <div
       className="w-full grid lg:grid-cols-4 grid-cols-2 grid-rows-3 lg:grid-rows-2"
-      onMouseLeave={() => setSelected(null)}
+      onMouseEnter={() => {
+        setIndex(null)
+        setIsOut(false)
+        setStopAnimation(true)
+      }}
+      onMouseLeave={() => {
+        setSelected(null)
+        setIsOut(true)
+      }}
     >
       <div
         className="w-full flex flex-col justify-center col-span-2 h-40 p-12"
       >
-        <span className="text-xl text-foreground/75">YZ13 Tech stack:</span>
+        <span className="text-xl text-foreground/75">My Tech stack:</span>
         <div className="w-full h-7 overflow-hidden relative">
           <motion.div
             style={{ y }}
@@ -110,15 +138,19 @@ const TechStack = () => {
         </div>
       </div>
       {
-        stack.map(item => {
+        stack.map((item, techIndex) => {
+          const isSelected = techIndex === index
           return (
             <div
               onMouseEnter={() => pick(item.value)}
               onMouseLeave={() => setSelected(null)}
-              className={cn(icon["icon-wrapper"], "w-full h-40 flex items-center justify-center")}
+              className={cn(
+                "w-full h-40 flex items-center justify-center",
+                isAutoMode ? isSelected ? icon["active-icon"] : "" : icon["icon-wrapper"]
+              )}
             >
               {/* @ts-ignore */}
-              {item.icon({ size: 48, style: { "--color": item.color } })}
+              {item.icon({ size: 48, style: item.color ? { "--color": item.color } : {} })}
             </div>
           )
         })
