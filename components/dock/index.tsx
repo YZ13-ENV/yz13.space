@@ -1,10 +1,7 @@
 import { Locales } from "@/dictionaries/tools"
-import { showFilesPage } from "@/feature-flags/files.feature"
 import { createClient } from "@/packages/supabase/src/supabase/server"
 import { cookies } from "next/headers"
-import Link from "next/link"
 import { LuMenu } from "react-icons/lu"
-import { MdOutlineFolder } from "react-icons/md"
 import { Contacts } from "./ui/section/contacts"
 import { Menu } from "./ui/section/menu"
 import { User } from "./ui/section/user"
@@ -17,20 +14,11 @@ const Dock = async ({ lang = "en" }: { lang?: Locales }) => {
   const { data: { user } } = await sp.auth.getUser()
   const metadata = user?.user_metadata
   const isAdmin = (metadata?.type || "user") === "admin"
-  const files = await showFilesPage();
   return (
     <DockWrapper>
       <Trigger className="lg:w-80 w-screen" content={<Menu />}>
         <LuMenu size={16} />
       </Trigger>
-      {
-        files &&
-        <Trigger asChild>
-          <Link href="/files">
-            <MdOutlineFolder size={16} />
-          </Link>
-        </Trigger>
-      }
       <Contacts />
       <Trigger>
         <User />
