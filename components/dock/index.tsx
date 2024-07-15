@@ -1,10 +1,8 @@
-import { NewThreadForm } from "@/app/(threads)/_components/new-thread/form"
 import { Locales } from "@/dictionaries/tools"
 import { showFilesPage } from "@/feature-flags/files.feature"
 import { createClient } from "@/packages/supabase/src/supabase/server"
 import { cookies } from "next/headers"
 import Link from "next/link"
-import { BsThreads } from "react-icons/bs"
 import { LuMenu } from "react-icons/lu"
 import { MdOutlineFolder } from "react-icons/md"
 import { Contacts } from "./ui/section/contacts"
@@ -34,16 +32,6 @@ const Dock = async ({ lang = "en" }: { lang?: Locales }) => {
         </Trigger>
       }
       <Contacts />
-      {
-        (user && isAdmin) &&
-        <Trigger content={
-          <div className="max-w-xl border w-full rounded-2xl max-h-full bg-background h-fit">
-            <NewThreadForm user={user} />
-          </div>
-        }>
-          <BsThreads size={16} />
-        </Trigger>
-      }
       <Trigger>
         <User />
       </Trigger>

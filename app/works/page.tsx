@@ -5,7 +5,7 @@ import { Locales, getLocale } from "@/dictionaries/tools"
 import { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
-import { LocalizedTitle } from "../(threads)/(routes)/threads/changelog"
+import { LocalizedTitle } from "../../components/changelog"
 import { Works, WorksSkeleton } from "./works"
 
 export const metadata: Metadata = {

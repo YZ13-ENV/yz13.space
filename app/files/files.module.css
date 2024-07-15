@@ -1,7 +1,0 @@
-.column {
-  @apply w-1/3 h-fit flex flex-col gap-2;
-}
-
-.file-cover-wrapper {
-  @apply w-full relative overflow-hidden rounded-xl;
-}

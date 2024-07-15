@@ -15,7 +15,6 @@ import { GeistMono } from 'geist/font/mono';
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
-import { AnonSession } from "./(threads)/_components/anon-session";
 import { Body } from "./_components/body";
 import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
 
@@ -61,7 +60,6 @@ export default async function RootLayout({ children }: LayoutProps) {
           <MediaOverlay />
           <Analytics />
           <SpeedInsights />
-          <AnonSession />
           {children}
         </TooltipProvider>
       </Body>
