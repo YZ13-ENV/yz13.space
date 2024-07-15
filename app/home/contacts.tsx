@@ -48,6 +48,15 @@ const Contacts = async ({ lang: providedLang = "en", title: providedTitle, hideT
   )
 }
 const ContactsSkeleton = () => {
-  return <div className="w-full h-[26px] bg-yz-neutral-200 animate-pulse" />
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="w-48 h-7 inline-block rounded-md bg-yz-neutral-300 animate-pulse" />
+      <div className="w-full flex items-center gap-3">
+        <span className="w-36 h-9 rounded-md bg-yz-neutral-300 animate-pulse" />
+        <span className="w-36 h-9 rounded-md bg-yz-neutral-300 animate-pulse" />
+        <span className="w-36 h-9 rounded-md bg-yz-neutral-300 animate-pulse" />
+      </div>
+    </div>
+  )
 }
 export { Contacts, ContactsSkeleton }

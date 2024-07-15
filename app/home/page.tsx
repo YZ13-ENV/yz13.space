@@ -4,13 +4,15 @@ import { ExperienceListSkeleton } from "@/components/experience/ui/skeleton";
 import { Logo } from "@/components/logo";
 import { metadata as layoutMetadata } from "@/const/metadata";
 import { Locales, getDict, getLocale } from "@/dictionaries/tools";
+import { showStatus } from "@/feature-flags/status.feature";
 import { Separator } from "@repo/ui/separator";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { Changelog, ChangelogSkeleton, LocalizedTitle } from "../(threads)/(routes)/threads/changelog";
-import { Works } from "../works/works";
+import { Works, WorksSkeleton } from "../works/works";
 import { Contacts, ContactsSkeleton } from "./contacts";
 import { Description } from "./description";
+import { Status } from "./status";
 
 export const metadata: Metadata = {
   ...layoutMetadata,
@@ -32,6 +34,7 @@ const page = async ({ searchParams }: Props) => {
   const description: string = (dict.description || "")
   const position = (dict.position || "")
   const descriptionList = description.split(" ")
+  const status = await showStatus()
   return (
     <>
       <Logo
@@ -55,6 +58,12 @@ const page = async ({ searchParams }: Props) => {
               </div>
             </section>
           </div>
+          {
+            status &&
+            <Suspense fallback={<></>}>
+              <Status lang={lang} title={LocalizedTitle} />
+            </Suspense>
+          }
           <Suspense fallback={<ContactsSkeleton />}>
             <Contacts lang={lang} title={LocalizedTitle} />
           </Suspense>
@@ -68,13 +77,8 @@ const page = async ({ searchParams }: Props) => {
             </Suspense>
           </section>
           <Separator />
-          <Suspense fallback={
-            <div className="w-full space-y-4">
-              <div className="w-full aspect-video bg-yz-neutral-300 rounded-xl animate-pulse" />
-              <div className="w-full h-9 rounded-xl bg-yz-neutral-300 animate-pulse" />
-            </div>
-          }>
-            <Works itemClassName="p-0" />
+          <Suspense fallback={<WorksSkeleton />}>
+            <Works itemClassName="p-0" lang={lang} title={LocalizedTitle} />
           </Suspense>
         </div>
       </div>

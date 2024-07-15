@@ -1,7 +1,7 @@
 "use client"
 import { cn } from "@repo/ui/cn"
 import { useInterval } from "ahooks"
-import { motion } from "framer-motion"
+import { cubicBezier, motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
 const Description = ({ description = [] }: { description?: string[] }) => {
@@ -15,7 +15,7 @@ const Description = ({ description = [] }: { description?: string[] }) => {
       if (isLastIndex) setIndex(0)
       if (!isLastIndex) setIndex(index + 1)
     } else setIndex(0)
-  }, stopAnimation ? undefined : 1200)
+  }, stopAnimation ? undefined : 1000)
   useEffect(() => {
     if (isOut) setStopAnimation(false)
   }, [isOut])
@@ -51,6 +51,12 @@ const Description = ({ description = [] }: { description?: string[] }) => {
               {
                 isMatch &&
                 <motion.span
+                  transition={{
+                    type: "spring",
+                    duration: .550,
+                    bounce: .25,
+                    easings: cubicBezier(.17, .67, .83, .67)
+                  }}
                   layoutId="text-wrapper-animated"
                   className="w-full p-2 absolute z-[-1] h-full rounded-md bg-yz-neutral-300"
                 />

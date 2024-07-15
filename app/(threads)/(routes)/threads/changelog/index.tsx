@@ -76,13 +76,33 @@ const Changelog = async ({ title: providedTitle, lang: providedLang, hideTitle =
 
 const ChangelogSkeleton = () => {
   return (
-    <div className="w-full h-2/3 space-y-3">
-      <span className="w-48 h-5 rounded-md bg-yz-neutral-100 animate-pulse"></span>
-      <ul className="space-y-1.5">
-        <li className="w-full h-9 rounded-md bg-yz-neutral-100 animate-pulse"></li>
-        <li className="w-full h-9 rounded-md bg-yz-neutral-100 animate-pulse"></li>
-        <li className="w-full h-9 rounded-md bg-yz-neutral-100 animate-pulse"></li>
-        <li className="w-full h-9 rounded-md bg-yz-neutral-100 animate-pulse"></li>
+    <div className="w-full h-full space-y-3">
+      <span className="w-1/3 h-7 inline-block rounded-md bg-yz-neutral-300 animate-pulse"></span>
+      <ul className="w-full flex flex-col gap-3">
+        <li className="w-full h-9">
+          <button className="flex items-center w-full h-full">
+            <span className="xl:text-base w-full inline-flex space-x-2 shrink-0">
+              <span className="animate-pulse w-24 inline-block h-5 rounded-md bg-yz-neutral-300" />
+              <span className="animate-pulse w-full inline-block h-5 rounded-md bg-yz-neutral-300" />
+            </span>
+          </button>
+        </li>
+        <li className="w-full h-9">
+          <button className="flex items-center w-full h-full">
+            <span className="xl:text-base w-full inline-flex space-x-2 shrink-0">
+              <span className="animate-pulse w-24 inline-block h-5 rounded-md bg-yz-neutral-300" />
+              <span className="animate-pulse w-full inline-block h-5 rounded-md bg-yz-neutral-300" />
+            </span>
+          </button>
+        </li>
+        <li className="w-full h-9">
+          <button className="flex items-center w-full h-full">
+            <span className="xl:text-base w-full inline-flex space-x-2 shrink-0">
+              <span className="animate-pulse w-24 inline-block h-5 rounded-md bg-yz-neutral-300" />
+              <span className="animate-pulse w-full inline-block h-5 rounded-md bg-yz-neutral-300" />
+            </span>
+          </button>
+        </li>
       </ul>
     </div>
   )
