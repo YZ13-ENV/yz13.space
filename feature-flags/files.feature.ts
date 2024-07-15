@@ -1,8 +1,8 @@
 import { get } from "@vercel/edge-config";
-import { unstable_flag as flag } from "@vercel/flags/next";
+import { unstable_flag as flag, FlagDeclaration } from "@vercel/flags/next";
 import { Features } from "./status.feature";
 
-export const showFilesPage = flag<boolean>({
+export const files_flag: FlagDeclaration<boolean> = {
   key: "files-page",
   async decide() {
     const key = this.key;
@@ -18,4 +18,6 @@ export const showFilesPage = flag<boolean>({
     { value: false, label: "Hide" },
     { value: true, label: "Show" },
   ],
-});
+};
+
+export const showFilesPage = flag<boolean>(files_flag);

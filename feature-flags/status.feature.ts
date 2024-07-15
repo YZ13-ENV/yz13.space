@@ -1,9 +1,9 @@
 import { get } from "@vercel/edge-config";
-import { unstable_flag as flag } from "@vercel/flags/next";
+import { unstable_flag as flag, FlagDeclaration } from "@vercel/flags/next";
 
 export type Features = { [key: string]: boolean };
 
-export const showStatus = flag<boolean>({
+export const status_flag: FlagDeclaration<boolean> = {
   key: "status",
   async decide() {
     const key = this.key;
@@ -19,4 +19,6 @@ export const showStatus = flag<boolean>({
     { value: false, label: "Hide" },
     { value: true, label: "Show" },
   ],
-});
+};
+
+export const showStatus = flag<boolean>(status_flag);
