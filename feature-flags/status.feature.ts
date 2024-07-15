@@ -1,9 +1,10 @@
 import { get } from "@vercel/edge-config";
 import { unstable_flag as flag, FlagDeclaration } from "@vercel/flags/next";
-import { Features } from "./status.feature";
 
-export const files_flag: FlagDeclaration<boolean> = {
-  key: "files-page",
+export type Features = { [key: string]: boolean };
+
+export const status_flag: FlagDeclaration<boolean> = {
+  key: "status",
   async decide() {
     const key = this.key;
     const isDev = process.env.NODE_ENV === "development";
@@ -11,8 +12,8 @@ export const files_flag: FlagDeclaration<boolean> = {
     const features = await get<Features>("features");
     return features ? features[key] ?? false : false;
   },
-  origin: "https://www.yz13.space/flags/files-page/",
-  description: "Show status page link in dock",
+  origin: "https://www.yz13.space/flags/status/",
+  description: "Show status on home page",
   defaultValue: false,
   options: [
     { value: false, label: "Hide" },
@@ -20,4 +21,4 @@ export const files_flag: FlagDeclaration<boolean> = {
   ],
 };
 
-export const showFilesPage = flag<boolean>(files_flag);
+export const showStatus = flag<boolean>(status_flag);
