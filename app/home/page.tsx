@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import { Changelog, ChangelogSkeleton, LocalizedTitle } from "../(threads)/(routes)/threads/changelog";
 import { Works } from "../works/works";
 import { Contacts, ContactsSkeleton } from "./contacts";
+import { Description } from "./description";
 
 export const metadata: Metadata = {
   ...layoutMetadata,
@@ -49,30 +50,16 @@ const page = async ({ searchParams }: Props) => {
             <section className="w-full flex flex-col gap-1.5 py-3">
               <h1 className="text-4xl uppercase font-medium">{title}</h1>
               <p className="text-4xl py-4 uppercase font-medium">{position}</p>
-
               <div className="w-full">
-                <p className="text-secondary inline-flex flex-wrap text-lg items-start gap-y-0 gap-x-1">
-                  {
-                    descriptionList.map(
-                      (item, index) => <span
-                        key={`${item}#${index}`}
-                        className="hover:text-foreground transition-colors text-inherit cursor-default"
-                      >
-                        {item}
-                      </span>
-                    )
-                  }
-                </p>
+                <Description description={descriptionList} />
               </div>
             </section>
           </div>
-          <div className="w-full flex mt-1 flex-wrap gap-2 items-start">
-            <Suspense fallback={<ContactsSkeleton />}>
-              <Contacts />
-            </Suspense>
-          </div>
+          <Suspense fallback={<ContactsSkeleton />}>
+            <Contacts lang={lang} title={LocalizedTitle} />
+          </Suspense>
           <Suspense fallback={<ExperienceListSkeleton />}>
-            <ExperienceList lang={lang} />
+            <ExperienceList lang={lang} title={LocalizedTitle} />
           </Suspense>
           <Separator />
           <section>

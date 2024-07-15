@@ -1,22 +1,37 @@
-import { Locales } from "@/dictionaries/tools"
+import { getDict, getLocale, Locales } from "@/dictionaries/tools"
+import { cn } from "@repo/ui/cn"
 import { Separator } from "@repo/ui/separator"
 import dayjs from "dayjs"
 import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import duration from "dayjs/plugin/duration"
-import { PiBagSimpleDuotone } from "react-icons/pi"
 import { getExperience } from "../api/experience.api"
+
+type ListProps = {
+  lang?: Locales
+  hideTitle?: boolean
+  title?: ({ name }: { name: string }) => JSX.Element
+}
+
 dayjs.extend(duration);
-const ExperienceList = async ({ lang = "en" }: { lang?: Locales }) => {
+const ExperienceList = async ({ lang: providedLang = "en", title: providedTitle, hideTitle = false }: ListProps) => {
+  const locale = getLocale()
+  const lang = providedLang ? providedLang : locale
+  const changelogDict = await getDict<any>("experience", lang)
+  const name = changelogDict.name
   const experience = await getExperience(lang)
   const list = (experience.data || [])
+  const title = providedTitle
   return (
     <>
       <Separator />
-      <div className="w-full rounded-xl border">
+      <div className="w-full h-fit space-y-3">
+        {
+          !hideTitle && title && title({ name })
+        }
         {
           !!list.length ?
-            <ul className="divide-y">
+            <ul>
               {
                 list
                   .sort((a, b) => {
@@ -32,17 +47,22 @@ const ExperienceList = async ({ lang = "en" }: { lang?: Locales }) => {
                     // const to = not_ended ? null : to_date ? to_date.format("MM.YYYY") : null
                     const duration = to_date ? dayjs.duration(from_date.diff(to_date)).locale(lang) : null
                     const durationString = duration?.humanize()
-                    return <li key={item.name + "#" + item.id} className="relative first:rounded-t-xl border-collapses last:rounded-b-xl bg-background">
-                      <div className="w-full p-2 flex gap-2">
-                        <div className="w-11 aspect-square border rounded-lg flex items-center justify-center bg-background">
-                          <PiBagSimpleDuotone size={18} />
-                        </div>
-                        <div className="w-full flex flex-col">
-                          <span className="font-medium text-sm">{item.name}</span>
-                          <span className="text-xs text-secondary">{durationString}</span>
-                        </div>
-                      </div>
-                    </li>
+                    return (
+                      <li key={item.name + "#" + item.id} className="w-full group h-9">
+                        <button className="flex items-center w-full h-full">
+                          <span className="xl:text-base w-full text-sm text-secondary text-left float-left space-x-2 shrink-0">
+                            <span className="inline">{durationString}</span>
+                            <span
+                              className={cn(
+                                "xl:text-base text-start text-sm group-hover:text-foreground transition-colors"
+                              )}
+                            >
+                              {item.name}
+                            </span>
+                          </span>
+                        </button>
+                      </li>
+                    )
                   })
               }
             </ul>

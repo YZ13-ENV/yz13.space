@@ -33,7 +33,7 @@ const Changelog = async ({ title: providedTitle, lang: providedLang, hideTitle =
   const isMoreThanMax = logs.length >= (max + 1)
   const title = providedTitle
   return (
-    <div className="w-full xl:h-2/3 h-fit space-y-3">
+    <div className="w-full h-fit space-y-3">
       {
         !hideTitle && title && title({ name })
       }
