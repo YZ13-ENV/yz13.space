@@ -54,7 +54,7 @@ const stack = [
   },
 ]
 
-const TechStack = () => {
+const TechStack = ({ title }: { title?: string }) => {
   const [selected, setSelected] = useState<string | null>(null)
   const y = useSpring(0)
   const pick = (id: string) => {
@@ -104,7 +104,7 @@ const TechStack = () => {
       <div
         className="w-full flex flex-col justify-center col-span-2 h-40 p-12"
       >
-        <span className="text-xl text-foreground/75">My Tech stack:</span>
+        <span className="text-xl text-foreground/75">{title}</span>
         <div className="w-full h-7 overflow-hidden relative">
           <motion.div
             style={{ y }}

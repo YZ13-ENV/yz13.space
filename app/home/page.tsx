@@ -39,6 +39,8 @@ const page = async ({ searchParams }: Props) => {
   const descriptionList = description.split(" ")
   const status = await showStatus()
   const techStack = await shotTechStack()
+  const techStackDict = await getDict<any>("tech-stack", lang)
+  const techStackTitle = techStackDict["name"]
   return (
     <>
       <Logo
@@ -76,7 +78,7 @@ const page = async ({ searchParams }: Props) => {
               ?
               <>
                 <Separator />
-                <TechStack />
+                <TechStack title={techStackTitle} />
                 <Separator />
               </>
               : <Separator />
