@@ -1,9 +1,24 @@
 import { Dock } from "@/components/dock"
 import { Logo } from "@/components/logo"
+import { metadata as layoutMetadata } from "@/const/metadata"
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
+import { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 import { JournalSection, JournalSkeleton } from "./journal"
+
+
+export const metadata: Metadata = {
+  ...layoutMetadata,
+  title: "Journal",
+  alternates: {
+    canonical: "/journal",
+    languages: {
+      "ru": "/journal?lang=ru",
+      "en": "/journal?lang=en",
+    }
+  }
+}
 
 type Props = {
   searchParams: {

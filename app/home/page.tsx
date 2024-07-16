@@ -19,7 +19,14 @@ import { TechStack } from "./tech-stack";
 
 export const metadata: Metadata = {
   ...layoutMetadata,
-  title: "Home"
+  title: "Home",
+  alternates: {
+    canonical: "/home",
+    languages: {
+      "ru": "/home?lang=ru",
+      "en": "/home?lang=en",
+    }
+  }
 }
 
 type Props = {
