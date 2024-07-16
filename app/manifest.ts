@@ -18,8 +18,8 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     shortcuts: [
       {
-        name: "Blog",
-        url: "/threads",
+        name: "Journal",
+        url: "/journal",
         icons: [
           {
             src: "/brand/yz-light-32.png",

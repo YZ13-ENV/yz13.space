@@ -1,6 +1,7 @@
 import { DynamicImage } from "@/components/dynamic-image"
 import { Locales } from "@/dictionaries/tools"
 import { JournalHead } from "@/journal/types"
+import { getStorageItem } from "@yz13/supabase/storage"
 import dayjs from "dayjs"
 import Link from "next/link"
 import { PiDotDuotone } from "react-icons/pi"
@@ -10,11 +11,12 @@ const List = ({ children }: { children?: React.ReactNode }) => {
 }
 
 const Item = ({ head, locale }: { head: JournalHead, locale: Locales }) => {
-  const { authors, createdAt, id, thumbnail, title, description } = head
+  const { authors, createdAt, id, title, description } = head
   const date = dayjs(createdAt)
   const formatted = date.locale(locale).format("DD MMMM, HH:mm")
   const joinedAuthors = authors.join(", ")
   const localeParam = `?lang=${locale}`
+  const thumbnail = { dark: getStorageItem(["journal", head.thumbnail.dark]), light: getStorageItem(["journal", head.thumbnail.light]) }
   return (
     <li className="h-32 relative w-full flex items-start gap-3">
       <Link href={`/journal/${id}${localeParam}`} className="absolute top-0 left-0 w-full h-full" />
