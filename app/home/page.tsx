@@ -9,8 +9,8 @@ import { shotTechStack } from "@/feature-flags/tech-stack.feature";
 import { Separator } from "@repo/ui/separator";
 import { Metadata } from "next";
 import { Suspense } from "react";
-import { Changelog, ChangelogSkeleton, LocalizedTitle } from "../(threads)/(routes)/threads/changelog";
-import { Footer } from "../(threads)/_components/footer";
+import { Changelog, ChangelogSkeleton, LocalizedTitle } from "../../components/changelog";
+import { Footer } from "../_components/footer";
 import { Works, WorksSkeleton } from "../works/works";
 import { Contacts, ContactsSkeleton } from "./contacts";
 import { Description } from "./description";
@@ -48,7 +48,7 @@ const page = async ({ searchParams }: Props) => {
         className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
       />
       <Suspense fallback={<></>}>
-        <Dock lang={searchParamLang as Locales | undefined} />
+        <Dock lang={lang} />
       </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6">
         <div className="w-full rounded-3xl bg-transparent h-fit flex flex-col gap-6">

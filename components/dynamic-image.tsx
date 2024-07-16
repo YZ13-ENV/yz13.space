@@ -2,11 +2,13 @@ import { cn } from "@repo/ui/cn"
 import Image, { ImageProps } from "next/image"
 
 
+export type ThemedImage = {
+  dark: string
+  light: string
+}
+
 type DynamicImageProps = {
-  image: {
-    dark: string
-    light: string
-  }
+  image: ThemedImage
   alt?: string
   className?: string
 } & Omit<ImageProps, "src">
