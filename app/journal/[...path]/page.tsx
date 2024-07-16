@@ -1,3 +1,4 @@
+import { Video } from "@/app/_components/video"
 import { Dock } from "@/components/dock"
 import { Logo } from "@/components/logo"
 import { getLocale, Locales } from "@/dictionaries/tools"
@@ -22,8 +23,16 @@ const page = async ({ params, searchParams }: Props) => {
   const path = params.path
   const isExist = isMDXExist(lang, path)
   if (!isExist) return "not exist"
-  const source = getMDX(lang, path)
-  const { content, frontmatter } = await compileMDX({ source: source, components: { Image: props => <Image {...props} /> }, options: { parseFrontmatter: true } })
+  const fullPath = path.join("/") + ".mdx"
+  const source = getMDX(lang, fullPath)
+  const { content, frontmatter } = await compileMDX({
+    source: source,
+    components: {
+      Image: props => <Image {...props} />,
+      Video: props => <Video {...props} />
+    },
+    options: { parseFrontmatter: true }
+  })
   const head = frontmatter
   const title = head?.title as string | undefined
   return (

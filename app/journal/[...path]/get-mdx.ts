@@ -2,10 +2,11 @@ import { Locales } from "@/dictionaries/tools";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";
 
-const getMDX = (locale: Locales, path: string[]) => {
+const getMDX = (locale: Locales, path: string) => {
   try {
-    const pathToContent = join(process.cwd(), "journal", locale, ...path);
-    const file = readFileSync(pathToContent + ".mdx", { encoding: "utf-8" });
+    const pathToContent = join(process.cwd(), "journal", locale, path);
+    const fullPath = pathToContent;
+    const file = readFileSync(fullPath, { encoding: "utf-8" });
     return file;
   } catch (e) {
     console.log(e);

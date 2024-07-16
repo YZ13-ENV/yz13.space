@@ -1,5 +1,10 @@
 ---
+id: "tech-stack"
 title: Techstack компонент
+description: "Как разрабатывался TechStack"
+thumbnail: {light: "/journal/tech-stack/grid.png", dark: "" }
+createdAt: "2024-07-16T06:31:22.151Z"
+authors: ["YZ13"]
 ---
 
 import Image from "next/image";
@@ -16,4 +21,16 @@ import Image from "next/image";
   alt="tech-stack-grid"
 />
 
-Сам компонент является сеткой, где первый блок занимает две ячейки по горизонтали
+Сам компонент является сеткой, где первый блок занимает две ячейки по горизонтали, остальные по одной.
+При наведении на любой блок, кроме двойного иконка подсвечивается и триггерит вывод названия в двойной блок.
+
+<Video
+  autoPlay
+  muted
+  loop
+  className="rounded-xl overflow-hidden border"
+  src="/journal/tech-stack/grid.mp4"
+  width={600}
+  height={400}
+  alt="tech-stack-grid"
+/>
