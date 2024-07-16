@@ -14,9 +14,10 @@ const Item = ({ head, locale }: { head: JournalHead, locale: Locales }) => {
   const date = dayjs(createdAt)
   const formatted = date.locale(locale).format("DD MMMM, HH:mm")
   const joinedAuthors = authors.join(", ")
+  const localeParam = `?lang=${locale}`
   return (
     <li className="h-32 relative w-full flex items-start gap-3">
-      <Link href={`/journal/${id}`} className="absolute top-0 left-0 w-full h-full" />
+      <Link href={`/journal/${id}${localeParam}`} className="absolute top-0 left-0 w-full h-full" />
       <div className="relative h-full aspect-video border rounded-xl bg-yz-neutral-200">
         <DynamicImage
           className="rounded-xl"

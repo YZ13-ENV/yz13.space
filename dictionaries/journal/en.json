@@ -1,3 +1,7 @@
 {
-  "name": "Journal"
+  "name": "Journal",
+  "not-found": {
+    "title": "Not found",
+    "action": "Back to journal"
+  }
 }

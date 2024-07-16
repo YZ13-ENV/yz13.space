@@ -18,8 +18,11 @@ export function middleware(request: NextRequest) {
   const countryCode = isValidCountry ? (country as Locales) : "en";
   const cookies = request.cookies;
   const hasLocaleCookie = cookies.has("locale");
-  const localeCookie = cookies.get("locale");
-  const noMatch = !hasLocaleCookie || localeCookie?.value !== countryCode;
+  const localeCookie = cookies.get("locale")?.value;
+  const isValidLocaleCookie = localeCookie
+    ? locales.includes(localeCookie)
+    : false;
+  const noMatch = !hasLocaleCookie || !isValidLocaleCookie;
   // write country code as locale -> en, ru, ...etc.
   if (noMatch) {
     const isProd = process.env.NODE_ENV === "production";

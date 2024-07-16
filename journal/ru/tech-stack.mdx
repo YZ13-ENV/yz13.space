@@ -7,30 +7,35 @@ createdAt: "2024-07-16T06:31:22.151Z"
 authors: ["YZ13"]
 ---
 
-import Image from "next/image";
-
 # Обновление
 
 В недавнем обновлении появилась новая сецкция "Стэк", которая состоит из компонента `<TeckStack />`.
 
-<Image
-  className="rounded-xl overflow-hidden border"
-  src="/journal/tech-stack/grid.png"
-  width={600}
-  height={400}
+<DynamicImage
+  className="rounded-xl !relative overflow-hidden border"
+  image={{
+    dark: "/tech-stack/grid_dark.png",
+    light: "/tech-stack/grid_light.png"
+  }}
   alt="tech-stack-grid"
 />
 
-Сам компонент является сеткой, где первый блок занимает две ячейки по горизонтали, остальные по одной.
-При наведении на любой блок, кроме двойного иконка подсвечивается и триггерит вывод названия в двойной блок.
+Мне показалось что на главной странице не хватает секции с технологиями, которые я использую в разработке, поэтому я принялся за его разработку.
+При поиске дизайна для нового блока я вспомнил про один дизайн, который я уже видел на [домашней странице Vercel](https://vercel.com/home), поэтому я взял его за основу и адаптировал под свой сайт.
 
-<Video
-  autoPlay
-  muted
-  loop
-  className="rounded-xl overflow-hidden border"
-  src="/journal/tech-stack/grid.mp4"
-  width={600}
-  height={400}
+<TechStack />
+
+При наведении на любой блок, кроме двойного, иконка подсвечивается и триггерит вывод названия в двойной блок.
+Одно из самых интересных было создание иконок, их внешним видом я вднохновился с [домашней странице Vercel](https://vercel.com/home).
+Иконки отрисовывал вручную в Figma и после перенёс как svg в код.
+
+<DynamicImage
+  className="rounded-xl !relative overflow-hidden border"
+  image={{
+    dark: "/tech-stack/icons_figma.png",
+    light: "/tech-stack/icons_figma.png"
+  }}
   alt="tech-stack-grid"
 />
+
+Спасибо за внимание, на этом всё!

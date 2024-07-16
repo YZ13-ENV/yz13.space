@@ -142,6 +142,7 @@ const TechStack = ({ title }: { title?: string }) => {
           const isSelected = techIndex === index
           return (
             <div
+              key={"tech#" + techIndex}
               onMouseEnter={() => pick(item.value)}
               onMouseLeave={() => setSelected(null)}
               className={cn(
