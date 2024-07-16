@@ -1,0 +1,41 @@
+---
+id: "tech-stack"
+title: Techstack component
+description: "How TechStack was developed"
+thumbnail: { dark: "/tech-stack/grid_dark.png",light: "/tech-stack/grid_light.png" }
+createdAt: "2024-07-16T06:31:22.151Z"
+authors: ["YZ13"]
+---
+
+# Update
+
+In the recent update, a new section "Stack" appeared, which consists of the `<TechStack />` component.
+
+<DynamicImage
+  className="rounded-xl !relative overflow-hidden border"
+  image={{
+    dark: "/tech-stack/grid_dark.png",
+    light: "/tech-stack/grid_light.png"
+  }}
+  alt="tech-stack-grid"
+/>
+
+I felt that the main page was missing a section with the technologies I use in development, so I set out to develop it.
+While searching for a design for the new block, I remembered a design I had seen on the [Vercel homepage](<https://vercel.com/home>), so I took it as a basis and adapted it for my site.
+
+<TechStack />
+
+When hovering over any block, except the double one, the icon is highlighted and triggers the display of the name in the double block.
+One of the most interesting parts was creating the icons; I was inspired by their appearance on the [Vercel homepage](<https://vercel.com/home>).
+I drew the icons manually in Figma and then transferred them as SVG into the code.
+
+<DynamicImage
+  className="rounded-xl !relative overflow-hidden border"
+  image={{
+    dark: "/tech-stack/icons_figma.png",
+    light: "/tech-stack/icons_figma.png"
+  }}
+  alt="tech-stack-grid"
+/>
+
+Thank you for your attention, that's all for now!

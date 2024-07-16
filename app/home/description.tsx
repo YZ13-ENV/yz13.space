@@ -36,7 +36,7 @@ const Description = ({ description = [] }: { description?: string[] }) => {
         description.map(
           (item, textIndex) => {
             const isMatch = index === textIndex
-            const isPast = index ? index > textIndex : false
+            const isReaded = index ? index < textIndex : false
             return <span
               onMouseEnter={() => setIndex(textIndex)}
               key={`${item}#${textIndex}`}
@@ -47,7 +47,7 @@ const Description = ({ description = [] }: { description?: string[] }) => {
             >
               <span className={cn(
                 "z-10 transition-colors hover:text-foreground",
-                isMatch ? "text-foreground" : isPast ? "text-secondary" : ""
+                isMatch ? "text-foreground" : !stopAnimation ? isReaded ? "text-secondary" : "" : ""
               )}>{item}</span>
               {
                 isMatch &&

@@ -82,4 +82,12 @@
   .md-layout > ul {
     @apply mx-3.5;
   }
+  .md-layout {
+    & > * > a {
+      @apply underline transition-colors hover:text-foreground;
+    }
+    & > a {
+      @apply underline transition-colors hover:text-foreground;
+    }
+  }
 }
