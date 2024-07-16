@@ -38,7 +38,7 @@ function PerformanceChart({ data = [] }: { data?: any[] }) {
     const formatted = diff.format("mm:ss")
     const deploymentDiff = diff
     const formattedDeploymentDiff = deploymentDiff.asSeconds()
-    const formattedDate = dayjs(started_at).format("dd")
+    const formattedDate = dayjs(started_at).format("HH:mm")
     return { ...deployment, formattedDate: formattedDate, readyAtFormatted: formatted, readyAt: formattedDeploymentDiff }
   })
   return (
@@ -61,7 +61,7 @@ function PerformanceChart({ data = [] }: { data?: any[] }) {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+            // tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip
               cursor={false}

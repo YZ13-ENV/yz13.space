@@ -30,8 +30,8 @@ const JournalSection = async ({ locale = "en" }: { locale?: Locales }) => {
 const JournalSkeleton = () => {
   return (
     <>
-      <div className="h-32 relative w-full flex items-start gap-3">
-        <div className="relative h-full aspect-video border rounded-xl bg-yz-neutral-200" />
+      <div className="sm:h-32 h-fit relative w-full flex sm:flex-row flex-col items-start gap-3">
+        <div className="relative sm:h-full h-fit sm:w-fit w-full aspect-video border rounded-xl bg-yz-neutral-200" />
         <div className="flex flex-col gap-0.5 py-2 w-full">
           <span className="inline-block w-3/4 h-8 rounded-md bg-yz-neutral-200" />
           <div className="flex items-center gap-1">

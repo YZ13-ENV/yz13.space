@@ -18,9 +18,9 @@ const Item = ({ head, locale }: { head: JournalHead, locale: Locales }) => {
   const localeParam = `?lang=${locale}`
   const thumbnail = { dark: getStorageItem(["journal", head.thumbnail.dark]), light: getStorageItem(["journal", head.thumbnail.light]) }
   return (
-    <li className="h-32 relative w-full flex items-start gap-3">
+    <li className="sm:h-32 h-fit relative w-full flex sm:flex-row flex-col items-start gap-3">
       <Link href={`/journal/${id}${localeParam}`} className="absolute top-0 left-0 w-full h-full" />
-      <div className="relative h-full aspect-video border rounded-xl bg-yz-neutral-200">
+      <div className="relative sm:h-full h-fit sm:w-fit w-full aspect-video border rounded-xl bg-yz-neutral-200">
         <DynamicImage
           className="rounded-xl"
           image={thumbnail}
