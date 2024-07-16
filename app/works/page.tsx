@@ -11,7 +11,14 @@ import { Works, WorksSkeleton } from "./works"
 export const metadata: Metadata = {
   ...layoutMetadata,
   title: "Works",
-  description: "Explore my works, hope yoy like some of them"
+  description: "Explore my works, hope yoy like some of them",
+  alternates: {
+    canonical: "/works",
+    languages: {
+      "ru": "/works?lang=ru",
+      "en": "/works?lang=en",
+    }
+  }
 }
 
 type Props = {

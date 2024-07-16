@@ -3,9 +3,10 @@ import { PiDotDuotone } from "react-icons/pi";
 import { getFullJournal } from "./get-journal";
 import * as Journal from "./journal-list";
 
-const JournalSection = async ({ locale = "en" }: { locale?: Locales }) => {
+const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: number }) => {
   const journal = await getFullJournal(locale)
   const isEmpty = !journal.length
+  const maxedJournal = max ? journal.slice(0, max) : journal
   if (isEmpty) return (
     <div className="w-full aspect-square h-full flex items-center justify-center">
       <span>No journal's records yet</span>
@@ -15,12 +16,12 @@ const JournalSection = async ({ locale = "en" }: { locale?: Locales }) => {
     <>
       <Journal.List>
         {
-          journal.map(item => {
-            const head = item.frontmatter
-            const id = head.id
-            return <Journal.Item key={locale + "#" + id} head={head} locale={locale} />
-          }
-          )
+          maxedJournal
+            .map(item => {
+              const head = item.frontmatter
+              const id = head.id
+              return <Journal.Item key={locale + "#" + id} head={head} locale={locale} />
+            })
         }
       </Journal.List>
     </>

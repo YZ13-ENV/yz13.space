@@ -11,7 +11,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { Changelog, ChangelogSkeleton, LocalizedTitle } from "../../components/changelog";
 import { Footer } from "../_components/footer";
-import { Works, WorksSkeleton } from "../works/works";
+import { JournalSection, JournalSkeleton } from "../journal/journal";
 import { Contacts, ContactsSkeleton } from "./contacts";
 import { Description } from "./description";
 import { Status } from "./status";
@@ -19,7 +19,14 @@ import { TechStack } from "./tech-stack";
 
 export const metadata: Metadata = {
   ...layoutMetadata,
-  title: "Home"
+  title: "Home",
+  alternates: {
+    canonical: "/home",
+    languages: {
+      "ru": "/home?lang=ru",
+      "en": "/home?lang=en",
+    }
+  }
 }
 
 type Props = {
@@ -93,8 +100,8 @@ const page = async ({ searchParams }: Props) => {
             </Suspense>
           </section>
           <Separator />
-          <Suspense fallback={<WorksSkeleton />}>
-            <Works itemClassName="p-0" lang={lang} title={LocalizedTitle} />
+          <Suspense fallback={<JournalSkeleton />}>
+            <JournalSection locale={lang} />
           </Suspense>
         </div>
         <div className="mt-12">

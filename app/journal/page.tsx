@@ -1,9 +1,24 @@
 import { Dock } from "@/components/dock"
 import { Logo } from "@/components/logo"
+import { metadata as layoutMetadata } from "@/const/metadata"
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
+import { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 import { JournalSection, JournalSkeleton } from "./journal"
+
+
+export const metadata: Metadata = {
+  ...layoutMetadata,
+  title: "Journal",
+  alternates: {
+    canonical: "/journal",
+    languages: {
+      "ru": "/journal?lang=ru",
+      "en": "/journal?lang=en",
+    }
+  }
+}
 
 type Props = {
   searchParams: {
@@ -28,10 +43,7 @@ const page = async ({ searchParams }: Props) => {
         <Dock lang={lang} />
       </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6 space-y-6">
-        <h1 className="text-3xl font-medium inline-flex items-center gap-2">
-          {name}
-          <span className="uppercase text-xl text-secondary">{lang}</span>
-        </h1>
+        <h1 className="text-3xl font-medium">{name}</h1>
         <Suspense fallback={<JournalSkeleton />}>
           <JournalSection locale={lang} />
         </Suspense>
