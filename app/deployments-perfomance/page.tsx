@@ -5,6 +5,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { Metadata } from "next"
 import { LuDiff } from "react-icons/lu"
 import { PiHashDuotone, PiTimerDuotone } from "react-icons/pi"
+import { PerformanceChart } from "./chart"
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -87,31 +88,29 @@ const page = async () => {
     )
   }
   return (
-    <section className="max-w-xl mx-auto w-full space-y-6 p-6">
-      <div className="w-full">
-        <h1 className="text-2xl font-semibold text-center">
-          Deployments performance
-        </h1>
-      </div>
-      <div className="w-full">
-        <ul className="w-full space-y-2">
-          {
-            deployments.map((deployment, index, arr) => {
-              const isLast = arr.length === (index + 1)
-              const previousDeployment = isLast ? undefined : arr[(index + 1)]
-              return (
-                <Deployment
-                  key={deployment.uid}
-                  deployment={deployment}
-                  isLast={isLast}
-                  previousDeployment={previousDeployment}
-                />
-              )
-            })
-          }
-        </ul>
-      </div>
-    </section>
+    <>
+      <section className="max-w-2xl mx-auto w-full space-y-6 p-6">
+        <PerformanceChart data={deployments} />
+        <div className="w-full">
+          <ul className="w-full space-y-2">
+            {
+              deployments.map((deployment, index, arr) => {
+                const isLast = arr.length === (index + 1)
+                const previousDeployment = isLast ? undefined : arr[(index + 1)]
+                return (
+                  <Deployment
+                    key={deployment.uid}
+                    deployment={deployment}
+                    isLast={isLast}
+                    previousDeployment={previousDeployment}
+                  />
+                )
+              })
+            }
+          </ul>
+        </div>
+      </section>
+    </>
   )
 }
 export default page
