@@ -4,6 +4,7 @@ import dayjs from "dayjs"
 import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import duration from "dayjs/plugin/duration"
+import relativeTime from "dayjs/plugin/relativeTime"
 import { getExperience } from "../api/experience.api"
 
 type ListProps = {
@@ -13,6 +14,7 @@ type ListProps = {
 }
 
 dayjs.extend(duration);
+dayjs.extend(relativeTime);
 const ExperienceList = async ({ lang: providedLang = "en", title: providedTitle, hideTitle = false }: ListProps) => {
   const locale = getLocale()
   const lang = providedLang ? providedLang : locale
@@ -44,7 +46,7 @@ const ExperienceList = async ({ lang: providedLang = "en", title: providedTitle,
                     const to_date = not_ended ? dayjs().locale(lang) : dayjs(item.to).locale(lang)
                     // const to = not_ended ? null : to_date ? to_date.format("MM.YYYY") : null
                     const duration = to_date ? dayjs.duration(from_date.diff(to_date)).locale(lang) : null
-                    const durationString = duration?.humanize()
+                    const durationString = duration ? duration?.humanize() : null
                     return (
                       <li key={item.name + "#" + item.id} className="w-full group h-9">
                         <button className="flex items-center w-full h-full">

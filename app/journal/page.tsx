@@ -28,10 +28,7 @@ const page = async ({ searchParams }: Props) => {
         <Dock lang={lang} />
       </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6 space-y-6">
-        <h1 className="text-3xl font-medium inline-flex items-center gap-2">
-          {name}
-          <span className="uppercase text-xl text-secondary">{lang}</span>
-        </h1>
+        <h1 className="text-3xl font-medium">{name}</h1>
         <Suspense fallback={<JournalSkeleton />}>
           <JournalSection locale={lang} />
         </Suspense>
