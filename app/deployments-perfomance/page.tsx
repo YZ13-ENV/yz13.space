@@ -5,6 +5,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { Metadata } from "next"
 import { LuDiff } from "react-icons/lu"
 import { PiHashDuotone, PiTimerDuotone } from "react-icons/pi"
+import { PerformanceChart } from "./chart"
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -93,6 +94,7 @@ const page = async () => {
           Deployments performance
         </h1>
       </div>
+      <PerformanceChart data={deployments} />
       <div className="w-full">
         <ul className="w-full space-y-2">
           {
