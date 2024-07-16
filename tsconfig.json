@@ -8,9 +8,13 @@
       ]
     },
   },
+  "mdx": {
+    "checkMdx": true
+  },
   "include": [
     "next-env.d.ts",
     "next.config.mjs",
+    "**/*.mdx",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"

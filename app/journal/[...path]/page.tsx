@@ -1,9 +1,11 @@
 import { Dock } from "@/components/dock"
 import { Logo } from "@/components/logo"
 import { getLocale, Locales } from "@/dictionaries/tools"
+import { compileMDX } from 'next-mdx-remote/rsc'
+import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
-
+import { getMDX, isMDXExist } from "./get-mdx"
 type Props = {
   params: {
     path: string[]
@@ -13,11 +15,17 @@ type Props = {
   }
 }
 
-const page = ({ params, searchParams }: Props) => {
+const page = async ({ params, searchParams }: Props) => {
   const searchParamLang = searchParams.lang
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   const path = params.path
+  const isExist = isMDXExist(lang, path)
+  if (!isExist) return "not exist"
+  const source = getMDX(lang, path)
+  const { content, frontmatter } = await compileMDX({ source: source, components: { Image: props => <Image {...props} /> }, options: { parseFrontmatter: true } })
+  const head = frontmatter
+  const title = head?.title as string | undefined
   return (
     <>
       <Link href="/journal">
@@ -30,7 +38,13 @@ const page = ({ params, searchParams }: Props) => {
         <Dock lang={searchParamLang as Locales | undefined} />
       </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6 space-y-6">
-        <h1 className="text-3xl font-medium">{path.join("/")} <span className="uppercase text-secondary">{lang}</span></h1>
+        <h1 className="text-3xl font-medium inline-flex items-center gap-2">
+          {title}
+          <span className="uppercase text-xl text-secondary">{lang}</span>
+        </h1>
+        <div className="md-layout">
+          {content}
+        </div>
         <div className="h-20 w-full"></div>
       </div>
     </>

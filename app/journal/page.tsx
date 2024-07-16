@@ -1,8 +1,10 @@
 import { Dock } from "@/components/dock"
 import { Logo } from "@/components/logo"
 import { getLocale, Locales } from "@/dictionaries/tools"
-import { cn } from "@repo/ui/cn"
+import Link from "next/link"
 import { Suspense } from "react"
+import { PiDotDuotone } from "react-icons/pi"
+import { getJournal } from "./get-journal"
 
 type Props = {
   searchParams: {
@@ -13,6 +15,8 @@ const page = async ({ searchParams }: Props) => {
   const searchParamLang = searchParams.lang
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const journal = getJournal(lang)
+  console.log(journal)
   // return (
   // <div className="w-full h-screen flex items-center justify-center">
   {/* <Logo */ }
@@ -32,21 +36,31 @@ const page = async ({ searchParams }: Props) => {
       </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6 space-y-6">
         <h1 className="text-3xl font-medium">Journal <span className="uppercase text-secondary">{lang}</span></h1>
-        <ul>
-          <li className="h-9 w-full">
-            <div className="h-full flex gap-2 items-center group cursor-pointer">
-              <span className="xl:text-base w-full text-sm text-secondary text-left float-left space-x-2 shrink-0">
-                <span className="inline">13 Aug</span>
-                <span
-                  className={cn(
-                    "xl:text-base text-start text-sm group-hover:text-foreground transition-colors"
-                  )}
-                >
-                  New title
-                </span>
-              </span>
-            </div>
-          </li>
+        <ul className="space-y-3">
+          {
+            journal.map(record => {
+              const id = record.replace(".mdx", "")
+              return (
+                <li key={record} className="h-32 relative w-full flex items-start gap-3">
+                  <Link href={`/journal/${id}`} className="absolute top-0 left-0 w-full h-full" />
+                  <div className="h-full aspect-video border rounded-xl bg-yz-neutral-200" />
+                  <div className="flex flex-col gap-0.5 py-2">
+                    <span className="font-medium text-2xl text-foreground">
+                      Beautiful grid component
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-sm text-foreground/75">YZ13</span>
+                      <PiDotDuotone size={16} />
+                      <span className="text-sm text-foreground/75">A day ago</span>
+                    </div>
+                    <span className="text-base text-foreground/80">
+                      I develop a beautiful and reusable grid component
+                    </span>
+                  </div>
+                </li>
+              )
+            })
+          }
         </ul>
         <div className="h-20 w-full"></div>
       </div>
