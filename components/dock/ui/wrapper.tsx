@@ -11,8 +11,7 @@ const DockWrapper = ({ children }: Props) => {
   const ref = useRef<ElementRef<"div">>(null)
   const [width, setWidth] = useState<number>(36)
   const [show, setShow] = useState<boolean>(false)
-  const { setTab, tab } = useDockTab()
-  console.log(tab)
+  const tab = useDockTab(state => state.tab)
   const updateDockWidth = () => {
     const div = ref.current
     if (div) {
