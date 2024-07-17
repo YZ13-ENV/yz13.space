@@ -1,7 +1,9 @@
 "use client"
+import { cn } from "@repo/ui/cn"
 import { useMutationObserver } from "ahooks"
-import { motion } from "framer-motion"
+import { cubicBezier, motion } from "framer-motion"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
+import { useDockTab } from "../store/dock.store"
 type Props = {
   children?: ReactNode
 }
@@ -9,6 +11,8 @@ const DockWrapper = ({ children }: Props) => {
   const ref = useRef<ElementRef<"div">>(null)
   const [width, setWidth] = useState<number>(36)
   const [show, setShow] = useState<boolean>(false)
+  const { setTab, tab } = useDockTab()
+  console.log(tab)
   const updateDockWidth = () => {
     const div = ref.current
     if (div) {
@@ -19,7 +23,7 @@ const DockWrapper = ({ children }: Props) => {
   useMutationObserver(
     () => updateDockWidth(),
     ref,
-    { attributes: true, characterData: true },
+    { attributes: true, characterData: true, childList: true },
   );
   useEffect(() => {
     if (typeof document !== "undefined") setShow(true)
@@ -27,7 +31,7 @@ const DockWrapper = ({ children }: Props) => {
   useEffect(() => {
     const div = ref.current
     if (div) updateDockWidth()
-  }, [ref])
+  }, [ref, tab])
   return (
     <motion.footer
       layout
@@ -35,9 +39,15 @@ const DockWrapper = ({ children }: Props) => {
       animate={{ width: "fit-content" }}
       // @ts-expect-error
       style={{ "--dock-width": `${width}px` }}
+      transition={{
+        easings: cubicBezier(.67, 0, .37, 1),
+        damping: .600,
+        bounce: .350
+      }}
       ref={ref}
       id="dock"
-      className="dock-wrapper rounded-full bg-background">
+      className={cn("dock-wrapper bg-background max-w-fit", "rounded-3xl")}
+    >
       {
         show &&
         children

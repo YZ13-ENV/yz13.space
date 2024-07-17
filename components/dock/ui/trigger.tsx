@@ -1,32 +1,28 @@
+"use client"
 import { Button } from "@repo/ui/button"
 import { cn } from "@repo/ui/cn"
-import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui/popover"
 import { ReactNode } from "react"
+import { useDockTab } from "../store/dock.store"
 
 type TriggerProps = {
+  value: string
   children?: ReactNode
-  content?: ReactNode
   className?: string
   asChild?: boolean
 }
-const Trigger = ({ children, asChild = false, content, className = '' }: TriggerProps) => {
+const Trigger = ({ asChild = false, value, children, className = '' }: TriggerProps) => {
+  const { tab, setTab } = useDockTab()
+  const isSelected = tab ? tab === value : false
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="w-10 h-10 aspect-square bg-yz-neutral-200 rounded-full"
-          asChild={asChild}
-        >
-          {children}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent sideOffset={24} className={cn("p-0 shadow-none border-0 w-[32rem]", className)}>
-        {content}
-      </PopoverContent>
-    </Popover>
-
+    <Button
+      asChild={asChild}
+      onClick={() => isSelected ? setTab(undefined) : setTab(value)}
+      variant="ghost"
+      size="icon"
+      className={cn("w-10 h-10 aspect-square bg-yz-neutral-200 rounded-full", className)}
+    >
+      {children}
+    </Button>
   )
 }
 export { Trigger }
