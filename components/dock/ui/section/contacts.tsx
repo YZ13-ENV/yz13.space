@@ -13,7 +13,7 @@ const Contacts = async () => {
       {
         contacts &&
         contacts.map(contact =>
-          <Trigger key={`dock#${contact.value}`} asChild>
+          <Trigger key={`dock#${contact.value}`} asChild value={contact.label}>
             <Link href={contact.value}>
               {contact.icon && bs[contact.icon as keyof typeof bs]({ size: 16 })}
             </Link>

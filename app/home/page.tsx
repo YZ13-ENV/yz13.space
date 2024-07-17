@@ -15,7 +15,8 @@ import { JournalSection, JournalSkeleton } from "../journal/journal";
 import { Contacts, ContactsSkeleton } from "./contacts";
 import { Description } from "./description";
 import { Status } from "./status";
-import { TechStack } from "./tech-stack";
+import { FrontendTechStack } from "./tech-stack/frontend";
+import { stack } from "./tech-stack/frontend/frontend-stack";
 
 export const metadata: Metadata = {
   ...layoutMetadata,
@@ -85,7 +86,7 @@ const page = async ({ searchParams }: Props) => {
               ?
               <>
                 <Separator />
-                <TechStack title={techStackTitle} />
+                <FrontendTechStack title={techStackTitle} stack={stack} />
                 <Separator />
               </>
               : <Separator />

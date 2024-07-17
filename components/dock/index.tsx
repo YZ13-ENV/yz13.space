@@ -1,5 +1,6 @@
 import { Locales } from "@/dictionaries/tools"
 import { LuMenu } from "react-icons/lu"
+import { DockContent } from "./ui/content"
 import { Contacts } from "./ui/section/contacts"
 import { Menu } from "./ui/section/menu"
 import { User } from "./ui/section/user"
@@ -7,20 +8,22 @@ import { Trigger } from "./ui/trigger"
 import { DockWrapper } from "./ui/wrapper"
 
 const Dock = ({ lang = "en" }: { lang?: Locales }) => {
-  // const cks = cookies()
-  // const sp = createClient(cks)
-  // const { data: { user } } = await sp.auth.getUser()
-  // const metadata = user?.user_metadata
-  // const isAdmin = (metadata?.type || "user") === "admin"
   return (
     <DockWrapper>
-      <Trigger className="lg:w-80 w-screen" content={<Menu lang={lang} />}>
-        <LuMenu size={16} />
-      </Trigger>
-      <Contacts />
-      <Trigger>
-        <User />
-      </Trigger>
+      <DockContent
+        content={{
+          "menu": <Menu lang={lang} />
+        }}
+      />
+      <div className="flex items-center shrink-0 justify-center mx-auto h-14 w-full gap-1.5">
+        <Trigger value="menu">
+          <LuMenu size={16} />
+        </Trigger>
+        <Contacts />
+        <Trigger value="user">
+          <User />
+        </Trigger>
+      </div>
     </DockWrapper>
   )
 }

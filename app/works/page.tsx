@@ -40,11 +40,9 @@ const page = async ({ searchParams }: Props) => {
         <Dock lang={lang} />
       </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6">
-        <div className="max-w-3xl w-full mx-auto">
-          <Suspense fallback={<WorksSkeleton />}>
-            <Works itemClassName="p-0" lang={lang} title={LocalizedTitle} />
-          </Suspense>
-        </div>
+        <Suspense fallback={<WorksSkeleton />}>
+          <Works itemClassName="p-0" lang={lang} title={LocalizedTitle} />
+        </Suspense>
         <div className="h-20 w-full"></div>
       </div>
       <Link href="/home">

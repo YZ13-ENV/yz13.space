@@ -1,6 +1,6 @@
 import { isDev } from "@/packages/api/src/const";
 import { IconType } from "react-icons/lib";
-import { PiBagSimpleDuotone, PiBookBookmarkDuotone, PiHouseSimpleDuotone } from "react-icons/pi";
+import { PiBookBookmarkDuotone, PiHouseSimpleDuotone } from "react-icons/pi";
 
 export type NavLink = {
   link: string
@@ -21,12 +21,12 @@ const nav_links: NavLink[] = [
     label: "Journal",
     link: "/journal",
     icon: PiBookBookmarkDuotone
-  },
-  {
-    label: "Works",
-    link: "/works",
-    icon: PiBagSimpleDuotone
   }
+  // {
+  // label: "Works",
+  // link: "/works",
+  // icon: PiBagSimpleDuotone
+  // }
 ].filter(link => {
   if (isDev) return link
   return !inDev.includes(link.link)

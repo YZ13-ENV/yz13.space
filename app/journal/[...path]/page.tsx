@@ -1,5 +1,6 @@
 import { Video } from "@/app/_components/video"
-import { TechStack } from "@/app/home/tech-stack"
+import { FrontendTechStack } from "@/app/home/tech-stack/frontend"
+import { stack } from "@/app/home/tech-stack/frontend/frontend-stack"
 import { Dock } from "@/components/dock"
 import { DynamicImage } from "@/components/dynamic-image"
 import { Logo } from "@/components/logo"
@@ -36,7 +37,7 @@ const page = async ({ params, searchParams }: Props) => {
       Image: props => <Image {...props} />,
       Video: props => <Video {...props} />,
       DynamicImage: props => <DynamicImage {...props} image={{ dark: getStorageItem(["journal", props.image.dark]), light: getStorageItem(["journal", props.image.light]) }} />,
-      TechStack: props => <TechStack {...props} />
+      TechStack: props => <FrontendTechStack {...props} stack={stack} />
     },
     options: { parseFrontmatter: true }
   })
