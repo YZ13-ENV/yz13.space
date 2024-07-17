@@ -46,9 +46,9 @@
   }
   code {
     color: var(--yz13-code);
-    font-family: var(--font-mono);
     font-size: 0.9em;
     white-space: pre-wrap;
+    @apply font-mono;
   }
 
   code:before {
