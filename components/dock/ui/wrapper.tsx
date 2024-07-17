@@ -2,16 +2,18 @@
 import { cn } from "@repo/ui/cn"
 import { useMutationObserver } from "ahooks"
 import { cubicBezier, motion } from "framer-motion"
+import { usePathname } from "next/navigation"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
 import { useDockTab } from "../store/dock.store"
 type Props = {
   children?: ReactNode
 }
 const DockWrapper = ({ children }: Props) => {
+  const pathname = usePathname()
   const ref = useRef<ElementRef<"div">>(null)
   const [width, setWidth] = useState<number>(36)
   const [show, setShow] = useState<boolean>(false)
-  const tab = useDockTab(state => state.tab)
+  const { setTab, tab } = useDockTab()
   const updateDockWidth = () => {
     const div = ref.current
     if (div) {
@@ -22,8 +24,11 @@ const DockWrapper = ({ children }: Props) => {
   useMutationObserver(
     () => updateDockWidth(),
     ref,
-    { attributes: true, characterData: true, childList: true },
+    { attributes: true, childList: true },
   );
+  useEffect(() => {
+    setTab(undefined)
+  }, [pathname])
   useEffect(() => {
     if (typeof document !== "undefined") setShow(true)
   }, [typeof document])
@@ -38,6 +43,7 @@ const DockWrapper = ({ children }: Props) => {
       animate={{ width: "fit-content" }}
       // @ts-expect-error
       style={{ "--dock-width": `${width}px` }}
+      onMouseLeave={() => setTab(undefined)}
       transition={{
         easings: cubicBezier(.67, 0, .37, 1),
         damping: .600,
