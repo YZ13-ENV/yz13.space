@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
     icons: [
       {
         src: "/brand/yz-light-128.png",
-        sizes: "any",
+        sizes: "128x128",
         type: "image/png",
         purpose: "any",
       },
@@ -23,7 +23,7 @@ export default function manifest(): MetadataRoute.Manifest {
         icons: [
           {
             src: "/brand/yz-light-32.png",
-            sizes: "any",
+            sizes: "32x32",
             type: "image/png",
             purpose: "any",
           },
@@ -35,7 +35,7 @@ export default function manifest(): MetadataRoute.Manifest {
         icons: [
           {
             src: "/brand/yz-light-32.png",
-            sizes: "any",
+            sizes: "32x32",
             type: "image/png",
             purpose: "any",
           },

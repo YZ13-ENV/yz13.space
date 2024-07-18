@@ -1,5 +1,6 @@
 import { metadata } from "@/const/metadata";
 import { getDict, getLocale } from "@/dictionaries/tools";
+import { isDev } from "@/packages/api/src/const";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
@@ -53,13 +54,19 @@ type LayoutProps = Readonly<{
 export default async function RootLayout({ children }: LayoutProps) {
   const locale = getLocale()
   const isEN = locale === "en"
+
   return (
     <html lang={locale} className={cn(isEN ? EN_FONT.variable : RU_FONT.variable, GeistMono.variable)}>
       <Body>
         <TooltipProvider>
+          {
+            !isDev &&
+            <>
+              <Analytics />
+              <SpeedInsights />
+            </>
+          }
           <MediaOverlay />
-          <Analytics />
-          <SpeedInsights />
           {children}
         </TooltipProvider>
       </Body>
