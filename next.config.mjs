@@ -6,9 +6,14 @@ const nextConfig = {
   compress: true,
   experimental: {
     optimizeCss: true,
-    appDocumentPreloading: true,
+    gzipSize: true,
+    optimizeServerReact: true,
+    parallelServerCompiles: true,
+    parallelServerBuildTraces: true,
+    serverMinification: true,
     cssChunking: "loose",
     swcMinify: true,
+    webpackBuildWorker: true
   },
   images: {
     remotePatterns: [

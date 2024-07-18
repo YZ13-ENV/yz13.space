@@ -29,7 +29,6 @@
     @apply relative mb-2 pl-1 font-light text-foreground;
   }
   .md-layout > ol > li::before {
-    content: "–";
     @apply text-secondary -left-3 absolute;
   }
   .md-layout > ul > li {

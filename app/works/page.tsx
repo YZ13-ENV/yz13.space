@@ -1,24 +1,20 @@
 import { Dock } from "@/components/dock"
 import { Logo } from "@/components/logo"
-import { metadata as layoutMetadata } from "@/const/metadata"
 import { Locales, getLocale } from "@/dictionaries/tools"
+import { Page, dynamicMetadata } from "@/metadata"
 import { Metadata } from "next"
 import Link from "next/link"
 import { Suspense } from "react"
 import { LocalizedTitle } from "../../components/changelog"
 import { Works, WorksSkeleton } from "./works"
 
-export const metadata: Metadata = {
-  ...layoutMetadata,
-  title: "Works",
-  description: "Explore my works, hope yoy like some of them",
-  alternates: {
-    canonical: "/works",
-    languages: {
-      "ru": "/works?lang=ru",
-      "en": "/works?lang=en",
-    }
-  }
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const searchParamLang = searchParams.lang
+  const locale = getLocale()
+  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const page: Page = "works"
+  const metadata = dynamicMetadata(lang, page)
+  return metadata
 }
 
 type Props = {

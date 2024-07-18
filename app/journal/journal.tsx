@@ -41,7 +41,7 @@ const JournalSkeleton = () => {
             <span className="inline-block w-1/4 h-5 rounded-md bg-yz-neutral-200" />
           </div>
           <span className="inline-block w-2/3 h-6 rounded-md bg-yz-neutral-200" />
-          <span className="inline-block w-1/2 h-6 rounded-md bg-yz-neutral-200" />
+          <span className="inline-block w-1/2 mt-1 h-6 rounded-md bg-yz-neutral-200" />
         </div>
       </div>
     </>

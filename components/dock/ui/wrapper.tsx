@@ -1,10 +1,11 @@
 "use client"
 import { cn } from "@repo/ui/cn"
-import { useMutationObserver } from "ahooks"
+import { useDebounceFn, useMutationObserver } from "ahooks"
 import { cubicBezier, motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
 import { useDockTab } from "../store/dock.store"
+
 type Props = {
   children?: ReactNode
 }
@@ -21,6 +22,9 @@ const DockWrapper = ({ children }: Props) => {
       setWidth(width)
     }
   }
+  const { run } = useDebounceFn(() => setTab(undefined), {
+    wait: 1000
+  })
   useMutationObserver(
     () => updateDockWidth(),
     ref,
@@ -43,7 +47,7 @@ const DockWrapper = ({ children }: Props) => {
       animate={{ width: "fit-content" }}
       // @ts-expect-error
       style={{ "--dock-width": `${width}px` }}
-      onMouseLeave={() => setTab(undefined)}
+      onMouseLeave={run}
       transition={{
         easings: cubicBezier(.67, 0, .37, 1),
         damping: .600,

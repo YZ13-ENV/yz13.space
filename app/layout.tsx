@@ -1,5 +1,6 @@
-import { metadata } from "@/const/metadata";
-import { getDict, getLocale } from "@/dictionaries/tools";
+import { getLocale } from "@/dictionaries/tools";
+import { dynamicMetadata } from "@/metadata";
+import { isDev } from "@/packages/api/src/const";
 import "@/styles/globals.css";
 import "@/styles/markdown.css";
 import "@/styles/svg.css";
@@ -32,12 +33,8 @@ const EN_FONT = Inter({
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = getLocale()
-  const localeMetadata = await getDict<any>("metadata", locale)
-  const layout = localeMetadata.layout
-  return {
-    ...metadata,
-    ...layout
-  }
+  const metadata = dynamicMetadata(locale)
+  return metadata
 }
 
 export const viewport: Viewport = {
@@ -57,9 +54,14 @@ export default async function RootLayout({ children }: LayoutProps) {
     <html lang={locale} className={cn(isEN ? EN_FONT.variable : RU_FONT.variable, GeistMono.variable)}>
       <Body>
         <TooltipProvider>
+          {
+            !isDev &&
+            <>
+              <Analytics />
+              <SpeedInsights />
+            </>
+          }
           <MediaOverlay />
-          <Analytics />
-          <SpeedInsights />
           {children}
         </TooltipProvider>
       </Body>

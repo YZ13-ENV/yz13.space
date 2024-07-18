@@ -36,7 +36,7 @@ const Item = ({ head, locale }: { head: JournalHead, locale: Locales }) => {
           <PiDotDuotone size={16} />
           <span className="text-sm text-foreground/75">{formatted}</span>
         </div>
-        <span className="text-base text-foreground/80">
+        <span className="text-base mt-1 text-foreground/80">
           {description}
         </span>
       </div>

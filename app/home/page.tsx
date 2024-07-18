@@ -2,10 +2,10 @@ import { Dock } from "@/components/dock";
 import { ExperienceList } from "@/components/experience";
 import { ExperienceListSkeleton } from "@/components/experience/ui/skeleton";
 import { Logo } from "@/components/logo";
-import { metadata as layoutMetadata } from "@/const/metadata";
 import { Locales, getDict, getLocale } from "@/dictionaries/tools";
 import { showStatus } from "@/feature-flags/status.feature";
 import { shotTechStack } from "@/feature-flags/tech-stack.feature";
+import { Page, dynamicMetadata } from "@/metadata";
 import { Separator } from "@repo/ui/separator";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -18,16 +18,13 @@ import { Status } from "./status";
 import { FrontendTechStack } from "./tech-stack/frontend";
 import { stack } from "./tech-stack/frontend/frontend-stack";
 
-export const metadata: Metadata = {
-  ...layoutMetadata,
-  title: "Home",
-  alternates: {
-    canonical: "/home",
-    languages: {
-      "ru": "/home?lang=ru",
-      "en": "/home?lang=en",
-    }
-  }
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const searchParamLang = searchParams.lang
+  const locale = getLocale()
+  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const page: Page = "home"
+  const metadata = dynamicMetadata(lang, page)
+  return metadata
 }
 
 type Props = {
