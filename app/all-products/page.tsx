@@ -1,5 +1,6 @@
 import { Logo } from "@/components/logo";
-import { metadata as layoutMetadata } from "@/const/metadata";
+import { Locales, getLocale } from "@/dictionaries/tools";
+import { dynamicMetadata } from "@/metadata";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Product } from "./product";
@@ -8,10 +9,20 @@ import { platform } from "./products/platform";
 import { storage } from "./products/storage";
 
 
-export const metadata: Metadata = {
-  ...layoutMetadata,
-  title: "All Products"
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const searchParamLang = searchParams.lang
+  const locale = getLocale()
+  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const metadata = dynamicMetadata(lang)
+  return metadata
 }
+
+type Props = {
+  searchParams: {
+    lang?: string
+  }
+}
+
 const page = () => {
   return (
     <>

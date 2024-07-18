@@ -1,3 +1,5 @@
+import { Locales, getLocale } from "@/dictionaries/tools"
+import { dynamicMetadata } from "@/metadata"
 import { cn } from "@repo/ui/cn"
 import dayjs from "dayjs"
 import duration from "dayjs/plugin/duration"
@@ -10,8 +12,18 @@ import { PerformanceChart } from "./chart"
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
-export const metadata: Metadata = {
-  title: "Deployments perfomance"
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const searchParamLang = searchParams.lang
+  const locale = getLocale()
+  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const metadata = dynamicMetadata(lang)
+  return metadata
+}
+
+type Props = {
+  searchParams: {
+    lang?: string
+  }
 }
 
 const page = async () => {
