@@ -8,5 +8,9 @@ export const openGraph: Metadata["openGraph"] = {
   locale: "EN",
   url: "https://yz13.space",
   title: "YZ13",
-  images: getStorageItem(["static", "metadata/og-preview-light.png"]),
+  images: {
+    url: getStorageItem(["static", "metadata/og-preview-light.png"]),
+    width: 1200,
+    height: 630,
+  },
 };

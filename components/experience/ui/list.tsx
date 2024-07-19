@@ -1,3 +1,4 @@
+import { experience } from "@/actions/experience"
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
 import { cn } from "@repo/ui/cn"
 import dayjs from "dayjs"
@@ -5,7 +6,6 @@ import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import duration from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { getExperience } from "../api/experience.api"
 
 type ListProps = {
   lang?: Locales
@@ -20,8 +20,10 @@ const ExperienceList = async ({ lang: providedLang = "en", title: providedTitle,
   const lang = providedLang ? providedLang : locale
   const changelogDict = await getDict<any>("experience", lang)
   const name = changelogDict.name
-  const experience = await getExperience(lang)
-  const list = (experience.data || [])
+  const experience_result = await experience(lang)
+  const experiences = experience_result?.data
+  if (!experiences) return "error"
+  const list = (experiences.data || [])
   const title = providedTitle
   return (
     <>
