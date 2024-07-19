@@ -1,7 +1,7 @@
 "use client"
 import { cn } from "@repo/ui/cn"
 import { useDebounceEffect, useInterval } from "ahooks"
-import { cubicBezier, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useState } from "react"
 
 const Description = ({ description = [] }: { description?: string[] }) => {
@@ -54,9 +54,10 @@ const Description = ({ description = [] }: { description?: string[] }) => {
                 <motion.span
                   transition={{
                     type: "spring",
-                    duration: .550,
-                    bounce: .25,
-                    easings: cubicBezier(.17, .67, .83, .67)
+                    bounce: 0.4,
+                    ease: "linear",
+                    damping: 13,
+                    stiffness: 75,
                   }}
                   layoutId="text-wrapper-animated"
                   className="w-full p-2 absolute z-[-1] h-full rounded-md bg-yz-neutral-300"

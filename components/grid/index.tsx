@@ -18,6 +18,7 @@ function Grid({ rows, columns, children, className = "" }: GridProps) {
           const y = Math.floor(index / columns) + 1;
           return (
             <div
+              key={`${x}-${y}#${index}`}
               className={grid["grid-guide"]}
               // @ts-ignore
               style={{ '--x': x, '--y': y }}

@@ -1,8 +1,8 @@
 "use client"
 import { cn } from "@repo/ui/cn"
-import { useDebounceEffect } from "ahooks"
-import { AnimatePresence, cubicBezier, motion } from "framer-motion"
-import { ReactNode, useState } from "react"
+import { useClickAway } from "ahooks"
+import { AnimatePresence, motion } from "framer-motion"
+import { ReactNode, useRef } from "react"
 import { useDockTab } from "../store/dock.store"
 
 type ContentProps = {
@@ -10,26 +10,31 @@ type ContentProps = {
 }
 
 const DockContent = ({ content }: ContentProps) => {
-  const tab = useDockTab(state => state.tab)
+  const { tab, setTab } = useDockTab()
   const isInContent = tab ? tab in content : false
-  const [completed, setCompleted] = useState<boolean>(false)
-  useDebounceEffect(() => {
-    setCompleted(!isInContent)
-  }, [isInContent], { wait: 600 })
+  const ref = useRef(null)
+  useClickAway(() => {
+    setTab(undefined)
+  }, ref)
   return (
     <AnimatePresence>
       {
         isInContent &&
         <motion.div
-          onAnimationComplete={() => setCompleted(true)}
-          initial={{ height: 0 }}
-          animate={{ height: "fit-content" }}
-          exit={{ height: 0 }}
+          ref={ref}
+          initial={{ y: 4, height: 0, width: 238 }}
+          animate={{ y: 0, height: 300, width: 238 }}
+          exit={{ y: 4, height: 0, width: 238 }}
           transition={{
-            easings: cubicBezier(.67, 0, .37, 1),
-            duration: .350
+            type: "spring",
+            bounce: 0.4,
+            ease: "linear",
+            damping: 13,
+            stiffness: 50,
           }}
-          className={cn("w-full", completed ? "overflow-auto" : "overflow-hidden")}
+          className={cn(
+            "w-full relative overflow-hidden",
+          )}
         >
           {content[tab as keyof typeof content]}
         </motion.div>

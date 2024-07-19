@@ -1,7 +1,7 @@
 "use client"
 import { cn } from "@repo/ui/cn"
 import { useDebounceFn, useMutationObserver } from "ahooks"
-import { cubicBezier, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
 import { useDockTab } from "../store/dock.store"
@@ -22,9 +22,7 @@ const DockWrapper = ({ children }: Props) => {
       setWidth(width)
     }
   }
-  const { run } = useDebounceFn(() => setTab(undefined), {
-    wait: 1000
-  })
+  const { run: closeDock } = useDebounceFn(() => setTab(undefined), { wait: 250 })
   useMutationObserver(
     () => updateDockWidth(),
     ref,
@@ -43,19 +41,33 @@ const DockWrapper = ({ children }: Props) => {
   return (
     <motion.footer
       layout
-      initial={{ width: "36px" }}
-      animate={{ width: "fit-content" }}
+      whileHover={{
+        scale: 1.1,
+      }}
+      initial={{
+        width: "36px",
+        bottom: "-64px"
+      }}
+      animate={{
+        width: "fit-content",
+        bottom: "24px"
+      }}
       // @ts-expect-error
       style={{ "--dock-width": `${width}px` }}
-      onMouseLeave={run}
       transition={{
-        easings: cubicBezier(.67, 0, .37, 1),
-        damping: .600,
-        bounce: .350
+        type: "spring",
+        bounce: 0.4,
+        ease: "linear",
+        damping: 13,
+        stiffness: 150,
+        // duration: 4,
       }}
       ref={ref}
       id="dock"
-      className={cn("dock-wrapper bg-background max-w-fit", "rounded-3xl")}
+      className={cn(
+        "dock-wrapper bg-background flex flex-col max-w-fit",
+        "rounded-3xl"
+      )}
     >
       {
         show &&

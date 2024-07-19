@@ -20,4 +20,4 @@ export const tech_stack_flag: FlagDeclaration<boolean> = {
   ],
 };
 
-export const shotTechStack = flag<boolean>(tech_stack_flag);
+export const showTechStack = flag<boolean>(tech_stack_flag);
