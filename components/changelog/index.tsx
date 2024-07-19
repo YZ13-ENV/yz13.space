@@ -1,7 +1,7 @@
+import { changelog } from "@/actions/changelog"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
 import { Button } from "@repo/ui/button"
 import { cn } from "@repo/ui/cn"
-import { getChangelog } from "@yz13/api/db/changelog"
 import dayjs from "dayjs"
 import "dayjs/locale/en"
 import "dayjs/locale/ru"
@@ -21,7 +21,9 @@ export const LocalizedTitle = ({ name }: { name: string }) => {
 const Changelog = async ({ title: providedTitle, lang: providedLang, hideTitle = false, max = 7 }: ChangelogProps) => {
   const locale = getLocale()
   const lang = providedLang ? providedLang : locale
-  const changelogs = await getChangelog(lang)
+  const changelog_result = await changelog(lang)
+  const changelogs = changelog_result?.data
+  if (!changelogs) return "error"
   const logs = (changelogs.data || [])
     .sort((a, b) => {
       const a_date = dayjs(a.created_at)

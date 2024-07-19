@@ -15,7 +15,7 @@ const Dock = ({ lang = "en" }: { lang?: Locales }) => {
           "menu": <Menu lang={lang} />
         }}
       />
-      <div className="flex items-center shrink-0 justify-center mx-auto h-14 w-full gap-1.5">
+      <div className="flex items-center shrink-0 justify-center mx-auto h-14 w-fit gap-1.5">
         <Trigger value="menu">
           <LuMenu size={16} />
         </Trigger>

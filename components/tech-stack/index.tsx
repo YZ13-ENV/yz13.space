@@ -55,7 +55,7 @@ const Wrapper = ({
 }) => {
   return (
     <div
-      className={className}
+      className={cn("", className)}
       onMouseLeave={onLeave}
       onMouseEnter={onEnter}
     >
