@@ -136,7 +136,7 @@ const Item = ({
       onMouseEnter={() => onChange && onChange(stack.value)}
       onMouseLeave={() => onChange && onChange(null)}
       className={cn(
-        "w-full h-40 flex items-center justify-center",
+        "w-full h-40 group flex items-center justify-center",
         className
       )}
     >

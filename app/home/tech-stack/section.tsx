@@ -12,7 +12,7 @@ const StackSection = ({ title }: { title?: string }) => {
   return (
     <>
       <StackSwitcher onValue={setSection} value={section} />
-      <div className="w-full relative overflow-hidden">
+      <div className="w-full relative h-[320px] overflow-hidden">
         <AnimatePresence>
           {
             section === "frontend" &&

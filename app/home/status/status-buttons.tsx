@@ -20,7 +20,7 @@ const StatusButtons = () => {
   }, copied ? 2000 : undefined)
   return (
     <>
-      <Button className="w-10 h-10 rounded-lg" size="icon" variant="outline" asChild>
+      <Button className="size-10 shrink-0 rounded-lg" size="icon" variant="outline" asChild>
         <Link href={"mailto:YZTHECEO@yandex.ru"}>
           <LuMail size={18} />
         </Link>
@@ -30,7 +30,7 @@ const StatusButtons = () => {
           setCopied(true)
           copy("YZTHECEO@yandex.ru")
         }}
-        className="w-10 h-10 rounded-lg"
+        className="size-10 shrink-0 rounded-lg"
         size="icon"
         variant="outline"
       >

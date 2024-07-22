@@ -23,7 +23,7 @@ const DockContent = ({ content }: ContentProps) => {
         <motion.div
           ref={ref}
           initial={{ y: 4, height: 0, width: 238 }}
-          animate={{ y: 0, height: 300, width: 238 }}
+          animate={{ y: 0, height: "fit-content", width: 238 }}
           exit={{ y: 4, height: 0, width: 238 }}
           transition={{
             type: "spring",
