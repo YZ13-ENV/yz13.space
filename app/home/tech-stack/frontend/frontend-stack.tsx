@@ -16,39 +16,30 @@ export const stack: Stack[] = [
   {
     label: "React",
     value: "react",
-    color: "#139eca",
-    // @ts-ignore
-    icon: <ReactIcon size={48} style={{ "--color": "#139eca" }} />,
+    icon: <ReactIcon size={48} />,
     y: -2 * 28,
   },
   {
     label: "TypeScript",
     value: "typescript",
-    // @ts-ignore
-    icon: <TypeScriptIcon size={48} style={{ "--color": "#3178c6" }} />,
-    color: "#3178c6",
+    icon: <TypeScriptIcon size={48} />,
     y: -3 * 28,
   },
   {
     label: "Vite",
     value: "vite",
-    color: "#8779fe",
-    // @ts-ignore
-    icon: <ViteIcon size={48} style={{ "--color": "#8779fe" }} />,
+    icon: <ViteIcon size={48} />,
     y: -4 * 28,
   },
   {
     label: "TailwindCSS",
     value: "tailwind",
-    color: "#38BDF8",
-    // @ts-ignore
-    icon: <TailwindIcon size={48} style={{ "--color": "#38BDF8" }} />,
+    icon: <TailwindIcon size={48} />,
     y: -5 * 28,
   },
   {
     label: "Shadcn",
     value: "shadcn",
-    // @ts-ignore
     icon: <ShadcnIcon size={48} />,
     y: -6 * 28,
   },
