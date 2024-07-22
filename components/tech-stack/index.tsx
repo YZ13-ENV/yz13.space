@@ -1,4 +1,5 @@
 "use client"
+import { StackName } from "@/app/home/tech-stack/stack-switcher"
 import { cn } from "@repo/ui/cn"
 import { useInterval } from "ahooks"
 import { cubicBezier, motion, MotionValue } from "framer-motion"
@@ -75,7 +76,17 @@ const Header = ({ title = "", children }: { title?: string, children?: ReactNode
   )
 }
 
-const HeaderList = ({ stack = [], y, selected }: { stack?: Stack[], y: MotionValue<any>, selected: string | null }) => {
+const HeaderList = ({
+  stack = [],
+  y,
+  selected,
+  stackName = "frontend"
+}: {
+  stack?: Stack[],
+  y: MotionValue<any>,
+  selected: string | null
+  stackName?: StackName
+}) => {
   return (
     <div className="w-full h-7 overflow-hidden relative">
       <motion.div
@@ -90,7 +101,7 @@ const HeaderList = ({ stack = [], y, selected }: { stack?: Stack[], y: MotionVal
         }}
         className="absolute w-full h-fit flex flex-col"
       >
-        <span className={cn("h-7 text-xl inline-block", !selected ? "opacity-100" : "opacity-0")}>Frontend</span>
+        <span className={cn("h-7 text-xl inline-block capitalize", !selected ? "opacity-100" : "opacity-0")}>{stackName}</span>
         {
           stack
             .map(item => {

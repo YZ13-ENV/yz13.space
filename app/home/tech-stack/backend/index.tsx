@@ -5,7 +5,7 @@ import { useSpring } from "framer-motion"
 import { useEffect, useMemo, useState } from "react"
 import { StackName } from "../stack-switcher"
 
-const FrontendTechStack = ({ title, stack = [], stackName = "frontend" }: { title?: string, stackName?: StackName, stack?: Stack[] }) => {
+const BackendTechStack = ({ title, stack = [], stackName = "backend" }: { title?: string, stackName?: StackName, stack?: Stack[] }) => {
   const [selected, setSelected] = useState<string | null>(null)
   const y = useSpring(0)
   const [index, setIndex] = useState<number | null>(null)
@@ -57,4 +57,4 @@ const FrontendTechStack = ({ title, stack = [], stackName = "frontend" }: { titl
     </Wrapper>
   )
 }
-export { FrontendTechStack }
+export { BackendTechStack }
