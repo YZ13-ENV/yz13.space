@@ -1,6 +1,6 @@
+import { DynamicImage } from "@/components/dynamic-image"
 import { createClient } from "@/packages/supabase/src/supabase/server"
 import { cookies } from "next/headers"
-import Image from "next/image"
 import { Logged } from "./logged"
 import { UnLogged } from "./unlogged"
 
@@ -19,10 +19,15 @@ const page = async ({ searchParams }: Props) => {
   return (
     <div className="max-w-3xl w-full mx-auto h-screen">
       <div className="w-full absolute top-0 left-0 flex justify-center p-6">
-        <Image
-          src="/yz-light.png"
-          width={36} height={36} alt="logo"
-        />
+        <div className="size-12 relative">
+          <DynamicImage
+            image={{
+              dark: "https://yzstatic.yz13.space/logo/yz-dark.svg",
+              light: "https://yzstatic.yz13.space/logo/yz-light.svg"
+            }}
+            alt="logo"
+          />
+        </div>
       </div>
       <div className="flex relative flex-col items-center h-full justify-center w-full">
         {

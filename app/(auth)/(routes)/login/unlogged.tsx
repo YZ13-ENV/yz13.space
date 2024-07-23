@@ -22,8 +22,8 @@ const UnLogged = ({ continue: continueLink }: Props) => {
         >
           Sign in with Email
         </button>
-        <Button variant="ghost" asChild>
-          <Link href={signUpLink}>
+        <Button variant="ghost" asChild disabled>
+          <Link href={signUpLink} className="line-through">
             Looking for a demo?
           </Link>
         </Button>
