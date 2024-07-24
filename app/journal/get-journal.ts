@@ -2,6 +2,7 @@ import { Locales } from "@/dictionaries/tools";
 import { JournalHead } from "@/journal/types";
 import { readdirSync } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
+import { unstable_cache as cache } from "next/cache";
 import { join } from "path";
 import { getMDX } from "./[...path]/get-mdx";
 
@@ -22,8 +23,13 @@ const parseJournal = (locale: Locales, path: string[]) => {
 };
 
 const getFullJournal = async (locale: Locales) => {
+  const getCachedJournal = cache(
+    (path: string, locale: Locales) => parseJournal(locale, [path]),
+    ["journal"],
+    { revalidate: 60 * 60 }
+  );
   const journal = getJournal(locale);
-  const parsed = journal.map((path) => parseJournal(locale, [path]));
+  const parsed = journal.map((path) => getCachedJournal(path, locale));
   const resolved = await Promise.all(parsed);
   return resolved;
 };
