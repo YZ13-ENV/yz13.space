@@ -9,7 +9,7 @@ const Contacts = async () => {
   const contacts = await get<Contact[]>("contacts")
   return (
     <>
-      <Separator orientation="vertical" className="h-1/2" />
+      <Separator orientation="vertical" className="h-2/3" />
       {
         contacts &&
         contacts.map(contact =>
@@ -20,7 +20,7 @@ const Contacts = async () => {
           </Trigger>
         )
       }
-      <Separator orientation="vertical" className="h-1/2" />
+      <Separator orientation="vertical" className="h-2/3" />
     </>
   )
 }

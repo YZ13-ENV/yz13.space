@@ -1,6 +1,7 @@
 import { Dock } from "@/components/dock";
-import { Logo } from "@/components/logo";
+import { DynamicImage } from "@/components/dynamic-image";
 import { Locales, getLocale } from "@/dictionaries/tools";
+import { showPixelLogo } from "@/feature-flags/pixelated-logo.feature";
 import { Page, dynamicMetadata } from "@/metadata";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -29,12 +30,18 @@ const page = async ({ searchParams }: Props) => {
   const searchParamLang = searchParams.lang
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const pixelLogo = await showPixelLogo()
   return (
     <>
-      <Logo
-        width={36} height={36}
-        className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
-      />
+      <div className="size-12 xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0">
+        <DynamicImage
+          image={{
+            dark: pixelLogo ? "https://yzstatic.yz13.space/logo/yz-dark-pixel-2.svg" : "https://yzstatic.yz13.space/logo/yz-dark.svg",
+            light: pixelLogo ? "https://yzstatic.yz13.space/logo/yz-light-pixel-2.svg" : "https://yzstatic.yz13.space/logo/yz-light.svg"
+          }}
+          alt="logo"
+        />
+      </div>
       <Suspense fallback={<></>}>
         <Dock lang={lang} />
       </Suspense>
