@@ -1,21 +1,15 @@
 :root {
+  --default-icon-color: #000;
+  --icon-brand-color: #000;
+
   --header-height: 64px;
   --page-wrapper-height: calc(100dvh - var(--header-height));
   --contact-card-width: 280px;
   /* new */
-
-  --accents-1: 0 0% 98%;
-  --accents-2: 0 0% 92%;
-  --accents-3: 0 0% 60%;
-  --accents-4: 0 0% 53%;
-  --accents-5: 0 0% 40%;
-  --accents-6: 0 0% 27%;
-  --accents-7: 0 0% 20%;
-  --accents-8: 0 0% 7%;
   --yz13-foreground: 0 0% 0%;
   --yz13-background: 0 0% 100%;
   --yz13-selection: var(--yz13-foreground);
-  --yz13-border: var(--accents-2);
+  --yz13-border: var(--yz13-neutral-300);
 
   /* accent */
   --yz13-accent: #456990;
@@ -110,19 +104,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* new */
-    --accents-1: 0 0% 7%;
-    --accents-2: 0 0% 20%;
-    --accents-3: 0 0% 27%;
-    --accents-4: 0 0% 40%;
-    --accents-5: 0 0% 53%;
-    --accents-6: 0 0% 60%;
-    --accents-7: 0 0% 92%;
-    --accents-8: 0 0% 98%;
+    --default-icon-color: #fff;
+    --icon-brand-color: #fff;
     --yz13-foreground: 0 0% 100%;
     --yz13-background: 0 0% 0%;
     --yz13-selection: hsl(var(--yz13-foreground));
-    --yz13-border: var(--accents-3);
+    --yz13-border: var(--yz13-neutral-300);
 
     /* accent */
     --yz13-accent: #456990;

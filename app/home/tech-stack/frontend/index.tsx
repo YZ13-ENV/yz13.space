@@ -48,7 +48,7 @@ const FrontendTechStack = ({ title, stack = [], stackName = "frontend" }: { titl
                   key={"tech#" + techIndex}
                   stack={item}
                   onChange={setSelected}
-                  className={isAutoMode ? isSelected ? icon["active-icon"] : "" : icon["icon-wrapper"]}
+                  className={isAutoMode ? isSelected ? icon["active-icon-wrapper"] : icon["icon-wrapper"] : icon["icon-wrapper"]}
                 />
               )
             }

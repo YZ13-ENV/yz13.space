@@ -1,4 +1,4 @@
-import { geolocation } from "@vercel/edge";
+import { geolocation } from "@vercel/functions";
 import { NextResponse, type NextRequest } from "next/server";
 import { Locales, locales } from "./dictionaries/tools";
 
