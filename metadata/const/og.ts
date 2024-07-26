@@ -1,4 +1,3 @@
-import { getStorageItem } from "@yz13/supabase/storage";
 import { Metadata } from "next";
 
 export const openGraph: Metadata["openGraph"] = {
@@ -9,7 +8,7 @@ export const openGraph: Metadata["openGraph"] = {
   url: "https://yz13.space",
   title: "YZ13",
   images: {
-    url: getStorageItem(["static", "metadata/og-preview-light.png"]),
+    url: "https://og.yz13.space/yz13/OG-DEFAULT.png",
     width: 1200,
     height: 630,
   },

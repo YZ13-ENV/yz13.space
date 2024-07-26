@@ -1,12 +1,22 @@
 import { Locales } from "@/dictionaries/tools";
+import dayjs from "dayjs";
 import { PiDotDuotone } from "react-icons/pi";
+import { isDev } from "../(auth)/(routes)/login/get-url";
 import { getFullJournal } from "./get-journal";
 import * as Journal from "./journal-list";
 
 const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: number }) => {
   const journal = await getFullJournal(locale)
+
   const isEmpty = !journal.length
   const maxedJournal = max ? journal.slice(0, max) : journal
+  const now = dayjs()
+  const filtered = maxedJournal
+    .filter(item => {
+      if (isDev) return true
+      const date = dayjs(item.frontmatter.createdAt)
+      return now.diff(date) > 0 ? true : false
+    })
   if (isEmpty) return (
     <div className="w-full aspect-square h-full flex items-center justify-center">
       <span>No journal's records yet</span>
@@ -16,7 +26,7 @@ const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: 
     <>
       <Journal.List>
         {
-          maxedJournal
+          filtered
             .map(item => {
               const head = item.frontmatter
               const id = head.id

@@ -4,6 +4,7 @@ import { readdirSync } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { unstable_cache as cache } from "next/cache";
 import { join } from "path";
+import { isDev } from "../(auth)/(routes)/login/get-url";
 import { getMDX } from "./[...path]/get-mdx";
 
 const getJournal = (locale: Locales) => {
@@ -28,10 +29,17 @@ const getFullJournal = async (locale: Locales) => {
     ["journal"],
     { revalidate: 60 * 60 }
   );
-  const journal = getJournal(locale);
-  const parsed = journal.map((path) => getCachedJournal(path, locale));
-  const resolved = await Promise.all(parsed);
-  return resolved;
+  if (isDev) {
+    const journal = getJournal(locale);
+    const parsed = journal.map((path) => parseJournal(locale, [path]));
+    const resolved = await Promise.all(parsed);
+    return resolved;
+  } else {
+    const journal = getJournal(locale);
+    const parsed = journal.map((path) => getCachedJournal(path, locale));
+    const resolved = await Promise.all(parsed);
+    return resolved;
+  }
 };
 
 export { getFullJournal, getJournal, parseJournal };
