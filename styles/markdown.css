@@ -42,7 +42,7 @@
     @apply font-bold text-inherit;
   }
   .md-layout > blockquote {
-    @apply p-2 my-2 rounded-lg h-fit bg-accents-1;
+    @apply p-2 my-2 rounded-lg h-fit bg-yz-neutral-100;
   }
   .md-layout > a {
     @apply text-foreground hover:underline;

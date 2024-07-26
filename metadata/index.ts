@@ -34,8 +34,6 @@ export const dynamicMetadata = async (
       icons,
       keywords: words,
       verification,
-      openGraph,
-      twitter,
     };
   }
 };
