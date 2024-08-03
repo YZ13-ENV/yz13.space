@@ -12,7 +12,7 @@
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
-    @apply bg-yz-neutral-100 font-sans text-foreground;
+    @apply bg-background font-sans text-foreground;
   }
   h1,
   h2,

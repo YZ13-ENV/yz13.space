@@ -8,7 +8,7 @@ export const pixelated_logo_flag: FlagDeclaration<boolean> = {
   async decide() {
     const key = this.key;
     const isDev = process.env.NODE_ENV === "development";
-    if (isDev) return isDev;
+    if (isDev) return !isDev;
     const features = await get<Features>("features");
     return features ? features[key] ?? false : false;
   },

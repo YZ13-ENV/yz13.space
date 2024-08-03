@@ -26,7 +26,7 @@ const Status = async ({ lang: providedLang = "en", title: providedTitle, hideTit
         <PiDotDuotone
           size={24}
           className={cn(
-            "",
+            "animate-ping",
             isAvailable ? "text-success-foreground" : "",
             isNotAvailable ? "text-error-foreground" : "",
           )}
