@@ -1,5 +1,6 @@
 @import url("./dock/dock.css");
 @import url("./illustration.css");
+@import url("@yz13/mono/globals.css");
 @tailwind components;
 
 .attachments-grid {

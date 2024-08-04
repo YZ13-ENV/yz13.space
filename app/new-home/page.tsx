@@ -1,7 +1,9 @@
 import { Status } from "@/app/home/status"
+import { Project } from "@/app/new-home/project"
 import { LocalizedTitle } from "@/components/changelog"
 import { DynamicImage } from "@/components/dynamic-image"
 import { Locales, getLocale } from "@/dictionaries/tools"
+import { Button } from "@yz13/mono/components/button"
 import { Switch } from "@yz13/mono/components/switch"
 import { Suspense } from "react"
 import { PiGithubLogoDuotone, PiTelegramLogoDuotone, PiTwitterLogoDuotone } from "react-icons/pi"
@@ -17,7 +19,7 @@ const page = async ({ searchParams }: Props) => {
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <>
-      <header className="w-full px-3 my-3 flex items-center justify-between h-12">
+      <header className="w-full sticky top-0 px-3 md:bg-transparent z-10 md:backdrop-blur-0 backdrop-blur bg-background/20 py-3 flex items-center justify-between min-h-12">
         <div className="h-12 w-28 shrink-0 relative">
           <DynamicImage
             image={{
@@ -27,11 +29,11 @@ const page = async ({ searchParams }: Props) => {
             alt="logo"
           />
         </div>
-        <div className="size-12 rounded-full bg-yz-neutral-200" />
+        <div className="size-10 rounded-full bg-yz-neutral-200" />
       </header>
-      <main className="w-full">
-        <div className="w-2/3 h-fit flex ml-auto">
-          <div className="w-full max-w-lg h-full shrink-0 space-y-6">
+      <main className="w-full py-6 space-y-6">
+        <Project.Wrapper>
+          <Project.Content>
             <div className="pt-12 flex flex-col gap-4">
               <section className="flex flex-col gap-2">
                 <h1 className="text-base font-medium text-foreground">Fullstack developer</h1>
@@ -40,14 +42,14 @@ const page = async ({ searchParams }: Props) => {
                 </p>
               </section>
             </div>
-            <div className="w-full h-full">
-            </div>
-          </div>
-        </div>
-        <div className="w-2/3 h-fit flex gap-4 ml-auto">
-          <div className="w-full max-w-lg h-full shrink-0 space-y-6">
-            <div className="w-full h-fit p-3 space-y-3 rounded-xl bg-yz-neutral-200">
-              <div className="w-full rounded-t-xl p-3 rounded-b-lg bg-background h-fit">
+            <Project.SubContent>
+            </Project.SubContent>
+          </Project.Content>
+        </Project.Wrapper>
+        <Project.Wrapper>
+          <Project.Content>
+            <Project.ContentItemGroup>
+              <Project.ContentItem>
                 <div className="h-12 w-28 shrink-0 relative">
                   <DynamicImage
                     image={{
@@ -57,8 +59,8 @@ const page = async ({ searchParams }: Props) => {
                     alt="logo"
                   />
                 </div>
-              </div>
-              <div className="w-full rounded-lg bg-background p-3">
+              </Project.ContentItem>
+              <Project.ContentItem>
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex w-full justify-end">
                     <span>Frontend</span>
@@ -68,8 +70,8 @@ const page = async ({ searchParams }: Props) => {
                     <span>Backend</span>
                   </div>
                 </div>
-              </div>
-              <div className="w-full rounded-lg bg-background p-3">
+              </Project.ContentItem>
+              <Project.ContentItem>
                 <div className="w-full grid grid-cols-3 grid-rows-2">
                   <div className="w-full h-36 border-b border-r"></div>
                   <div className="w-full h-36 border-b border-r"></div>
@@ -79,15 +81,15 @@ const page = async ({ searchParams }: Props) => {
                   <div className="w-full h-36 border-r"></div>
                   <div className="w-full h-36"></div>
                 </div>
-              </div>
-              <div className="w-full rounded-b-xl rounded-t-lg bg-background h-fit p-3">
+              </Project.ContentItem>
+              <Project.ContentItem>
                 <Suspense fallback={<></>}>
                   <Status lang={lang} title={LocalizedTitle} />
                 </Suspense>
-              </div>
-            </div>
-          </div>
-          <div className="w-full h-full">
+              </Project.ContentItem>
+            </Project.ContentItemGroup>
+          </Project.Content>
+          <Project.SubContent>
             <div className="flex flex-col gap-2">
               <span>Socials</span>
               <ul>
@@ -111,8 +113,59 @@ const page = async ({ searchParams }: Props) => {
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
+          </Project.SubContent>
+        </Project.Wrapper>
+        <Project.Wrapper>
+          <Project.Content>
+            <Project.ContentItemGroup>
+              <Project.ContentItem className="flex items-center gap-2">
+                <div className="size-10 shrink-0 relative">
+                  <DynamicImage
+                    image={{
+                      dark: "https://yzstatic.yz13.space/logo/yz-dark.svg",
+                      light: "https://yzstatic.yz13.space/logo/yz-light.svg"
+                    }}
+                    alt="logo"
+                  />
+                </div>
+                <span className="text-3xl text-foreground/20">/</span>
+                <span className="text-3xl font-medium">News</span>
+              </Project.ContentItem>
+              <Project.ContentItem className="gap-3 flex items-center">
+                <Button variant="secondary" className="w-1/4">Top news</Button>
+                <Button variant="secondary" className="w-1/4">Politics</Button>
+                <Button variant="secondary" className="w-1/4">Sports</Button>
+                <Button variant="secondary" className="w-1/4">Finance</Button>
+              </Project.ContentItem>
+              <Project.ContentItem></Project.ContentItem>
+            </Project.ContentItemGroup>
+          </Project.Content>
+          <Project.SubContent></Project.SubContent>
+        </Project.Wrapper>
+        <Project.Wrapper>
+          <Project.Content>
+            <Project.ContentItemGroup>
+              <Project.ContentItem className="flex items-center gap-2">
+                <div className="size-10 shrink-0 relative">
+                  <DynamicImage
+                    image={{
+                      dark: "https://yzstatic.yz13.space/logo/yz-dark.svg",
+                      light: "https://yzstatic.yz13.space/logo/yz-light.svg"
+                    }}
+                    alt="logo"
+                  />
+                </div>
+                <span className="text-3xl text-foreground/20">/</span>
+                <span className="text-3xl font-medium">JSON Store</span>
+              </Project.ContentItem>
+              <Project.ContentItem className="gap-3 flex items-center">
+
+              </Project.ContentItem>
+              <Project.ContentItem></Project.ContentItem>
+            </Project.ContentItemGroup>
+          </Project.Content>
+          <Project.SubContent></Project.SubContent>
+        </Project.Wrapper>
       </main >
     </>
   )
