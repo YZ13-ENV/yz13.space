@@ -1,5 +1,17 @@
 import { Dock } from "@/components/dock"
 import { DynamicImage } from "@/components/dynamic-image"
+import { HonoIcon } from "@/components/pixel-stack/hono-icon"
+import { JestIcon } from "@/components/pixel-stack/jest-icon"
+import { MongoDBIcon } from "@/components/pixel-stack/mongodb-icon"
+import { NextIcon } from "@/components/pixel-stack/next-icon"
+import { NodeIcon } from "@/components/pixel-stack/node-icon"
+import { ReactIcon } from "@/components/pixel-stack/react-icon"
+import { ShadcnIcon } from "@/components/pixel-stack/shadcn-ui-icon"
+import { SupabaseIcon } from "@/components/pixel-stack/supabase-icon"
+import { TailwindIcon } from "@/components/pixel-stack/tailwind-icon"
+import { TypeScriptIcon } from "@/components/pixel-stack/typescript-icon"
+import { ViteIcon } from "@/components/pixel-stack/vite-icon"
+import { ZodIcon } from "@/components/pixel-stack/zod"
 import { Stack } from "@/components/stack"
 import { Locales, getLocale } from "@/dictionaries/tools"
 import { Suspense } from "react"
@@ -51,12 +63,65 @@ const page = async ({ searchParams }: Props) => {
                 alt="logo"
               />
             </div>
-            <h2 className="text-lg font-medium text-foreground">YZ13</h2>
+            <h2 className="text-lg font-medium text-foreground">Frontend</h2>
           </Stack.Header>
           <Stack.Content>
-            <p className="text-base text-foreground/60">
-              Hey
-            </p>
+            <div className="w-full grid grid-cols-3 grid-rows-2">
+              <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                <NextIcon size={64} />
+              </div>
+              <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                <ReactIcon size={64} />
+              </div>
+              <div className="w-full border-b aspect-square flex items-center justify-center">
+                <ViteIcon size={64} />
+              </div>
+              <div className="w-full border-r aspect-square flex items-center justify-center">
+                <TypeScriptIcon size={64} />
+              </div>
+              <div className="w-full border-r aspect-square flex items-center justify-center">
+                <TailwindIcon size={64} />
+              </div>
+              <div className="w-full aspect-square flex items-center justify-center">
+                <ShadcnIcon size={64} />
+              </div>
+            </div>
+          </Stack.Content>
+        </Stack.Wrapper>
+        <Stack.Wrapper hovered>
+          <Stack.Header>
+            <div className="size-7 shrink-0 relative">
+              <DynamicImage
+                image={{
+                  dark: "https://yzstatic.yz13.space/logo/yz-dark.svg",
+                  light: "https://yzstatic.yz13.space/logo/yz-light.svg"
+                }}
+                alt="logo"
+              />
+            </div>
+            <h2 className="text-lg font-medium text-foreground">Backend</h2>
+          </Stack.Header>
+          <Stack.Content>
+            <div className="w-full grid grid-cols-3 grid-rows-2">
+              <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                <NodeIcon size={64} />
+              </div>
+              <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                <HonoIcon size={64} />
+              </div>
+              <div className="w-full border-b aspect-square flex items-center justify-center">
+                <SupabaseIcon size={64} />
+              </div>
+              <div className="w-full border-r aspect-square flex items-center justify-center">
+                <JestIcon size={64} />
+              </div>
+              <div className="w-full border-r aspect-square flex items-center justify-center">
+                <MongoDBIcon size={64} />
+              </div>
+              <div className="w-full aspect-square flex items-center justify-center">
+                <ZodIcon size={64} />
+              </div>
+            </div>
           </Stack.Content>
         </Stack.Wrapper>
         <Stack.Wrapper>

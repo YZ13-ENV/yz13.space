@@ -2,7 +2,7 @@
 import { Button } from "@yz13/mono/components/button"
 import { HTMLMotionProps, motion } from "framer-motion"
 import Link from "next/link"
-import { ReactNode } from "react"
+import { ReactNode, useState } from "react"
 import { BiFullscreen, BiRightArrowAlt } from "react-icons/bi"
 import { cn } from "yz13/cn"
 
@@ -11,11 +11,23 @@ type DefaultProps = {
   children?: ReactNode
 }
 
+type GroupStackProps = {} & DefaultProps
+
+const GroupStack = ({ children }: GroupStackProps) => {
+  const [expanded, setExpanded] = useState<boolean>(false)
+  return (
+    <div
+      className="w-full space-y-6"
+    >
+      {children}
+    </div>
+  )
+}
+
 export interface ContainerProps extends HTMLMotionProps<"section"> {
   hovered?: boolean
   focused?: boolean
 }
-
 
 const Wrapper = ({ focused = false, hovered = false, children, className, ...props }: ContainerProps) => {
   return (
