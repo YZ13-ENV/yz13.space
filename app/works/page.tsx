@@ -1,9 +1,8 @@
 import { Dock } from "@/components/dock"
-import { Logo } from "@/components/logo"
+import { DynamicImage } from "@/components/dynamic-image"
 import { Locales, getLocale } from "@/dictionaries/tools"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Metadata } from "next"
-import Link from "next/link"
 import { Suspense } from "react"
 import { LocalizedTitle } from "../../components/changelog"
 import { Works, WorksSkeleton } from "./works"
@@ -28,10 +27,15 @@ const page = async ({ searchParams }: Props) => {
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <>
-      <Logo
-        width={36} height={36}
-        className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
-      />
+      <div className="h-12 w-28 xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0">
+        <DynamicImage
+          image={{
+            dark: "https://yzstatic.yz13.space/logo/yz-dark-full.svg",
+            light: "https://yzstatic.yz13.space/logo/yz-light-full.svg"
+          }}
+          alt="logo"
+        />
+      </div>
       <Suspense fallback={<></>}>
         <Dock lang={lang} />
       </Suspense>
@@ -41,12 +45,6 @@ const page = async ({ searchParams }: Props) => {
         </Suspense>
         <div className="h-20 w-full"></div>
       </div>
-      <Link href="/home">
-        <Logo
-          width={36} height={36}
-          className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
-        />
-      </Link>
     </>
   )
 }

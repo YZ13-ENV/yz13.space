@@ -6,11 +6,11 @@
     z-index: 20;
     position: fixed;
     min-width: var(--dock-width);
-    min-height: 44px;
+    min-height: 40px;
     gap: 6px;
     left: calc(50% - (var(--dock-width) / 2));
     bottom: 24px;
-    @apply flex flex-col rounded-xl p-1.5 border-yz-neutral-300 bg-yz-neutral-100 !border shadow-sm;
+    @apply flex flex-col rounded-xl px-1.5 py-0.5 border-yz-neutral-300 bg-yz-neutral-100 !border shadow-sm;
   }
   .dock-work-header {
     @apply w-full h-12;

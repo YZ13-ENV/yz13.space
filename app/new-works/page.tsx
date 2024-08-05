@@ -1,9 +1,8 @@
 import { Dock } from "@/components/dock"
-import { Stack } from "@/components/stack"
 import { getLocale, Locales } from "@/dictionaries/tools"
 import { Suspense } from "react"
-import { PiUserDuotone } from "react-icons/pi"
 import { Abc } from "./abc"
+import { AbcWorksList } from "./abc-works-list"
 
 type Props = {
   searchParams: {
@@ -23,7 +22,8 @@ const page = async ({ searchParams }: Props) => {
         <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
           <h1 className="text-4xl font-medium">Works</h1>
         </div>
-        <Stack.Wrapper>
+        <AbcWorksList />
+        {/* <Stack.Wrapper>
           <Stack.Header>A</Stack.Header>
           <Stack.Content>
             <button className="w-full flex rounded-lg hover:bg-yz-neutral-200 items-center gap-2 justify-start">
@@ -44,7 +44,7 @@ const page = async ({ searchParams }: Props) => {
         <Stack.Wrapper>
           <Stack.Header>C</Stack.Header>
           <Stack.Content></Stack.Content>
-        </Stack.Wrapper>
+        </Stack.Wrapper> */}
       </main>
       <Abc />
     </>

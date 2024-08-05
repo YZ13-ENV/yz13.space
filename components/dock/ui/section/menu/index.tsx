@@ -35,7 +35,7 @@ const Menu = async ({ className = "", lang: provided_lang }: { className?: strin
   const menuSearch = menu.search
   const auth_button = await getDict<{ signout: string, profile: string, login: string, signup: string }>("auth-buttons", lang)
   return (
-    <Command className={cn("w-full py-2", className)}>
+    <Command className={cn("w-full", className)}>
       <CommandInput placeholder={menuSearch} />
       <TimeAndDate lang={lang} />
       <CommandList className="overflow-hidden">

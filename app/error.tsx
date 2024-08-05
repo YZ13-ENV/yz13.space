@@ -1,5 +1,5 @@
 "use client"
-import { Logo } from "@/components/logo"
+import { DynamicImage } from "@/components/dynamic-image"
 import Link from "next/link"
 
 const ErrorPage = ({
@@ -13,12 +13,18 @@ const ErrorPage = ({
   return (
     <>
       <div className="w-full flex-col gap-6 flex items-center justify-center h-screen">
-        <Link href="/home">
-          <Logo
-            width={256} height={256}
-            className="opacity-10"
-          />
-        </Link>
+        <div className="h-64 w-64 xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0">
+          <Link href="/home">
+            <DynamicImage
+              image={{
+                dark: "https://yzstatic.yz13.space/logo/yz-dark.svg",
+                light: "https://yzstatic.yz13.space/logo/yz-light.svg"
+              }}
+              className="opacity-10"
+              alt="logo"
+            />
+          </Link>
+        </div>
       </div>
     </>
   )

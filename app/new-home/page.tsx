@@ -4,6 +4,7 @@ import { Stack } from "@/components/stack"
 import { Locales, getLocale } from "@/dictionaries/tools"
 import { Suspense } from "react"
 import { BiUser } from "react-icons/bi"
+import { BGOverlay } from "./bg-overlay"
 import { LocalData } from "./local-data"
 
 
@@ -18,6 +19,7 @@ const page = async ({ searchParams }: Props) => {
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <>
+      <BGOverlay />
       <Suspense fallback={<></>}>
         <Dock lang={lang} />
       </Suspense>

@@ -1,7 +1,7 @@
 "use client"
-import { Button } from "@repo/ui/button"
-import { cn } from "@repo/ui/cn"
+import { Button } from "@yz13/mono/components/button"
 import { ReactNode } from "react"
+import { cn } from "yz13/cn"
 import { useDockTab } from "../store/dock.store"
 
 type TriggerProps = {

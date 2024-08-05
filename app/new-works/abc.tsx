@@ -2,9 +2,10 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { cn } from "yz13/cn"
+import { useAbc } from "./abc-store"
 
 const Abc = () => {
-  const alphabet = ["#", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
+  const abc = useAbc(state => state.abc)
   const [hovered, setHovered] = useState<string | null>(null)
   return (
     <motion.aside
@@ -19,8 +20,8 @@ const Abc = () => {
       }}
     >
       {
-        alphabet.map((letter, index) => {
-          const currentIndex = hovered ? alphabet.findIndex(item => item === hovered) : -1
+        abc.map((letter, index) => {
+          const currentIndex = hovered ? abc.findIndex(item => item === hovered) : -1
           const isNextOrPrevious = currentIndex > -1 ? (index + 1 === currentIndex) || (index - 1 === currentIndex) : false
           const isAround = currentIndex > -1 ? (index + 2 === currentIndex) || (index - 2 === currentIndex) : false
           const isHovered = letter === hovered
