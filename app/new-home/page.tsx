@@ -1,6 +1,8 @@
-import { Stack } from "@/app/new-home/stack"
+import { Dock } from "@/components/dock"
 import { DynamicImage } from "@/components/dynamic-image"
+import { Stack } from "@/components/stack"
 import { Locales, getLocale } from "@/dictionaries/tools"
+import { Suspense } from "react"
 import { BiUser } from "react-icons/bi"
 import { LocalData } from "./local-data"
 
@@ -16,9 +18,12 @@ const page = async ({ searchParams }: Props) => {
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <>
+      <Suspense fallback={<></>}>
+        <Dock lang={lang} />
+      </Suspense>
       <main className="space-y-6 w-full pt-36 px-6 pb-12">
         <LocalData lang={lang} />
-        <Stack hovered>
+        <Stack.Wrapper hovered>
           <Stack.Header expandable>
             <span className="size-7 group-hover:border-foreground transition-colors inline-flex items-center justify-center rounded-full border">
               <BiUser size={14} className="text-foreground" />
@@ -32,8 +37,8 @@ const page = async ({ searchParams }: Props) => {
               Hi, I'm a fullstack developer. I like to create beautiful websites, in my free time I practice creating UI to improve the design of my work, I also try to learn more about backend development.
             </p>
           </Stack.Content>
-        </Stack>
-        <Stack hovered>
+        </Stack.Wrapper>
+        <Stack.Wrapper hovered>
           <Stack.Header>
             <div className="size-7 shrink-0 relative">
               <DynamicImage
@@ -51,8 +56,8 @@ const page = async ({ searchParams }: Props) => {
               Hey
             </p>
           </Stack.Content>
-        </Stack>
-        <Stack>
+        </Stack.Wrapper>
+        <Stack.Wrapper>
           <Stack.Header link="/works">
             <div className="size-7 shrink-0 relative">
               <DynamicImage
@@ -81,8 +86,8 @@ const page = async ({ searchParams }: Props) => {
               <BiRightArrowAlt size={18} className="group-hover/work:right-1.5 group-hover/work:opacity-100 right-3 relative transition-all opacity-0" />
             </button>
           </Stack.Content> */}
-        </Stack>
-        <Stack>
+        </Stack.Wrapper>
+        <Stack.Wrapper>
           <Stack.Header link="/journal">
             <div className="size-7 shrink-0 relative">
               <DynamicImage
@@ -96,7 +101,7 @@ const page = async ({ searchParams }: Props) => {
             <h2 className="text-lg font-medium text-foreground">YZ13/Journal</h2>
           </Stack.Header>
           {/* <Stack.Content></Stack.Content> */}
-        </Stack>
+        </Stack.Wrapper>
       </main>
     </>
   )

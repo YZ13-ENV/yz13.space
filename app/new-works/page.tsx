@@ -1,8 +1,9 @@
+import { Dock } from "@/components/dock"
+import { Stack } from "@/components/stack"
 import { getLocale, Locales } from "@/dictionaries/tools"
-import { Button } from "@yz13/mono/components/button"
-import { Stack } from "../new-home/stack"
+import { Suspense } from "react"
 import { PiUserDuotone } from "react-icons/pi"
-
+import { Abc } from "./abc"
 
 type Props = {
   searchParams: {
@@ -15,11 +16,14 @@ const page = async ({ searchParams }: Props) => {
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
     <>
-      <main className="space-y-6 w-full pt-36 px-6 pb-12">
+      <Suspense fallback={<></>}>
+        <Dock lang={lang} />
+      </Suspense>
+      <main className="space-y-6 w-full pt-36 pl-4 pr-8 pb-12">
         <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
           <h1 className="text-4xl font-medium">Works</h1>
         </div>
-        <Stack>
+        <Stack.Wrapper>
           <Stack.Header>A</Stack.Header>
           <Stack.Content>
             <button className="w-full flex rounded-lg hover:bg-yz-neutral-200 items-center gap-2 justify-start">
@@ -32,25 +36,17 @@ const page = async ({ searchParams }: Props) => {
               </span>
             </button>
           </Stack.Content>
-        </Stack>
-        <Stack>
+        </Stack.Wrapper>
+        <Stack.Wrapper>
           <Stack.Header>B</Stack.Header>
           <Stack.Content></Stack.Content>
-        </Stack>
-        <Stack>
+        </Stack.Wrapper>
+        <Stack.Wrapper>
           <Stack.Header>C</Stack.Header>
           <Stack.Content></Stack.Content>
-        </Stack>
-
+        </Stack.Wrapper>
       </main>
-      <aside className="w-8 h-screen fixed bottom-0 right-0 flex flex-col gap-1 items-center justify-center">
-        <Button className="size-6 uppercase" variant="ghost" size="icon">#</Button>
-        <Button className="size-6 uppercase" variant="ghost" size="icon">A</Button>
-        <Button className="size-6 uppercase" variant="ghost" size="icon">B</Button>
-        <Button className="size-6 uppercase" variant="ghost" size="icon">C</Button>
-        <Button className="size-6 uppercase" variant="ghost" size="icon">D</Button>
-        <Button className="size-6 uppercase" variant="ghost" size="icon">E</Button>
-      </aside>
+      <Abc />
     </>
   )
 }
