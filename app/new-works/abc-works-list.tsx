@@ -1,9 +1,10 @@
 import { works } from "@/actions/works"
 import { Stack } from "@/components/stack"
 import { Button } from "@yz13/mono/components/button"
+import { uniq } from "lodash"
 import Link from "next/link"
 import { BiRightArrowAlt } from "react-icons/bi"
-import { PiUserDuotone } from "react-icons/pi"
+import { PiGlobeDuotone, PiPackageDuotone, PiQuestionDuotone } from "react-icons/pi"
 import { AbcProvider } from "./abc-provider"
 import { AbcScroller } from "./abc-scroller"
 
@@ -13,7 +14,7 @@ type AbcWorksListProps = {
 const AbcWorksList = async ({ lt }: AbcWorksListProps) => {
   const allWorksResponse = await works()
   const allWorks = allWorksResponse?.data ?? []
-  const abcFromWorks = allWorks.length ? allWorks.map(item => String((item.name ?? "")?.slice(0, 1)).toLowerCase()) : []
+  const abcFromWorks = uniq(allWorks.length ? allWorks.map(item => String((item.name ?? "")?.slice(0, 1)).toLowerCase()) : []).sort()
   return (
     <>
       <AbcScroller lt={lt} />
@@ -30,11 +31,18 @@ const AbcWorksList = async ({ lt }: AbcWorksListProps) => {
                   worksThatMatchLetter.map(
                     work => {
                       const link = work.link
+                      const type = work.type
                       return <Button key={work.id + "#" + letter} variant="ghost" className="w-full p-0 flex rounded-lg hover:bg-yz-neutral-200 h-10 items-center gap-2 justify-between relative">
                         {link && <Link href={link} className="absolute top-0 left-0 w-full h-full rounded-lg" />}
                         <span className="inline-flex items-center gap-2">
                           <span className="size-10 inline-flex items-center justify-center">
-                            <PiUserDuotone size={18} />
+                            {
+                              type === "website"
+                                ? <PiGlobeDuotone size={18} />
+                                : type === "package"
+                                  ? <PiPackageDuotone size={18} />
+                                  : <PiQuestionDuotone size={18} />
+                            }
                           </span>
                           <span className="inline-flex flex-col items-start">
                             <span className="text-sm font-medium text-foreground">{work.name}</span>

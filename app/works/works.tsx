@@ -35,8 +35,8 @@ const Works = async ({ lang: providedLang = "en", title: providedTitle, hideTitl
           websites.map(
             site => {
               const thumb = site.thumbnail as { dark: string, light: string }
-              const dark = getStorageItem(["media", thumb?.dark])
-              const light = getStorageItem(["media", thumb?.light])
+              const dark = thumb.dark ? getStorageItem(["media", thumb?.dark]) : ""
+              const light = thumb.light ? getStorageItem(["media", thumb?.light]) : ""
               const thumbnail = {
                 dark: dark,
                 light: light

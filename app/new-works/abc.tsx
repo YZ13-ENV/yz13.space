@@ -11,7 +11,7 @@ type AbcProps = {
 
 const Abc = ({ defaultValue }: AbcProps) => {
   const abc = useAbc(state => state.abc)
-  const [hovered, setHovered] = useState<string | null>(defaultValue ?? null)
+  const [hovered, setHovered] = useState<string | null>(null)
   const router = useRouter()
   return (
     <motion.aside
@@ -38,10 +38,10 @@ const Abc = ({ defaultValue }: AbcProps) => {
             onHoverStart={() => setHovered(letter)}
             onHoverEnd={() => setHovered(null)}
             className={cn(
-              "w-6 h-8 flex items-center select-none justify-center uppercase transition-all",
-              isAround ? "scale-125 my-1.5 mr-1.5" : "",
-              isNextOrPrevious ? "scale-150 my-3 mr-3" : "",
-              isHovered ? "scale-[2] my-3 mr-6" : "",
+              "w-6 h-8 flex text-secondary items-center select-none justify-center uppercase transition-all",
+              isAround ? "scale-125 my-1.5 mr-1.5 text-foreground/60" : "",
+              isNextOrPrevious ? "scale-150 my-3 mr-3 text-foreground/60" : "",
+              isHovered ? "scale-[2] my-3 mr-6 text-foreground" : "",
             )}
             transition={{
               type: "spring",
