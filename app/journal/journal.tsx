@@ -17,6 +17,11 @@ const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: 
       const date = dayjs(item.frontmatter.createdAt)
       return now.diff(date) > 0 ? true : false
     })
+    .sort((a, b) => {
+      const a_date = dayjs(a.frontmatter.createdAt)
+      const b_date = dayjs(b.frontmatter.createdAt)
+      return b_date.diff(a_date)
+    })
   if (isEmpty) return (
     <div className="w-full aspect-square h-full flex items-center justify-center">
       <span>No journal's records yet</span>
