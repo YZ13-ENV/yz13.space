@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@yz13/mono/components/button"
-import { motion } from "framer-motion"
+import { HTMLMotionProps, motion } from "framer-motion"
 import Link from "next/link"
 import { ReactNode } from "react"
 import { BiFullscreen, BiRightArrowAlt } from "react-icons/bi"
@@ -11,15 +11,13 @@ type DefaultProps = {
   children?: ReactNode
 }
 
-export type ContainerProps = {
+export interface ContainerProps extends HTMLMotionProps<"section"> {
   hovered?: boolean
   focused?: boolean
-} & DefaultProps
+}
 
 
-
-
-const Wrapper = ({ focused = false, hovered = false, children, className }: ContainerProps) => {
+const Wrapper = ({ focused = false, hovered = false, children, className, ...props }: ContainerProps) => {
   return (
     <motion.section
       whileHover={hovered ? { scale: 1.025 } : undefined}
@@ -28,6 +26,7 @@ const Wrapper = ({ focused = false, hovered = false, children, className }: Cont
         "flex flex-col group cursor-pointer bg-background gap-1.5 p-3 rounded-2xl border-2 hover:border-foreground max-w-lg w-full mx-auto",
         hovered ? "hover:shadow-2xl transition-shadow" : "transition-all",
         focused ? "" : "",
+        className
       )}
       transition={{
         type: "spring",
@@ -37,6 +36,7 @@ const Wrapper = ({ focused = false, hovered = false, children, className }: Cont
         stiffness: 150,
         // duration: 4,
       }}
+      {...props}
     >
       {children}
     </motion.section>

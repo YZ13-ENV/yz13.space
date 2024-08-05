@@ -5,20 +5,25 @@ import Link from "next/link"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { PiUserDuotone } from "react-icons/pi"
 import { AbcProvider } from "./abc-provider"
+import { AbcScroller } from "./abc-scroller"
 
-
-const AbcWorksList = async () => {
+type AbcWorksListProps = {
+  lt?: string
+}
+const AbcWorksList = async ({ lt }: AbcWorksListProps) => {
   const allWorksResponse = await works()
   const allWorks = allWorksResponse?.data ?? []
   const abcFromWorks = allWorks.length ? allWorks.map(item => String((item.name ?? "")?.slice(0, 1)).toLowerCase()) : []
   return (
     <>
+      <AbcScroller lt={lt} />
       <AbcProvider initialValue={abcFromWorks} />
       {
         abcFromWorks.map(letter => {
+          const matchedLT = lt ? letter === lt : false
           const worksThatMatchLetter = allWorks.filter(work => String((work.name ?? "")?.slice(0, 1)).toLowerCase() === letter)
           return (
-            <Stack.Wrapper key={`abc#${letter}`}>
+            <Stack.Wrapper id={`letter#${letter}`} key={`abc#${letter}`} className={matchedLT ? "border-foreground" : ""}>
               <Stack.Header><span className="uppercase">{letter}</span></Stack.Header>
               <Stack.Content>
                 {

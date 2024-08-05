@@ -7,10 +7,12 @@ import { AbcWorksList } from "./abc-works-list"
 type Props = {
   searchParams: {
     lang?: string
+    lt?: string
   }
 }
 const page = async ({ searchParams }: Props) => {
   const searchParamLang = searchParams.lang
+  const lt = searchParams.lt
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
   return (
@@ -22,7 +24,7 @@ const page = async ({ searchParams }: Props) => {
         <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
           <h1 className="text-4xl font-medium">Works</h1>
         </div>
-        <AbcWorksList />
+        <AbcWorksList lt={lt} />
         {/* <Stack.Wrapper>
           <Stack.Header>A</Stack.Header>
           <Stack.Content>
@@ -46,7 +48,7 @@ const page = async ({ searchParams }: Props) => {
           <Stack.Content></Stack.Content>
         </Stack.Wrapper> */}
       </main>
-      <Abc />
+      <Abc defaultValue={lt} />
     </>
   )
 }

@@ -1,12 +1,18 @@
 "use client"
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { cn } from "yz13/cn"
 import { useAbc } from "./abc-store"
 
-const Abc = () => {
+type AbcProps = {
+  defaultValue?: string
+}
+
+const Abc = ({ defaultValue }: AbcProps) => {
   const abc = useAbc(state => state.abc)
-  const [hovered, setHovered] = useState<string | null>(null)
+  const [hovered, setHovered] = useState<string | null>(defaultValue ?? null)
+  const router = useRouter()
   return (
     <motion.aside
       layout
@@ -26,6 +32,7 @@ const Abc = () => {
           const isAround = currentIndex > -1 ? (index + 2 === currentIndex) || (index - 2 === currentIndex) : false
           const isHovered = letter === hovered
           return <motion.button key={letter}
+            onClick={() => router.push(`?lt=${letter}`)}
             onTapStart={() => setHovered(letter)}
             onTapCancel={() => setHovered(null)}
             onHoverStart={() => setHovered(letter)}
