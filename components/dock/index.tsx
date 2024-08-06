@@ -21,7 +21,7 @@ const Dock = ({ lang = "en" }: { lang?: Locales }) => {
         </Trigger>
         <Contacts />
         <Trigger value="user">
-          <User />
+          <User size={24} />
         </Trigger>
       </div>
     </DockWrapper>

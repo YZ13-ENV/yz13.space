@@ -1,4 +1,4 @@
-import { cn } from "@repo/ui/cn"
+import { cn } from "yz13/cn"
 import logo from "./logo.module.css"
 type LogoProps = {
   width?: number

@@ -1,9 +1,9 @@
 "use client"
-import { cn } from "@repo/ui/cn"
 import { useDebounceFn, useMutationObserver } from "ahooks"
 import { motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
+import { cn } from "yz13/cn"
 import { useDockTab } from "../store/dock.store"
 
 type Props = {
@@ -65,7 +65,7 @@ const DockWrapper = ({ children }: Props) => {
       ref={ref}
       id="dock"
       className={cn(
-        "dock-wrapper bg-background flex flex-col max-w-fit",
+        "dock-wrapper bg-background flex flex-col max-w-fit border shadow-2xl",
         "rounded-3xl"
       )}
     >

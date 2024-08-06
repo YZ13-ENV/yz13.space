@@ -1,6 +1,6 @@
 import { DynamicImage } from "@/components/dynamic-image"
-import { createClient } from "@/packages/supabase/src/supabase/server"
 import { cookies } from "next/headers"
+import { createClient } from "yz13/supabase/server"
 import { Logged } from "./logged"
 import { UnLogged } from "./unlogged"
 

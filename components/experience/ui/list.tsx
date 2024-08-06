@@ -1,11 +1,11 @@
 import { experience } from "@/actions/experience"
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
-import { cn } from "@repo/ui/cn"
 import dayjs from "dayjs"
 import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import duration from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { cn } from "yz13/cn"
 
 type ListProps = {
   lang?: Locales

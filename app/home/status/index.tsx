@@ -1,7 +1,7 @@
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
-import { cn } from "@repo/ui/cn"
 import { get } from "@vercel/edge-config"
 import { PiDotDuotone } from "react-icons/pi"
+import { cn } from "yz13/cn"
 import { StatusButtons } from "./status-buttons"
 
 type ListProps = {
@@ -26,7 +26,7 @@ const Status = async ({ lang: providedLang = "en", title: providedTitle, hideTit
         <PiDotDuotone
           size={24}
           className={cn(
-            "",
+            "animate-ping",
             isAvailable ? "text-success-foreground" : "",
             isNotAvailable ? "text-error-foreground" : "",
           )}

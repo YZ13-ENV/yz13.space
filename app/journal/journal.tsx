@@ -1,13 +1,11 @@
 import { Locales } from "@/dictionaries/tools";
 import dayjs from "dayjs";
-import { PiDotDuotone } from "react-icons/pi";
 import { isDev } from "../(auth)/(routes)/login/get-url";
 import { getFullJournal } from "./get-journal";
 import * as Journal from "./journal-list";
 
 const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: number }) => {
   const journal = await getFullJournal(locale)
-
   const isEmpty = !journal.length
   const maxedJournal = max ? journal.slice(0, max) : journal
   const now = dayjs()
@@ -16,6 +14,11 @@ const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: 
       if (isDev) return true
       const date = dayjs(item.frontmatter.createdAt)
       return now.diff(date) > 0 ? true : false
+    })
+    .sort((a, b) => {
+      const a_date = dayjs(a.frontmatter.createdAt)
+      const b_date = dayjs(b.frontmatter.createdAt)
+      return b_date.diff(a_date)
     })
   if (isEmpty) return (
     <div className="w-full aspect-square h-full flex items-center justify-center">
@@ -47,7 +50,6 @@ const JournalSkeleton = () => {
           <span className="inline-block w-3/4 h-8 rounded-md bg-yz-neutral-200" />
           <div className="flex items-center gap-1">
             <span className="inline-block w-1/6 h-5 rounded-md bg-yz-neutral-200" />
-            <PiDotDuotone size={16} />
             <span className="inline-block w-1/4 h-5 rounded-md bg-yz-neutral-200" />
           </div>
           <span className="inline-block w-2/3 h-6 rounded-md bg-yz-neutral-200" />

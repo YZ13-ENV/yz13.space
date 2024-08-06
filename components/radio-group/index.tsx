@@ -1,7 +1,7 @@
 "use client"
-import { cn } from "@repo/ui/cn"
 import { ReactNode, useEffect } from "react"
 import { PiDotFill } from "react-icons/pi"
+import { cn } from "yz13/cn"
 import { create } from "zustand"
 
 type Store = {

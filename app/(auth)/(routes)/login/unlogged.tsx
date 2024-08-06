@@ -1,5 +1,5 @@
-import { Separator } from "@/packages/ui/src/components/separator"
-import { Button } from "@repo/ui/button"
+import { Button } from "@yz13/mono/components/button"
+import { Separator } from "@yz13/mono/components/separator"
 import Link from "next/link"
 import { GithubButton } from "./github-button"
 import { GoogleButton } from "./google-button"

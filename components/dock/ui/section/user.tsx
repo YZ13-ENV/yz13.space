@@ -1,10 +1,13 @@
-import { createClient } from "@/packages/supabase/src/supabase/server"
-import { cn } from "@/packages/ui/lib/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "@yz13/mono/components/avatar"
 import { cookies } from "next/headers"
-import Image from "next/image"
 import { BiUser } from "react-icons/bi"
+import { createClient } from "yz13/supabase/server"
 
-const User = async () => {
+type UserProps = {
+  size?: number
+}
+
+const User = async ({ size = 36 }: UserProps) => {
   const cks = cookies()
   const sp = createClient(cks)
   const { data: { user } } = await sp.auth.getUser()
@@ -13,26 +16,13 @@ const User = async () => {
   const name = metadata?.name
   const hasAvatar = !!metadata?.avatar_url
   const avatar_url = metadata?.avatar_url
-  if (!user) return (
-    <div className="w-9 aspect-square flex justify-center items-center">
-      <BiUser size={16} />
-    </div>
-  )
   return (
-    <div className="w-9 aspect-square flex justify-center items-center">
-      <div
-        className={cn(
-          "rounded-full border relative w-6 aspect-square bg-background flex justify-center items-center",
-          "outline outline-1 outline-foreground"
-        )}
-      >
-        {
-          hasAvatar
-            ? <Image src={avatar_url} className="rounded-full" fill alt="user-avatar" />
-            : <BiUser size={16} />
-        }
-      </div>
-    </div>
+    <Avatar style={{ width: size, height: size }} className="shrink-0 relative aspect-square flex justify-center items-center">
+      <AvatarImage className="w-full h-full" src={avatar_url} />
+      <AvatarFallback className="w-full h-full">
+        <BiUser size={16} />
+      </AvatarFallback>
+    </Avatar>
   )
 }
 export { User }

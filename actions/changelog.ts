@@ -1,14 +1,41 @@
 import { getHOST, isDev } from "@/app/(auth)/(routes)/login/get-url";
-import { getLocale } from "@/dictionaries/tools";
-import { getChangelog } from "@yz13/api/db/changelog";
-import dayjs from "dayjs";
+import { Locales, getLocale } from "@/dictionaries/tools";
+import { PostgrestResponse } from "@supabase/supabase-js";
 import { RequestMethod, RequestType, log } from "yz13/log";
+import { Tables } from "yz13/supabase/database";
 import { z } from "zod";
 import { actionClient } from "./safe-client";
 
 const schema = z.string();
 const type: RequestType = "Request";
 const method: RequestMethod = "GET";
+
+type Changelog = Tables<"changelog">;
+
+const INTERNAL__changelog = async (
+  lang?: Locales
+): Promise<PostgrestResponse<Changelog>> => {
+  const url = "https://www.api.yz13.space";
+  const path = "/changelog";
+  const fetchURL = new URL(path, url);
+  if (lang) fetchURL.searchParams.set("lang", lang);
+  try {
+    const response = await fetch(fetchURL.toString(), { method: "GET" });
+    if (response.ok) {
+      const json = await response.json();
+      return json;
+    } else throw new Error("failed to fetch");
+  } catch (e: any) {
+    console.log(e);
+    return {
+      count: null,
+      data: [],
+      error: e?.message,
+      status: 404,
+      statusText: "",
+    };
+  }
+};
 
 export const changelog = actionClient
   .schema(schema)
@@ -22,7 +49,7 @@ export const changelog = actionClient
   })
   .action(
     async ({ parsedInput: lang }) => {
-      return getChangelog(lang);
+      return INTERNAL__changelog(lang as Locales);
     },
     {
       onSuccess: (props) => {
@@ -43,7 +70,6 @@ export const changelog = actionClient
         if (isDev) {
           return console.log("LOCAL_LOG", method, status, host, type, "?");
         } else {
-          const date = dayjs();
           console.log("LOG", method, status, host, type, "");
           // @ts-ignore
           log({

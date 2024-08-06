@@ -1,16 +1,15 @@
-import { Dock } from "@/components/dock";
-import { DynamicImage } from "@/components/dynamic-image";
-import { Locales, getLocale } from "@/dictionaries/tools";
-import { showPixelLogo } from "@/feature-flags/pixelated-logo.feature";
-import { Page, dynamicMetadata } from "@/metadata";
-import { Metadata } from "next";
-import { Suspense } from "react";
-import { LocalizedTitle } from "../../components/changelog";
-import { JournalSection, JournalSkeleton } from "../journal/journal";
-import { Contacts, ContactsSkeleton } from "./contacts";
-import { Developer, DeveloperSkeleton } from "./developer";
-import { Stack, StackSkeleton } from "./stack";
-import { Status } from "./status";
+import { LocalizedTitle } from "@/components/changelog"
+import { Dock } from "@/components/dock"
+import { Stack } from "@/components/stack"
+import { Locales, getLocale } from "@/dictionaries/tools"
+import { Page, dynamicMetadata } from "@/metadata"
+import { Skeleton } from "@yz13/mono/components/skeleton"
+import { Metadata } from "next"
+import { Suspense } from "react"
+import { About } from "./about"
+import { BGOverlay } from "./bg-overlay"
+import { LocalData } from "./local-data"
+import { Status } from "./status"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const searchParamLang = searchParams.lang
@@ -30,47 +29,81 @@ const page = async ({ searchParams }: Props) => {
   const searchParamLang = searchParams.lang
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
-  const pixelLogo = await showPixelLogo()
   return (
     <>
-      <div className="size-12 xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0">
-        <DynamicImage
-          image={{
-            dark: pixelLogo ? "https://yzstatic.yz13.space/logo/yz-dark-pixel-2.svg" : "https://yzstatic.yz13.space/logo/yz-dark.svg",
-            light: pixelLogo ? "https://yzstatic.yz13.space/logo/yz-light-pixel-2.svg" : "https://yzstatic.yz13.space/logo/yz-light.svg"
-          }}
-          alt="logo"
-        />
-      </div>
+      <BGOverlay />
       <Suspense fallback={<></>}>
         <Dock lang={lang} />
       </Suspense>
-      <div className="max-w-2xl w-full mx-auto p-6">
-        <div className="w-full rounded-3xl bg-transparent h-fit flex flex-col gap-6">
-          <Suspense fallback={<DeveloperSkeleton />}>
-            <Developer lang={lang} />
-          </Suspense>
-          <div className="w-full h-fit flex sm:flex-row flex-col items-start gap-4">
-            <div className="sm:w-1/2 w-full">
-              <Suspense fallback={<></>}>
-                <Status lang={lang} title={LocalizedTitle} />
-              </Suspense>
-            </div>
-            <div className="sm:w-1/2 w-full">
-              <Suspense fallback={<ContactsSkeleton />}>
-                <Contacts lang={lang} title={LocalizedTitle} />
-              </Suspense>
-            </div>
-          </div>
-          <Suspense fallback={<StackSkeleton />}>
-            <Stack lang={lang} />
-          </Suspense>
-          <Suspense fallback={<JournalSkeleton />}>
-            <JournalSection locale={lang} />
-          </Suspense>
-        </div>
-        <div className="h-20 w-full"></div>
-      </div>
+      <main className="space-y-6 w-full pt-36 px-6 pb-12">
+        <LocalData lang={lang} />
+        <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl " />}>
+          <About lang={lang} />
+        </Suspense>
+        <Stack.Wrapper hovered>
+          <Stack.Content>
+            <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl" />}>
+              <Status lang={lang} title={LocalizedTitle} />
+            </Suspense>
+          </Stack.Content>
+        </Stack.Wrapper>
+        {/* <Stack.GroupStack stackName="Technologies">
+          <Stack.Wrapper>
+            <Stack.Header>
+              <h2 className="text-lg font-medium text-foreground">Frontend</h2>
+            </Stack.Header>
+            <Stack.Content>
+              <div className="w-full grid grid-cols-3 grid-rows-2 z-0">
+                <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                  <NextIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                  <ReactIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-b aspect-square flex items-center justify-center">
+                  <ViteIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-r aspect-square flex items-center justify-center">
+                  <TypeScriptIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-r aspect-square flex items-center justify-center">
+                  <TailwindIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full aspect-square flex items-center justify-center">
+                  <ShadcnIcon size={64} className="z-0" />
+                </div>
+              </div>
+            </Stack.Content>
+          </Stack.Wrapper>
+          <Stack.Wrapper>
+            <Stack.Header>
+              <h2 className="text-lg font-medium text-foreground">Backend</h2>
+            </Stack.Header>
+            <Stack.Content>
+              <div className="w-full grid grid-cols-3 grid-rows-2">
+                <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                  <NodeIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-r border-b aspect-square flex items-center justify-center">
+                  <HonoIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-b aspect-square flex items-center justify-center">
+                  <SupabaseIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-r aspect-square flex items-center justify-center">
+                  <JestIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full border-r aspect-square flex items-center justify-center">
+                  <MongoDBIcon size={64} className="z-0" />
+                </div>
+                <div className="w-full aspect-square flex items-center justify-center">
+                  <ZodIcon size={64} className="z-0" />
+                </div>
+              </div>
+            </Stack.Content>
+          </Stack.Wrapper>
+        </Stack.GroupStack> */}
+      </main>
     </>
   )
 }

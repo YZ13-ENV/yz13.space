@@ -1,4 +1,4 @@
-import { cn } from "@repo/ui/cn"
+import { cn } from "yz13/cn"
 import svg from "./icon.module.css"
 
 export interface SVGProps
@@ -13,7 +13,7 @@ const IconBase = ({ className, size = 24, ...props }: SVGProps) => {
       height={size}
       className={cn(
         svg["svg-icon"],
-        "opacity-75 hover:opacity-100 group-hover:opacity-100 transition-all",
+        "opacity-75 hover:opacity-100 group-hover:opacity-100",
         className
       )}
       fill="none"

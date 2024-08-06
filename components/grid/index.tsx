@@ -1,4 +1,4 @@
-import { cn } from "@repo/ui/cn";
+import { cn } from "yz13/cn";
 import grid from "./grid.module.css";
 interface GridProps {
   rows: number;

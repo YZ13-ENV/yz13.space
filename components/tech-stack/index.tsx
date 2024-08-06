@@ -1,9 +1,8 @@
 "use client"
-import { StackName } from "@/app/home/tech-stack/stack-switcher"
-import { cn } from "@repo/ui/cn"
 import { useInterval } from "ahooks"
 import { cubicBezier, motion, MotionValue } from "framer-motion"
 import { ReactNode, useEffect, useState } from "react"
+import { cn } from "yz13/cn"
 
 export type Stack = {
   label: string
@@ -85,7 +84,7 @@ const HeaderList = ({
   stack?: Stack[],
   y: MotionValue<any>,
   selected: string | null
-  stackName?: StackName
+  stackName?: string
 }) => {
   return (
     <div className="w-full h-7 overflow-hidden relative">

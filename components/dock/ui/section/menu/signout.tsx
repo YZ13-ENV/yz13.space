@@ -1,11 +1,10 @@
 "use client"
-
-import { createClient } from "@/packages/supabase/src/supabase/client"
-import { Button } from "@/packages/ui/src/components/button"
-import { CommandItem } from "@/packages/ui/src/components/command"
+import { Button } from "@yz13/mono/components/button"
+import { CommandItem } from "@yz13/mono/components/command"
 import { useRouter } from "next/navigation"
 import { ReactNode } from "react"
 import { LuLogOut } from "react-icons/lu"
+import { createClient } from "yz13/supabase/client"
 
 type Props = {
   children?: ReactNode

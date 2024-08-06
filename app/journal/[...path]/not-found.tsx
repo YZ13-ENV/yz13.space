@@ -1,6 +1,6 @@
 import { Logo } from "@/components/logo"
 import { getDict, getLocale } from "@/dictionaries/tools"
-import { Button } from "@repo/ui/button"
+import { Button } from "@yz13/mono/components/button"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
 

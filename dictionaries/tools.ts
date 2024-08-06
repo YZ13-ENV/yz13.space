@@ -1,3 +1,4 @@
+import { isDev } from "@/app/(auth)/(routes)/login/get-url";
 import { unstable_cache as cache } from "next/cache";
 import { cookies } from "next/headers";
 import "server-only";
@@ -17,9 +18,15 @@ const getDict = async <T extends any>(
       revalidate: 60 * 60,
     }
   );
-  const module = await getCachedModule(dict, locale);
-  const defaultModule = module;
-  return defaultModule;
+  if (isDev) {
+    const module = await import(`./${dict}/${locale}.json`);
+    const defaultModule = module?.default;
+    return defaultModule;
+  } else {
+    const module = await getCachedModule(dict, locale);
+    const defaultModule = module;
+    return defaultModule;
+  }
 };
 
 const getLocale = (): Locales => {
