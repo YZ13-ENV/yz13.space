@@ -1,8 +1,8 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@yz13/mono/components/avatar"
-import { createClient } from "yz13/supabase/server"
-import { cn } from "@/packages/ui/lib/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "@yz13/mono/components/avatar"
 import { cookies } from "next/headers"
 import { BiUser } from "react-icons/bi"
+import { createClient } from "yz13/supabase/server"
+
 type UserProps = {
   size?: number
 }

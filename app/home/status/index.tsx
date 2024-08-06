@@ -1,7 +1,7 @@
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
-import { cn } from "@repo/ui/cn"
 import { get } from "@vercel/edge-config"
 import { PiDotDuotone } from "react-icons/pi"
+import { cn } from "yz13/cn"
 import { StatusButtons } from "./status-buttons"
 
 type ListProps = {

@@ -1,4 +1,4 @@
-import { cn } from "@repo/ui/cn"
+import { cn } from "yz13/cn"
 
 type Props = {
   size?: "lg" | "md" | "sm"

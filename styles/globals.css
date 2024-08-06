@@ -1,7 +1,13 @@
 @import url("./dock/dock.css");
+@import url("./vars.css");
 @import url("./illustration.css");
 @import url("@yz13/mono/globals.css");
+@import url("./dock/dock.css");
+@import url("@/styles/markdown.css");
+@import url("@/styles/svg.css");
+@tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 .attachments-grid {
   grid-template-areas:

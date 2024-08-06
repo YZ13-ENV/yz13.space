@@ -1,7 +1,7 @@
 import { DynamicImage } from "@/components/dynamic-image"
 import { RadioGroup, RadioItem, RadioLabel } from "@/components/radio-group"
-import { Button } from "@/packages/ui/src/components/button"
-import { Input } from "@/packages/ui/src/components/input"
+import { Button } from "@yz13/mono/components/button"
+import { Input } from "@yz13/mono/components/input"
 import Link from "next/link"
 import { MdOpenInNew } from "react-icons/md"
 

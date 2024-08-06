@@ -1,14 +1,6 @@
 import { getLocale } from "@/dictionaries/tools";
 import { dynamicMetadata } from "@/metadata";
-import { isDev } from "@/packages/api/src/const";
 import "@/styles/globals.css";
-import "@/styles/markdown.css";
-import "@/styles/svg.css";
-import "@repo/tailwind-config/css";
-import { cn } from "@repo/ui/cn";
-import "@repo/ui/css";
-import "@repo/ui/css/typography";
-import "@repo/ui/css/vars";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@yz13/mono/components/tooltip";
@@ -16,8 +8,8 @@ import { GeistMono } from 'geist/font/mono';
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
+import { cn } from "yz13/cn";
 import { Body } from "./_components/body";
-import { MediaOverlay } from "./_components/media-overlay/ui/overlay";
 
 const RU_FONT = Inter({
   subsets: ["cyrillic", "latin"],
@@ -54,14 +46,8 @@ export default async function RootLayout({ children }: LayoutProps) {
     <html lang={locale} className={cn(isEN ? EN_FONT.variable : RU_FONT.variable, GeistMono.variable)}>
       <Body>
         <TooltipProvider>
-          {
-            !isDev &&
-            <>
-              <Analytics />
-              <SpeedInsights />
-            </>
-          }
-          <MediaOverlay />
+          <Analytics />
+          <SpeedInsights />
           {children}
         </TooltipProvider>
       </Body>

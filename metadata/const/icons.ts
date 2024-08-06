@@ -1,4 +1,3 @@
-import { getStorageItem } from "@yz13/supabase/storage";
 import { Metadata } from "next";
 
 export const icons: Metadata["icons"] = {

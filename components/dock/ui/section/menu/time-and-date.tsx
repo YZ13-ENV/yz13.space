@@ -1,6 +1,6 @@
 "use client"
 import { Locales } from "@/dictionaries/tools"
-import { CommandItem } from "@repo/ui/command"
+import { CommandItem } from "@yz13/mono/components/command"
 import { useInterval } from "ahooks"
 import dayjs, { Dayjs } from "dayjs"
 import "dayjs/locale/en"

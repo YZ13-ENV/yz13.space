@@ -1,5 +1,5 @@
-import { cn } from "@/packages/ui/lib/utils"
 import { HTMLAttributes } from "react"
+import { cn } from "yz13/cn"
 
 interface BodyProps extends HTMLAttributes<HTMLBodyElement> { }
 

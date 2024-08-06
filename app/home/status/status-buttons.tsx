@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@repo/ui/button"
+import { Button } from "@yz13/mono/components/button"
 import { useInterval } from "ahooks"
 import Link from "next/link"
 import { useState } from "react"

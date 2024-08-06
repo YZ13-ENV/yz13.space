@@ -1,11 +1,11 @@
 import { changelog } from "@/actions/changelog"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
-import { Button } from "@repo/ui/button"
-import { cn } from "@repo/ui/cn"
+import { Button } from "@yz13/mono/components/button"
 import dayjs from "dayjs"
 import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import Link from "next/link"
+import { cn } from "yz13/cn"
 
 type ChangelogProps = {
   max?: number

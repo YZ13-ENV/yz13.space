@@ -1,8 +1,8 @@
 "use client"
-import { cn } from "@repo/ui/cn"
 import { useClickAway } from "ahooks"
 import { AnimatePresence, motion } from "framer-motion"
 import { ReactNode, useRef } from "react"
+import { cn } from "yz13/cn"
 import { useDockTab } from "../store/dock.store"
 
 type ContentProps = {

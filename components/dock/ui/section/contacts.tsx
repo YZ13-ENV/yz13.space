@@ -1,9 +1,15 @@
 import { get } from "@vercel/edge-config"
-import { Contact } from "@yz13/api/edge/types"
 import { Separator } from "@yz13/mono/components/separator"
 import Link from "next/link"
 import * as bs from "react-icons/bs"
 import { Trigger } from "../trigger"
+
+export type Contact = {
+  icon: string
+  label: string
+  value_label: string
+  value: string
+}
 
 const Contacts = async () => {
   const contacts = await get<Contact[]>("contacts")

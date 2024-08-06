@@ -1,9 +1,9 @@
 "use client"
-import { createClient } from "@/packages/supabase/src/supabase/client"
-import { Button } from "@/packages/ui/src/components/button"
 import { User } from "@supabase/supabase-js"
+import { Button } from "@yz13/mono/components/button"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { createClient } from "yz13/supabase/client"
 
 type Props = {
   user: User

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: [ "next-mdx-remote", "@repo/ui", "@repo/tailwind-config", "@microservice/playground", "@microservice/widgets-lib", "@yz13/api", "@yz13/supabase" ],
+  transpilePackages: [ "next-mdx-remote", "@repo/tailwind-config" ],
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
   compress: true,
   experimental: {
@@ -13,7 +13,6 @@ const nextConfig = {
     serverMinification: true,
     cssChunking: "loose",
     swcMinify: true,
-    webpackBuildWorker: true
   },
   images: {
     remotePatterns: [

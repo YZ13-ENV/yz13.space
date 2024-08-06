@@ -1,9 +1,9 @@
 "use client"
-import { cn } from "@repo/ui/cn"
 import { useDebounceFn, useMutationObserver } from "ahooks"
 import { motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
+import { cn } from "yz13/cn"
 import { useDockTab } from "../store/dock.store"
 
 type Props = {

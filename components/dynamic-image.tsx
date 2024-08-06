@@ -1,5 +1,5 @@
-import { cn } from "@repo/ui/cn"
 import Image, { ImageProps } from "next/image"
+import { cn } from "yz13/cn"
 
 
 export type ThemedImage = {

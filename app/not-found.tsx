@@ -1,15 +1,8 @@
-"use client"
 import { DynamicImage } from "@/components/dynamic-image"
 import Link from "next/link"
 
-const ErrorPage = ({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) => {
-  console.log(error)
+
+const NotFound = () => {
   return (
     <>
       <div className="w-full flex-col gap-6 flex items-center justify-center h-screen">
@@ -25,8 +18,9 @@ const ErrorPage = ({
             />
           </Link>
         </div>
+        <h1 className="text-4xl font-semibold text-secondary">404</h1>
       </div>
     </>
   )
 }
-export default ErrorPage
+export default NotFound

@@ -1,18 +1,15 @@
-import { Video } from "@/app/_components/video"
-import { FrontendTechStack } from "@/app/home/tech-stack/frontend"
-import { stack } from "@/app/home/tech-stack/frontend/frontend-stack"
 import { Dock } from "@/components/dock"
 import { DynamicImage } from "@/components/dynamic-image"
 import { Logo } from "@/components/logo"
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
 import { dynamicMetadata, Page } from "@/metadata"
-import { getStorageItem } from "@yz13/supabase/storage"
 import { Metadata } from "next"
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
+import { getStorageItem } from "yz13/supabase/storage"
 import { getMDX, isMDXExist } from "./get-mdx"
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
@@ -48,9 +45,7 @@ const compile = (source: string) => compileMDX({
   source: source,
   components: {
     Image: props => <Image {...props} />,
-    Video: props => <Video {...props} />,
     DynamicImage: props => <DynamicImage {...props} image={{ dark: getStorageItem(["journal", props.image.dark]), light: getStorageItem(["journal", props.image.light]) }} />,
-    TechStack: props => <FrontendTechStack {...props} stack={stack} />
   },
   options: { parseFrontmatter: true }
 })

@@ -1,12 +1,12 @@
 import { Locales } from "@/dictionaries/tools";
-import { APIResponse } from "@yz13/api/db/types";
-import { Database } from "@yz13/supabase/database";
+import { PostgrestResponse } from "@supabase/supabase-js";
+import { Tables } from "yz13/supabase/database";
 
-type Experience = Database["public"]["Tables"]["experience"]["Row"];
+type Experience = Tables<"experience">;
 
 const getExperience = async (
   lang: Locales
-): Promise<APIResponse<Experience[]>> => {
+): Promise<PostgrestResponse<Experience>> => {
   try {
     const url = "https://www.api.yz13.space";
     const path = "/experience";
@@ -21,7 +21,8 @@ const getExperience = async (
       count: 0,
       data: [],
       error: null,
-      status: 504,
+      statusText: "",
+      status: 404,
     };
   }
 };

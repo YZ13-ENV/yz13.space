@@ -1,8 +1,7 @@
 "use client"
-
-import { createClient } from "@/packages/supabase/src/supabase/client"
-import { cn } from "@/packages/ui/lib/utils"
 import { useRouter } from "next/navigation"
+import { cn } from "yz13/cn"
+import { createClient } from "yz13/supabase/client"
 import { getURL } from "./get-url"
 
 type Props = {

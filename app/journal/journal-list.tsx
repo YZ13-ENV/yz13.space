@@ -1,10 +1,10 @@
 import { DynamicImage } from "@/components/dynamic-image"
 import { Locales } from "@/dictionaries/tools"
 import { JournalHead } from "@/journal/types"
-import { getStorageItem } from "@yz13/supabase/storage"
 import dayjs from "dayjs"
 import Link from "next/link"
 import { PiDotDuotone } from "react-icons/pi"
+import { getStorageItem } from "yz13/supabase/storage"
 
 const List = ({ children }: { children?: React.ReactNode }) => {
   return <ul className="space-y-3">{children}</ul>

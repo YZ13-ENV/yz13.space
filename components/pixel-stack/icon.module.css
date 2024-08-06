@@ -32,6 +32,7 @@
   @apply opacity-50 hover:opacity-100 group-hover:opacity-100 transition-all;
 }
 .svg-icon {
+  fill: var(--default-icon-color);
   & > g > g > * {
     fill: var(--default-icon-color);
     @apply transition-all;
@@ -77,6 +78,7 @@
     @apply opacity-50 hover:opacity-100 group-hover:opacity-100 transition-all;
   }
   .svg-icon {
+    fill: var(--default-icon-color);
     & > g > g > * {
       fill: var(--default-icon-color);
       @apply transition-all;
