@@ -1,8 +1,9 @@
 "use client"
 import { motion } from "framer-motion"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useMemo, useState } from "react"
 import { cn } from "yz13/cn"
+import { getURL } from "../(auth)/(routes)/login/get-url"
 import { useAbc } from "./abc-store"
 
 type AbcProps = {
@@ -13,6 +14,23 @@ const Abc = ({ defaultValue }: AbcProps) => {
   const abc = useAbc(state => state.abc)
   const [hovered, setHovered] = useState<string | null>(null)
   const router = useRouter()
+  const path = "/works"
+  const oldSearchParams = useSearchParams()
+  const base = getURL()
+  const url = new URL(path, base)
+  const parsedParams = useMemo(() => {
+    let result: { [key: string]: string } = {}
+    oldSearchParams.forEach((value, key) => result[key] = value)
+    return result
+  }, [oldSearchParams])
+  const searchParams = url.searchParams
+  if (parsedParams) {
+    const paramsKeys = Object.keys(parsedParams)
+    paramsKeys.forEach(key => {
+      const value = parsedParams[key]
+      if (value) searchParams.set(key, value)
+    })
+  }
   return (
     <motion.aside
       layout
@@ -32,7 +50,11 @@ const Abc = ({ defaultValue }: AbcProps) => {
           const isAround = currentIndex > -1 ? (index + 2 === currentIndex) || (index - 2 === currentIndex) : false
           const isHovered = letter === hovered
           return <motion.button key={letter}
-            onClick={() => router.push(`?lt=${letter}`)}
+            onClick={() => {
+              searchParams.set("lt", letter)
+              const urlString = url.toString()
+              router.push(urlString)
+            }}
             onTapStart={() => setHovered(letter)}
             onTapCancel={() => setHovered(null)}
             onHoverStart={() => setHovered(letter)}

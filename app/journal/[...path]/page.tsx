@@ -1,6 +1,5 @@
 import { Dock } from "@/components/dock"
 import { DynamicImage } from "@/components/dynamic-image"
-import { Logo } from "@/components/logo"
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
 import { dynamicMetadata, Page } from "@/metadata"
 import { Metadata } from "next"
@@ -66,12 +65,6 @@ const page = async ({ params, searchParams }: Props) => {
   const name = dict.name
   return (
     <>
-      <Link href="/journal">
-        <Logo
-          width={36} height={36}
-          className="xl:absolute shrink-0 relative top-0 mt-6 ml-6 left-0"
-        />
-      </Link>
       <Suspense fallback={<></>}>
         <Dock lang={searchParamLang as Locales | undefined} />
       </Suspense>

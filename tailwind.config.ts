@@ -1,14 +1,9 @@
-import shared from "@repo/tailwind-config/config";
+import { config as mono } from "@yz13/mono/config";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  presets: [shared],
-  content: [
-    "./components/**/*.{ts,tsx,mdx}",
-    "./app/**/*.{ts,tsx,mdx}",
-    "./packages/ui/**/*.{ts,tsx,mdx}",
-    "./microservices/**/*.{ts,tsx,mdx}",
-  ],
+  presets: [mono],
+  content: ["./components/**/*.{ts,tsx,mdx}", "./app/**/*.{ts,tsx,mdx}"],
   corePlugins: {
     preflight: true,
   },

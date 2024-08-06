@@ -3,7 +3,7 @@ import { Button } from "@yz13/mono/components/button"
 import { HTMLMotionProps, motion } from "framer-motion"
 import Link from "next/link"
 import { ReactNode, useState } from "react"
-import { BiFullscreen, BiRightArrowAlt } from "react-icons/bi"
+import { BiDownArrowAlt, BiFullscreen, BiRightArrowAlt } from "react-icons/bi"
 import { cn } from "yz13/cn"
 
 type DefaultProps = {
@@ -11,20 +11,39 @@ type DefaultProps = {
   children?: ReactNode
 }
 
-type GroupStackProps = {} & DefaultProps
+type GroupStackProps = {
+  stackName?: string
+} & DefaultProps
 
-const GroupStack = ({ children, className = "" }: GroupStackProps) => {
+const GroupStack = ({ stackName, children, className = "" }: GroupStackProps) => {
   const [expanded, setExpanded] = useState<boolean>(false)
   return (
-    <div
-      onClick={() => setExpanded(!expanded)}
-      className={cn(
-        "w-full group max-w-lg mx-auto transition-all",
-        expanded ? "space-y-6" : "-space-y-80",
-        className
-      )}
-    >
-      {children}
+    <div className="flex flex-col gap-3 max-w-lg mx-auto">
+      {
+        !expanded &&
+        <div className="flex items-center w-full justify-between px-2">
+          {stackName && <span>{stackName}</span>}
+          <Button variant="secondary" className={cn("rounded-full", !!stackName ? "" : "mx-auto")} size="sm"><BiDownArrowAlt size={16} /> Click to expand</Button>
+        </div>
+      }
+      <motion.div
+        layout
+        onClick={() => setExpanded(!expanded)}
+        className={cn(
+          "w-full group max-w-lg relative mx-auto transition-all",
+          expanded ? "space-y-6" : "-space-y-80",
+          className
+        )}
+        transition={{
+          type: "spring",
+          bounce: 0.4,
+          ease: "linear",
+          damping: 13,
+          stiffness: 150,
+        }}
+      >
+        {children}
+      </motion.div>
     </div>
   )
 }

@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
   }
   const response = NextResponse.next();
   const { country, city, region } = geolocation(request);
-  console.log(region);
+  // console.log(region);
   const isValidCountry = country ? locales.includes(country) : false;
   const countryCode = isValidCountry ? (country as Locales) : "en";
   const cookies = request.cookies;

@@ -10,7 +10,7 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     icons: [
       {
-        src: "/brand/yz-light-128.png",
+        src: "https://yzstatic.yz13.space/logo/yz-light-128.png",
         sizes: "128x128",
         type: "image/png",
         purpose: "any",
@@ -22,7 +22,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/journal",
         icons: [
           {
-            src: "/brand/yz-light-32.png",
+            src: "https://yzstatic.yz13.space/logo/yz-light-32.png",
             sizes: "32x32",
             type: "image/png",
             purpose: "any",
@@ -34,7 +34,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/works",
         icons: [
           {
-            src: "/brand/yz-light-32.png",
+            src: "https://yzstatic.yz13.space/logo/yz-light-32.png",
             sizes: "32x32",
             type: "image/png",
             purpose: "any",

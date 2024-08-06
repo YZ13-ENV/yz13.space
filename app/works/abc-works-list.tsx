@@ -25,7 +25,9 @@ const AbcWorksList = async ({ lt }: AbcWorksListProps) => {
           const worksThatMatchLetter = allWorks.filter(work => String((work.name ?? "")?.slice(0, 1)).toLowerCase() === letter)
           return (
             <Stack.Wrapper id={`letter#${letter}`} key={`abc#${letter}`} className={matchedLT ? "border-foreground" : ""}>
-              <Stack.Header><span className="uppercase">{letter}</span></Stack.Header>
+              <Stack.Header>
+                <span className="uppercase">{letter}</span>
+              </Stack.Header>
               <Stack.Content>
                 {
                   worksThatMatchLetter.map(

@@ -1,23 +1,12 @@
 import { LocalizedTitle } from "@/components/changelog"
 import { Dock } from "@/components/dock"
-import { HonoIcon } from "@/components/pixel-stack/hono-icon"
-import { JestIcon } from "@/components/pixel-stack/jest-icon"
-import { MongoDBIcon } from "@/components/pixel-stack/mongodb-icon"
-import { NextIcon } from "@/components/pixel-stack/next-icon"
-import { NodeIcon } from "@/components/pixel-stack/node-icon"
-import { ReactIcon } from "@/components/pixel-stack/react-icon"
-import { ShadcnIcon } from "@/components/pixel-stack/shadcn-ui-icon"
-import { SupabaseIcon } from "@/components/pixel-stack/supabase-icon"
-import { TailwindIcon } from "@/components/pixel-stack/tailwind-icon"
-import { TypeScriptIcon } from "@/components/pixel-stack/typescript-icon"
-import { ViteIcon } from "@/components/pixel-stack/vite-icon"
-import { ZodIcon } from "@/components/pixel-stack/zod"
 import { Stack } from "@/components/stack"
 import { Locales, getLocale } from "@/dictionaries/tools"
 import { Page, dynamicMetadata } from "@/metadata"
+import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
-import { BiUser } from "react-icons/bi"
+import { About } from "./about"
 import { BGOverlay } from "./bg-overlay"
 import { LocalData } from "./local-data"
 import { Status } from "./status"
@@ -48,29 +37,17 @@ const page = async ({ searchParams }: Props) => {
       </Suspense>
       <main className="space-y-6 w-full pt-36 px-6 pb-12">
         <LocalData lang={lang} />
-        <Stack.Wrapper hovered>
-          <Stack.Header>
-            <span className="size-7 group-hover:border-foreground transition-colors inline-flex items-center justify-center rounded-full border">
-              <BiUser size={14} className="text-foreground" />
-            </span>
-            <h1 className="text-lg text-foreground">
-              Hey, i'm a YZ13
-            </h1>
-          </Stack.Header>
-          <Stack.Content>
-            <p className="text-base text-foreground/60">
-              Hi, I'm a fullstack developer. I like to create beautiful websites, in my free time I practice creating UI to improve the design of my work, I also try to learn more about backend development.
-            </p>
-          </Stack.Content>
-        </Stack.Wrapper>
+        <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl " />}>
+          <About lang={lang} />
+        </Suspense>
         <Stack.Wrapper hovered>
           <Stack.Content>
-            <Suspense fallback={<></>}>
+            <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl" />}>
               <Status lang={lang} title={LocalizedTitle} />
             </Suspense>
           </Stack.Content>
         </Stack.Wrapper>
-        <Stack.GroupStack>
+        {/* <Stack.GroupStack stackName="Technologies">
           <Stack.Wrapper>
             <Stack.Header>
               <h2 className="text-lg font-medium text-foreground">Frontend</h2>
@@ -125,7 +102,7 @@ const page = async ({ searchParams }: Props) => {
               </div>
             </Stack.Content>
           </Stack.Wrapper>
-        </Stack.GroupStack>
+        </Stack.GroupStack> */}
       </main>
     </>
   )

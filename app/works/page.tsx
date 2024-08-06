@@ -1,9 +1,12 @@
 import { Dock } from "@/components/dock"
+import { LocalizedHeading } from "@/components/localized-heading"
 import { getLocale, Locales } from "@/dictionaries/tools"
 import { dynamicMetadata, Page } from "@/metadata"
+import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
 import { Abc } from "./abc"
+import { AbcReset } from "./abc-reset"
 import { AbcWorkListSkeleton, AbcWorksList } from "./abc-works-list"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
@@ -33,7 +36,25 @@ const page = async ({ searchParams }: Props) => {
       </Suspense>
       <main className="space-y-6 w-full pt-36 pl-4 pr-8 pb-12">
         <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
-          <h1 className="text-4xl font-medium">Works</h1>
+          <div className="flex items-center gap-2">
+            <Suspense
+              fallback={
+                <Skeleton className="h-10 w-36" />
+              }
+            >
+              <LocalizedHeading
+                heading="h1"
+                className="text-4xl font-medium"
+                lang={lang}
+                dict="works"
+                field="name"
+              />
+            </Suspense>
+            {
+              !!lt &&
+              <AbcReset lt={lt} />
+            }
+          </div>
         </div>
         <Suspense fallback={<AbcWorkListSkeleton />}>
           <AbcWorksList lt={lt} />

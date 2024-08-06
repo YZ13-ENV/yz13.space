@@ -65,7 +65,7 @@ const DockWrapper = ({ children }: Props) => {
       ref={ref}
       id="dock"
       className={cn(
-        "dock-wrapper bg-background flex flex-col max-w-fit",
+        "dock-wrapper bg-background flex flex-col max-w-fit border shadow-2xl",
         "rounded-3xl"
       )}
     >

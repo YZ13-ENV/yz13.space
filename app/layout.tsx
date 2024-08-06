@@ -4,12 +4,18 @@ import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@yz13/mono/components/tooltip";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { GeistMono } from 'geist/font/mono';
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import { cn } from "yz13/cn";
 import { Body } from "./_components/body";
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 const RU_FONT = Inter({
   subsets: ["cyrillic", "latin"],
