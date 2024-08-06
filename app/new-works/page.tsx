@@ -1,8 +1,19 @@
 import { Dock } from "@/components/dock"
 import { getLocale, Locales } from "@/dictionaries/tools"
+import { dynamicMetadata, Page } from "@/metadata"
+import { Metadata } from "next"
 import { Suspense } from "react"
 import { Abc } from "./abc"
 import { AbcWorksList } from "./abc-works-list"
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const searchParamLang = searchParams.lang
+  const locale = getLocale()
+  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const page: Page = "works"
+  const metadata = dynamicMetadata(lang, page)
+  return metadata
+}
 
 type Props = {
   searchParams: {
@@ -25,28 +36,6 @@ const page = async ({ searchParams }: Props) => {
           <h1 className="text-4xl font-medium">Works</h1>
         </div>
         <AbcWorksList lt={lt} />
-        {/* <Stack.Wrapper>
-          <Stack.Header>A</Stack.Header>
-          <Stack.Content>
-            <button className="w-full flex rounded-lg hover:bg-yz-neutral-200 items-center gap-2 justify-start">
-              <span className="size-10 inline-flex items-center justify-center">
-                <PiUserDuotone size={18} />
-              </span>
-              <span className="inline-flex flex-col items-start">
-                <span className="text-sm font-medium text-foreground">User</span>
-                <span className="text-xs text-secondary">Notification</span>
-              </span>
-            </button>
-          </Stack.Content>
-        </Stack.Wrapper>
-        <Stack.Wrapper>
-          <Stack.Header>B</Stack.Header>
-          <Stack.Content></Stack.Content>
-        </Stack.Wrapper>
-        <Stack.Wrapper>
-          <Stack.Header>C</Stack.Header>
-          <Stack.Content></Stack.Content>
-        </Stack.Wrapper> */}
       </main>
       <Abc defaultValue={lt} />
     </>

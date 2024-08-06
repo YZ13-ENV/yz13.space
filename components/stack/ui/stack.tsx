@@ -13,11 +13,16 @@ type DefaultProps = {
 
 type GroupStackProps = {} & DefaultProps
 
-const GroupStack = ({ children }: GroupStackProps) => {
+const GroupStack = ({ children, className = "" }: GroupStackProps) => {
   const [expanded, setExpanded] = useState<boolean>(false)
   return (
     <div
-      className="w-full space-y-6"
+      onClick={() => setExpanded(!expanded)}
+      className={cn(
+        "w-full group max-w-lg mx-auto transition-all",
+        expanded ? "space-y-6" : "-space-y-80",
+        className
+      )}
     >
       {children}
     </div>
@@ -35,7 +40,7 @@ const Wrapper = ({ focused = false, hovered = false, children, className, ...pro
       whileHover={hovered ? { scale: 1.025 } : undefined}
       whileFocus={focused ? { scale: 1.025 } : undefined}
       className={cn(
-        "flex flex-col group cursor-pointer bg-background gap-1.5 p-3 rounded-2xl border-2 hover:border-foreground max-w-lg w-full mx-auto",
+        "flex flex-col relative group cursor-pointer bg-background gap-1.5 p-3 rounded-2xl border-2 hover:border-foreground max-w-lg w-full mx-auto",
         hovered ? "hover:shadow-2xl transition-shadow" : "transition-all",
         focused ? "" : "",
         className
@@ -89,5 +94,5 @@ const Content = ({ children, className = "" }: ContentProps) => {
   )
 }
 
-export { Content, Header, Wrapper }
+export { Content, GroupStack, Header, Wrapper }
 
