@@ -1,7 +1,7 @@
 import { getHOST, isDev } from "@/app/(auth)/(routes)/login/get-url";
 import { Locales, getLocale } from "@/dictionaries/tools";
 import { PostgrestResponse } from "@supabase/supabase-js";
-import { RequestMethod, RequestType, log } from "yz13/log";
+import { RequestMethod, RequestType } from "yz13/log";
 import { Tables } from "yz13/supabase/database";
 import { z } from "zod";
 import { actionClient } from "./safe-client";
@@ -71,15 +71,6 @@ export const changelog = actionClient
           return console.log("LOCAL_LOG", method, status, host, type, "?");
         } else {
           console.log("LOG", method, status, host, type, "");
-          // @ts-ignore
-          log({
-            host,
-            method,
-            path: "",
-            status: status,
-            type,
-            message: "changelog-action",
-          }).then(console.log);
         }
       },
     }

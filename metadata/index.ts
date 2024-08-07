@@ -1,5 +1,7 @@
+import { isDev } from "@/app/(auth)/(routes)/login/get-url";
 import { Locales } from "@/dictionaries/tools";
 import { Metadata } from "next";
+import { unstable_cache as cache } from "next/cache";
 import { defaultMetadata } from "./const/default-metadata";
 import { icons } from "./const/icons";
 import { openGraph } from "./const/og";
@@ -11,11 +13,10 @@ import pages from "./pages";
 
 export type Page = keyof typeof pages;
 
-export const dynamicMetadata = async (
-  locale: Locales,
-  path?: Page
-): Promise<Metadata> => {
-  const pageMetadata = path ? pages[path] ?? defaultMetadata : defaultMetadata;
+const INTERNAL__dynamicMetadata = async (locale: Locales, path?: Page) => {
+  const pageMetadata = path
+    ? (pages[path] ?? defaultMetadata)
+    : defaultMetadata;
   const words = await keywords();
   if (!path) {
     return {
@@ -35,5 +36,24 @@ export const dynamicMetadata = async (
       keywords: words,
       verification,
     };
+  }
+};
+
+export const dynamicMetadata = async (
+  locale: Locales,
+  path?: Page
+): Promise<Metadata> => {
+  if (isDev) {
+    const metadata = await INTERNAL__dynamicMetadata(locale, path);
+    return metadata;
+  } else {
+    const getCachedMetadata = cache(
+      async (locale: Locales, path?: Page) =>
+        await INTERNAL__dynamicMetadata(locale, path),
+      ["metadata"],
+      { revalidate: 60 * 60 }
+    );
+    const metadata = await getCachedMetadata(locale, path);
+    return metadata;
   }
 };

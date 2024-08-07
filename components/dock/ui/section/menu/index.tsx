@@ -1,11 +1,12 @@
 import { nav_links } from "@/const/nav-links"
 import { Locales, getDict, getLocale } from "@/dictionaries/tools"
+import { showIdLink } from "@/feature-flags/dock-id.feature"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@yz13/mono/components/command"
 import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import { cookies } from "next/headers"
 import Link from "next/link"
-import { LuLogIn, LuUserPlus } from "react-icons/lu"
+import { LuLogIn, LuUser, LuUserPlus } from "react-icons/lu"
 import { cn } from "yz13/cn"
 import { createClient } from "yz13/supabase/server"
 import { SignOut } from "./signout"
@@ -28,6 +29,7 @@ const Menu = async ({ className = "", lang: provided_lang }: { className?: strin
       }
     } else return { ...nav, link: nav.link + (provided_lang ? `?lang=${provided_lang}` : "") }
   })
+  const dock_id_feature = await showIdLink()
   const dockDict = await getDict<any>("dock", lang)
   const menu = dockDict.menu
   const menuNavName = menu.nav
@@ -45,7 +47,7 @@ const Menu = async ({ className = "", lang: provided_lang }: { className?: strin
             local_nav_links.map(nav =>
               <CommandItem
                 key={`command-${nav.link}`}
-                className="gap-2 cursor-pointer hover:bg-yz-neutral-100 rounded-lg"
+                className="gap-2 cursor-pointer rounded-lg"
                 asChild
               >
                 <Link href={nav.link}>
@@ -61,17 +63,26 @@ const Menu = async ({ className = "", lang: provided_lang }: { className?: strin
           user
             ?
             <CommandGroup heading={menuProfileName}>
+              {
+                dock_id_feature &&
+                <CommandItem className="rounded-lg cursor-pointer" asChild>
+                  <Link href="https://id.yz13.space">
+                    <LuUser className="mr-2 h-4 w-4" />
+                    {auth_button.profile}
+                  </Link>
+                </CommandItem>
+              }
               <SignOut>{auth_button.signout}</SignOut>
             </CommandGroup>
             :
             <CommandGroup heading={menuProfileName}>
-              <CommandItem className="hover:bg-yz-neutral-100 rounded-lg cursor-pointer" asChild>
+              <CommandItem className="rounded-lg cursor-pointer" asChild>
                 <Link href="/login">
                   <LuLogIn className="mr-2 h-4 w-4" />
                   <span>{auth_button.login}</span>
                 </Link>
               </CommandItem>
-              <CommandItem className="hover:bg-yz-neutral-100 rounded-lg cursor-pointer" asChild>
+              <CommandItem className="rounded-lg cursor-pointer" asChild>
                 <Link href="/signup">
                   <LuUserPlus className="mr-2 h-4 w-4" />
                   <span>{auth_button.signup}</span>
