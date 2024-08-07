@@ -2,7 +2,7 @@ import { getHOST, isDev } from "@/app/(auth)/(routes)/login/get-url";
 import { getExperience } from "@/components/experience/api/experience.api";
 import { Locales, getLocale } from "@/dictionaries/tools";
 import dayjs from "dayjs";
-import { RequestMethod, RequestType, log } from "yz13/log";
+import { RequestMethod, RequestType } from "yz13/log";
 import { z } from "zod";
 import { actionClient } from "./safe-client";
 
@@ -45,15 +45,6 @@ export const experience = actionClient
         } else {
           const date = dayjs();
           console.log("LOG", method, status, host, type, "?");
-          // @ts-ignore
-          log({
-            host,
-            method,
-            path: "",
-            status: status,
-            type,
-            message: "experience-action",
-          }).then(console.log);
         }
       },
     }

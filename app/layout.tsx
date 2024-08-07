@@ -45,7 +45,7 @@ export const viewport: Viewport = {
 type LayoutProps = Readonly<{
   children?: ReactNode
 }>
-export default async function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children }: LayoutProps) {
   const locale = getLocale()
   const isEN = locale === "en"
   return (

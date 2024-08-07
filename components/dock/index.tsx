@@ -1,4 +1,6 @@
 import { Locales } from "@/dictionaries/tools"
+import { Skeleton } from "@yz13/mono/components/skeleton"
+import { Suspense } from "react"
 import { LuMenu } from "react-icons/lu"
 import { DockContent } from "./ui/content"
 import { Contacts } from "./ui/section/contacts"
@@ -19,9 +21,19 @@ const Dock = ({ lang = "en" }: { lang?: Locales }) => {
         <Trigger value="menu">
           <LuMenu size={16} />
         </Trigger>
-        <Contacts />
+        <Suspense fallback={
+          <>
+            <Skeleton className="size-6 rounded-full" />
+            <Skeleton className="size-6 rounded-full" />
+            <Skeleton className="size-6 rounded-full" />
+          </>
+        }>
+          <Contacts />
+        </Suspense>
         <Trigger value="user">
-          <User size={24} />
+          <Suspense fallback={<Skeleton className="size-6 rounded-full" />}>
+            <User size={24} />
+          </Suspense>
         </Trigger>
       </div>
     </DockWrapper>
