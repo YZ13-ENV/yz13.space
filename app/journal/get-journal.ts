@@ -8,9 +8,14 @@ import { isDev } from "../(auth)/(routes)/login/get-url";
 import { getMDX } from "./[...path]/get-mdx";
 
 const getJournal = (locale: Locales) => {
-  const pathToContent = join(process.cwd(), "journal", locale);
-  const dir = readdirSync(pathToContent);
-  return dir;
+  try {
+    const pathToContent = join(process.cwd(), "journal", locale);
+    const dir = readdirSync(pathToContent);
+    return dir;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 };
 
 const parseJournal = (locale: Locales, path: string[]) => {

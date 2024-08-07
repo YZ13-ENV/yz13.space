@@ -1,18 +1,19 @@
 import { get } from "@vercel/edge-config";
 import { unstable_flag as flag, FlagDeclaration } from "@vercel/flags/next";
-import { Features } from "./status.feature";
 
-export const tech_stack_flag: FlagDeclaration<boolean> = {
-  key: "tech-stack",
+export type Features = { [key: string]: boolean };
+
+export const dock_id_flag: FlagDeclaration<boolean> = {
+  key: "dock-id-link",
   async decide() {
     const key = this.key;
     const isDev = process.env.NODE_ENV === "development";
     if (isDev) return isDev;
     const features = await get<Features>("features");
-    return features ? features[key] ?? false : false;
+    return features ? (features[key] ?? false) : false;
   },
-  origin: "https://www.yz13.space/flags/tech-stack/",
-  description: "Show status on home page",
+  origin: "https://www.yz13.space/flags/dock-id-link/",
+  description: "Show button to YZ13 ID",
   defaultValue: false,
   options: [
     { value: false, label: "Hide" },
@@ -20,4 +21,4 @@ export const tech_stack_flag: FlagDeclaration<boolean> = {
   ],
 };
 
-export const showTechStack = flag<boolean>(tech_stack_flag);
+export const showIdLink = flag<boolean>(dock_id_flag);
