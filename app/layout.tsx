@@ -10,7 +10,7 @@ import utc from "dayjs/plugin/utc";
 import { GeistMono } from 'geist/font/mono';
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { cn } from "yz13/cn";
 import { Body } from "./_components/body";
 
@@ -54,7 +54,9 @@ export default function RootLayout({ children }: LayoutProps) {
         <TooltipProvider>
           <Analytics />
           <SpeedInsights />
-          {children}
+          <Suspense fallback={<></>}>
+            {children}
+          </Suspense>
         </TooltipProvider>
       </Body>
     </html>

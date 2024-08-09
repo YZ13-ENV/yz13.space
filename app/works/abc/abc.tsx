@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useMemo, useState } from "react"
 import { cn } from "yz13/cn"
-import { getURL } from "../(auth)/(routes)/login/get-url"
+import { getURL } from "../../(auth)/(routes)/login/get-url"
 import { useAbc } from "./abc-store"
 
 type AbcProps = {
@@ -34,7 +34,7 @@ const Abc = ({ defaultValue }: AbcProps) => {
   return (
     <motion.aside
       layout
-      className="w-8 h-screen fixed bottom-0 right-0 flex flex-col gap-0 items-center justify-center"
+      className="w-10 h-screen fixed bottom-0 right-0 flex flex-col gap-0 items-center justify-center"
       transition={{
         type: "spring",
         bounce: 0.4,

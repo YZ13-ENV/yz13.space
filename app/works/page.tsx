@@ -1,13 +1,16 @@
 import { Dock } from "@/components/dock"
 import { LocalizedHeading } from "@/components/localized-heading"
-import { getLocale, Locales } from "@/dictionaries/tools"
-import { dynamicMetadata, Page } from "@/metadata"
+import { Locales, getLocale } from "@/dictionaries/tools"
+import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
-import { Abc } from "./abc"
-import { AbcReset } from "./abc-reset"
-import { AbcWorkListSkeleton, AbcWorksList } from "./abc-works-list"
+import { LuLoader } from "react-icons/lu"
+import { Abc } from "./abc/abc"
+import { AbcReset } from "./abc/abc-reset"
+import { AbcWorkListSkeleton, AbcWorksList } from "./abc/abc-works-list"
+import { Modal } from "./work-modal/modal"
+import { Work } from "./work-modal/work"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const searchParamLang = searchParams.lang
@@ -22,6 +25,7 @@ type Props = {
   searchParams: {
     lang?: string
     lt?: string
+    workId?: string
   }
 }
 const page = async ({ searchParams }: Props) => {
@@ -29,12 +33,23 @@ const page = async ({ searchParams }: Props) => {
   const lt = searchParams.lt
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const workId = searchParams.workId
   return (
     <>
+      {
+        !!workId &&
+        <Modal
+          queryParam="workId"
+        >
+          <Suspense fallback={<LuLoader size={20} className="animate-spin" />}>
+            <Work id={workId} />
+          </Suspense>
+        </Modal>
+      }
       <Suspense fallback={<></>}>
         <Dock lang={lang} />
       </Suspense>
-      <main className="space-y-6 w-full pt-36 pl-4 pr-8 pb-12">
+      <main className="space-y-6 w-full pt-36 pl-6 pr-10 pb-12">
         <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
           <div className="flex items-center gap-2">
             <Suspense
