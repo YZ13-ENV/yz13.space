@@ -3,13 +3,14 @@ import { LocalizedText } from "@/components/localized-text"
 import { Stack } from "@/components/stack"
 import { Locales } from "@/dictionaries/tools"
 import { BiUser } from "react-icons/bi"
+import { TechStack } from "./tech-stack"
 
 
 const About = ({ lang = "en" }: { lang?: Locales }) => {
   return (
-    <Stack.Wrapper hovered>
-      <Stack.Header>
-        <span className="size-7 group-hover:border-foreground transition-colors inline-flex items-center justify-center rounded-full border">
+    <Stack.Wrapper hovered store={{ expanded: true }}>
+      <Stack.Header expandable>
+        <span className="size-7 transition-colors inline-flex items-center justify-center rounded-full border">
           <BiUser size={14} className="text-foreground" />
         </span>
         <LocalizedHeading
@@ -27,6 +28,9 @@ const About = ({ lang = "en" }: { lang?: Locales }) => {
           lang={lang}
         />
       </Stack.Content>
+      <Stack.Expandable>
+        <TechStack />
+      </Stack.Expandable>
     </Stack.Wrapper>
   )
 }

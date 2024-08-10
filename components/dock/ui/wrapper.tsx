@@ -1,5 +1,5 @@
 "use client"
-import { useDebounceFn, useMutationObserver } from "ahooks"
+import { useMutationObserver } from "ahooks"
 import { motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
@@ -22,7 +22,6 @@ const DockWrapper = ({ children }: Props) => {
       setWidth(width)
     }
   }
-  const { run: closeDock } = useDebounceFn(() => setTab(undefined), { wait: 250 })
   useMutationObserver(
     () => updateDockWidth(),
     ref,
@@ -65,7 +64,7 @@ const DockWrapper = ({ children }: Props) => {
       ref={ref}
       id="dock"
       className={cn(
-        "dock-wrapper bg-background flex flex-col max-w-fit border shadow-2xl",
+        "dock-wrapper bg-background flex flex-col max-w-fit items-center justify-center border shadow-2xl",
         "rounded-3xl"
       )}
     >

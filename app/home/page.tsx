@@ -46,6 +46,7 @@ const page = async ({ searchParams }: Props) => {
               <Status lang={lang} title={LocalizedTitle} />
             </Suspense>
           </Stack.Content>
+          <Stack.Expandable>1</Stack.Expandable>
         </Stack.Wrapper>
         {/* <Stack.GroupStack stackName="Technologies">
           <Stack.Wrapper>
