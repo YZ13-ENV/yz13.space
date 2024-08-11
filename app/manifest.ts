@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "YZ13",
     short_name: "YZ13",
-    background_color: "#fff",
+    background_color: "#000",
     description: "Developers website",
     start_url: "/",
     display: "standalone",

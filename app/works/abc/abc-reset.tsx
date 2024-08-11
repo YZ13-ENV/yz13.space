@@ -3,7 +3,7 @@ import { Button } from "@yz13/mono/components/button"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useMemo } from "react"
 import { LuX } from "react-icons/lu"
-import { getURL } from "../(auth)/(routes)/login/get-url"
+import { getURL } from "../../(auth)/(routes)/login/get-url"
 
 const AbcReset = ({ lt }: { lt: string }) => {
   const router = useRouter()
