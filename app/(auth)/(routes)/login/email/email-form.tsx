@@ -4,13 +4,12 @@ import { Input } from "@yz13/mono/components/input"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { createClient } from "yz13/supabase/client"
-import { getURL } from "../get-url"
 
 type Props = {
   continue?: string
 }
 
-const EmailForm = ({ continue: continueLink = "" }: Props) => {
+const EmailForm = ({ continue: continueLink = "/" }: Props) => {
   const sp = createClient()
   const [email, setEmail] = useState<string>("")
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -26,9 +25,8 @@ const EmailForm = ({ continue: continueLink = "" }: Props) => {
     })
     console.log(data, error)
     const user = data.user
-    const callbackUrl = getURL() + "/auth/callback" + continue_flow
     if (error) setError(true)
-    if (user) router.push(callbackUrl)
+    if (user) router.push(continueLink)
   }
   return (
     <>

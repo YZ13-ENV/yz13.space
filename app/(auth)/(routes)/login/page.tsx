@@ -16,6 +16,7 @@ const page = async ({ searchParams }: Props) => {
   const { data: { user } } = await sp.auth.getUser()
   const isLogged = !!user
   const continueLink = searchParams.continue
+  console.log(user)
   return (
     <div className="max-w-3xl w-full mx-auto h-screen">
       <div className="w-full absolute top-0 left-0 flex justify-center p-6">
