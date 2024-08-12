@@ -8,7 +8,6 @@ import "dayjs/locale/ru"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
 import { useEffect, useMemo, useState } from "react"
-
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
@@ -30,8 +29,13 @@ const LocalData = ({ lang = "en" }: { lang?: Locales }) => {
     <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
       <time className="text-5xl font-medium">{time}{ready && <span className="text-secondary">:{seconds}</span>}</time>
       <div className="flex items-center gap-2">
-        <time className="text-foreground/60 capitalize font-medium">{date}</time>
+        <time className="text-foreground/60 shrink-0 capitalize font-medium">{date}</time>
         <Separator orientation="vertical" className="h-3" />
+        {/* <div className="inline-flex text-secondary hover:text-foreground/60 transition-colors cursor-pointer items-center gap-1.5">
+          <LuCalendar size={14} />
+          <span className="text-inherit line-clamp-1">11:40 New journal record</span>
+        </div>
+        <Separator orientation="vertical" className="h-3" /> */}
         <span className="text-foreground/60 font-medium uppercase">{lang}</span>
       </div>
     </div>

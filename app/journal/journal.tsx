@@ -1,3 +1,4 @@
+import { LocalizedText } from "@/components/localized-text";
 import { Locales } from "@/dictionaries/tools";
 import dayjs from "dayjs";
 import { isDev } from "../(auth)/(routes)/login/get-url";
@@ -22,7 +23,11 @@ const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: 
     })
   if (isEmpty) return (
     <div className="w-full aspect-square h-full flex items-center justify-center">
-      <span>No journal's records yet</span>
+      <LocalizedText
+        dict="journal"
+        field="empty"
+        lang={locale}
+      />
     </div>
   )
   return (

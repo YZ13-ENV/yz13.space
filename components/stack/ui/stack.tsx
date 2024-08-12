@@ -67,6 +67,7 @@ const Expandable = ({ className, children }: ExpandableProps) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "fit-content", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
+            className={className}
           >
             {children}
           </motion.div>
