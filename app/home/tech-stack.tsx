@@ -18,14 +18,21 @@ import { AnimatePresence, motion } from "framer-motion"
 import { ReactNode, useState } from "react"
 import { cn } from "yz13/cn"
 
+type Dot = {
+  x: number
+  y: number
+}
+
 const Wrapper = ({ children, className }: { className?: string, children?: ReactNode }) => {
   return (
     <div className={cn(
-      "w-full group/stack aspect-square flex-col gap-4 flex items-center justify-center",
+      "w-full group/stack aspect-square relative flex items-center justify-center",
       className
     )}
     >
-      {children}
+      <div className="flex items-center justify-center z-10 gap-4 p-4 rounded-full bg-background">
+        {children}
+      </div>
     </div>
   )
 }
@@ -84,13 +91,13 @@ const Frontend = () => {
       }}
       className="w-full grid grid-cols-3 grid-rows-2 z-0"
     >
-      <Wrapper className="border-r">
+      <Wrapper className="border-b border-r">
         <NextIcon size={64} className="z-0" />
       </Wrapper>
-      <Wrapper className="border-r">
+      <Wrapper className="border-b border-r">
         <ReactIcon size={64} className="z-0" />
       </Wrapper>
-      <Wrapper className="border-r">
+      <Wrapper className="border-b">
         <ViteIcon size={64} className="z-0" />
       </Wrapper>
       <Wrapper className="border-r">

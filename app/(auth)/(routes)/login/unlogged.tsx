@@ -9,6 +9,7 @@ type Props = {
 }
 const UnLogged = ({ continue: continueLink }: Props) => {
   const signUpLink = "/signup" + (continueLink ? `?continue=${continueLink}` : "")
+  const emailLoginLink = "/login/email" + (continueLink ? `?continue=${continueLink}` : "")
   return (
     <>
       <h1 className="text-4xl font-bold">Login in to YZ13</h1>
@@ -16,12 +17,12 @@ const UnLogged = ({ continue: continueLink }: Props) => {
         <GithubButton continue={continueLink} />
         <GoogleButton continue={continueLink} />
         <Separator />
-        <button
-          disabled
+        <Link
+          href={emailLoginLink}
           className="flex items-center justify-center w-full h-12 gap-2 font-medium rounded-xl disabled:opacity-60"
         >
           Sign in with Email
-        </button>
+        </Link>
         <Button variant="ghost" asChild disabled>
           <Link href={signUpLink} className="line-through">
             Looking for a demo?

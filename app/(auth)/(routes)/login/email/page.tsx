@@ -1,8 +1,7 @@
 import { DynamicImage } from "@/components/dynamic-image"
-import { cookies } from "next/headers"
-import { createClient } from "yz13/supabase/server"
-import { Logged } from "./logged"
-import { UnLogged } from "./unlogged"
+import { Button } from "@yz13/mono/components/button"
+import Link from "next/link"
+import { EmailForm } from "./email-form"
 
 type Props = {
   searchParams: {
@@ -11,14 +10,10 @@ type Props = {
   }
 }
 const page = async ({ searchParams }: Props) => {
-  const cks = cookies()
-  const sp = createClient(cks)
-  const { data: { user } } = await sp.auth.getUser()
-  const isLogged = !!user
   const continueLink = searchParams.continue
-  console.log(user)
+  const backLink = "/login" + (continueLink ? `?continue=${continueLink}` : "")
   return (
-    <div className="max-w-3xl w-full mx-auto h-screen">
+    <div className="max-w-sm w-full mx-auto h-screen">
       <div className="w-full absolute top-0 left-0 flex justify-center p-6">
         <div className="size-12 relative">
           <DynamicImage
@@ -30,12 +25,13 @@ const page = async ({ searchParams }: Props) => {
           />
         </div>
       </div>
-      <div className="flex relative flex-col items-center h-full justify-center w-full">
-        {
-          isLogged
-            ? <Logged user={user} />
-            : <UnLogged continue={continueLink} />
-        }
+      <div className="flex relative flex-col gap-2 items-center h-full justify-center w-full">
+        <EmailForm />
+        <Button size="lg" className="rounded-lg w-full" variant="secondary" asChild>
+          <Link href={backLink}>
+            Вернуться
+          </Link>
+        </Button>
       </div>
     </div>
   )
