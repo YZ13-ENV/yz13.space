@@ -1,4 +1,4 @@
-import { Dock } from "@/components/dock"
+import Dock from "@/components/dock"
 import { LocalizedHeading } from "@/components/localized-heading"
 import { Locales, getLocale } from "@/dictionaries/tools"
 import { Page, dynamicMetadata } from "@/metadata"

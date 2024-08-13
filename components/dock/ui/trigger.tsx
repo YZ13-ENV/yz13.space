@@ -19,7 +19,7 @@ const Trigger = ({ asChild = false, value, children, className = '' }: TriggerPr
       onClick={() => isSelected ? setTab(undefined) : setTab(value)}
       variant="ghost"
       size="icon"
-      className={cn("size-8 aspect-square transition-colors hover:bg-yz-neutral-200 rounded-full", className)}
+      className={cn("size-10 aspect-square transition-colors hover:bg-yz-neutral-200 rounded-xl", className)}
     >
       {children}
     </Button>

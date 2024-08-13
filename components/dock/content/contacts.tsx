@@ -2,7 +2,7 @@ import { get } from "@vercel/edge-config"
 import { Separator } from "@yz13/mono/components/separator"
 import Link from "next/link"
 import * as bs from "react-icons/bs"
-import { Trigger } from "../trigger"
+import { Trigger } from "../ui/trigger"
 
 export type Contact = {
   icon: string
@@ -21,7 +21,7 @@ const Contacts = async () => {
         contacts.map(contact =>
           <Trigger key={`dock#${contact.value}`} asChild value={contact.label}>
             <Link href={contact.value}>
-              {contact.icon && bs[contact.icon as keyof typeof bs]({ size: 16 })}
+              {contact.icon && bs[contact.icon as keyof typeof bs]({ size: 20 })}
             </Link>
           </Trigger>
         )

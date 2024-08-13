@@ -1,4 +1,4 @@
-import { Dock } from "@/components/dock"
+import Dock from "@/components/dock"
 import { DynamicImage } from "@/components/dynamic-image"
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
 import { dynamicMetadata, Page } from "@/metadata"
