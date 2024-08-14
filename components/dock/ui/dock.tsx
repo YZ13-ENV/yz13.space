@@ -1,47 +1,32 @@
 "use client"
-import { useMutationObserver } from "ahooks"
+import { useClickAway } from "ahooks"
 import { motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
 import { cn } from "yz13/cn"
 import { useDockTab } from "../store/dock.store"
 
-type Props = {
+export type WrapperProps = {
   children?: ReactNode
 }
-const DockWrapper = ({ children }: Props) => {
+const Wrapper = ({ children }: WrapperProps) => {
   const pathname = usePathname()
   const ref = useRef<ElementRef<"div">>(null)
-  const [width, setWidth] = useState<number>(36)
   const [show, setShow] = useState<boolean>(false)
   const { setTab, tab } = useDockTab()
-  const updateDockWidth = () => {
-    const div = ref.current
-    if (div) {
-      const width = div.clientWidth
-      setWidth(width)
-    }
-  }
-  useMutationObserver(
-    () => updateDockWidth(),
-    ref,
-    { attributes: true, childList: true },
-  );
+  const hasActiveTab = !!tab
   useEffect(() => {
     setTab(undefined)
   }, [pathname])
   useEffect(() => {
     if (typeof document !== "undefined") setShow(true)
   }, [typeof document])
-  useEffect(() => {
-    const div = ref.current
-    if (div) updateDockWidth()
-  }, [ref, tab])
+  useClickAway(() => setTab(undefined), ref)
   return (
     <motion.footer
       layout
       whileHover={{
-        scale: 1.025,
+        scale: hasActiveTab ? 1 : 1.025,
       }}
       initial={{
         width: "36px",
@@ -51,8 +36,6 @@ const DockWrapper = ({ children }: Props) => {
         width: "fit-content",
         bottom: "24px"
       }}
-      // @ts-expect-error
-      style={{ "--dock-width": `${width}px` }}
       transition={{
         type: "spring",
         bounce: 0.4,
@@ -65,8 +48,8 @@ const DockWrapper = ({ children }: Props) => {
       id="dock"
       className={cn(
         "bg-background min-h-10 z-50 flex flex-col items-center justify-center border shadow-2xl",
-        "p-2 rounded-2xl absolute bottom-0",
-        "max-w-full",
+        "p-1.5 rounded-2xl",
+        "max-w-full"
       )}
     >
       {
@@ -76,4 +59,18 @@ const DockWrapper = ({ children }: Props) => {
     </motion.footer>
   )
 }
-export { DockWrapper }
+
+export type ContainerProps = {
+  children?: ReactNode
+}
+
+const Container = ({ children }: ContainerProps) => {
+  return (
+    <div className="w-full fixed bottom-3 left-0 z-20 h-16 flex items-end justify-center">
+      {children}
+    </div>
+  )
+}
+
+export { Container, Wrapper }
+

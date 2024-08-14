@@ -20,7 +20,7 @@ const User = async ({ size = 36 }: UserProps) => {
     <Avatar style={{ width: size, height: size }} className="shrink-0 relative aspect-square flex justify-center items-center">
       <AvatarImage className="w-full h-full" src={avatar_url} />
       <AvatarFallback className="w-full h-full">
-        <BiUser size={16} />
+        <BiUser size={20} />
       </AvatarFallback>
     </Avatar>
   )
