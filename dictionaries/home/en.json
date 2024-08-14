@@ -1,5 +1,30 @@
 {
   "title": "Vladimir/@YZ13",
   "position": "Frontend developer",
-  "description": "Hi, I'm a fullstack developer. I like to create beautiful websites, in my free time I practice creating UI to improve the design of my work, I also try to learn more about backend development."
+  "description": "Hi, I'm a fullstack developer. I like to create beautiful websites, in my free time I practice creating UI to improve the design of my work, I also try to learn more about backend development.",
+  "team-experience": {
+    "text": [
+      "I am very passionate about my work, in the future i want create my own development team and build beautiful websites.",
+      "For now i work alone, every day trying to upgrade my skills, make my designs more perfect."
+    ],
+    "experience": {
+      "metric": "years",
+      "description": "experience"
+    },
+    "projects": {
+      "metric": "",
+      "description": "completed projects"
+    }
+  },
+  "what-i-offer": {
+    "title": "What i offer",
+    "description": "I try to be flexible to each project, based on requirements. There is some basic things that i can provide.",
+    "ul": [
+      "End-end process",
+      "Full-time fullstack developer",
+      "A-sync Communication + Calls",
+      "Daily updates",
+      "Ongoing Revisions & Refinement"
+    ]
+  }
 }

@@ -4,19 +4,18 @@ import { Tables } from "yz13/supabase/database";
 
 export type TeamMember = Tables<"team_members">;
 
-const INTERNAL__members = async (): Promise<PostgrestResponse<
-  TeamMember[]
-> | null> => {
-  try {
-    const response = await fetch(`https://www.api.yz13.space/team/members`, {
-      method: "GET",
-    });
-    return await response.json();
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
-};
+const INTERNAL__members =
+  async (): Promise<PostgrestResponse<TeamMember> | null> => {
+    try {
+      const response = await fetch(`https://www.api.yz13.space/team/members`, {
+        method: "GET",
+      });
+      return await response.json();
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  };
 
 export const members = () => {
   const tag = "team-members";

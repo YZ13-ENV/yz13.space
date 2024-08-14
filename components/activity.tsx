@@ -1,5 +1,5 @@
 "use client"
-import { ActivityEvent } from "@/app/home/activity-widget"
+import { ActivityEvent } from "@/app/home/activity/activity-widget"
 import { Stack } from "@/components/stack"
 import { Locales } from "@/dictionaries/tools"
 import { Button } from "@yz13/mono/components/button"
@@ -60,7 +60,7 @@ const Month = forwardRef<HTMLDivElement, MonthProps>(
       <div className="w-fit flex shrink-0 flex-col h-full gap-1" ref={ref} {...props}>
         <div className="h-3 flex items-center">
           <span className={cn(
-            "relative text-xs",
+            "relative text-xs capitalize",
             isNeedMove ? "-left-3.5" : ""
           )}
           >
@@ -74,6 +74,8 @@ const Month = forwardRef<HTMLDivElement, MonthProps>(
               const filtered = data.filter(item => item.created_at === dayKey)
               const isLVLOne = filtered.length > 0 && filtered.length < 5
               const isLVLTwo = filtered.length > 5 && filtered.length < 9
+              const isLVLThree = filtered.length > 9 && filtered.length < 12
+              const isLVLFour = filtered.length >= 12
               const count = filtered.length
               return (
                 <Tooltip key={dayKey} delayDuration={100}>
@@ -81,10 +83,12 @@ const Month = forwardRef<HTMLDivElement, MonthProps>(
                     className={cn(
                       "size-3 shrink-0 rounded-sm",
                       isLVLOne ? "activity-lvl-1" : "border border-yz-neutral-300",
-                      isLVLTwo ? "activity-lvl-2" : "border border-yz-neutral-300"
+                      isLVLTwo ? "activity-lvl-2" : "border border-yz-neutral-300",
+                      isLVLThree ? "activity-lvl-3" : "border border-yz-neutral-300",
+                      isLVLFour ? "activity-lvl-4" : "border border-yz-neutral-300"
                     )}
                   />
-                  <TooltipContent>{count} on {dayKey}</TooltipContent>
+                  <TooltipContent>{count} {"->"} {dayKey}</TooltipContent>
                 </Tooltip>
               )
             })
@@ -96,10 +100,11 @@ const Month = forwardRef<HTMLDivElement, MonthProps>(
 
 type ActivityProps = {
   year: number
+  lang?: Locales
   data?: ActivityEvent[]
 }
 
-const Activity = ({ year: providedYear, data = [] }: ActivityProps) => {
+const Activity = ({ year: providedYear, data = [], lang = "en" }: ActivityProps) => {
   const now = dayjs()
   const actualYear = now.year()
   const actualMonth = now.month() + 1
@@ -109,7 +114,6 @@ const Activity = ({ year: providedYear, data = [] }: ActivityProps) => {
   const [year, setYear] = useState<number>(2024)
   const isActualYear = year === actualYear
   const months = Array.from({ length: isActualYear ? actualMonth : 12 }).map((_, i) => i)
-  const lang: Locales = "en"
   return (
     <Stack.Wrapper>
       <Stack.Content className="flex items-center gap-2">

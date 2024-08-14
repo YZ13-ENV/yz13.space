@@ -12,6 +12,10 @@
   --activity-lvl-1-border: hsl(var(--yz13-neutral-400));
   --activity-lvl-2-bg: hsl(var(--yz13-neutral-400));
   --activity-lvl-2-border: hsl(var(--yz13-neutral-600));
+  --activity-lvl-3-bg: hsl(var(--yz13-neutral-600));
+  --activity-lvl-3-border: hsl(var(--yz13-neutral-800));
+  --activity-lvl-4-bg: hsl(var(--yz13-foreground));
+  --activity-lvl-4-border: hsl(var(--yz13-foreground));
 }
 
 .activity-lvl-1 {
@@ -21,6 +25,14 @@
 .activity-lvl-2 {
   background-color: var(--activity-lvl-2-bg);
   border: 1px solid var(--activity-lvl-2-border);
+}
+.activity-lvl-3 {
+  background-color: var(--activity-lvl-3-bg);
+  border: 1px solid var(--activity-lvl-3-border);
+}
+.activity-lvl-4 {
+  background-color: var(--activity-lvl-4-bg);
+  border: 1px solid var(--activity-lvl-4-border);
 }
 
 @layer base {
