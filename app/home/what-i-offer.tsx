@@ -13,7 +13,7 @@ const WhatIOffer = async ({ lang = "en" }: { lang?: Locales }) => {
     <Stack.Wrapper>
       <Stack.Header>{title}</Stack.Header>
       <Stack.Content>
-        <p className="text-foreground/60">{description}</p>
+        <p className="text-sm text-foreground/60">{description}</p>
         <Separator className="mb-2 mt-3" />
         <ul>
           {

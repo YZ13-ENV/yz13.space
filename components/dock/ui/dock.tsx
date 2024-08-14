@@ -48,7 +48,7 @@ const Wrapper = ({ children }: WrapperProps) => {
       id="dock"
       className={cn(
         "bg-background min-h-10 z-50 flex flex-col items-center justify-center border shadow-2xl",
-        "p-2 rounded-2xl",
+        "p-1.5 rounded-2xl",
         "max-w-full"
       )}
     >

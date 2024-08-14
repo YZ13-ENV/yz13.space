@@ -8,7 +8,7 @@ export const INTERNAL__events = async ({
   page,
 }: ActivityEventsProps) => {
   const base = "https://api.github.com";
-  const path = `/users/${username}/received_events`;
+  const path = `/users/${username}/events`;
   const url = new URL(path, base);
   const searchParams = url.searchParams;
   searchParams.set("per_page", "100");

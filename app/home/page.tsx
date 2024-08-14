@@ -2,6 +2,7 @@ import Dock from "@/components/dock"
 import { LocalizedTitle } from "@/components/localized-title(deprecated)"
 import { Stack } from "@/components/stack"
 import { Locales, getLocale } from "@/dictionaries/tools"
+import { showOffer } from "@/feature-flags/offer.feature"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
@@ -31,6 +32,7 @@ const page = async ({ searchParams }: Props) => {
   const searchParamLang = searchParams.lang
   const locale = getLocale()
   const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const offer = await showOffer()
   return (
     <>
       <Suspense fallback={<></>}>
@@ -49,15 +51,20 @@ const page = async ({ searchParams }: Props) => {
         <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl " />}>
           <About lang={lang} />
         </Suspense>
-        <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-36 rounded-xl" />}>
-          <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
-        </Suspense>
-        <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-xl" />}>
-          <TeamInfo lang={lang} />
-        </Suspense>
-        <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-xl" />}>
-          <WhatIOffer lang={lang} />
-        </Suspense>
+        <Stack.Group>
+          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-36 rounded-xl" />}>
+            <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
+          </Suspense>
+          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-xl" />}>
+            <TeamInfo lang={lang} />
+          </Suspense>
+        </Stack.Group>
+        {
+          offer &&
+          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-xl" />}>
+            <WhatIOffer lang={lang} />
+          </Suspense>
+        }
       </main>
     </>
   )

@@ -13,17 +13,16 @@ export type ActivityEvent = {
 
 const fetchAllEvents = async () => {
   const username = "YZ13-ENV"
-  let remaining = true
-  let page = 1
+  const pages = Array.from({ length: 10 }).map((_, i) => i + 1)
   let all: any[] = []
-  while (remaining) {
+  pages.forEach(async page => {
     const activity = await events({ username, page })
-    if (!activity) remaining = false
-    if (typeof activity?.message === "string") remaining = false
-    if (activity?.length === 0) remaining = false
+    console.log(activity?.length)
+    if (!activity) return
+    if (typeof activity?.message === "string") return
+    if (activity?.length === 0) return
     if (activity) all = [...all, ...activity]
-    page = page + 1
-  }
+  })
   return all
 }
 
