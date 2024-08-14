@@ -7,45 +7,28 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --activity-lvl-1-bg: hsl(var(--yz13-neutral-200));
+  --activity-lvl-1-border: hsl(var(--yz13-neutral-400));
+  --activity-lvl-2-bg: hsl(var(--yz13-neutral-400));
+  --activity-lvl-2-border: hsl(var(--yz13-neutral-600));
+}
+
+.activity-lvl-1 {
+  background-color: var(--activity-lvl-1-bg);
+  border: 1px solid var(--activity-lvl-1-border);
+}
+.activity-lvl-2 {
+  background-color: var(--activity-lvl-2-bg);
+  border: 1px solid var(--activity-lvl-2-border);
+}
+
 @layer base {
   ::selection {
     @apply bg-foreground text-background;
   }
 }
 
-.attachments-grid {
-  grid-template-areas:
-    "a a b"
-    "a a c";
-}
-.attachment-a {
-  grid-area: a;
-}
-.attachment-b {
-  grid-area: b;
-}
-.attachment-c {
-  grid-area: c;
-}
-
-.app-grid {
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-}
-.team-avatar-grid {
-  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
-}
-.widgets-grid {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-}
-.apps-widget-grid {
-  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
-}
-.contact-card-grid {
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(var(--contact-card-width), 1fr)
-  );
-}
 .header {
   height: var(--header-height);
 }
@@ -67,119 +50,6 @@
     fill: hsl(var(--yz13-foreground));
   }
 }
-
-.two-attachments {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  & :first-child {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    & > img {
-      border-radius: 12px 0px 0px 12px;
-    }
-  }
-  & :last-child {
-    width: 100%;
-    height: 100%;
-    & > img {
-      border-radius: 0px 12px 12px 0px;
-    }
-  }
-}
-
-.three-attachments {
-  grid-template: "a a b" "a a c";
-  & :first-child {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    object-fit: cover;
-    grid-area: a;
-    grid-row: 1 / -1;
-    & > img {
-      border-radius: 12px 0px 0px 12px;
-    }
-  }
-  & :nth-child(2) {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    grid-area: b;
-    & > img {
-      border-radius: 0px 12px 0px 0px;
-    }
-  }
-  & :nth-child(3) {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    grid-area: c;
-    & > img {
-      border-radius: 0px 0px 12px 0px;
-    }
-  }
-}
-
-.four-attachments {
-  grid-template: "a a a b" "a a a c" "a a a d";
-
-  & :first-child {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    object-fit: cover;
-    grid-area: a;
-    grid-row: 1 / -1;
-    & > img {
-      border-radius: 12px 0px 0px 12px;
-    }
-  }
-  & :nth-child(2) {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    grid-area: b;
-    & > img {
-      border-radius: 0px 12px 0px 0px;
-    }
-  }
-  & :nth-child(3) {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    grid-area: c;
-  }
-  & :nth-child(4) {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    grid-area: d;
-    & > img {
-      border-radius: 0px 0px 12px 0px;
-    }
-  }
-}
-.size-responsive-link {
-  font-weight: bold;
-  line-height: 10dvw;
-  font-size: 10dvw;
-  @apply text-secondary hover:text-foreground transition-colors;
-}
-
-.split-view-container {
-  --padding: 16px;
-  @apply lg:flex-row flex-col w-full flex min-h-screen max-w-full bg-yz-neutral-300 p-4 gap-4;
-
-  & .left-view {
-    max-height: calc(100dvh - var(--padding) * 2);
-    @media (min-width: 1280px) {
-      width: calc(50% - var(--padding) / 2);
-    }
-    @apply lg:sticky lg:top-4 rounded-xl bg-background;
-  }
-  & .right-view {
-    @media (min-width: 1280px) {
-      width: calc(50% - var(--padding) / 2);
-    }
-    @apply rounded-xl bg-background;
-  }
-}
-
 .light-mode-thumbnail {
   display: block;
 }

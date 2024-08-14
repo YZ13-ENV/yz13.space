@@ -7,7 +7,7 @@ import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
 import { About } from "./about"
-import { Activity } from "./activity"
+import { UserActivity } from "./activity-widget"
 import { LocalData } from "./local-data"
 import { Status } from "./status"
 
@@ -47,7 +47,9 @@ const page = async ({ searchParams }: Props) => {
         <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl " />}>
           <About lang={lang} />
         </Suspense>
-        <Activity />
+        <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-36 rounded-xl" />}>
+          <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" />
+        </Suspense>
         <Stack.Wrapper>
           <Stack.Content className="flex h-fit items-start gap-4">
             <div className="w-2/3 h-full flex flex-col">

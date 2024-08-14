@@ -1,4 +1,5 @@
 "use client"
+import { ActivityEvent } from "@/app/home/activity-widget"
 import { Stack } from "@/components/stack"
 import { Locales } from "@/dictionaries/tools"
 import { Button } from "@yz13/mono/components/button"
@@ -46,10 +47,11 @@ interface MonthProps extends HTMLAttributes<HTMLDivElement> {
   month: number
   year: number
   lang?: Locales
+  data?: ActivityEvent[]
 }
 
 const Month = forwardRef<HTMLDivElement, MonthProps>(
-  ({ month, year, lang = "en", ...props }, ref) => {
+  ({ month, year, lang = "en", data = [], ...props }, ref) => {
     const date = dayjs({ year: year, month: month, date: 1 }).locale(lang)
     const dateList = generateData({ month, year, lang })
     const monthName = date.format("MMM")
@@ -68,12 +70,21 @@ const Month = forwardRef<HTMLDivElement, MonthProps>(
         <div className="grid grid-rows-7 w-fit grid-cols-5 grid-flow-col h-full gap-0.5">
           {
             dateList.map(day => {
-              const format = day.format("DD-MM-YYYY")
-              const weekday = day.day()
+              const dayKey = day.format("DD-MM-YYYY")
+              const filtered = data.filter(item => item.created_at === dayKey)
+              const isLVLOne = filtered.length > 0 && filtered.length < 5
+              const isLVLTwo = filtered.length > 5 && filtered.length < 9
+              const count = filtered.length
               return (
-                <Tooltip key={format} delayDuration={100}>
-                  <TooltipTrigger className="size-3 shrink-0 rounded-sm border border-yz-neutral-300" />
-                  <TooltipContent>{weekday}/{format}</TooltipContent>
+                <Tooltip key={dayKey} delayDuration={100}>
+                  <TooltipTrigger
+                    className={cn(
+                      "size-3 shrink-0 rounded-sm",
+                      isLVLOne ? "activity-lvl-1" : "border border-yz-neutral-300",
+                      isLVLTwo ? "activity-lvl-2" : "border border-yz-neutral-300"
+                    )}
+                  />
+                  <TooltipContent>{count} on {dayKey}</TooltipContent>
                 </Tooltip>
               )
             })
@@ -83,10 +94,18 @@ const Month = forwardRef<HTMLDivElement, MonthProps>(
     )
   })
 
-const Activity = () => {
+type ActivityProps = {
+  year: number
+  data?: ActivityEvent[]
+}
+
+const Activity = ({ year: providedYear, data = [] }: ActivityProps) => {
   const now = dayjs()
   const actualYear = now.year()
   const actualMonth = now.month() + 1
+  // +1 to include current year
+  const yearDifference = (actualYear + 1) - providedYear
+  const yearsArr = Array.from({ length: yearDifference }).map((_, i) => providedYear + i).sort((a, b) => b - a)
   const [year, setYear] = useState<number>(2024)
   const isActualYear = year === actualYear
   const months = Array.from({ length: isActualYear ? actualMonth : 12 }).map((_, i) => i)
@@ -97,6 +116,8 @@ const Activity = () => {
         <div className="w-full flex gap-0.5 flex-row overflow-x-auto no-scrollbar">
           {
             months.map(month => {
+              const monthKey = dayjs({ year, month, date: 1 }).format("MM-YYYY")
+              const filtered = data.filter(item => item.created_at.endsWith(monthKey))
               const isActualMonth = (month + 1) === actualMonth && isActualYear
               return <Month
                 ref={ref => ref?.scrollIntoView()}
@@ -104,35 +125,25 @@ const Activity = () => {
                 month={month}
                 year={year}
                 lang={lang}
+                data={filtered}
               />
             })
           }
         </div>
         <div className="w-16 shrink-0 h-full flex flex-col overflow-y-auto">
-          <Button
-            onClick={() => setYear(2024)}
-            variant={year === 2024 ? "secondary" : "ghost"}
-            className={cn(year === 2024 ? "" : "text-secondary")}
-            size="sm"
-          >
-            2024
-          </Button>
-          <Button
-            onClick={() => setYear(2023)}
-            variant={year === 2023 ? "secondary" : "ghost"}
-            className={cn(year === 2023 ? "" : "text-secondary")}
-            size="sm"
-          >
-            2023
-          </Button>
-          <Button
-            onClick={() => setYear(2022)}
-            variant={year === 2022 ? "secondary" : "ghost"}
-            className={cn(year === 2022 ? "" : "text-secondary")}
-            size="sm"
-          >
-            2022
-          </Button>
+          {
+            yearsArr.map(yr =>
+              <Button
+                key={yr}
+                onClick={() => setYear(yr)}
+                variant={year === yr ? "secondary" : "ghost"}
+                className={cn(year === yr ? "" : "text-secondary")}
+                size="sm"
+              >
+                {yr}
+              </Button>
+            )
+          }
         </div>
       </Stack.Content>
     </Stack.Wrapper>
