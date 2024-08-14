@@ -1,5 +1,5 @@
-import { LocalizedTitle } from "@/components/changelog"
 import Dock from "@/components/dock"
+import { LocalizedTitle } from "@/components/localized-title(deprecated)"
 import { Stack } from "@/components/stack"
 import { Locales, getLocale } from "@/dictionaries/tools"
 import { Page, dynamicMetadata } from "@/metadata"
