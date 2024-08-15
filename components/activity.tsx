@@ -1,5 +1,5 @@
 "use client"
-import { ActivityEvent } from "@/app/home/activity/activity-widget"
+import { ActivityEvent } from "@/app/[locale]/home/activity/activity-widget"
 import { Stack } from "@/components/stack"
 import { Locales } from "@/dictionaries/tools"
 import { Button } from "@yz13/mono/components/button"

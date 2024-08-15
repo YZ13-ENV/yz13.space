@@ -1,6 +1,6 @@
 "use client"
 
-import { getURL } from "@/app/(auth)/(routes)/login/get-url"
+import { getURL } from "@/app/[locale]/(auth)/(routes)/login/get-url"
 import { Stack } from "@/components/stack"
 import { Button } from "@yz13/mono/components/button"
 import { useRouter, useSearchParams } from "next/navigation"

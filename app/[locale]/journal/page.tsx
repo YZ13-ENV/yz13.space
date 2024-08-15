@@ -1,6 +1,6 @@
 import Dock from "@/components/dock"
-import { LocalizedHeading } from "@/components/localized-heading"
 import { Locales, getLocale } from "@/dictionaries/tools"
+import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
@@ -22,10 +22,9 @@ type Props = {
     lang?: string
   }
 }
-const page = async ({ searchParams }: Props) => {
-  const searchParamLang = searchParams.lang
-  const locale = getLocale()
-  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+const page = async ({ }: Props) => {
+  const lang = getCurrentLocale()
+  const t = await getI18n()
   return (
     <>
       <Suspense fallback={<></>}>
@@ -38,13 +37,7 @@ const page = async ({ searchParams }: Props) => {
               <Skeleton className="h-10 w-36" />
             }
           >
-            <LocalizedHeading
-              heading="h1"
-              className="text-4xl font-medium"
-              lang={lang}
-              dict="journal"
-              field="name"
-            />
+            <h1 className="text-4xl font-medium">{t("journal.title")}</h1>
           </Suspense>
         </div>
         <Suspense fallback={

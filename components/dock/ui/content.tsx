@@ -2,7 +2,7 @@
 import { AnimatePresence, m } from "framer-motion"
 import { ReactNode, useEffect, useMemo } from "react"
 import { cn } from "yz13/cn"
-import { contentConfig, defaultUnit } from "../content/menu/config"
+import { contentConfig, defaultUnit } from "../content/config"
 import { useDockTab } from "../store/dock.store"
 
 type ContentProps = {

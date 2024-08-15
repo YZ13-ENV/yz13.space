@@ -1,5 +1,5 @@
 "use client"
-import { getURL } from "@/app/(auth)/(routes)/login/get-url"
+import { getURL } from "@/app/[locale]/(auth)/(routes)/login/get-url"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { ReactNode, useEffect, useMemo } from "react"
 

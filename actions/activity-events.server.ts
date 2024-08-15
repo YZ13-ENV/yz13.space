@@ -1,5 +1,5 @@
 "use server";
-import { isDev } from "@/app/(auth)/(routes)/login/get-url";
+import { isDev } from "@/app/[locale]/(auth)/(routes)/login/get-url";
 import { unstable_cache as cache } from "next/cache";
 import { ActivityEventsProps, INTERNAL__events } from "./activity-events";
 

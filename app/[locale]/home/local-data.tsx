@@ -31,11 +31,6 @@ const LocalData = ({ lang = "en" }: { lang?: Locales }) => {
       <div className="flex items-center gap-2">
         <time className="text-foreground/60 shrink-0 capitalize font-medium">{date}</time>
         <Separator orientation="vertical" className="h-3" />
-        {/* <div className="inline-flex text-secondary hover:text-foreground/60 transition-colors cursor-pointer items-center gap-1.5">
-          <LuCalendar size={14} />
-          <span className="text-inherit line-clamp-1">11:40 New journal record</span>
-        </div>
-        <Separator orientation="vertical" className="h-3" /> */}
         <span className="text-foreground/60 font-medium uppercase">{lang}</span>
       </div>
     </div>

@@ -1,7 +1,5 @@
 @import url("https://ooybokfuxqwahirzlujp.supabase.co/storage/v1/object/public/static/css/vars.css");
 @import url("@yz13/mono/globals.css");
-@import url("./dock/dock.css");
-@import url("./illustration.css");
 @import url("./markdown.css");
 @tailwind base;
 @tailwind components;

@@ -3,6 +3,7 @@ import { LocalizedTitle } from "@/components/localized-title(deprecated)"
 import { Stack } from "@/components/stack"
 import { Locales, getLocale } from "@/dictionaries/tools"
 import { showOffer } from "@/feature-flags/offer.feature"
+import { getCurrentLocale } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
@@ -29,9 +30,7 @@ type Props = {
   }
 }
 const page = async ({ searchParams }: Props) => {
-  const searchParamLang = searchParams.lang
-  const locale = getLocale()
-  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const lang = getCurrentLocale()
   const offer = await showOffer()
   return (
     <>

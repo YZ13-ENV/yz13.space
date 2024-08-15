@@ -1,5 +1,5 @@
-import { LocalizedText } from "@/components/localized-text";
 import { Locales } from "@/dictionaries/tools";
+import { getI18n } from "@/locales/server";
 import dayjs from "dayjs";
 import { isDev } from "../(auth)/(routes)/login/get-url";
 import { getFullJournal } from "./get-journal";
@@ -21,13 +21,10 @@ const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: 
       const b_date = dayjs(b.frontmatter.createdAt)
       return b_date.diff(a_date)
     })
+  const t = await getI18n()
   if (isEmpty) return (
     <div className="w-full aspect-square h-full flex items-center justify-center">
-      <LocalizedText
-        dict="journal"
-        field="empty"
-        lang={locale}
-      />
+      <span>{t("journal.empty")}</span>
     </div>
   )
   return (
