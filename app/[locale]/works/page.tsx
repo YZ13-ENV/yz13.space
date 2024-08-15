@@ -1,6 +1,5 @@
 import Dock from "@/components/dock"
-import { LocalizedHeading } from "@/components/localized-heading"
-import { Locales, getLocale } from "@/dictionaries/tools"
+import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
@@ -13,9 +12,7 @@ import { Modal } from "./work-modal/modal"
 import { Work } from "./work-modal/work"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const searchParamLang = searchParams.lang
-  const locale = getLocale()
-  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const lang = getCurrentLocale()
   const page: Page = "works"
   const metadata = dynamicMetadata(lang, page)
   return metadata
@@ -29,10 +26,9 @@ type Props = {
   }
 }
 const page = async ({ searchParams }: Props) => {
-  const searchParamLang = searchParams.lang
+  const t = await getI18n()
+  const lang = getCurrentLocale()
   const lt = searchParams.lt
-  const locale = getLocale()
-  const lang = (searchParamLang ? searchParamLang : locale) as Locales
   const workId = searchParams.workId
   return (
     <>
@@ -57,13 +53,7 @@ const page = async ({ searchParams }: Props) => {
                 <Skeleton className="h-10 w-36" />
               }
             >
-              <LocalizedHeading
-                heading="h1"
-                className="text-4xl font-medium"
-                lang={lang}
-                dict="works"
-                field="name"
-              />
+              <h1 className="text-4xl font-medium">{t("works.title")}</h1>
             </Suspense>
             {
               !!lt &&

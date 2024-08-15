@@ -2,6 +2,7 @@
 
 import { getURL } from "@/app/[locale]/(auth)/(routes)/login/get-url"
 import { Stack } from "@/components/stack"
+import { useI18n } from "@/locales/client"
 import { Button } from "@yz13/mono/components/button"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useMemo } from "react"
@@ -21,6 +22,7 @@ const WorksList = ({ works = [], abc = [], lt }: WorkListProps) => {
   const path = "/works"
   const url = new URL(path, base)
   const router = useRouter()
+  const t = useI18n()
   const parsedParams = useMemo(() => {
     let result: { [key: string]: string } = {}
     searchParams.forEach((value, key) => result[key] = value)
@@ -74,7 +76,7 @@ const WorksList = ({ works = [], abc = [], lt }: WorkListProps) => {
                           </span>
                           <span className="inline-flex flex-col items-start">
                             <span className="text-sm font-medium text-foreground">{work.name}</span>
-                            <span className="text-xs text-secondary capitalize">{work.type}</span>
+                            <span className="text-xs text-secondary capitalize">{t(`works.work.type.${work.type as "website" | "package" | "service"}`)}</span>
                           </span>
                         </span>
                         {link && <BiRightArrowAlt size={18} className="relative right-2" />}

@@ -1,6 +1,7 @@
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Suspense } from "react"
-import { LuMenu, LuSettings2 } from "react-icons/lu"
+import { LuMenu } from "react-icons/lu"
+import { PiSlidersHorizontalDuotone } from "react-icons/pi"
 import { Contacts } from "../content/contacts"
 import { Trigger } from "../ui/trigger"
 import { User } from "./user"
@@ -21,10 +22,10 @@ const Plank = () => {
         <Contacts />
       </Suspense>
       {/* <Trigger value="control-center">
-            <LuLayoutGrid size={20} />
+            <PiSquaresFourDuotone size={20} />
           </Trigger> */}
       <Trigger value="settings">
-        <LuSettings2 size={20} />
+        <PiSlidersHorizontalDuotone size={20} />
       </Trigger>
       <Trigger value="user">
         <Suspense fallback={<Skeleton className="size-6 rounded-full" />}>

@@ -1,3 +1,4 @@
 import settings from "./dock.settings";
 import journal from "./journal";
-export default { ...journal, ...settings } as const;
+import works from "./works";
+export default { ...journal, ...settings, ...works } as const;
