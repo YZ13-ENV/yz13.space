@@ -48,7 +48,7 @@ const page = async ({ searchParams }: Props) => {
           <Stack.Expandable>1</Stack.Expandable>
         </Stack.Wrapper>
         <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl " />}>
-          <About lang={lang} />
+          <About />
         </Suspense>
         <Stack.Group>
           <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-36 rounded-t-xl rounded-b-none" />}>

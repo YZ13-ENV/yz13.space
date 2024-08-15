@@ -16,8 +16,6 @@ const UserActivity = async ({ uid, lang = "en" }: { uid: string, lang?: Locales 
   const data = user?.data
   const year = data?.["experience-from"] ?? 2024
   const allData: ActivityEvent[] = all.data ?? []
-  return (
-    <Activity year={year} data={allData} lang={lang} />
-  )
+  return <Activity year={year} data={allData} lang={lang} />
 }
 export { UserActivity }

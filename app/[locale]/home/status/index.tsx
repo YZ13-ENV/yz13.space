@@ -1,4 +1,5 @@
 import { getDict, getLocale, Locales } from "@/dictionaries/tools"
+import { getI18n } from "@/locales/server"
 import { get } from "@vercel/edge-config"
 import { PiDotDuotone } from "react-icons/pi"
 import { cn } from "yz13/cn"
@@ -20,6 +21,7 @@ const Status = async ({ lang: providedLang = "en", title: providedTitle, hideTit
   const title = providedTitle
   const isAvailable = status_work === "available"
   const isNotAvailable = status_work === "not-available"
+  const t = await getI18n()
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center">

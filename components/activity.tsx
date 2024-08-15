@@ -128,7 +128,7 @@ const Activity = ({ year: providedYear, data = [], lang = "en" }: ActivityProps)
                   const filtered = transformed.filter(item => item.created_at.endsWith(monthKey))
                   const isActualMonth = (month + 1) === actualMonth && isActualYear
                   return <Month
-                    ref={ref => ref?.scrollIntoView()}
+                    // ref={ref => ref?.scrollIntoView()}
                     key={`${month}-${year}`}
                     month={month}
                     year={year}

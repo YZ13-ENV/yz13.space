@@ -17,7 +17,7 @@ const User = async ({ lang = "en" }: UserProps) => {
   const avatar = metadata?.avatar_url
   const name: string = metadata?.name ?? "Username"
   const email = user?.email
-  if (user) {
+  if (!user) {
     return (
       <div className="w-full h-full p-2 flex flex-col gap-3">
         <div className="flex items-center gap-2 h-10 justify-center">
