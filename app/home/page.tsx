@@ -52,10 +52,10 @@ const page = async ({ searchParams }: Props) => {
           <About lang={lang} />
         </Suspense>
         <Stack.Group>
-          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-36 rounded-xl" />}>
+          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-36 rounded-t-xl rounded-b-none" />}>
             <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
           </Suspense>
-          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-xl" />}>
+          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-b-xl rounded-t-none" />}>
             <TeamInfo lang={lang} />
           </Suspense>
         </Stack.Group>
