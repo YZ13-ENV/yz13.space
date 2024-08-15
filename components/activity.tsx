@@ -124,7 +124,8 @@ const Activity = ({ year: providedYear, data = [], lang = "en" }: ActivityProps)
               {
                 months.map(month => {
                   const monthKey = dayjs({ year, month, date: 1 }).format("MM-YYYY")
-                  const filtered = data.filter(item => item.created_at.endsWith(monthKey))
+                  const transformed = data.map(item => ({ ...item, created_at: dayjs(item.created_at).format("DD-MM-YYYY") }))
+                  const filtered = transformed.filter(item => item.created_at.endsWith(monthKey))
                   const isActualMonth = (month + 1) === actualMonth && isActualYear
                   return <Month
                     ref={ref => ref?.scrollIntoView()}
