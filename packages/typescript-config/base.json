@@ -3,7 +3,6 @@
   "display": "Default",
   "compilerOptions": {
     "declaration": true,
-    "declarationMap": true,
     "esModuleInterop": true,
     "incremental": true,
     "isolatedModules": true,

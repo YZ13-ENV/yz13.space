@@ -1,4 +1,4 @@
-import { Work } from "@/app/works/abc/abc-store";
+import { Work } from "@/app/[locale]/works/abc/abc-store";
 import { PostgrestResponse } from "@supabase/supabase-js";
 
 export const works = async (): Promise<PostgrestResponse<Work> | null> => {

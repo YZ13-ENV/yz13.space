@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const openGraph: Metadata["openGraph"] = {
   type: "website",
   countryName: "Russia",
-  description: "Developer that you look for",
+  description: "Developer that you are looking for",
   locale: "EN",
   url: "https://yz13.space",
   title: "YZ13",

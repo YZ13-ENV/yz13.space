@@ -12,11 +12,22 @@ type TriggerProps = {
 }
 const Trigger = ({ asChild = false, value, children, className = '' }: TriggerProps) => {
   const { tab, setTab } = useDockTab()
-  const isSelected = tab ? tab === value : false
+  const pickTab = () => {
+    const isSelected = tab ? tab === value : false
+    const pickedDifferentTab = tab ? tab !== value : false
+    if (isSelected) {
+      setTab(undefined)
+    } else {
+      if (pickedDifferentTab) {
+        setTab(undefined)
+        setTimeout(() => { setTab(value) }, 1000)
+      } else setTab(value)
+    }
+  }
   return (
     <Button
       asChild={asChild}
-      onClick={() => isSelected ? setTab(undefined) : setTab(value)}
+      onClick={pickTab}
       variant="ghost"
       size="icon"
       className={cn("size-10 aspect-square transition-colors hover:bg-yz-neutral-200 rounded-xl", className)}
