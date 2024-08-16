@@ -1,4 +1,4 @@
-import { Locales } from "@/dictionaries/tools"
+import { Locales } from "@/locales/server"
 import { Button } from "@yz13/mono/components/button"
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi"
 import { LuBell } from "react-icons/lu"

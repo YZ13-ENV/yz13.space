@@ -1,6 +1,5 @@
-import { LocalizedHeading } from "@/components/localized-heading"
 import { Stack } from "@/components/stack"
-import { Locales } from "@/dictionaries/tools"
+import { Locales } from "@/locales/server"
 import dayjs from "dayjs"
 import { getFullJournal } from "./get-journal"
 
@@ -27,13 +26,7 @@ const UpcomingJournal = async ({ locale = "en" }: JournalProps) => {
   return (
     <Stack.Wrapper>
       <Stack.Header>
-        <LocalizedHeading
-          lang={locale}
-          dict="journal"
-          field="upcoming.name"
-          className="text-lg font-medium text-foreground"
-        />
-        {/* <h2 className="text-lg font-medium text-foreground">Upcoming</h2> */}
+        <h1 className="text-lg font-medium text-foreground"></h1>
       </Stack.Header>
       <Stack.Content>
         {

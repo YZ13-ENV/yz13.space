@@ -1,7 +1,7 @@
 import { events } from "@/actions/activity-events.server"
 import { member } from "@/actions/team-member"
 import { Activity } from "@/components/activity"
-import { Locales } from "@/dictionaries/tools"
+import { Locales } from "@/locales/server"
 
 export type ActivityEvent = {
   id: string

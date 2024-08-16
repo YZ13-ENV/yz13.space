@@ -1,6 +1,5 @@
 "use client"
-import { Locales } from "@/dictionaries/tools"
-import { useChangeLocale } from "@/locales/client"
+import { Locales, useChangeLocale } from "@/locales/client"
 import variables from "@/locales/variables"
 import { Button } from "@yz13/mono/components/button"
 import { cn } from "yz13/cn"

@@ -1,5 +1,4 @@
-import { Locales } from "@/dictionaries/tools";
-import { getI18n } from "@/locales/server";
+import { Locales, getI18n } from "@/locales/server";
 import dayjs from "dayjs";
 import { isDev } from "../(auth)/(routes)/login/get-url";
 import { getFullJournal } from "./get-journal";

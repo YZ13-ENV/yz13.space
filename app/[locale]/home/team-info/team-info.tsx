@@ -1,11 +1,11 @@
 import { members } from "@/actions/team-members"
 import { works } from "@/actions/works"
 import { Stack } from "@/components/stack"
-import { Locales, getDict } from "@/dictionaries/tools"
+import { getI18n } from "@/locales/server"
 import dayjs from "dayjs"
 import { TeamAvatars } from "./team-avatars"
 
-const TeamInfo = async ({ lang = "en" }: { lang?: Locales }) => {
+const TeamInfo = async () => {
   const now = dayjs()
   const year = now.year()
   const team = await members()
@@ -15,36 +15,22 @@ const TeamInfo = async ({ lang = "en" }: { lang?: Locales }) => {
   const allWorks = await works()
   const worksCount = allWorks?.data ? allWorks?.data.length : 0
   // localization
-  const dict = await getDict<any>("home", lang)
-  const team_dict = dict["team-experience"]
-  const text = team_dict["text"]
-  const experience = team_dict["experience"]
-  const experience_metric = experience.metric
-  const experience_description = experience.description
-  const projects = team_dict["projects"]
-  const projects_metric = projects.metric
-  const projects_description = projects.description
+  const t = await getI18n()
   return (
     <Stack.Wrapper className="rounded-t-none">
       <Stack.Content className="flex h-fit items-start gap-4">
         <div className="w-2/3 h-full flex flex-col">
-          {
-            text.map((item: string) =>
-              <p key={item} className="text-foreground/60 text-sm">
-                {item}
-              </p>
-            )
-          }
+          {t("home.widget.team.text")}
         </div>
         <div className="w-1/3 flex h-full flex-col pb-3 gap-3">
           <TeamAvatars members={data} max={4} />
           <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">+{combinedExperience} {experience_metric}</span>
-            <span className="text-xs capitalize text-secondary">{experience_description}</span>
+            <span className="text-sm text-foreground">+{combinedExperience} {t("home.widget.team.experience.metric")}</span>
+            <span className="text-xs capitalize text-secondary">{t("home.widget.team.experience.description")}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">+{worksCount} {projects_metric}</span>
-            <span className="text-xs capitalize text-secondary">{projects_description}</span>
+            <span className="text-sm text-foreground">+{worksCount} {t("home.widget.team.projects.metric")}</span>
+            <span className="text-xs capitalize text-secondary">{t("home.widget.team.projects.description")}</span>
           </div>
         </div>
       </Stack.Content>

@@ -1,5 +1,5 @@
-import { Locales } from "@/dictionaries/tools";
 import { JournalHead } from "@/journal/types";
+import { Locales } from "@/locales/server";
 import { readdirSync } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { unstable_cache as cache } from "next/cache";

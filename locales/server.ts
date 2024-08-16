@@ -10,3 +10,4 @@ export const { getI18n, getScopedI18n, getCurrentLocale, getStaticParams } =
       fallbackLocale: { en: () => import("./dict/en/en") },
     }
   );
+export type Locales = ReturnType<typeof getCurrentLocale>

@@ -1,4 +1,4 @@
-import { Locales } from "@/dictionaries/tools";
+import { Locales } from "@/locales/server";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";
 

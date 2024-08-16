@@ -1,5 +1,4 @@
-import { Locales } from "@/dictionaries/tools"
-import { getI18n } from "@/locales/server"
+import { Locales, getI18n } from "@/locales/server"
 import { Language } from "./language"
 import { Version } from "./version"
 

@@ -1,15 +1,11 @@
 import { Logo } from "@/components/logo"
-import { getDict, getLocale } from "@/dictionaries/tools"
+import { getI18n } from "@/locales/server"
 import { Button } from "@yz13/mono/components/button"
 import Link from "next/link"
 import { BiLeftArrowAlt } from "react-icons/bi"
 
 const not_found = async () => {
-  const lang = getLocale()
-  const dict = await getDict<any>("journal", lang)
-  const not_found = dict["not-found"]
-  const title = not_found.title
-  const action = not_found.action
+  const t = await getI18n()
   return (
     <>
       <Link href="/journal">
@@ -23,10 +19,10 @@ const not_found = async () => {
           width={256} height={256}
           className="opacity-10"
         />
-        <h1 className="font-semibold text-3xl opacity-10">{title}</h1>
+        <h1 className="font-semibold text-3xl opacity-10">{t("journal.not-found.title")}</h1>
         <Button className="gap-2" asChild variant="secondary">
           <Link href="/journal">
-            <BiLeftArrowAlt size={16} /> {action}
+            <BiLeftArrowAlt size={16} /> {t("journal.not-found.action")}
           </Link>
         </Button>
       </div>

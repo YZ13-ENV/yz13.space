@@ -1,5 +1,4 @@
 import Dock from "@/components/dock"
-import { Locales, getLocale } from "@/dictionaries/tools"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
@@ -9,9 +8,7 @@ import { JournalSection, JournalSkeleton } from "./journal"
 import { UpcomingJournal } from "./upcoming-journal"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const searchParamLang = searchParams.lang
-  const locale = getLocale()
-  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const lang = getCurrentLocale()
   const page: Page = "journal"
   const metadata = dynamicMetadata(lang, page)
   return metadata

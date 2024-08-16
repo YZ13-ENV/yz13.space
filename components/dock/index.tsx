@@ -1,4 +1,4 @@
-import { Locales } from "@/dictionaries/tools"
+import { Locales } from "@/locales/server"
 import { ControlCenter } from "./content/control-center"
 import { Menu } from "./content/menu"
 import { User } from "./content/user"
@@ -13,7 +13,7 @@ const Root = ({ lang = "en" }: { lang?: Locales }) => {
       <Wrapper>
         <DockContent
           content={{
-            "menu": <Menu lang={lang} />,
+            "menu": <Menu />,
             "control-center": <ControlCenter lang={lang} />,
             "settings": <Settings lang={lang} />,
             "user": <User lang={lang} />

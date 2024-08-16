@@ -1,5 +1,4 @@
-import { Locales } from "@/dictionaries/tools"
-import { getI18n } from "@/locales/server"
+import { Locales, getI18n } from "@/locales/server"
 import json from "@/package.json"
 import { LuBox } from "react-icons/lu"
 

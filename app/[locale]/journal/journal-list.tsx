@@ -1,6 +1,6 @@
 import { DynamicImage } from "@/components/dynamic-image"
-import { Locales } from "@/dictionaries/tools"
 import { JournalHead } from "@/journal/types"
+import { Locales } from "@/locales/server"
 import dayjs from "dayjs"
 import Link from "next/link"
 import { PiDotDuotone } from "react-icons/pi"

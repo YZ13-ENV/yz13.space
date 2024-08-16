@@ -1,4 +1,4 @@
-import { Locales } from "@/dictionaries/tools"
+import { Locales } from "@/locales/server"
 import { Avatar, AvatarFallback, AvatarImage } from "@yz13/mono/components/avatar"
 import { Button } from "@yz13/mono/components/button"
 import { Separator } from "@yz13/mono/components/separator"

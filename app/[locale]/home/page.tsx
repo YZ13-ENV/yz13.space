@@ -1,7 +1,5 @@
 import Dock from "@/components/dock"
-import { LocalizedTitle } from "@/components/localized-title(deprecated)"
 import { Stack } from "@/components/stack"
-import { Locales, getLocale } from "@/dictionaries/tools"
 import { showOffer } from "@/feature-flags/offer.feature"
 import { getCurrentLocale } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
@@ -16,9 +14,7 @@ import { TeamInfo } from "./team-info/team-info"
 import { WhatIOffer } from "./what-i-offer"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const searchParamLang = searchParams.lang
-  const locale = getLocale()
-  const lang = (searchParamLang ? searchParamLang : locale) as Locales
+  const lang = getCurrentLocale()
   const page: Page = "home"
   const metadata = dynamicMetadata(lang, page)
   return metadata
@@ -42,7 +38,7 @@ const page = async ({ searchParams }: Props) => {
         <Stack.Wrapper>
           <Stack.Content>
             <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl" />}>
-              <Status lang={lang} title={LocalizedTitle} />
+              <Status />
             </Suspense>
           </Stack.Content>
           <Stack.Expandable>1</Stack.Expandable>
@@ -55,7 +51,7 @@ const page = async ({ searchParams }: Props) => {
             <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
           </Suspense>
           <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-b-xl rounded-t-none" />}>
-            <TeamInfo lang={lang} />
+            <TeamInfo />
           </Suspense>
         </Stack.Group>
         {

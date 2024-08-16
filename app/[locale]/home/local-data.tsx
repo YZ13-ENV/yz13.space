@@ -1,5 +1,5 @@
 "use client"
-import { Locales } from "@/dictionaries/tools"
+import { Locales } from "@/locales/client"
 import { Separator } from "@yz13/mono/components/separator"
 import { useInterval } from "ahooks"
 import dayjs, { Dayjs } from "dayjs"

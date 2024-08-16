@@ -1,5 +1,5 @@
 import { isDev } from "@/app/[locale]/(auth)/(routes)/login/get-url";
-import { Locales } from "@/dictionaries/tools";
+import { Locales } from "@/locales/server";
 import { Metadata } from "next";
 import { unstable_cache as cache } from "next/cache";
 import { defaultMetadata } from "./const/default-metadata";

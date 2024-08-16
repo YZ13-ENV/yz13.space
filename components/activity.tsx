@@ -1,7 +1,7 @@
 "use client"
 import { ActivityEvent } from "@/app/[locale]/home/activity/activity-widget"
 import { Stack } from "@/components/stack"
-import { Locales } from "@/dictionaries/tools"
+import { Locales } from "@/locales/client"
 import { Button } from "@yz13/mono/components/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@yz13/mono/components/tooltip"
 import dayjs from "dayjs"
@@ -120,7 +120,7 @@ const Activity = ({ year: providedYear, data = [], lang = "en" }: ActivityProps)
       <Stack.Content className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <div className="flex flex-col gap-2">
-            <div className="w-full flex gap-0.5 flex-row overflow-x-auto no-scrollbar">
+            <div className="w-full flex gap-0.5 flex-row justify-end overflow-x-auto no-scrollbar">
               {
                 months.map(month => {
                   const monthKey = dayjs({ year, month, date: 1 }).format("MM-YYYY")
