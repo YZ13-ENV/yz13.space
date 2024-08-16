@@ -1,6 +1,6 @@
 export default {
-  "id.profile.tooltip": "Profile",
-  "id.sign-out.tooltip": "Sign out",
-  "id.login.tooltip": "Login",
-  "id.sign-up.tooltip": "Sign up",
+  "id.profile.tooltip": "Профиль",
+  "id.sign-out.tooltip": "Выйти",
+  "id.login.tooltip": "Войти",
+  "id.sign-up.tooltip": "Зарегистрироваться",
 } as const;
