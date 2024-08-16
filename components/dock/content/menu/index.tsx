@@ -4,7 +4,7 @@ import "dayjs/locale/en"
 import "dayjs/locale/ru"
 import { cookies } from "next/headers"
 import Link from "next/link"
-import { PiHouseSimpleDuotone } from "react-icons/pi"
+import { PiBagSimpleDuotone, PiBookBookmarkDuotone, PiHouseSimpleDuotone } from "react-icons/pi"
 import { cn } from "yz13/cn"
 import { createClient } from "yz13/supabase/server"
 
@@ -27,6 +27,24 @@ const Menu = async ({ className = "" }: { className?: string }) => {
             <Link href="/home">
               <PiHouseSimpleDuotone size={16} className="text-inherit" />
               <span className="text-inherit">{t("dock.nav.home.label")}</span>
+            </Link>
+          </CommandItem>
+          <CommandItem
+            className="gap-2 cursor-pointer capitalize transition-colors rounded-lg text-foreground/60 hover:text-foreground"
+            asChild
+          >
+            <Link href="/journal">
+              <PiBookBookmarkDuotone size={16} className="text-inherit" />
+              <span className="text-inherit">{t("dock.nav.journal.label")}</span>
+            </Link>
+          </CommandItem>
+          <CommandItem
+            className="gap-2 cursor-pointer capitalize transition-colors rounded-lg text-foreground/60 hover:text-foreground"
+            asChild
+          >
+            <Link href="/works">
+              <PiBagSimpleDuotone size={16} className="text-inherit" />
+              <span className="text-inherit">{t("dock.nav.works.label")}</span>
             </Link>
           </CommandItem>
 

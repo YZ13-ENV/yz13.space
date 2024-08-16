@@ -1,10 +1,13 @@
-import { Locales } from "@/locales/server"
+import { Locales, getI18n } from "@/locales/server"
 import { Avatar, AvatarFallback, AvatarImage } from "@yz13/mono/components/avatar"
 import { Button } from "@yz13/mono/components/button"
 import { Separator } from "@yz13/mono/components/separator"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@yz13/mono/components/tooltip"
 import { cookies } from "next/headers"
-import { LuLogIn, LuLogOut, LuUser, LuUserPlus } from "react-icons/lu"
+import Link from "next/link"
+import { LuLogIn, LuUser, LuUserPlus } from "react-icons/lu"
 import { createClient } from "yz13/supabase/server"
+import { SignOut } from "./sign-out"
 
 type UserProps = {
   lang?: Locales
@@ -17,6 +20,7 @@ const User = async ({ lang = "en" }: UserProps) => {
   const avatar = metadata?.avatar_url
   const name: string = metadata?.name ?? "Username"
   const email = user?.email
+  const t = await getI18n()
   if (!user) {
     return (
       <div className="w-full h-full p-2 flex flex-col gap-3">
@@ -26,12 +30,26 @@ const User = async ({ lang = "en" }: UserProps) => {
         <Separator />
         <div className="flex flex-col w-full">
           <div className="flex items-center justify-start gap-2">
-            <Button variant="outline" className="w-1/2">
-              <LuUserPlus size={16} />
-            </Button>
-            <Button variant="outline" className="w-1/2">
-              <LuLogIn size={16} />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" className="w-1/2" asChild>
+                  <Link href="/signup">
+                    <LuUserPlus size={16} />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="border">{t("id.sign-up.tooltip")}</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" className="w-1/2" asChild>
+                  <Link href="/login">
+                    <LuLogIn size={16} />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="border">{t("id.login.tooltip")}</TooltipContent>
+            </Tooltip>
           </div>
         </div>
       </div>
@@ -52,12 +70,17 @@ const User = async ({ lang = "en" }: UserProps) => {
       <Separator />
       <div className="flex flex-col w-full">
         <div className="flex items-center justify-start gap-2">
-          <Button variant="outline" className="w-1/2">
-            <LuUser size={16} />
-          </Button>
-          <Button variant="outline" className="w-1/2">
-            <LuLogOut size={16} />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" className="w-1/2" asChild>
+                <Link href="https://id.yz13.space">
+                  <LuUser size={16} />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent className="border">{t("id.profile.tooltip")}</TooltipContent>
+          </Tooltip>
+          <SignOut tooltip={t("id.sign-out.tooltip")} />
         </div>
       </div>
     </div>

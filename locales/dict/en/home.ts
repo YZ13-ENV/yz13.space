@@ -9,7 +9,7 @@ export default {
     "I am very passionate about my work and in the future, I want to create my own development team to continue building beautiful websites. For now i work alone, every day trying to upgrade my skills, make my designs more perfect.",
   "home.widget.team.experience.metric": "years",
   "home.widget.team.experience.description": "experience",
-  "home.widget.team.projects.metric": "",
+  "home.widget.team.projects.metric": " ",
   "home.widget.team.projects.description": "projects",
   "home.widget.offer.title": "What i offer",
   "home.widget.offer.description":

@@ -8,12 +8,12 @@ import { openGraph } from "./const/og";
 import { twitter } from "./const/twitter";
 import { verification } from "./const/verification";
 import { keywords } from "./dynamic/keywords";
-import { getLocaleMetadata } from "./locale/tools";
+import { getI18n } from "./locales/server";
 import pages from "./pages";
 
 export type Page = keyof typeof pages;
 
-const INTERNAL__dynamicMetadata = async (locale: Locales, path?: Page) => {
+const INTERNAL__dynamicMetadata = async (path?: Page) => {
   const pageMetadata = path
     ? (pages[path] ?? defaultMetadata)
     : defaultMetadata;
@@ -28,10 +28,13 @@ const INTERNAL__dynamicMetadata = async (locale: Locales, path?: Page) => {
       twitter,
     };
   } else {
-    const localeMetadata = await getLocaleMetadata<Metadata>(path, locale);
+    const t = await getI18n();
+    const title = t(`metadata.${path}.title`);
+    const description = t(`metadata.${path}.description`);
     return {
       ...pageMetadata,
-      ...localeMetadata,
+      title,
+      description,
       icons,
       keywords: words,
       verification,
@@ -44,16 +47,15 @@ export const dynamicMetadata = async (
   path?: Page
 ): Promise<Metadata> => {
   if (isDev) {
-    const metadata = await INTERNAL__dynamicMetadata(locale, path);
+    const metadata = await INTERNAL__dynamicMetadata(path);
     return metadata;
   } else {
     const getCachedMetadata = cache(
-      async (locale: Locales, path?: Page) =>
-        await INTERNAL__dynamicMetadata(locale, path),
+      async (path?: Page) => await INTERNAL__dynamicMetadata(path),
       ["metadata"],
-      { revalidate: 60 * 60 }
+      { revalidate: 60 * 60 * 6 }
     );
-    const metadata = await getCachedMetadata(locale, path);
+    const metadata = await getCachedMetadata(path);
     return metadata;
   }
 };

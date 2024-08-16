@@ -10,7 +10,7 @@ export default {
     "Я очень увлечен своей работой, в будущем я хочу создать свою собственную команду разработчиков и продолжать создавать красивые веб-сайты. Сейчас я работаю в одиночку, каждый день стремясь улучшить свои навыки и сделать свой дизайн более качественным.",
   "home.widget.team.experience.metric": "лет",
   "home.widget.team.experience.description": "опыт",
-  "home.widget.team.projects.metric": "",
+  "home.widget.team.projects.metric": " ",
   "home.widget.team.projects.description": "проекты",
   "home.widget.offer.title": "Что я предлагаю",
   "home.widget.offer.description":
