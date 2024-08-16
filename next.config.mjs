@@ -4,7 +4,10 @@ const nextConfig = {
   transpilePackages: [ "next-mdx-remote", "@repo/tailwind-config" ],
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
   compress: true,
+  cleanDistDir: true,
   experimental: {
+    cssChunking: "loose",
+    useEarlyImport: true,
     optimizeCss: true,
     gzipSize: true,
     optimizeServerReact: true,
@@ -19,14 +22,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: '*'
-      }
-    ]
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "https://www.api.yz13.space/:path*"
       }
     ]
   }

@@ -1,5 +1,5 @@
 import { getExperience } from "@/components/experience/api/experience.api";
-import { Locales, getLocale } from "@/dictionaries/tools";
+import { Locales, getCurrentLocale } from "@/locales/server";
 import { z } from "zod";
 import { actionClient } from "./safe-client";
 
@@ -8,7 +8,7 @@ const schema = z.string();
 export const experience = actionClient
   .schema(schema)
   .use(async ({ next }) => {
-    const locale = getLocale();
+    const locale = getCurrentLocale();
     return next({ ctx: { locale } });
   })
   .metadata({})

@@ -1,4 +1,4 @@
-import { Locales } from "@/dictionaries/tools";
+import { Locales } from "@/locales/server";
 import { PostgrestResponse } from "@supabase/supabase-js";
 import { Tables } from "yz13/supabase/database";
 
