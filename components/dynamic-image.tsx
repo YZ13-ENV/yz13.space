@@ -25,14 +25,14 @@ const DynamicImage = async ({ image, alt = "", className, ...props }: DynamicIma
       return "data:image/" as `data:image/${string}`
     }
   }
-  const darkPlaceholder = await getBASE64(dark)
-  const lightPlaceholder = await getBASE64(light)
+  // const darkPlaceholder = await getBASE64(dark)
+  // const lightPlaceholder = await getBASE64(light)
   return (
     <>
       <Image
         {...props}
         src={dark}
-        placeholder={darkPlaceholder}
+        // placeholder={darkPlaceholder}
         className={cn("dark-mode-thumbnail", className)}
         fill
         alt={alt || "dark-img"}
@@ -40,7 +40,7 @@ const DynamicImage = async ({ image, alt = "", className, ...props }: DynamicIma
       <Image
         {...props}
         src={light}
-        placeholder={lightPlaceholder}
+        // placeholder={lightPlaceholder}
         className={cn("light-mode-thumbnail", className)}
         fill
         alt={alt || "light-img"}
