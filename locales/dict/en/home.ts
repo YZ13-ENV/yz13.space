@@ -5,6 +5,8 @@ export default {
   "home.widget.about.title": "YZ13",
   "home.widget.about.description":
     "Hi, I'm a fullstack developer. I like to create beautiful websites, in my free time I practice creating UI to improve the design of my work, I also try to learn more about backend development.",
+  "home.widget.activity.title": "Activity",
+  "home.widget.activity.metric": "commits",
   "home.widget.team.text":
     "I am very passionate about my work and in the future, I want to create my own development team to continue building beautiful websites. For now i work alone, every day trying to upgrade my skills, make my designs more perfect.",
   "home.widget.team.experience.metric": "years",

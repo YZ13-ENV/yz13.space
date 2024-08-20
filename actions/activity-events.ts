@@ -1,11 +1,15 @@
 export type ActivityEventsProps = {
-  username: string;
+  from: string;
+  to: string;
 };
 
-export const INTERNAL__events = async ({ username }: ActivityEventsProps) => {
+export const INTERNAL__events = async ({ from, to }: ActivityEventsProps) => {
   const base = "https://api.yz13.space";
-  const path = `/activity/user/${username}`;
+  const path = `/activity-commits`;
   const url = new URL(path, base);
+  const searchParams = url.searchParams;
+  searchParams.set("from", from);
+  searchParams.set("to", to);
   try {
     const result = await fetch(url.toString(), {
       method: "GET",

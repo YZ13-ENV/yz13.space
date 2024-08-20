@@ -7,7 +7,7 @@ export const events = (props: ActivityEventsProps) => {
   const getCached = cache(
     async (props: ActivityEventsProps) => INTERNAL__events(props),
     ["events"],
-    { tags: ["events"], revalidate: 60 * 60 }
+    { tags: ["events"], revalidate: 60 * 60 * 6 }
   );
   if (isDev) return INTERNAL__events(props);
   return getCached(props);
