@@ -65,14 +65,15 @@ const Cell = async ({ count = 0, cell }: { count?: number, cell?: string }) => {
 type GridProps = {
   month: number
   year: number
+  isFirst?: boolean
   lang?: Locales
 }
 
-const Grid = async ({ month, year, lang = "en" }: GridProps) => {
+const Grid = async ({ isFirst = false, month, year, lang = "en" }: GridProps) => {
   const date = dayjs({ year: year, month: month, date: 1 }).locale(lang)
   const dateList = generateData({ month, year, lang })
   const monthName = date.format("MMM")
-  const isNeedMove = date.month() === 0 ? false : date.day() !== 1
+  const isNeedMove = isFirst === true ? false : date.month() === 0 ? false : date.day() !== 1
   const isFirstMonth = date.month() === 0
   const from = dateList[0]?.toISOString()
   const to = dateList[dateList.length - 1]?.toISOString()
@@ -99,7 +100,7 @@ const Grid = async ({ month, year, lang = "en" }: GridProps) => {
       </div>
       <div className="grid grid-rows-7 w-fit grid-cols-5 grid-flow-col h-full gap-0.5">
         {
-          dateList.map(date => {
+          (dateList.reverse()).map(date => {
             const key = date.format("DD-MM-YYYY")
             const filtered = converted.filter(item => item.date === key)
             return <Cell key={key} cell={key} count={filtered.length} />
@@ -113,16 +114,17 @@ const Grid = async ({ month, year, lang = "en" }: GridProps) => {
 const Map = ({ year, lang = "en" }: { year: number, lang: Locales }) => {
   const now = dayjs()
   const actualYear = now.year()
-  const actualMonth = now.month()
+  const actualMonth = (now.month() + 1)
   const isCurrentYear = actualYear === year
   const months = Array.from({ length: isCurrentYear ? actualMonth : 12 }).map((_, i) => i)
   return (
     <>
       {
-        months.map(month => {
+        (months.reverse()).map((month, index) => {
           const key = dayjs({ year, month, date: 1 }).format("MM-YYYY")
           return <Grid
             key={key}
+            isFirst={index === 0}
             month={month}
             year={year}
             lang={lang}
