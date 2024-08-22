@@ -23,7 +23,7 @@
     "@vercel/functions": "^1.4.0",
     "@vercel/kv": "^2.0.0",
     "@vercel/speed-insights": "^1.0.12",
-    "@yz13/mono": "0.0.6",
+    "@yz13/mono": "^0.1.2",
     "ahooks": "^3.8.0",
     "critters": "^0.0.22",
     "dayjs": "^1.11.11",

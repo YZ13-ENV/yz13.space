@@ -8,7 +8,7 @@ import objectSupport from "dayjs/plugin/objectSupport";
 import { ReactNode } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { cn } from "yz13/cn";
-import { generateData } from "../api/genetate-date";
+import { heat_map } from "../api/genetate-date";
 
 dayjs.extend(objectSupport);
 
@@ -50,11 +50,11 @@ const Cell = async ({ count = 0, cell }: { count?: number, cell?: string }) => {
     <Tooltip delayDuration={100}>
       <TooltipTrigger
         className={cn(
-          "size-3 shrink-0 rounded-[3px]",
-          isLVLOne ? "activity-lvl-1" : "border border-yz-neutral-300",
-          isLVLTwo ? "activity-lvl-2" : "border border-yz-neutral-300",
-          isLVLThree ? "activity-lvl-3" : "border border-yz-neutral-300",
-          isLVLFour ? "activity-lvl-4" : "border border-yz-neutral-300"
+          "size-3 shrink-0 text-xs rounded-[3px] border border-yz-neutral-300",
+          isLVLOne ? "activity-lvl-1" : "",
+          isLVLTwo ? "activity-lvl-2" : "",
+          isLVLThree ? "activity-lvl-3" : "",
+          isLVLFour ? "activity-lvl-4" : ""
         )}
       />
       {cell && <TooltipContent>{count} {t("home.widget.activity.metric")} {"->"} {cell}</TooltipContent>}
@@ -71,7 +71,7 @@ type GridProps = {
 
 const Grid = async ({ isFirst = false, month, year, lang = "en" }: GridProps) => {
   const date = dayjs({ year: year, month: month, date: 1 }).locale(lang)
-  const dateList = generateData({ month, year, lang })
+  const dateList = heat_map({ month, year, lang })
   const monthName = date.format("MMM")
   const isNeedMove = isFirst === true ? false : date.month() === 0 ? false : date.day() !== 1
   const isFirstMonth = date.month() === 0
@@ -100,10 +100,11 @@ const Grid = async ({ isFirst = false, month, year, lang = "en" }: GridProps) =>
       </div>
       <div className="grid grid-rows-7 w-fit grid-cols-5 grid-flow-col h-full gap-0.5">
         {
-          (dateList.reverse()).map(date => {
+          (dateList).map(date => {
             const key = date.format("DD-MM-YYYY")
             const filtered = converted.filter(item => item.date === key)
-            return <Cell key={key} cell={key} count={filtered.length} />
+            const cell = date.format("dd, DD MMMM YYYY")
+            return <Cell key={key} cell={cell} count={filtered.length} />
           })
         }
       </div>
@@ -120,7 +121,7 @@ const Map = ({ year, lang = "en" }: { year: number, lang: Locales }) => {
   return (
     <>
       {
-        (months.reverse()).map((month, index) => {
+        ((months)).map((month, index) => {
           const key = dayjs({ year, month, date: 1 }).format("MM-YYYY")
           return <Grid
             key={key}
