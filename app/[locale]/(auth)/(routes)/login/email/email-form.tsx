@@ -18,12 +18,10 @@ const EmailForm = ({ continue: continueLink = "/" }: Props) => {
   const disabled = password.length < 6 || email.length < 6
   const router = useRouter()
   const signIn = async () => {
-    const continue_flow = continueLink ? `?continue=${continueLink}` : ""
     const { data, error } = await sp.auth.signInWithPassword({
       email: email,
       password: password,
     })
-    console.log(data, error)
     const user = data.user
     if (error) setError(true)
     if (user) router.push(continueLink)

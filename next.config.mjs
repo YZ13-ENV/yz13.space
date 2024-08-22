@@ -2,11 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [ "next-mdx-remote", "@repo/tailwind-config" ],
-  pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
+  pageExtensions: [ "js", "jsx", "md", "mdx", "ts", "tsx" ],
   compress: true,
   cleanDistDir: true,
   experimental: {
-    cssChunking: "loose",
     useEarlyImport: true,
     optimizeCss: true,
     gzipSize: true,
@@ -20,10 +19,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '*'
-      }
-    ]
-  }
+        protocol: "https",
+        hostname: "*",
+      },
+    ],
+  },
 };
-export default nextConfig
+export default nextConfig;

@@ -14,13 +14,12 @@ const TeamInfo = async () => {
   const combinedExperience = membersExperience.length ? membersExperience.reduce((a, b) => a + b) : 0
   const allWorks = await works()
   const worksCount = allWorks?.data ? allWorks?.data.length : 0
-  // localization
   const t = await getI18n()
   return (
     <Stack.Wrapper className="rounded-t-none">
       <Stack.Content className="flex h-fit items-start gap-4">
         <div className="w-2/3 h-full flex flex-col">
-          {t("home.widget.team.text")}
+          <p className="text-sm text-foreground/60">{t("home.widget.team.text")}</p>
         </div>
         <div className="w-1/3 flex h-full flex-col pb-3 gap-3">
           <TeamAvatars members={data} max={4} />
