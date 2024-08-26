@@ -44,6 +44,12 @@
   }
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  height: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
 .header {
   height: var(--header-height);
 }

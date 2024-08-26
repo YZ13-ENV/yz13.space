@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: [ "next-mdx-remote", "@repo/tailwind-config" ],
+  transpilePackages: [ "next-mdx-remote", "yz13", "@yz13/mono" ],
   pageExtensions: [ "js", "jsx", "md", "mdx", "ts", "tsx" ],
   compress: true,
   cleanDistDir: true,
   experimental: {
+    optimizePackageImports: [ "react", "dayjs", "react-icons", "yz13", "@yz13/mono" ],
     useEarlyImport: true,
     optimizeCss: true,
     gzipSize: true,

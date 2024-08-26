@@ -9,12 +9,20 @@ import utc from "dayjs/plugin/utc";
 import { GeistMono } from 'geist/font/mono';
 import type { Viewport } from "next";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { ReactNode, Suspense } from "react";
 import { cn } from "yz13/cn";
 import { Body } from "../_components/body";
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+
+const PIXEL = localFont({
+  src: "../../font/pixeloid/pixeloid-sans.ttf",
+  variable: "--font-pixel",
+  preload: true,
+  adjustFontFallback: "Arial"
+})
 
 const RU_FONT = Inter({
   subsets: ["cyrillic", "latin"],
@@ -45,7 +53,11 @@ export default function RootLayout({ children, params }: LayoutProps) {
   const locale = params.locale
   const isEN = locale === "en"
   return (
-    <html lang={locale} className={cn(isEN ? EN_FONT.variable : RU_FONT.variable, GeistMono.variable)}>
+    <html lang={locale} className={cn(
+      isEN ? EN_FONT.variable : RU_FONT.variable,
+      GeistMono.variable,
+      PIXEL.variable
+    )}>
       <Body>
         <I18nProviderClient locale={locale}>
           <TooltipProvider>
