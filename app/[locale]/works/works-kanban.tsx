@@ -4,7 +4,7 @@ import { Locales } from "@/locales/server"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import dayjs from "dayjs"
 import { uniq } from "lodash"
-import { LuPackage } from "react-icons/lu"
+import { Package } from "lucide-react"
 import { cn } from "yz13/cn"
 import { Work } from "./abc/abc-store"
 
@@ -84,7 +84,7 @@ const KanbanCard = ({ work, lang = "en" }: CardProps) => {
       )}
     >
       <div className="size-7 shrink-0 rounded-md bg-yz-neutral-50 border flex items-center justify-center">
-        <LuPackage size={16} className="text-secondary" />
+        <Package size={16} className="text-secondary" />
       </div>
       <div className="flex flex-col gap-3 w-full">
         <span className="font-regular text-foreground">

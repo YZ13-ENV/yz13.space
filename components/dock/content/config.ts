@@ -11,18 +11,18 @@ type ContentUnit = {
 export const contentConfig: ContentUnit = {
   menu: {
     width: "100%",
-    height: 180,
+    height: 310,
   },
   "control-center": {
     width: 800,
     height: 600,
   },
   settings: {
-    width: "100%",
+    width: 240,
     height: 110,
   },
   user: {
-    width: "100%",
+    width: 240,
     height: 120,
   },
 };

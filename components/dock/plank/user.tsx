@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@yz13/mono/components/avatar"
+import { User2 } from "lucide-react"
 import { cookies } from "next/headers"
-import { BiUser } from "react-icons/bi"
 import { createClient } from "yz13/supabase/server"
 
 type UserProps = {
@@ -20,7 +20,7 @@ const User = async ({ size = 36 }: UserProps) => {
     <Avatar style={{ width: size, height: size }} className="shrink-0 relative aspect-square flex justify-center items-center">
       <AvatarImage className="w-full h-full" src={avatar_url} />
       <AvatarFallback className="w-full h-full">
-        <BiUser size={20} />
+        <User2 size={20} />
       </AvatarFallback>
     </Avatar>
   )
