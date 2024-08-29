@@ -5,6 +5,7 @@ import experience from "./experience";
 import home from "./home";
 import journal from "./journal";
 import login from "./login";
+import nav from "./nav";
 import works from "./works";
 export default {
   ...journal,
@@ -15,4 +16,5 @@ export default {
   ...dock,
   ...experience,
   ...login,
+  ...nav,
 } as const;

@@ -1,5 +1,6 @@
 import { LogoHeader } from "@/components/header/logo"
-import { UserHeader } from "@/components/header/user"
+import { MiniNav } from "@/components/header/mini-nav"
+import { UserMini } from "@/components/header/user-mini"
 import { Stack } from "@/components/stack"
 import { showOffer } from "@/feature-flags/offer.feature"
 import { getCurrentLocale } from "@/locales/server"
@@ -31,11 +32,17 @@ const page = async ({ searchParams }: Props) => {
   const offer = await showOffer()
   return (
     <>
-      <LogoHeader className="absolute top-6 left-6" />
-      <UserHeader className="absolute top-6 right-6" lang={lang} size={36} />
-      {/* <Suspense fallback={<></>}><Dock lang={lang} /></Suspense> */}
+      <header className="flex ml-6 mt-6 md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
+        <div className="flex items-center gap-2">
+          <LogoHeader className="size-9" />
+          <span className="text-2xl font-pixel">YZ13</span>
+        </div>
+        <MiniNav />
+      </header>
       <main className="space-y-6 w-full pt-36 px-6 pb-24">
-        <LocalData lang={lang} />
+        <LocalData lang={lang}>
+          <UserMini className="ml-auto" />
+        </LocalData>
         <Stack.Wrapper>
           <Stack.Content>
             <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl" />}>

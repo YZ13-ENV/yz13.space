@@ -12,14 +12,15 @@ type Props = {
   className?: string
   lang?: Locales
 }
-const UserHeader = async ({ lang = "en", size = 24, className = "" }: Props) => {
+const UserMini = async ({ lang = "en", size = 24, className = "" }: Props) => {
   const user = await authorizedUser()
   const metadata = user?.user_metadata
   const avatar_url = metadata?.avatar_url
+  const name = metadata?.name
   const t = await getI18n()
   if (!user) return (
     <div className={cn("flex items-center gap-2", className)}>
-      <Button variant="outline" asChild>
+      <Button variant="outline" size="sm" asChild>
         <Link href="/login">{t("id.login.tooltip")}</Link>
       </Button>
       {/* <Button variant="default" asChild>
@@ -29,7 +30,12 @@ const UserHeader = async ({ lang = "en", size = 24, className = "" }: Props) => 
   )
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      <UserDropdown user={user} lang={lang}>
+      <UserDropdown
+        user={user}
+        lang={lang}
+        className="inline-flex items-center gap-2 hover:bg-yz-neutral-200 px-2 py-1 transition-colors"
+      >
+        <span className="text-sm text-foreground">{name}</span>
         <Avatar
           style={{ width: size, height: size }}
           className="shrink-0 relative aspect-square flex justify-center items-center border-2 border-foreground"
@@ -43,4 +49,4 @@ const UserHeader = async ({ lang = "en", size = 24, className = "" }: Props) => 
     </div>
   )
 }
-export { UserHeader }
+export { UserMini }

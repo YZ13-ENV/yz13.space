@@ -1,4 +1,5 @@
-import Dock from "@/components/dock"
+import { LogoHeader } from "@/components/header/logo"
+import { MiniNav } from "@/components/header/mini-nav"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
@@ -24,9 +25,13 @@ const page = async ({ }: Props) => {
   const t = await getI18n()
   return (
     <>
-      <Suspense fallback={<></>}>
-        <Dock lang={lang} />
-      </Suspense>
+      <header className="flex ml-6 mt-6 md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
+        <div className="flex items-center gap-2">
+          <LogoHeader className="size-9" />
+          <span className="text-2xl font-pixel">YZ13</span>
+        </div>
+        <MiniNav />
+      </header>
       <main className="space-y-6 w-full pt-36 px-6 pb-12">
         <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
           <Suspense

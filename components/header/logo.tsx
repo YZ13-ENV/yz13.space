@@ -6,7 +6,7 @@ type LogoProps = {
 }
 const LogoHeader = ({ className = "" }: LogoProps) => {
   return (
-    <div className={cn("", className)}>
+    <div className={cn("relative", className)}>
       <DynamicImage
         image={{
           dark: "https://yzstatic.yz13.space/logo/yz-dark.svg",
