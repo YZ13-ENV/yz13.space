@@ -1,5 +1,6 @@
 import { LogoHeader } from "@/components/header/logo"
 import { MiniNav } from "@/components/header/mini-nav"
+import { UserMini } from "@/components/header/user-mini"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
@@ -28,12 +29,17 @@ const page = async ({ searchParams }: Props) => {
   const lt = searchParams.lt
   return (
     <>
-      <header className="flex ml-6 mt-6 md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
-        <div className="flex items-center gap-2">
-          <LogoHeader className="size-9" />
-          <span className="text-2xl font-pixel">YZ13</span>
+      <header className="flex px-6 mt-6 justify-between items-start">
+        <div className="flex md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
+          <div className="flex items-center gap-2">
+            <LogoHeader className="size-9" />
+            <span className="text-2xl font-pixel">YZ13</span>
+          </div>
+          <MiniNav />
         </div>
-        <MiniNav />
+        <div className="flex items-center h-9">
+          <UserMini />
+        </div>
       </header>
       <main className="space-y-6 w-full min-h-screen pt-36 pl-6 pr-10 pb-12">
         <div className="w-full flex flex-col gap-2 p-3 max-w-7xl mx-auto">

@@ -6,7 +6,8 @@ const nextConfig = {
   compress: true,
   cleanDistDir: true,
   experimental: {
-    optimizePackageImports: [ "react", "dayjs", "react-icons", "yz13", "@yz13/mono" ],
+    optimizePackageImports: [ "react", "dayjs", "yz13", "@yz13/mono" ],
+    appDocumentPreloading: true,
     useEarlyImport: true,
     optimizeCss: true,
     gzipSize: true,

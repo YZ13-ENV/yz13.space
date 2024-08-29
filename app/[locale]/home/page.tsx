@@ -32,17 +32,20 @@ const page = async ({ searchParams }: Props) => {
   const offer = await showOffer()
   return (
     <>
-      <header className="flex ml-6 mt-6 md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
-        <div className="flex items-center gap-2">
-          <LogoHeader className="size-9" />
-          <span className="text-2xl font-pixel">YZ13</span>
+      <header className="flex px-6 mt-6 justify-between items-start">
+        <div className="flex md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
+          <div className="flex items-center gap-2">
+            <LogoHeader className="size-9" />
+            <span className="text-2xl font-pixel">YZ13</span>
+          </div>
+          <MiniNav />
         </div>
-        <MiniNav />
+        <div className="flex items-center h-9">
+          <UserMini />
+        </div>
       </header>
       <main className="space-y-6 w-full pt-36 px-6 pb-24">
-        <LocalData lang={lang}>
-          <UserMini className="ml-auto" />
-        </LocalData>
+        <LocalData lang={lang} />
         <Stack.Wrapper>
           <Stack.Content>
             <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl" />}>
