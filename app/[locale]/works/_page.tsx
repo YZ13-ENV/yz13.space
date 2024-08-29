@@ -4,8 +4,12 @@ import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
+import { LuLoader } from "react-icons/lu"
+import { Abc } from "./abc/abc"
 import { AbcReset } from "./abc/abc-reset"
-import { KanbanSkeleton, WorksKanban } from "./works-kanban"
+import { AbcWorkListSkeleton, AbcWorksList } from "./abc/abc-works-list"
+import { Modal } from "./work-modal/modal"
+import { Work } from "./work-modal/work"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -28,11 +32,21 @@ const page = async ({ searchParams }: Props) => {
   const workId = searchParams.workId
   return (
     <>
+      {
+        !!workId &&
+        <Modal
+          queryParam="workId"
+        >
+          <Suspense fallback={<LuLoader size={20} className="animate-spin" />}>
+            <Work id={workId} />
+          </Suspense>
+        </Modal>
+      }
       <Suspense fallback={<></>}>
         <Dock lang={lang} />
       </Suspense>
-      <main className="space-y-6 w-full min-h-screen pt-36 pl-6 pr-10 pb-12">
-        <div className="w-full flex flex-col gap-2 p-3 max-w-7xl mx-auto">
+      <main className="space-y-6 w-full pt-36 pl-6 pr-10 pb-12">
+        <div className="w-full flex flex-col gap-2 p-3 max-w-lg mx-auto">
           <div className="flex items-center gap-2">
             <Suspense
               fallback={
@@ -47,14 +61,11 @@ const page = async ({ searchParams }: Props) => {
             }
           </div>
         </div>
-        <Suspense fallback={<KanbanSkeleton />}>
-          <WorksKanban lang={lang} />
-        </Suspense>
-        {/* <Suspense fallback={<AbcWorkListSkeleton />}>
+        <Suspense fallback={<AbcWorkListSkeleton />}>
           <AbcWorksList lt={lt} />
-        </Suspense> */}
+        </Suspense>
       </main>
-      {/* <Abc defaultValue={lt} /> */}
+      <Abc defaultValue={lt} />
     </>
   )
 }

@@ -3,8 +3,6 @@ import { Locales } from "@/locales/client"
 import { Separator } from "@yz13/mono/components/separator"
 import { useInterval } from "ahooks"
 import dayjs, { Dayjs } from "dayjs"
-import "dayjs/locale/en"
-import "dayjs/locale/ru"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
 import { useEffect, useMemo, useState } from "react"
@@ -12,15 +10,15 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 
 const LocalData = ({ lang = "en" }: { lang?: Locales }) => {
-  dayjs.locale(lang)
   const TZ = "Asia/Yekaterinburg"
   const [ready, setReady] = useState<boolean>(false)
-  const [now, setNow] = useState<Dayjs>(dayjs().tz(TZ, true))
+  const [now, setNow] = useState<Dayjs>(dayjs().tz(TZ, true).locale(lang))
+  const update = () => setNow(dayjs().tz(TZ, true).locale(lang))
   const time = useMemo(() => { return now.format("HH:mm") }, [now])
   const seconds = useMemo(() => { return now.format("ss") }, [now])
   const date = useMemo(() => { return now.format("dddd, MMM DD") }, [now])
   useInterval(() => {
-    setNow(dayjs().tz(TZ, true))
+    update()
   }, ready ? 1000 : undefined)
   useEffect(() => {
     if (typeof document !== "undefined") setReady(true)
