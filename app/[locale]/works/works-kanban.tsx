@@ -22,6 +22,7 @@ const WorksKanban = async ({ lang = "en" }: KanbanProps) => {
         types.map(
           type =>
             <KanbanColumn
+              key={`column/${type}`}
               lang={lang}
               data={allWorks}
               filter={{ key: "type", value: type }}

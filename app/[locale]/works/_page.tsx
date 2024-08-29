@@ -4,12 +4,9 @@ import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
-import { LuLoader } from "react-icons/lu"
 import { Abc } from "./abc/abc"
 import { AbcReset } from "./abc/abc-reset"
 import { AbcWorkListSkeleton, AbcWorksList } from "./abc/abc-works-list"
-import { Modal } from "./work-modal/modal"
-import { Work } from "./work-modal/work"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -32,16 +29,6 @@ const page = async ({ searchParams }: Props) => {
   const workId = searchParams.workId
   return (
     <>
-      {
-        !!workId &&
-        <Modal
-          queryParam="workId"
-        >
-          <Suspense fallback={<LuLoader size={20} className="animate-spin" />}>
-            <Work id={workId} />
-          </Suspense>
-        </Modal>
-      }
       <Suspense fallback={<></>}>
         <Dock lang={lang} />
       </Suspense>
