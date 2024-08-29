@@ -15,7 +15,7 @@ const LanguageSwitcher = ({ lang = "en", className = "" }: { className?: string,
             size="sm"
             variant={lang === variable ? "secondary" : "ghost"}
             className={cn(
-              "uppercase hover:bg-yz-neutral-200",
+              "uppercase h-5 px-1.5 hover:bg-yz-neutral-50",
               variable === lang ? "text-foreground/80" : "text-secondary"
             )}
             onClick={() => changeLocale(variable as Locales)}

@@ -1,4 +1,5 @@
-import Dock from "@/components/dock"
+import { LogoHeader } from "@/components/header/logo"
+import { UserHeader } from "@/components/header/user"
 import { Stack } from "@/components/stack"
 import { showOffer } from "@/feature-flags/offer.feature"
 import { getCurrentLocale } from "@/locales/server"
@@ -30,9 +31,9 @@ const page = async ({ searchParams }: Props) => {
   const offer = await showOffer()
   return (
     <>
-      <Suspense fallback={<></>}>
-        <Dock lang={lang} />
-      </Suspense>
+      <LogoHeader className="absolute top-6 left-6" />
+      <UserHeader className="absolute top-6 right-6" lang={lang} size={36} />
+      {/* <Suspense fallback={<></>}><Dock lang={lang} /></Suspense> */}
       <main className="space-y-6 w-full pt-36 px-6 pb-24">
         <LocalData lang={lang} />
         <Stack.Wrapper>

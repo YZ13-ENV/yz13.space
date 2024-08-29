@@ -6,8 +6,9 @@ import { getURL } from "./get-url"
 
 type Props = {
   continue?: string
+  children?: React.ReactNode
 }
-const GoogleButton = ({ continue: continueLink = "" }: Props) => {
+const GoogleButton = ({ continue: continueLink = "", children }: Props) => {
   const router = useRouter()
   const signInWithGoogle = async () => {
     const continue_flow = continueLink ? `?continue=${continueLink}` : ""
@@ -28,7 +29,7 @@ const GoogleButton = ({ continue: continueLink = "" }: Props) => {
         "hover:bg-foreground/90"
       )}
     >
-      Sign in with Google
+      {children}
     </button>
   )
 }
