@@ -5,8 +5,10 @@ import { NavList } from "@/components/nav/list"
 import { getCurrentLocale } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Separator } from "@yz13/mono/components/separator"
+import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import Link from "next/link"
+import { Suspense } from "react"
 import { Aside } from "../../../components/container/aside"
 import { Main } from "../../../components/container/main"
 import { About } from "./about"
@@ -97,9 +99,13 @@ const page = async ({ searchParams }: Props) => {
           </div>
           <div className="w-full flex lg:!flex-row flex-col">
             <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
-              <TeamInfo />
+              <Suspense fallback={<Skeleton className="rounded-xl w-full h-40" />}>
+                <TeamInfo />
+              </Suspense>
               <Separator />
-              <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
+              <Suspense fallback={<Skeleton className="rounded-xl w-full h-36" />}>
+                <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
+              </Suspense>
               <Separator />
               <About />
             </div>
