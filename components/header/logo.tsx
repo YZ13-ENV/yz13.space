@@ -9,8 +9,8 @@ const LogoHeader = ({ className = "" }: LogoProps) => {
     <div className={cn("relative", className)}>
       <DynamicImage
         image={{
-          dark: "https://yzstatic.yz13.space/logo/yz-dark.svg",
-          light: "https://yzstatic.yz13.space/logo/yz-light.svg"
+          dark: "/yz-dark.svg",
+          light: "/yz-light.svg"
         }}
         alt="logo"
       />

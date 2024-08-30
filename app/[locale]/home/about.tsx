@@ -6,6 +6,13 @@ import { TechStack } from "./tech-stack"
 const About = async () => {
   const t = await getI18n()
   return (
+    <>
+      {/* <h2 classNames="text-lg text-foreground">{t("home.widget.about.title")}</h2> */}
+      {/* <p className="text-base text-foreground/60">{t("home.widget.about.description")}</p> */}
+      <TechStack />
+    </>
+  )
+  return (
     <Stack.Wrapper hovered store={{ expanded: true }}>
       <Stack.Header expandable>
         <h2 className="text-lg text-foreground">{t("home.widget.about.title")}</h2>

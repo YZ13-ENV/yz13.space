@@ -17,7 +17,7 @@ const WorksKanban = async ({ lang = "en" }: KanbanProps) => {
   const allWorks = allWorksResponse?.data ?? []
   const types = uniq(allWorks.map(work => work.type))
   return (
-    <div className="w-full flex items-start gap-3 py-3 px-4 max-w-7xl mx-auto overflow-x-auto no-scrollbar">
+    <div className="w-full flex items-start gap-3 py-3 px-1 overflow-x-auto no-scrollbar">
       {
         types.map(
           type =>

@@ -22,7 +22,7 @@ const JournalSection = async ({ locale = "en", max }: { locale?: Locales, max?: 
     })
   const t = await getI18n()
   if (isEmpty) return (
-    <div className="w-full aspect-square h-full flex items-center justify-center">
+    <div className="w-full aspect-video h-full flex items-center justify-center">
       <span>{t("journal.empty")}</span>
     </div>
   )

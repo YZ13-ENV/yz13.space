@@ -1,0 +1,62 @@
+<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_455_2403)">
+<rect x="6" y="6" width="1" height="1" fill="white"/>
+<rect x="7" y="5" width="1" height="1" fill="white"/>
+<rect x="5" y="6" width="1" height="1" transform="rotate(-90 5 6)" fill="white"/>
+<rect x="6" y="8" width="1" height="1" transform="rotate(180 6 8)" fill="white"/>
+<rect x="8" y="7" width="1" height="1" transform="rotate(90 8 7)" fill="white"/>
+<rect opacity="0.5" x="8" y="4" width="1" height="1" fill="white"/>
+<rect opacity="0.5" x="4" y="5" width="1" height="1" transform="rotate(-90 4 5)" fill="white"/>
+<rect opacity="0.5" x="5" y="9" width="1" height="1" transform="rotate(180 5 9)" fill="white"/>
+<rect opacity="0.5" x="9" y="8" width="1" height="1" transform="rotate(90 9 8)" fill="white"/>
+<rect opacity="0.25" x="9" y="3" width="1" height="1" fill="white"/>
+<rect opacity="0.25" x="3" y="4" width="1" height="1" transform="rotate(-90 3 4)" fill="white"/>
+<rect opacity="0.25" x="4" y="10" width="1" height="1" transform="rotate(180 4 10)" fill="white"/>
+<rect opacity="0.25" x="10" y="9" width="1" height="1" transform="rotate(90 10 9)" fill="white"/>
+<rect opacity="0.25" x="8" y="5" width="1" height="1" transform="rotate(-180 8 5)" fill="white"/>
+<rect opacity="0.25" x="5" y="5" width="1" height="1" transform="rotate(90 5 5)" fill="white"/>
+<rect opacity="0.25" x="5" y="8" width="1" height="1" fill="white"/>
+<rect opacity="0.25" x="8" y="8" width="1" height="1" transform="rotate(-90 8 8)" fill="white"/>
+<rect opacity="0.15" x="9" y="4" width="1" height="1" transform="rotate(-180 9 4)" fill="white"/>
+<rect opacity="0.15" x="4" y="4" width="1" height="1" transform="rotate(90 4 4)" fill="white"/>
+<rect opacity="0.15" x="4" y="9" width="1" height="1" fill="white"/>
+<rect opacity="0.15" x="9" y="9" width="1" height="1" transform="rotate(-90 9 9)" fill="white"/>
+<rect opacity="0.25" x="9" y="6" width="1" height="1" transform="rotate(-180 9 6)" fill="white"/>
+<rect opacity="0.25" x="6" y="4" width="1" height="1" transform="rotate(90 6 4)" fill="white"/>
+<rect opacity="0.25" x="4" y="7" width="1" height="1" fill="white"/>
+<rect opacity="0.25" x="7" y="9" width="1" height="1" transform="rotate(-90 7 9)" fill="white"/>
+<rect opacity="0.15" x="10" y="5" width="1" height="1" transform="rotate(-180 10 5)" fill="white"/>
+<rect opacity="0.15" x="5" y="3" width="1" height="1" transform="rotate(90 5 3)" fill="white"/>
+<rect opacity="0.15" x="3" y="8" width="1" height="1" fill="white"/>
+<rect opacity="0.15" x="8" y="10" width="1" height="1" transform="rotate(-90 8 10)" fill="white"/>
+<rect x="8" y="6" width="1" height="1" fill="white"/>
+<rect x="7" y="8" width="1" height="1" transform="rotate(90 7 8)" fill="white"/>
+<rect x="5" y="7" width="1" height="1" transform="rotate(180 5 7)" fill="white"/>
+<rect x="6" y="5" width="1" height="1" transform="rotate(-90 6 5)" fill="white"/>
+<rect opacity="0.5" x="11" y="6" width="1" height="1" fill="white"/>
+<rect opacity="0.5" x="7" y="11" width="1" height="1" transform="rotate(90 7 11)" fill="white"/>
+<rect opacity="0.5" x="2" y="7" width="1" height="1" transform="rotate(180 2 7)" fill="white"/>
+<rect opacity="0.5" x="6" y="2" width="1" height="1" transform="rotate(-90 6 2)" fill="white"/>
+<rect x="7" y="6" width="1" height="1" fill="white"/>
+<rect x="7" y="7" width="1" height="1" transform="rotate(90 7 7)" fill="white"/>
+<rect x="6" y="7" width="1" height="1" transform="rotate(180 6 7)" fill="white"/>
+<rect x="6" y="6" width="1" height="1" transform="rotate(-90 6 6)" fill="white"/>
+<rect x="10" y="6" width="1" height="1" fill="white"/>
+<rect x="7" y="10" width="1" height="1" transform="rotate(90 7 10)" fill="white"/>
+<rect x="3" y="7" width="1" height="1" transform="rotate(180 3 7)" fill="white"/>
+<rect x="6" y="3" width="1" height="1" transform="rotate(-90 6 3)" fill="white"/>
+<rect x="9" y="6" width="1" height="1" fill="white"/>
+<rect x="7" y="9" width="1" height="1" transform="rotate(90 7 9)" fill="white"/>
+<rect x="4" y="7" width="1" height="1" transform="rotate(180 4 7)" fill="white"/>
+<rect x="6" y="4" width="1" height="1" transform="rotate(-90 6 4)" fill="white"/>
+<rect opacity="0.25" x="12" y="6" width="1" height="1" fill="white"/>
+<rect opacity="0.25" x="7" y="12" width="1" height="1" transform="rotate(90 7 12)" fill="white"/>
+<rect opacity="0.25" x="1" y="7" width="1" height="1" transform="rotate(180 1 7)" fill="white"/>
+<rect opacity="0.25" x="6" y="1" width="1" height="1" transform="rotate(-90 6 1)" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_455_2403">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>

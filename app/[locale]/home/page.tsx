@@ -1,19 +1,18 @@
+import { Content } from "@/components/container/content"
 import { LogoHeader } from "@/components/header/logo"
-import { MiniNav } from "@/components/header/mini-nav"
-import { UserMini } from "@/components/header/user-mini"
-import { Stack } from "@/components/stack"
-import { showOffer } from "@/feature-flags/offer.feature"
+import { UserHeader } from "@/components/header/user"
+import { NavList } from "@/components/nav/list"
 import { getCurrentLocale } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
-import { Skeleton } from "@yz13/mono/components/skeleton"
+import { Separator } from "@yz13/mono/components/separator"
 import { Metadata } from "next"
-import { Suspense } from "react"
+import Link from "next/link"
+import { Aside } from "../../../components/container/aside"
+import { Main } from "../../../components/container/main"
 import { About } from "./about"
 import { UserActivity } from "./activity/activity-widget"
 import { LocalData } from "./local-data"
-import { Status } from "./status"
 import { TeamInfo } from "./team-info/team-info"
-import { WhatIOffer } from "./what-i-offer"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -29,23 +28,120 @@ type Props = {
 }
 const page = async ({ searchParams }: Props) => {
   const lang = getCurrentLocale()
-  const offer = await showOffer()
+  // const offer = await showOffer()
   return (
     <>
-      <header className="flex px-6 mt-6 justify-between items-start">
-        <div className="flex md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
-          <div className="flex items-center gap-2">
-            <LogoHeader className="size-9" />
-            <span className="text-2xl font-pixel">YZ13</span>
-          </div>
-          <MiniNav />
+      <header className="flex px-6 mt-6 justify-between items-center">
+        <div className="flex items-center gap-2">
+          <LogoHeader className="size-9" />
+          <span className="text-2xl text-foreground font-pixel">YZ13</span>
         </div>
         <div className="flex items-center h-9">
-          <UserMini />
+          <UserHeader size={36} lang={lang} />
         </div>
       </header>
-      <main className="space-y-6 w-full pt-36 px-6 pb-24">
-        <LocalData lang={lang} />
+      <Main>
+        <Aside>
+          <NavList />
+        </Aside>
+        <Content>
+          <div className="w-full gap-6 md:!h-64 h-fit flex md:!flex-row flex-col md:!items-center items-start">
+            <div className="lg:!w-1/4 md:!w-1/3 w-full md:!h-full h-fit space-y-3 ">
+              <LocalData className="w-full h-1/2" lang={lang} />
+            </div>
+            <div className="lg:!w-3/4 md:!w-2/3 w-full md:!h-full h-fit ">
+              <span className="text-lg font-medium text-secondary">Journal</span>
+              <ul className="w-full">
+                <li className="h-9">
+                  <Link
+                    href="/journal"
+                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
+                  >
+                    There is a new CMS out there
+                  </Link>
+                </li>
+                <li className="h-9 w-full">
+                  <Link
+                    href="/journal"
+                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
+                  >
+                    More projects, here is a few of upcoming projects
+                  </Link>
+                </li>
+                <li className="h-9">
+                  <Link
+                    href="/journal"
+                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
+                  >
+                    YZ13/Mono just ui-kit or...
+                  </Link>
+                </li>
+                <li className="h-9">
+                  <Link
+                    href="/journal"
+                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
+                  >
+                    Journal record #4
+                  </Link>
+                </li>
+                <li className="h-9">
+                  <Link
+                    href="/journal"
+                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
+                  >
+                    Journal record #5
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="w-full flex lg:!flex-row flex-col">
+            <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
+              <TeamInfo />
+              <Separator />
+              <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
+              <Separator />
+              <About />
+            </div>
+            <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
+            </div>
+          </div>
+          {/* <div className="w-full h-full grid grid-cols-4 gap-4 grid-rows-3">
+            <div className="w-full h-full ">
+              <LocalData className="w-full h-1/2" lang={lang} />
+              <div className="w-full h-1/2 flex items-center justify-center">
+                <span className="text-xs text-secondary">No events yet</span>
+              </div>
+            </div>
+            <div className="w-full h-full col-span-3 gap-4  flex flex-col">
+              <span className="text-foreground/60">Activity</span>
+              <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
+            </div>
+            <div className="w-full h-full col-span-2 row-span-2 rounded-xl border">
+              <About />
+            </div>
+            <div className="w-full h-full col-span-2 ">
+              <TeamInfo />
+            </div>
+            <div className="w-full h-full">
+              <div className="w-full h-full flex flex-col divide-y rounded-xl border">
+                <div className="w-full h-1/4"></div>
+                <div className="w-full h-1/4"></div>
+                <div className="w-full h-1/4"></div>
+                <div className="w-full h-1/4"></div>
+              </div>
+            </div>
+            <div className="w-full h-full">
+              <div className="w-full h-full flex flex-col divide-y rounded-xl border">
+                <div className="w-full h-1/4"></div>
+                <div className="w-full h-1/4"></div>
+                <div className="w-full h-1/4"></div>
+                <div className="w-full h-1/4"></div>
+              </div>
+            </div>
+          </div> */}
+        </Content>
+        {/* <LocalData lang={lang} />
         <Stack.Wrapper>
           <Stack.Content>
             <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl" />}>
@@ -70,8 +166,8 @@ const page = async ({ searchParams }: Props) => {
           <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-xl" />}>
             <WhatIOffer lang={lang} />
           </Suspense>
-        }
-      </main>
+        } */}
+      </Main>
     </>
   )
 }

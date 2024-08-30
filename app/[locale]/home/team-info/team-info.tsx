@@ -16,6 +16,31 @@ const TeamInfo = async () => {
   const worksCount = allWorks?.data ? allWorks?.data.length : 0
   const t = await getI18n()
   return (
+    <div className="flex flex-col gap-3">
+      <h2 className="text-lg text-foreground">{t("home.widget.about.title")}</h2>
+      {/* <div className="flex flex-col gap-1.5"> */}
+      {/* <p className="text-sm text-foreground/60">{t("home.widget.about.description")}</p> */}
+      {/* </div> */}
+      {/* <Separator /> */}
+      <div className="w-full flex flex-col h-fit gap-4">
+        <div className="w-full h-fit flex flex-col">
+          <p className="text-sm text-foreground/60">{t("home.widget.team.text")}</p>
+        </div>
+        <div className="w-full flex h-fit flex-row pb-3 gap-3">
+          <TeamAvatars className="w-fit" members={data} max={4} />
+          <div className="flex flex-col gap-1">
+            <span className="text-sm text-foreground">+{combinedExperience} {t("home.widget.team.experience.metric")}</span>
+            <span className="text-xs capitalize text-secondary">{t("home.widget.team.experience.description")}</span>
+          </div>
+          <div className="flex flex-col gap-1">
+            <span className="text-sm text-foreground">+{worksCount} {t("home.widget.team.projects.metric")}</span>
+            <span className="text-xs capitalize text-secondary">{t("home.widget.team.projects.description")}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+  return (
     <Stack.Wrapper className="rounded-t-none">
       <Stack.Content className="flex h-fit items-start gap-4">
         <div className="w-2/3 h-full flex flex-col">

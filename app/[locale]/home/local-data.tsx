@@ -6,15 +6,17 @@ import dayjs, { Dayjs } from "dayjs"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
 import { useEffect, useMemo, useState } from "react"
+import { cn } from "yz13/cn"
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
 type LocalDataProps = {
+  className?: string
   lang?: Locales
   children?: React.ReactNode
 }
 
-const LocalData = ({ lang = "en", children }: LocalDataProps) => {
+const LocalData = ({ className = "", lang = "en", children }: LocalDataProps) => {
   const TZ = "Asia/Yekaterinburg"
   const [ready, setReady] = useState<boolean>(false)
   const [now, setNow] = useState<Dayjs>(dayjs().tz(TZ, true).locale(lang))
@@ -29,7 +31,7 @@ const LocalData = ({ lang = "en", children }: LocalDataProps) => {
     if (typeof document !== "undefined") setReady(true)
   }, [typeof document])
   return (
-    <div className="w-full flex flex-col gap-2 max-w-lg mx-auto">
+    <div className={cn("w-full flex flex-col gap-2", className)}>
       <time className="text-5xl font-medium">{time}{ready && <span className="text-secondary">:{seconds}</span>}</time>
       <div className="flex items-center gap-2">
         <time className="text-foreground/60 shrink-0 capitalize font-medium">{date}</time>

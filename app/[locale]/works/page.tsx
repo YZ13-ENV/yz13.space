@@ -1,6 +1,9 @@
+import { Aside } from "@/components/container/aside"
+import { Content } from "@/components/container/content"
+import { Main } from "@/components/container/main"
 import { LogoHeader } from "@/components/header/logo"
-import { MiniNav } from "@/components/header/mini-nav"
-import { UserMini } from "@/components/header/user-mini"
+import { UserHeader } from "@/components/header/user"
+import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
@@ -29,20 +32,20 @@ const page = async ({ searchParams }: Props) => {
   const lt = searchParams.lt
   return (
     <>
-      <header className="flex px-6 mt-6 justify-between items-start">
-        <div className="flex md:!items-center items-start md:!flex-row flex-col gap-3 md:!gap-6">
-          <div className="flex items-center gap-2">
-            <LogoHeader className="size-9" />
-            <span className="text-2xl font-pixel">YZ13</span>
-          </div>
-          <MiniNav />
+      <header className="flex px-6 mt-6 justify-between items-center">
+        <div className="flex items-center gap-2">
+          <LogoHeader className="size-9" />
+          <span className="text-2xl text-foreground font-pixel">YZ13</span>
         </div>
         <div className="flex items-center h-9">
-          <UserMini />
+          <UserHeader size={36} lang={lang} />
         </div>
       </header>
-      <main className="space-y-6 w-full min-h-screen pt-36 pl-6 pr-10 pb-12">
-        <div className="w-full flex flex-col gap-2 p-3 max-w-7xl mx-auto">
+      <Main>
+        <Aside>
+          <NavList />
+        </Aside>
+        <Content className="flex flex-col">
           <div className="flex items-center gap-2">
             <Suspense
               fallback={
@@ -56,14 +59,14 @@ const page = async ({ searchParams }: Props) => {
               <AbcReset lt={lt} />
             }
           </div>
-        </div>
-        <Suspense fallback={<KanbanSkeleton />}>
-          <WorksKanban lang={lang} />
-        </Suspense>
+          <Suspense fallback={<KanbanSkeleton />}>
+            <WorksKanban lang={lang} />
+          </Suspense>
+        </Content>
         {/* <Suspense fallback={<AbcWorkListSkeleton />}>
           <AbcWorksList lt={lt} />
         </Suspense> */}
-      </main>
+      </Main>
       {/* <Abc defaultValue={lt} /> */}
     </>
   )

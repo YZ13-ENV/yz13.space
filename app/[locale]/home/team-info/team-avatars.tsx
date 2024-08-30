@@ -8,14 +8,15 @@ import { cn } from "yz13/cn"
 type TeamAvatarsProps = {
   members?: TeamMember[]
   max?: number
+  className?: string
 }
 
-const TeamAvatars = ({ max, members = [] }: TeamAvatarsProps) => {
+const TeamAvatars = ({ className = "", max, members = [] }: TeamAvatarsProps) => {
   const sliced = max ? members.slice(0, max) : members
   const isMoreThanSlice = max ? members.length >= 5 : false
   const aboveSliceCount = members.length - 5
   return (
-    <div className="h-9 w-full -space-x-3">
+    <div className={cn("h-9 w-full -space-x-3", className)}>
       {
         sliced.map(
           (member, index) =>
