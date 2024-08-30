@@ -1,5 +1,4 @@
 import { events } from "@/actions/activity-events.server";
-import { Stack } from "@/components/stack";
 import { Locales, getI18n } from "@/locales/server";
 import { Button } from "@yz13/mono/components/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@yz13/mono/components/tooltip";
@@ -24,20 +23,6 @@ type WrapperProps = {
   className?: string
   children?: ReactNode
   lang?: Locales
-}
-
-const Wrapper = async ({ children, className }: WrapperProps) => {
-  const t = await getI18n()
-  return (
-    <>
-      <Stack.Wrapper className="rounded-b-none">
-        <Stack.Header>{t("home.widget.activity.title")}</Stack.Header>
-        <Stack.Content className="flex flex-col gap-2">
-          {children}
-        </Stack.Content>
-      </Stack.Wrapper>
-    </>
-  )
 }
 
 const Cell = async ({ count = 0, cell }: { count?: number, cell?: string }) => {
@@ -175,5 +160,5 @@ const Years = ({ year, className = "" }: { year: number, className?: string }) =
   )
 }
 
-export { Cell, Grid, Legend, Map, Wrapper, Years };
+export { Cell, Grid, Legend, Map, Years };
 

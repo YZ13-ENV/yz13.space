@@ -1,6 +1,5 @@
 import { members } from "@/actions/team-members"
 import { works } from "@/actions/works"
-import { Stack } from "@/components/stack"
 import { getI18n } from "@/locales/server"
 import dayjs from "dayjs"
 import { TeamAvatars } from "./team-avatars"
@@ -18,10 +17,6 @@ const TeamInfo = async () => {
   return (
     <div className="flex flex-col gap-3">
       <h2 className="text-lg text-foreground">{t("home.widget.about.title")}</h2>
-      {/* <div className="flex flex-col gap-1.5"> */}
-      {/* <p className="text-sm text-foreground/60">{t("home.widget.about.description")}</p> */}
-      {/* </div> */}
-      {/* <Separator /> */}
       <div className="w-full flex flex-col h-fit gap-4">
         <div className="w-full h-fit flex flex-col">
           <p className="text-sm text-foreground/60">{t("home.widget.team.text")}</p>
@@ -39,26 +34,6 @@ const TeamInfo = async () => {
         </div>
       </div>
     </div>
-  )
-  return (
-    <Stack.Wrapper className="rounded-t-none">
-      <Stack.Content className="flex h-fit items-start gap-4">
-        <div className="w-2/3 h-full flex flex-col">
-          <p className="text-sm text-foreground/60">{t("home.widget.team.text")}</p>
-        </div>
-        <div className="w-1/3 flex h-full flex-col pb-3 gap-3">
-          <TeamAvatars members={data} max={4} />
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">+{combinedExperience} {t("home.widget.team.experience.metric")}</span>
-            <span className="text-xs capitalize text-secondary">{t("home.widget.team.experience.description")}</span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">+{worksCount} {t("home.widget.team.projects.metric")}</span>
-            <span className="text-xs capitalize text-secondary">{t("home.widget.team.projects.description")}</span>
-          </div>
-        </div>
-      </Stack.Content>
-    </Stack.Wrapper>
   )
 }
 export { TeamInfo }

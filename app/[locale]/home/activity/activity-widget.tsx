@@ -26,13 +26,5 @@ const UserActivity = async ({ lang = "en", uid }: { uid: string, lang?: Locales 
       <CommitsActivity.Legend />
     </div>
   )
-  return (
-    <CommitsActivity.Wrapper className="rounded-b-none">
-      <div className="flex items-center flex-col overflow-x-hidden gap-2">
-        <HeatMap lang={lang} years={years} />
-        <CommitsActivity.Legend />
-      </div>
-    </CommitsActivity.Wrapper>
-  )
 }
 export { UserActivity }

@@ -1,3 +1,4 @@
+import { Work } from "@/actions/work"
 import { works } from "@/actions/works"
 import { GroupedAvatars } from "@/components/avatar-group/group"
 import { Locales } from "@/locales/server"
@@ -6,7 +7,6 @@ import dayjs from "dayjs"
 import { uniq } from "lodash"
 import { Package } from "lucide-react"
 import { cn } from "yz13/cn"
-import { Work } from "./abc/abc-store"
 
 type KanbanProps = {
   lang?: Locales

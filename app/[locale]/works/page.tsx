@@ -9,7 +9,6 @@ import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
-import { AbcReset } from "./abc/abc-reset"
 import { KanbanSkeleton, WorksKanban } from "./works-kanban"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
@@ -54,20 +53,12 @@ const page = async ({ searchParams }: Props) => {
             >
               <h1 className="text-4xl font-medium">{t("works.title")}</h1>
             </Suspense>
-            {
-              !!lt &&
-              <AbcReset lt={lt} />
-            }
           </div>
           <Suspense fallback={<KanbanSkeleton />}>
             <WorksKanban lang={lang} />
           </Suspense>
         </Content>
-        {/* <Suspense fallback={<AbcWorkListSkeleton />}>
-          <AbcWorksList lt={lt} />
-        </Suspense> */}
       </Main>
-      {/* <Abc defaultValue={lt} /> */}
     </>
   )
 }

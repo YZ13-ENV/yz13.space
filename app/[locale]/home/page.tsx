@@ -30,7 +30,6 @@ type Props = {
 }
 const page = async ({ searchParams }: Props) => {
   const lang = getCurrentLocale()
-  // const offer = await showOffer()
   return (
     <>
       <header className="flex px-6 mt-6 justify-between items-center">
@@ -112,67 +111,7 @@ const page = async ({ searchParams }: Props) => {
             <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
             </div>
           </div>
-          {/* <div className="w-full h-full grid grid-cols-4 gap-4 grid-rows-3">
-            <div className="w-full h-full ">
-              <LocalData className="w-full h-1/2" lang={lang} />
-              <div className="w-full h-1/2 flex items-center justify-center">
-                <span className="text-xs text-secondary">No events yet</span>
-              </div>
-            </div>
-            <div className="w-full h-full col-span-3 gap-4  flex flex-col">
-              <span className="text-foreground/60">Activity</span>
-              <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
-            </div>
-            <div className="w-full h-full col-span-2 row-span-2 rounded-xl border">
-              <About />
-            </div>
-            <div className="w-full h-full col-span-2 ">
-              <TeamInfo />
-            </div>
-            <div className="w-full h-full">
-              <div className="w-full h-full flex flex-col divide-y rounded-xl border">
-                <div className="w-full h-1/4"></div>
-                <div className="w-full h-1/4"></div>
-                <div className="w-full h-1/4"></div>
-                <div className="w-full h-1/4"></div>
-              </div>
-            </div>
-            <div className="w-full h-full">
-              <div className="w-full h-full flex flex-col divide-y rounded-xl border">
-                <div className="w-full h-1/4"></div>
-                <div className="w-full h-1/4"></div>
-                <div className="w-full h-1/4"></div>
-                <div className="w-full h-1/4"></div>
-              </div>
-            </div>
-          </div> */}
         </Content>
-        {/* <LocalData lang={lang} />
-        <Stack.Wrapper>
-          <Stack.Content>
-            <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl" />}>
-              <Status />
-            </Suspense>
-          </Stack.Content>
-          <Stack.Expandable>1</Stack.Expandable>
-        </Stack.Wrapper>
-        <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-28 rounded-xl " />}>
-          <About />
-        </Suspense>
-        <Stack.Group>
-          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-36 rounded-t-xl rounded-b-none" />}>
-            <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
-          </Suspense>
-          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-b-xl rounded-t-none" />}>
-            <TeamInfo />
-          </Suspense>
-        </Stack.Group>
-        {
-          offer &&
-          <Suspense fallback={<Skeleton className="max-w-lg mx-auto w-full h-48 rounded-xl" />}>
-            <WhatIOffer lang={lang} />
-          </Suspense>
-        } */}
       </Main>
     </>
   )
