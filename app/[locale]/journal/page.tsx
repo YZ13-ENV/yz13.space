@@ -1,4 +1,3 @@
-import { journal } from "@/actions/journal"
 import { Aside } from "@/components/container/aside"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
@@ -10,7 +9,7 @@ import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
-import { JournalSkeleton } from "./journal"
+import { JournalList } from "./journal-list"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -27,7 +26,26 @@ type Props = {
 const page = async ({ }: Props) => {
   const lang = getCurrentLocale()
   const t = await getI18n()
-  console.log(await journal())
+  const JournalRecord = () => {
+    return (
+      <div className="w-full flex items-center gap-4">
+        <div className="h-16 aspect-video rounded-xl border relative hover:border-foreground transition-colors"></div>
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2">
+            <div className="-space-x-2 shrink-0 h-5">
+              <div className="size-5 inline-block rounded-full bg-yz-neutral-100 border" />
+              <div className="size-5 inline-block rounded-full bg-yz-neutral-100 border" />
+              <div className="size-5 inline-block rounded-full bg-yz-neutral-100 border" />
+            </div>
+            <span className="text-foreground line-clamp-1 font-medium">Journal record</span>
+          </div>
+          <span className="text-sm text-secondary line-clamp-2">
+            Description that came from journal record
+          </span>
+        </div>
+      </div>
+    )
+  }
   return (
     <>
       <header className="flex px-6 mt-6 justify-between items-center">
@@ -51,9 +69,34 @@ const page = async ({ }: Props) => {
           >
             <h1 className="text-4xl font-medium">{t("journal.title")}</h1>
           </Suspense>
-          <Suspense fallback={<JournalSkeleton />}>
-            {/* <JournalSection locale={lang} /> */}
-          </Suspense>
+          <section className="w-full h-fit py-12 space-y-6">
+            <h2 className="text-2xl font-medium text-foreground/80">Last records</h2>
+            <ul className="w-full h-fit grid lg:!grid-cols-4 md:!grid-cols-3 sm:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
+              <Suspense fallback={
+                <>
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                </>
+              }>
+                <JournalList />
+              </Suspense>
+            </ul>
+          </section>
+          <section className="space-y-6 w-full h-fit">
+            <h2 className="text-2xl font-medium text-foreground/80">All records</h2>
+            <div className="w-full grid lg:!grid-cols-3 md:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
+              <JournalRecord />
+              <JournalRecord />
+              <JournalRecord />
+
+              <JournalRecord />
+              <JournalRecord />
+              <JournalRecord />
+            </div>
+          </section>
         </Content>
       </Main>
     </>
