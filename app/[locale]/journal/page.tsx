@@ -1,3 +1,4 @@
+import { journal } from "@/actions/journal"
 import { Aside } from "@/components/container/aside"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
@@ -9,7 +10,7 @@ import { Page, dynamicMetadata } from "@/metadata"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import { Suspense } from "react"
-import { JournalSection, JournalSkeleton } from "./journal"
+import { JournalSkeleton } from "./journal"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -26,6 +27,7 @@ type Props = {
 const page = async ({ }: Props) => {
   const lang = getCurrentLocale()
   const t = await getI18n()
+  console.log(await journal())
   return (
     <>
       <header className="flex px-6 mt-6 justify-between items-center">
@@ -50,7 +52,7 @@ const page = async ({ }: Props) => {
             <h1 className="text-4xl font-medium">{t("journal.title")}</h1>
           </Suspense>
           <Suspense fallback={<JournalSkeleton />}>
-            <JournalSection locale={lang} />
+            {/* <JournalSection locale={lang} /> */}
           </Suspense>
         </Content>
       </Main>

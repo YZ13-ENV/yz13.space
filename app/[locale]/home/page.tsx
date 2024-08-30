@@ -7,10 +7,10 @@ import { Page, dynamicMetadata } from "@/metadata"
 import { Separator } from "@yz13/mono/components/separator"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
-import Link from "next/link"
 import { Suspense } from "react"
 import { Aside } from "../../../components/container/aside"
 import { Main } from "../../../components/container/main"
+import { JournalLastFive } from "../journal/journal-last-five"
 import { About } from "./about"
 import { UserActivity } from "./activity/activity-widget"
 import { LocalData } from "./local-data"
@@ -52,48 +52,17 @@ const page = async ({ searchParams }: Props) => {
             </div>
             <div className="lg:!w-3/4 md:!w-2/3 w-full md:!h-full h-fit ">
               <span className="text-lg font-medium text-secondary">Journal</span>
-              <ul className="w-full">
-                <li className="h-9">
-                  <Link
-                    href="/journal"
-                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
-                  >
-                    There is a new CMS out there
-                  </Link>
-                </li>
-                <li className="h-9 w-full">
-                  <Link
-                    href="/journal"
-                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
-                  >
-                    More projects, here is a few of upcoming projects
-                  </Link>
-                </li>
-                <li className="h-9">
-                  <Link
-                    href="/journal"
-                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
-                  >
-                    YZ13/Mono just ui-kit or...
-                  </Link>
-                </li>
-                <li className="h-9">
-                  <Link
-                    href="/journal"
-                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
-                  >
-                    Journal record #4
-                  </Link>
-                </li>
-                <li className="h-9">
-                  <Link
-                    href="/journal"
-                    className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
-                  >
-                    Journal record #5
-                  </Link>
-                </li>
-              </ul>
+              <Suspense fallback={
+                <ul className="h-fit w-full space-y-3">
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                  <Skeleton className="w-1/2 h-6 rounded-lg" />
+                </ul>
+              }>
+                <JournalLastFive />
+              </Suspense>
             </div>
           </div>
           <div className="w-full flex lg:!flex-row flex-col">
