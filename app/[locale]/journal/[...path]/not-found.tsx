@@ -19,10 +19,10 @@ const not_found = async () => {
           width={256} height={256}
           className="opacity-10"
         />
-        <h1 className="font-semibold text-3xl opacity-10">{t("journal.not-found.title")}</h1>
+        <h1 className="font-semibold text-3xl opacity-10"></h1>
         <Button className="gap-2" asChild variant="secondary">
           <Link href="/journal">
-            <BiLeftArrowAlt size={16} /> {t("journal.not-found.action")}
+            <BiLeftArrowAlt size={16} />
           </Link>
         </Button>
       </div>
