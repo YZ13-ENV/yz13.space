@@ -1,3 +1,3 @@
-import { Cell, Grid, Legend, Map, Wrapper, Years } from "./ui/commits-activity";
+import { Cell, Grid, Legend, Map, Years } from "./ui/commits-activity";
 
-export default { Map, Grid, Cell, Years, Wrapper, Legend };
+export default { Map, Grid, Cell, Years, Legend };

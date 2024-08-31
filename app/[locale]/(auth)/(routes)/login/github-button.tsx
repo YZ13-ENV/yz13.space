@@ -6,8 +6,9 @@ import { getURL } from "./get-url"
 
 type Props = {
   continue?: string
+  children?: React.ReactNode
 }
-const GithubButton = ({ continue: continueLink = "" }: Props) => {
+const GithubButton = ({ continue: continueLink = "", children }: Props) => {
   const router = useRouter()
   const signInWithGithub = async () => {
     const continue_flow = continueLink ? `?continue=${continueLink}` : ""
@@ -28,7 +29,7 @@ const GithubButton = ({ continue: continueLink = "" }: Props) => {
         "hover:bg-foreground/90"
       )}
     >
-      Sign in with Github
+      {children}
     </button>
   )
 }

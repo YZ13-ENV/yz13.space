@@ -1,47 +1,40 @@
-import { DynamicImage } from "@/components/dynamic-image"
-import { JournalHead } from "@/journal/types"
-import { Locales } from "@/locales/server"
-import dayjs from "dayjs"
+import { journal } from "@/actions/journal"
+import { GroupedAvatars } from "@/components/avatar-group/group"
 import Link from "next/link"
-import { PiDotDuotone } from "react-icons/pi"
-import { getStorageItem } from "yz13/supabase/storage"
 
-const List = ({ children }: { children?: React.ReactNode }) => {
-  return <ul className="space-y-3">{children}</ul>
-}
-
-const Item = ({ head, locale }: { head: JournalHead, locale: Locales }) => {
-  const { authors, createdAt, id, title, description } = head
-  const date = dayjs(createdAt)
-  const formatted = date.locale(locale).format("DD MMMM, HH:mm")
-  const joinedAuthors = authors.join(", ")
-  const localeParam = `?lang=${locale}`
-  const thumbnail = { dark: getStorageItem(["journal", head.thumbnail.dark]), light: getStorageItem(["journal", head.thumbnail.light]) }
+const JournalList = async () => {
+  const list: any[] = await journal()
+  const sliced = list.slice(0, 6)
   return (
-    <li className="h-fit relative w-full flex flex-col items-start gap-3">
-      <Link href={`/journal/${id}${localeParam}`} className="absolute top-0 left-0 w-full h-full" />
-      <div className="relative w-full aspect-video border rounded-xl bg-yz-neutral-200">
-        <DynamicImage
-          className="rounded-xl"
-          image={thumbnail}
-          alt="thumbnail"
-        />
-      </div>
-      <div className="flex flex-col gap-0.5 py-2">
-        <span className="font-medium text-2xl text-foreground">
-          {title}
-        </span>
-        <div className="flex items-center gap-1">
-          <span className="text-sm text-foreground/75">{joinedAuthors}</span>
-          <PiDotDuotone size={16} />
-          <span className="text-sm text-foreground/75">{formatted}</span>
-        </div>
-        <span className="text-base mt-1 text-foreground/80">
-          {description}
-        </span>
-      </div>
-    </li>
+    <>
+      {
+        sliced.map(
+          (item, index) => {
+            const id = item["publication-id"]
+            const title = item?.markdown?.title
+            const description = item?.markdown?.description
+            const authors = item?.authors ?? []
+            const href = `/journal/${id}`
+            return (
+              <li
+                key={`${id}/${item.created_at}`}
+                className="min-h-9 group"
+              >
+                <Link
+                  href={href}
+                  className="w-full h-full inline-flex gap-2"
+                >
+                  <span className="text-secondary">{index}</span>
+                  <GroupedAvatars className="-space-x-3" size={24} users={authors} />
+                  <span className="text-foreground font-medium">{title}</span>
+                  <span className="transition-colors text-secondary group-hover:text-foreground">{description}</span>
+                </Link>
+              </li>
+            )
+          }
+        )
+      }
+    </>
   )
 }
-
-export { Item, List }
+export { JournalList }

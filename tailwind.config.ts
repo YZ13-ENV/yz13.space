@@ -7,6 +7,13 @@ const config: Config = {
   corePlugins: {
     preflight: true,
   },
+  theme: {
+    extend: {
+      fontFamily: {
+        pixel: "var(--font-pixel)",
+      },
+    },
+  },
 };
 
 export default config;

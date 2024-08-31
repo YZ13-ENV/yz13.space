@@ -1,6 +1,5 @@
 export default {
   "journal.title": "Журнал",
-  "journal.empty": "Нет записей в журнале",
-  "journal.not-found.title": "",
-  "journal.not-found.action": "",
+  "journal.section.picked.title": "Выбранные записи",
+  "journal.section.all.title": "Все записи",
 } as const;

@@ -1,4 +1,3 @@
-import Dock from "@/components/dock"
 import { DynamicImage } from "@/components/dynamic-image"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
@@ -7,7 +6,6 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { Suspense } from "react"
 import { getStorageItem } from "yz13/supabase/storage"
 import { getMDX, isMDXExist } from "./get-mdx"
 
@@ -60,9 +58,6 @@ const page = async ({ params, searchParams }: Props) => {
   const t = await getI18n()
   return (
     <>
-      <Suspense fallback={<></>}>
-        <Dock />
-      </Suspense>
       <div className="max-w-2xl w-full mx-auto p-6 space-y-6">
         <div className="flex items-center gap-1">
           <Link href="/journal" className="text-3xl text-secondary hover:text-foreground transition-colors font-medium">

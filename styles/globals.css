@@ -16,6 +16,19 @@
   --activity-lvl-3-border: hsl(var(--yz13-neutral-800));
   --activity-lvl-4-bg: hsl(var(--yz13-foreground));
   --activity-lvl-4-border: hsl(var(--yz13-foreground));
+
+  --container-padding-right: 2.5rem;
+  --container-padding-left: 1.5rem;
+  --container-nav-sidebar-width: 13rem;
+  --container-gap: 1.5rem;
+  --container-width: calc(
+    100% - var(--container-gap) - var(--container-padding-right)
+  );
+}
+@media (max-width: 768px) {
+  :root {
+    --container-nav-sidebar-width: 2.25rem;
+  }
 }
 .activity-lvl-0 {
   background-color: var(--activity-lvl-0-bg);
@@ -42,6 +55,12 @@
   ::selection {
     @apply bg-foreground text-background;
   }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  height: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 .header {

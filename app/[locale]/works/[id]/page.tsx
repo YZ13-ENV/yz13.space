@@ -1,11 +1,8 @@
 import { work } from "@/actions/work"
-import Dock from "@/components/dock"
-import { Stack } from "@/components/stack"
 import { getCurrentLocale } from "@/locales/server"
 import { Button } from "@yz13/mono/components/button"
 import dayjs from "dayjs"
 import Link from "next/link"
-import { Suspense } from "react"
 import { PiLockKeyDuotone } from "react-icons/pi"
 
 type Props = {
@@ -24,9 +21,6 @@ const page = async ({ params }: Props) => {
   const noThumbnail = !data?.thumbnail
   return (
     <>
-      <Suspense fallback={<></>}>
-        <Dock lang={lang} />
-      </Suspense>
       <main className="space-y-6 w-full pt-36 px-6 pb-24">
         <div className="max-w-lg w-full mx-auto space-y-2">
           <div className="flex items-center justify-between">
@@ -49,11 +43,7 @@ const page = async ({ params }: Props) => {
         </div>
         {
           noThumbnail &&
-          <Stack.Wrapper>
-            <Stack.Content>
-              <div className="w-full aspect-video"></div>
-            </Stack.Content>
-          </Stack.Wrapper>
+          <div className="w-full aspect-video"></div>
         }
         <div className="max-w-lg w-full mx-auto space-y-2">
           <p>This is a work</p>

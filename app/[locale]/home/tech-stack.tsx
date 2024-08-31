@@ -26,7 +26,7 @@ type Dot = {
 const Wrapper = ({ children, className }: { className?: string, children?: ReactNode }) => {
   return (
     <div className={cn(
-      "w-full group/stack aspect-square relative flex items-center justify-center",
+      "w-full h-full group/stack aspect-square relative flex items-center justify-center",
       className
     )}
     >
@@ -51,7 +51,8 @@ const Backend = () => {
         stiffness: 150,
         // duration: 4,
       }}
-      className="w-full grid grid-cols-3 grid-rows-2"
+      style={{ height: "calc(100% - 48px)" }}
+      className="w-full h-full gap-0 grid grid-cols-3 grid-rows-2 z-0"
     >
       <Wrapper className="border-r border-b">
         <NodeIcon size={64} className="z-0" />
@@ -89,7 +90,8 @@ const Frontend = () => {
         stiffness: 150,
         // duration: 4,
       }}
-      className="w-full grid grid-cols-3 grid-rows-2 z-0"
+      style={{ height: "calc(100% - 48px)" }}
+      className="w-full h-full gap-0 grid grid-cols-3 grid-rows-2 z-0"
     >
       <Wrapper className="border-b border-r">
         <NextIcon size={64} className="z-0" />
@@ -124,9 +126,8 @@ const TechStack = () => {
     }
   }, [checked], { wait: 250 })
   return (
-    <>
-      <Separator className="my-3" />
-      <div className="flex items-center gap-3 justify-center">
+    <div className="w-full h-full overflow-hidden">
+      <div className="flex items-center gap-3 py-3 justify-center">
         <button
           onClick={() => {
             if (checked === true) setStack(null)
@@ -144,12 +145,12 @@ const TechStack = () => {
           }}
           className={checked ? "text-foreground" : "text-secondary"}>Backend</button>
       </div>
-      <Separator className="my-3" />
+      <Separator />
       <AnimatePresence>
         {stack === "backend" && <Backend />}
         {stack === "frontend" && <Frontend />}
       </AnimatePresence>
-    </>
+    </div>
   )
 }
 export { TechStack }

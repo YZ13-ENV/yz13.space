@@ -1,16 +1,21 @@
 import { DynamicImage } from "@/components/dynamic-image"
+import { Locales } from "@/locales/server"
 import { cookies } from "next/headers"
 import { createClient } from "yz13/supabase/server"
 import { Logged } from "./logged"
 import { UnLogged } from "./unlogged"
 
 type Props = {
+  params: {
+    locale: Locales
+  }
   searchParams: {
     lang?: string
     continue?: string
   }
 }
-const page = async ({ searchParams }: Props) => {
+const page = async ({ searchParams, params }: Props) => {
+  const lang = params.locale
   const cks = cookies()
   const sp = createClient(cks)
   const { data: { user } } = await sp.auth.getUser()
@@ -32,8 +37,8 @@ const page = async ({ searchParams }: Props) => {
       <div className="flex relative flex-col items-center h-full justify-center w-full">
         {
           isLogged
-            ? <Logged user={user} />
-            : <UnLogged continue={continueLink} />
+            ? <Logged user={user} continue={continueLink} />
+            : <UnLogged lang={lang} continue={continueLink} />
         }
       </div>
     </div>

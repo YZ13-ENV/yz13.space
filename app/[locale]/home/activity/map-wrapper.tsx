@@ -12,7 +12,7 @@ const HeatMapScrollWrapper = ({ children }: { children?: ReactNode }) => {
   return (
     <div
       ref={ref}
-      className="w-full overflow-x-auto flex justify-start items-center gap-0.5"
+      className="w-full overflow-x-auto flex justify-start no-scrollbar items-center gap-0.5"
     >
       {children}
     </div>
