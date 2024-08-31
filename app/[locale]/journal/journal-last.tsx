@@ -1,11 +1,12 @@
 import { journal } from "@/actions/journal"
 import { GroupedAvatars } from "@/components/avatar-group/group"
+import { Locales } from "@/locales/server"
 import { ImageIcon } from "lucide-react"
 import Link from "next/link"
 import { cn } from "yz13/cn"
 
-const JournalLastList = async () => {
-  const list: any[] = await journal()
+const JournalLastList = async ({ lang = "en" }: { lang?: Locales }) => {
+  const list: any[] = await journal(lang)
   return (
     <>
       {

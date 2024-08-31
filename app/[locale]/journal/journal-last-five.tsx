@@ -1,8 +1,9 @@
 import { journal } from "@/actions/journal"
+import { Locales } from "@/locales/server"
 import Link from "next/link"
 
-const JournalLastFive = async () => {
-  const list: any[] = await journal()
+const JournalLastFive = async ({ lang = "en" }: { lang?: Locales }) => {
+  const list: any[] = await journal(lang)
   const sliced = list.slice(0, 5)
   return (
     <>
