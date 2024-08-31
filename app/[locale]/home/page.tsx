@@ -2,11 +2,12 @@ import { Content } from "@/components/container/content"
 import { LogoHeader } from "@/components/header/logo"
 import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
-import { getCurrentLocale } from "@/locales/server"
+import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Separator } from "@yz13/mono/components/separator"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
+import Link from "next/link"
 import { Suspense } from "react"
 import { Aside } from "../../../components/container/aside"
 import { Main } from "../../../components/container/main"
@@ -30,6 +31,7 @@ type Props = {
 }
 const page = async ({ searchParams }: Props) => {
   const lang = getCurrentLocale()
+  const t = await getI18n()
   return (
     <>
       <header className="flex px-6 mt-6 justify-between items-center">
@@ -46,12 +48,19 @@ const page = async ({ searchParams }: Props) => {
           <NavList />
         </Aside>
         <Content>
-          <div className="w-full gap-6 md:!h-64 h-fit flex md:!flex-row flex-col md:!items-center items-start">
-            <div className="lg:!w-1/4 md:!w-1/3 w-full md:!h-full h-fit space-y-3 ">
+          <div className="md:!w-1/2 w-full gap-6 xl:!h-64 h-fit flex xl:!flex-row flex-col xl:!items-center items-start">
+            <div className="xl:!w-1/3 w-full md:!h-full h-fit space-y-3 ">
               <LocalData className="w-full h-1/2" lang={lang} />
             </div>
-            <div className="lg:!w-3/4 md:!w-2/3 w-full md:!h-full h-fit ">
-              <span className="text-lg font-medium text-secondary">Journal</span>
+            <div className="xl:!w-2/3 w-full md:!h-full h-fit ">
+              <div className="flex items-center h-9 gap-2">
+                <Link
+                  href="/journal"
+                  className="text-lg font-medium text-secondary hover:text-foreground transition-colors"
+                >
+                  {t("journal.title")}
+                </Link>
+              </div>
               <Suspense fallback={
                 <ul className="h-fit w-full space-y-3">
                   <Skeleton className="w-1/2 h-6 rounded-lg" />

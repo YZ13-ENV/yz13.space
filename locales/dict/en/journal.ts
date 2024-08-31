@@ -1,6 +1,5 @@
 export default {
   "journal.title": "Journal",
-  "journal.empty": "Journal is empty",
-  "journal.not-found.title": "",
-  "journal.not-found.action": "",
+  "journal.section.picked.title": "Picked records",
+  "journal.section.all.title": "All records",
 } as const;

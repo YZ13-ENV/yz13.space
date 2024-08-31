@@ -9,7 +9,7 @@ const JournalLastFive = async () => {
       <ul className="w-full">
         {
           sliced.map(
-            item => {
+            (item, index) => {
               const id = item["publication-id"]
               const title = item?.markdown?.title
               const href = `/journal/${id}`
@@ -19,7 +19,7 @@ const JournalLastFive = async () => {
                     href={href}
                     className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
                   >
-                    {title}
+                    {index} - {title}
                   </Link>
                 </li>
               )
