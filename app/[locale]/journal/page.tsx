@@ -62,14 +62,14 @@ const page = async ({ }: Props) => {
                   <Skeleton className="w-1/2 h-6 rounded-lg" />
                 </>
               }>
-                <JournalList />
+                <JournalList lang={lang} />
               </Suspense>
             </ul>
           </section>
           <section className="space-y-6 w-full h-fit">
             <h2 className="text-2xl font-medium text-foreground/80">{t("journal.section.all.title")}</h2>
             <div className="w-full grid lg:!grid-cols-3 md:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
-              <JournalLastList />
+              <JournalLastList lang={lang} />
             </div>
           </section>
         </Content>

@@ -1,9 +1,10 @@
 import { journal } from "@/actions/journal"
 import { GroupedAvatars } from "@/components/avatar-group/group"
+import { Locales } from "@/locales/server"
 import Link from "next/link"
 
-const JournalList = async () => {
-  const list: any[] = await journal()
+const JournalList = async ({ lang = "en" }: { lang?: Locales }) => {
+  const list: any[] = await journal(lang)
   const sliced = list.slice(0, 6)
   return (
     <>

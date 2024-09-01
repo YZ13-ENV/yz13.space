@@ -70,7 +70,7 @@ const page = async ({ searchParams }: Props) => {
                   <Skeleton className="w-1/2 h-6 rounded-lg" />
                 </ul>
               }>
-                <JournalLastFive />
+                <JournalLastFive lang={lang} />
               </Suspense>
             </div>
           </div>
