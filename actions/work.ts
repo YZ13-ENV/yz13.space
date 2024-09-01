@@ -1,7 +1,10 @@
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { Tables } from "yz13/supabase/database";
 
-export type Work = Tables<"works">;
+export type Work = Tables<"works"> & {
+  icon: { [key: string]: string };
+  description: string;
+};
 
 export const work = async (
   id: string | null
