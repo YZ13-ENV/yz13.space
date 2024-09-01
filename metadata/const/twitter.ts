@@ -8,6 +8,6 @@ export const twitter: Metadata["twitter"] = {
   creator: "@YZ13_DEV",
   creatorId: "1794707806584446976",
   images: {
-    url: "https://og.yz13.space/yz13/OG-DEFAULT.png",
+    url: "https://cdn.yz13.space/og/yz13/default.png",
   },
 };

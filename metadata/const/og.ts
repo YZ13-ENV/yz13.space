@@ -8,7 +8,7 @@ export const openGraph: Metadata["openGraph"] = {
   url: "https://yz13.space",
   title: "YZ13",
   images: {
-    url: "https://og.yz13.space/yz13/OG-DEFAULT.png",
+    url: "https://cdn.yz13.space/og/yz13/default.png",
     width: 1200,
     height: 630,
   },
