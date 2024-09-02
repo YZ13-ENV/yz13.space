@@ -63,7 +63,7 @@ const Grid = async ({ isFirst = false, month, year, lang = "en" }: GridProps) =>
   const from = dateList[0]?.toISOString()
   const to = dateList[dateList.length - 1]?.toISOString()
   const commits = (from && to ? await events({ from, to }) : [])
-  const data: Commits[] = commits?.data
+  const data: Commits[] = commits
   const converted = data.map(item => {
     const date = dayjs(item.date).format("DD-MM-YYYY")
     return { ...item, date }

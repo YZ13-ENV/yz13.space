@@ -1,11 +1,13 @@
 import { Work } from "@/actions/work"
 import { works } from "@/actions/works"
 import { GroupedAvatars } from "@/components/avatar-group/group"
+import { DynamicImage } from "@/components/dynamic-image"
 import { Locales } from "@/locales/server"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import dayjs from "dayjs"
 import { uniq } from "lodash"
-import { Package } from "lucide-react"
+import { ExternalLinkIcon, Package } from "lucide-react"
+import Link from "next/link"
 import { cn } from "yz13/cn"
 
 type KanbanProps = {
@@ -75,21 +77,53 @@ type CardProps = {
 }
 const KanbanCard = ({ work, lang = "en" }: CardProps) => {
   const created_at = dayjs(work.created_at).locale(lang).format("ddd, DD MMMM YYYY")
+  const description = work.description
   const authors = work.authors
+  const icon = work.icon
+  const href = work.link
   return (
     <div
       className={cn(
-        "w-96 rounded-xl bg-yz-background border h-fit p-3 flex gap-3 transition-colors cursor-pointer",
-        "hover:border-foreground"
+        "w-96 rounded-xl bg-yz-background border h-fit p-3 flex gap-3 cursor-pointer",
+        "group hover:border-foreground transition-colors"
       )}
     >
-      <div className="size-7 shrink-0 rounded-md bg-yz-neutral-50 border flex items-center justify-center">
-        <Package size={16} className="text-secondary" />
+      <div
+        className={cn(
+          "size-7 p-1 relative shrink-0 rounded-md bg-yz-neutral-50 border flex items-center justify-center",
+          "group-hover:border-foreground group-hover:bg-yz-neutral-100 transition-colors"
+        )}
+      >
+        {
+          (icon && icon.dark && icon.light)
+            ?
+            <div className="relative size-4">
+              <DynamicImage image={{ dark: icon.dark, light: icon.light }} alt="work-icon" />
+            </div>
+            : <Package size={16} className="text-secondary" />
+        }
       </div>
       <div className="flex flex-col gap-3 w-full">
-        <span className="font-regular text-foreground">
-          {work.name}
-        </span>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <span className="font-regular text-foreground line-clamp-1">
+              {work.name}
+            </span>
+            <span className="text-xs text-secondary border rounded-full px-1.5 py-0 capitalize">
+              {work.public ? "Public" : "Private"}
+            </span>
+          </div>
+          {
+            href &&
+            <Link
+              href={href}
+              className="group/link hover:underline text-xs text-secondary inline-flex items-center gap-1"
+            >
+              {href}
+              <ExternalLinkIcon size={12} className="group-hover/link:inline-block hidden" />
+            </Link>
+          }
+        </div>
         <span className="text-xs text-secondary">{created_at}</span>
       </div>
       <GroupedAvatars className="-space-x-3" size={24} users={authors} />

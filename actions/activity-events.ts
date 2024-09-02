@@ -5,7 +5,7 @@ export type ActivityEventsProps = {
 
 export const INTERNAL__events = async ({ from, to }: ActivityEventsProps) => {
   const base = "https://api.yz13.space";
-  const path = `/activity-commits`;
+  const path = `/commits/owner`;
   const url = new URL(path, base);
   const searchParams = url.searchParams;
   searchParams.set("from", from);

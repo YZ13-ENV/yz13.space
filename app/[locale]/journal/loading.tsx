@@ -1,6 +1,7 @@
 import { Aside } from "@/components/container/aside"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
+import { NavList } from "@/components/nav/list"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 
 const Loading = () => {
@@ -12,9 +13,7 @@ const Loading = () => {
       </header>
       <Main>
         <Aside>
-          <Skeleton className="h-9 w-full rounded-lg" />
-          <Skeleton className="h-9 w-full rounded-lg" />
-          <Skeleton className="h-9 w-full rounded-lg" />
+          <NavList />
         </Aside>
         <Content className="flex flex-col">
         </Content>

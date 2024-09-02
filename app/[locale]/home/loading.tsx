@@ -2,6 +2,7 @@ import { Aside } from "@/components/container/aside"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
 import { Skeleton } from "@yz13/mono/components/skeleton"
+import { NavList } from "@/components/nav/list"
 
 const Loading = () => {
   return (
@@ -12,9 +13,7 @@ const Loading = () => {
       </header>
       <Main>
         <Aside>
-          <Skeleton className="h-9 w-full rounded-lg" />
-          <Skeleton className="h-9 w-full rounded-lg" />
-          <Skeleton className="h-9 w-full rounded-lg" />
+          <NavList />
         </Aside>
         <Content className="flex flex-col">
           <div className="w-full gap-6 md:!h-64 h-fit flex md:!flex-row flex-col md:!items-center items-start">
