@@ -2,6 +2,18 @@ import { Content } from "@/components/container/content"
 import { LogoHeader } from "@/components/header/logo"
 import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
+import { HonoIcon } from "@/components/pixel-stack/hono-icon"
+import { JestIcon } from "@/components/pixel-stack/jest-icon"
+import { MongoDBIcon } from "@/components/pixel-stack/mongodb-icon"
+import { NextIcon } from "@/components/pixel-stack/next-icon"
+import { NodeIcon } from "@/components/pixel-stack/node-icon"
+import { ReactIcon } from "@/components/pixel-stack/react-icon"
+import { ShadcnIcon } from "@/components/pixel-stack/shadcn-ui-icon"
+import { SupabaseIcon } from "@/components/pixel-stack/supabase-icon"
+import { TailwindIcon } from "@/components/pixel-stack/tailwind-icon"
+import { TypeScriptIcon } from "@/components/pixel-stack/typescript-icon"
+import { ViteIcon } from "@/components/pixel-stack/vite-icon"
+import { ZodIcon } from "@/components/pixel-stack/zod"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { Page, dynamicMetadata } from "@/metadata"
 import { Separator } from "@yz13/mono/components/separator"
@@ -12,7 +24,6 @@ import { Suspense } from "react"
 import { Aside } from "../../../components/container/aside"
 import { Main } from "../../../components/container/main"
 import { JournalLastFive } from "../journal/journal-last-five"
-import { About } from "./about"
 import { UserActivity } from "./activity/activity-widget"
 import { LocalData } from "./local-data"
 import { TeamInfo } from "./team-info/team-info"
@@ -84,10 +95,74 @@ const page = async ({ searchParams }: Props) => {
                 <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
               </Suspense>
               <Separator />
-              <About />
+              {/* <About /> */}
             </div>
             <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
             </div>
+          </div>
+          <div className="lg:!w-1/2 w-full h-fit gap-3 flex flex-row">
+            <section className="w-1/2 space-y-3">
+              <h2 className="text-base font-medium text-foreground">Frontend</h2>
+              <ul>
+                <li>
+                  <div className="h-9 flex items-center gap-2">
+                    <ReactIcon size={18} />
+                    <span>React</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <NextIcon size={18} />
+                    <span>NextJS</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <ViteIcon size={18} />
+                    <span>Vite</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <TypeScriptIcon size={18} />
+                    <span>Typescript</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <TailwindIcon size={18} />
+                    <span>TailwindCSS</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <ShadcnIcon size={18} />
+                    <span>Shadcn UI</span>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section className="w-1/2 space-y-3">
+              <h2 className="text-base font-medium text-foreground">Backend</h2>
+              <ul>
+                <li>
+                  <div className="h-9 flex items-center gap-2">
+                    <NodeIcon size={18} />
+                    <span>NodeJS</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <HonoIcon size={18} />
+                    <span>Hono</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <SupabaseIcon size={18} />
+                    <span>Supabase</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <JestIcon size={18} />
+                    <span>Jest</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <MongoDBIcon size={18} />
+                    <span>MongoDB</span>
+                  </div>
+                  <div className="h-9 flex items-center gap-2">
+                    <ZodIcon size={18} />
+                    <span>Zod</span>
+                  </div>
+                </li>
+              </ul>
+            </section>
           </div>
         </Content>
       </Main>
