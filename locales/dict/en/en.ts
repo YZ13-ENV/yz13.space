@@ -6,6 +6,7 @@ import home from "./home";
 import journal from "./journal";
 import login from "./login";
 import nav from "./nav";
+import weekday from "./weekday";
 import works from "./works";
 export default {
   ...journal,
@@ -17,4 +18,5 @@ export default {
   ...experience,
   ...login,
   ...nav,
+  ...weekday,
 } as const;

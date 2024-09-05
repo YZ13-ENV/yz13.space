@@ -11,6 +11,7 @@ import { Metadata } from "next"
 import { Suspense } from "react"
 import { JournalLastList } from "./journal-last"
 import { JournalList } from "./journal-list"
+import Link from "next/link"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -66,12 +67,18 @@ const page = async ({ }: Props) => {
               </Suspense>
             </ul>
           </section>
-          <section className="space-y-6 w-full h-fit">
+          <section className="space-y-6 w-full h-fit min-h-[52.5dvh]">
             <h2 className="text-2xl font-medium text-foreground/80">{t("journal.section.all.title")}</h2>
             <div className="w-full grid lg:!grid-cols-3 md:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
               <JournalLastList lang={lang} />
             </div>
           </section>
+          <footer className="flex items-center justify-between mt-auto">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-secondary">Powered by</span>
+              <Link href="https://cms.yz13.space" target="_blank" className="text-sm hover:underline">YZ13/CMS</Link>
+            </div>
+          </footer>
         </Content>
       </Main>
     </>
