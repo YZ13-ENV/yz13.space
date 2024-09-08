@@ -13,6 +13,7 @@ const JournalLastFive = async ({ lang = "en" }: { lang?: Locales }) => {
             (item, index) => {
               const id = item["publication-id"]
               const title = item?.markdown?.title
+              const description = item?.markdown?.description
               const href = `/journal/${id}`
               return (
                 <li className="h-9" key={`${id}/${item.created_at}`}>
@@ -20,7 +21,7 @@ const JournalLastFive = async ({ lang = "en" }: { lang?: Locales }) => {
                     href={href}
                     className="w-full h-full flex items-center text-foreground/60 hover:text-foreground transition-colors line-clamp-1"
                   >
-                    {index} - {title}
+                    {title} - {description}
                   </Link>
                 </li>
               )
