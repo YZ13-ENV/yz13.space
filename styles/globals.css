@@ -6,6 +6,7 @@
 @tailwind utilities;
 
 :root {
+  --yz13-background: var(--yz13-neutral-100);
   --activity-lvl-0-bg: hsl(var(--yz13-background));
   --activity-lvl-0-border: hsl(var(--yz13-neutral-300));
   --activity-lvl-1-bg: hsl(var(--yz13-neutral-200));
@@ -21,31 +22,39 @@
   --container-padding-left: 1.5rem;
   --container-nav-sidebar-width: 13rem;
   --container-gap: 1.5rem;
-  --container-width: calc(
-    100% - var(--container-gap) - var(--container-padding-right)
-  );
+  --container-width: calc(100% - var(--container-gap) - var(--container-padding-right));
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {}
+}
+
 @media (max-width: 768px) {
   :root {
     --container-nav-sidebar-width: 2.25rem;
   }
 }
+
 .activity-lvl-0 {
   background-color: var(--activity-lvl-0-bg);
   border: 1px solid var(--activity-lvl-0-border);
 }
+
 .activity-lvl-1 {
   background-color: var(--activity-lvl-1-bg);
   border: 1px solid var(--activity-lvl-1-border);
 }
+
 .activity-lvl-2 {
   background-color: var(--activity-lvl-2-bg);
   border: 1px solid var(--activity-lvl-2-border);
 }
+
 .activity-lvl-3 {
   background-color: var(--activity-lvl-3-bg);
   border: 1px solid var(--activity-lvl-3-border);
 }
+
 .activity-lvl-4 {
   background-color: var(--activity-lvl-4-bg);
   border: 1px solid var(--activity-lvl-4-border);
@@ -58,14 +67,18 @@
 }
 
 .no-scrollbar::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  height: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
+  width: 0;
+  /* Remove scrollbar space */
+  height: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }
 
 .header {
   height: var(--header-height);
 }
+
 .page-wrapper {
   min-height: var(--page-wrapper-height);
 }
@@ -75,25 +88,30 @@
 }
 
 .connector {
-  & > path {
+  &>path {
     stroke: hsl(var(--yz13-neutral-300));
   }
 }
+
 .logo {
-  & > path {
+  &>path {
     fill: hsl(var(--yz13-foreground));
   }
 }
+
 .light-mode-thumbnail {
   display: block;
 }
+
 .dark-mode-thumbnail {
   display: none;
 }
+
 @media (prefers-color-scheme: dark) {
   .light-mode-thumbnail {
     display: none;
   }
+
   .dark-mode-thumbnail {
     display: block;
   }
