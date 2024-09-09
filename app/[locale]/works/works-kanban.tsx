@@ -74,8 +74,9 @@ const KanbanColumn = ({ title, data = [], filter, lang = "en" }: ColumnProps) =>
 type CardProps = {
   lang?: Locales
   work: Work
+  className?: string
 }
-const KanbanCard = ({ work, lang = "en" }: CardProps) => {
+const KanbanCard = ({ className = "", work, lang = "en" }: CardProps) => {
   const created_at = dayjs(work.created_at).locale(lang).format("ddd, DD MMMM YYYY")
   const description = work.description
   const authors = work.authors
@@ -85,7 +86,8 @@ const KanbanCard = ({ work, lang = "en" }: CardProps) => {
     <div
       className={cn(
         "w-96 rounded-xl bg-yz-background border h-fit p-3 flex gap-3 cursor-pointer",
-        "group hover:border-foreground transition-colors"
+        "group hover:border-foreground transition-colors",
+        className
       )}
     >
       <div
@@ -114,14 +116,16 @@ const KanbanCard = ({ work, lang = "en" }: CardProps) => {
             </span>
           </div>
           {
-            href &&
-            <Link
-              href={href}
-              className="group/link hover:underline text-xs text-secondary inline-flex items-center gap-1"
-            >
-              {href}
-              <ExternalLinkIcon size={12} className="group-hover/link:inline-block hidden" />
-            </Link>
+            href
+              ?
+              <Link
+                href={href}
+                className="group/link hover:underline text-xs text-secondary inline-flex items-center gap-1"
+              >
+                <span className="line-clamp-1">{href}</span>
+                <ExternalLinkIcon size={12} className="group-hover/link:inline-block hidden" />
+              </Link>
+              : <span className="text-xs text-secondary">-</span>
           }
         </div>
         <span className="text-xs text-secondary">{created_at}</span>
@@ -159,5 +163,5 @@ const KanbanSkeleton = () => {
     </div>
   )
 }
-export { KanbanSkeleton, WorksKanban }
+export { KanbanSkeleton, WorksKanban, KanbanCard }
 
