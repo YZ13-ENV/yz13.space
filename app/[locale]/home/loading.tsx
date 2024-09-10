@@ -31,12 +31,10 @@ const Loading = () => {
             </div>
           </div>
           <div className="w-full flex lg:!flex-row flex-col">
-            <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
+            <div className="w-full lg:!h-full h-fit gap-6  flex flex-col">
               <Skeleton className="rounded-xl w-full h-40" />
               <Skeleton className="rounded-xl w-full h-36" />
               <Skeleton className="rounded-xl w-full h-96" />
-            </div>
-            <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
             </div>
           </div>
         </Content>

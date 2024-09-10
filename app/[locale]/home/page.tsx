@@ -65,7 +65,7 @@ const page = async ({ searchParams }: Props) => {
             <div className="xl:!w-1/3 w-full md:!h-full h-fit space-y-3 ">
               <LocalData className="w-full h-1/2" lang={lang} />
             </div>
-            <div className="xl:!w-2/3 w-full md:!h-full h-fit ">
+            <div className="xl:!w-2/3 w-full md:!h-full h-fit space-y-3">
               <div className="flex items-center h-9 gap-2">
                 <Link
                   href="/journal"
