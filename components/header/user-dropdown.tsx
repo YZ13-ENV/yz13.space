@@ -13,12 +13,13 @@ type DropdownProps = {
   user: UserType
   children?: React.ReactNode
   className?: string
+  asChild?: boolean
 }
-const UserDropdown = async ({ className = "", children, user, lang = "en" }: DropdownProps) => {
+const UserDropdown = async ({ asChild = false, className = "", children, user, lang = "en" }: DropdownProps) => {
   const t = await getI18n()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={cn("rounded-full", className)}>
+      <DropdownMenuTrigger className={cn("rounded-full", className)} asChild={asChild}>
         {children}
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -33,17 +34,6 @@ const UserDropdown = async ({ className = "", children, user, lang = "en" }: Dro
             <User size={16} />
             {t("id.profile.tooltip")}
           </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator className="my-1" />
-        <DropdownMenuItem className="gap-2">
-          <Languages size={16} />
-          {t("settings.language.title")}
-          <LanguageSwitcher lang={lang} className="ml-auto" />
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2">
-          <Package size={16} />
-          {t("settings.version.title")}
-          <span className="text-secondary ml-auto px-2 text-sm">{json.version}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="my-1" />
         <DropdownMenuItem className="text-center gap-2" asChild>

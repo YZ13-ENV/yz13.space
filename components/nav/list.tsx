@@ -20,7 +20,7 @@ const NavList = () => {
           >
             <Link href="/home">
               <HomeIcon size={20} />
-              <span className="lg:!inline hidden">{t("nav.home")}</span>
+              <span className="lg:!inline md:!inline hidden">{t("nav.home")}</span>
             </Link>
           </Button>
         </TooltipTrigger>
@@ -41,7 +41,7 @@ const NavList = () => {
           >
             <Link href="/works">
               <FolderCodeIcon size={20} />
-              <span className="lg:!inline hidden">{t("nav.works")}</span>
+              <span className="lg:!inline md:!inline hidden">{t("nav.works")}</span>
             </Link>
           </Button>
         </TooltipTrigger>
@@ -62,7 +62,7 @@ const NavList = () => {
           >
             <Link href="/journal">
               <StickerIcon size={20} />
-              <span className="lg:!inline hidden">{t("nav.journal")}</span>
+              <span className="lg:!inline md:!inline hidden">{t("nav.journal")}</span>
             </Link>
           </Button>
         </TooltipTrigger>

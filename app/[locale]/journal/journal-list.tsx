@@ -19,7 +19,7 @@ const JournalList = async ({ lang = "en" }: { lang?: Locales }) => {
             return (
               <li
                 key={`${id}/${item.created_at}`}
-                className="min-h-9 group"
+                className="group"
               >
                 <Link
                   href={href}
