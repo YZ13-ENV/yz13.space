@@ -35,15 +35,41 @@ const WorksKanban = async ({ lang = "en" }: KanbanProps) => {
     </div>
   )
 }
+const WorksList = async ({ lang = "en" }: KanbanProps) => {
+  const allWorksResponse = await works()
+  const allWorks = allWorksResponse?.data ?? []
+  const types = uniq(allWorks.map(work => work.type))
+  return (
+    <>
+      {
+        types.map(
+          type =>
+            <KanbanColumn
+              key={`column/${type}`}
+              lang={lang}
+              data={allWorks}
+              filter={{ key: "type", value: type }}
+              title={type}
+              className="w-full bg-yz-neutral-50"
+              colClassName="sm:!grid-cols-2 grid grid-cols-1"
+            />
+        )
+      }
+    </>
+  )
+}
+
 
 type ColumnProps = {
   lang?: Locales
   title?: string
   data?: Work[]
   filter?: { key: keyof Work, value: Work[keyof Work] }
+  colClassName?: string
+  className?: string
 }
 
-const KanbanColumn = ({ title, data = [], filter, lang = "en" }: ColumnProps) => {
+const KanbanColumn = ({ colClassName = "", className = "", title, data = [], filter, lang = "en" }: ColumnProps) => {
   const filtered = data.filter(item => filter ? item[filter.key] === filter.value : item)
   return (
     <div className="flex flex-col gap-3">
@@ -55,7 +81,12 @@ const KanbanColumn = ({ title, data = [], filter, lang = "en" }: ColumnProps) =>
           {filtered.length}
         </span>
       </div>
-      <div className="w-full flex flex-col gap-1">
+      <div
+        className={cn(
+          "w-full flex flex-col gap-1",
+          colClassName
+        )}
+      >
         {
           filtered.map(
             item =>
@@ -63,6 +94,7 @@ const KanbanColumn = ({ title, data = [], filter, lang = "en" }: ColumnProps) =>
                 key={`${item.type}/${item.id}`}
                 work={item}
                 lang={lang}
+                className={className}
               />
           )
         }
@@ -135,6 +167,34 @@ const KanbanCard = ({ className = "", work, lang = "en" }: CardProps) => {
   )
 }
 
+const WorksListSkeleton = () => {
+  return (
+    <>
+      <div className="flex flex-col gap-3">
+        <span className="font-medium inline-flex items-center gap-2 capitalize">
+          [ --- ]
+        </span>
+        <div className="w-full sm:!grid-cols-2 grid grid-cols-1 gap-1">
+          <Skeleton className="w-full h-24 rounded-xl" />
+          <Skeleton className="w-full h-24 rounded-xl" />
+          <Skeleton className="w-full h-24 rounded-xl" />
+        </div>
+      </div>
+      <div className="flex flex-col gap-3">
+        <span className="font-medium inline-flex items-center gap-2 capitalize">
+          [ --- ]
+        </span>
+        <div className="w-full sm:!grid-cols-2 grid grid-cols-1 gap-1">
+          <Skeleton className="w-full h-24 rounded-xl" />
+          <Skeleton className="w-full h-24 rounded-xl" />
+          <Skeleton className="w-full h-24 rounded-xl" />
+          <Skeleton className="w-full h-24 rounded-xl" />
+          <Skeleton className="w-full h-24 rounded-xl" />
+        </div>
+      </div>
+    </>
+  )
+}
 const KanbanSkeleton = () => {
   return (
     <div className="w-full flex items-start gap-3 py-3 px-4 max-w-7xl mx-auto overflow-x-auto no-scrollbar">
@@ -163,5 +223,5 @@ const KanbanSkeleton = () => {
     </div>
   )
 }
-export { KanbanSkeleton, WorksKanban, KanbanCard }
+export { WorksList, WorksListSkeleton, KanbanSkeleton, WorksKanban, KanbanCard }
 

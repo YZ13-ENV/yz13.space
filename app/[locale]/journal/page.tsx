@@ -30,13 +30,15 @@ const page = async ({ }: Props) => {
   const t = await getI18n()
   return (
     <>
-      <header className="flex px-6 mt-6 justify-between items-center">
+      <header className="flex h-12 lg:!px-6 px-3 max-w-7xl mx-auto w-full justify-between items-center">
         <div className="flex items-center gap-2">
-          <LogoHeader className="size-9" />
-          <span className="text-2xl text-foreground font-pixel">YZ13</span>
+          <div className="w-9 flex justify-center items-center">
+            <LogoHeader className="size-7" />
+          </div>
+          <span className="text-xl text-foreground font-pixel">YZ13</span>
         </div>
         <div className="flex items-center h-9">
-          <UserHeader size={36} lang={lang} />
+          <UserHeader size={28} lang={lang} />
         </div>
       </header>
       <Main>
@@ -53,7 +55,7 @@ const page = async ({ }: Props) => {
           </Suspense>
           <section className="w-full h-fit pb-12 pt-6 space-y-6">
             <h2 className="text-2xl font-medium text-foreground/80">{t("journal.section.picked.title")}</h2>
-            <ul className="w-full h-fit grid lg:!grid-cols-4 md:!grid-cols-3 sm:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
+            <ul className="w-full h-fit grid sm:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
               <Suspense fallback={
                 <>
                   <Skeleton className="w-1/2 h-6 rounded-lg" />
@@ -69,7 +71,7 @@ const page = async ({ }: Props) => {
           </section>
           <section className="space-y-6 w-full h-fit min-h-[52.5dvh]">
             <h2 className="text-2xl font-medium text-foreground/80">{t("journal.section.all.title")}</h2>
-            <div className="w-full grid lg:!grid-cols-3 md:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
+            <div className="w-full grid md:!grid-cols-2 grid-cols-1 auto-rows-auto gap-6">
               <JournalLastList lang={lang} />
             </div>
           </section>

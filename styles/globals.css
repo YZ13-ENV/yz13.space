@@ -29,7 +29,7 @@
   :root {}
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   :root {
     --container-nav-sidebar-width: 2.25rem;
   }

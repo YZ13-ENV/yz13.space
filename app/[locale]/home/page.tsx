@@ -45,13 +45,15 @@ const page = async ({ searchParams }: Props) => {
   const t = await getI18n()
   return (
     <>
-      <header className="flex px-6 mt-6 justify-between items-center">
+      <header className="flex h-12 lg:!px-6 px-3 max-w-7xl mx-auto w-full justify-between items-center">
         <div className="flex items-center gap-2">
-          <LogoHeader className="size-9" />
-          <span className="text-2xl text-foreground font-pixel">YZ13</span>
+          <div className="w-9 flex justify-center items-center">
+            <LogoHeader className="size-7" />
+          </div>
+          <span className="text-xl text-foreground font-pixel">YZ13</span>
         </div>
         <div className="flex items-center h-9">
-          <UserHeader size={36} lang={lang} />
+          <UserHeader size={28} lang={lang} />
         </div>
       </header>
       <Main>
@@ -59,7 +61,7 @@ const page = async ({ searchParams }: Props) => {
           <NavList />
         </Aside>
         <Content>
-          <div className="md:!w-1/2 w-full gap-6 xl:!h-64 h-fit flex xl:!flex-row flex-col xl:!items-center items-start">
+          <div className="w-full gap-6 xl:!h-64 h-fit flex xl:!flex-row flex-col xl:!items-center items-start">
             <div className="xl:!w-1/3 w-full md:!h-full h-fit space-y-3 ">
               <LocalData className="w-full h-1/2" lang={lang} />
             </div>
@@ -86,7 +88,7 @@ const page = async ({ searchParams }: Props) => {
             </div>
           </div>
           <div className="w-full flex lg:!flex-row flex-col">
-            <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
+            <div className="w-full lg:!h-full h-fit gap-6  flex flex-col">
               <Suspense fallback={<Skeleton className="rounded-xl w-full h-40" />}>
                 <TeamInfo />
               </Suspense>
@@ -97,10 +99,8 @@ const page = async ({ searchParams }: Props) => {
               <Separator />
               {/* <About /> */}
             </div>
-            <div className="lg:!w-1/2 w-full lg:!h-full h-fit gap-6  flex flex-col">
-            </div>
           </div>
-          <div className="lg:!w-1/2 w-full h-fit gap-3 flex flex-row">
+          <div className="w-full h-fit gap-3 flex flex-row">
             <section className="w-1/2 space-y-3">
               <h2 className="text-base font-medium text-foreground">Frontend</h2>
               <ul>
