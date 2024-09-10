@@ -7,7 +7,7 @@ import { NavList } from "@/components/nav/list"
 const Loading = () => {
   return (
     <>
-      <header className="flex px-6 mt-6 justify-between items-center">
+      <header className="flex h-12 lg:!px-6 px-3 max-w-7xl mx-auto w-full justify-between items-center">
         <Skeleton className="w-28 h-9" />
         <Skeleton className="size-9 rounded-full" />
       </header>

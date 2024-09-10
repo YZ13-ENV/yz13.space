@@ -7,7 +7,9 @@ type MainProps = {
 const Main = ({ children, className = "" }: MainProps) => {
   return (
     <main className={cn(
-      "w-full h-fit pt-24 pl-6 gap-6 pr-10 pb-12 flex",
+      "w-full max-w-7xl mx-auto h-fit flex",
+      "lg:!pl-6 lg:!pr-10 lg:!py-12 lg:!gap-6",
+      "p-3 gap-3",
       className
     )}>
       {children}
