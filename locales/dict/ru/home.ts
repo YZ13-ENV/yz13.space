@@ -14,6 +14,7 @@ export default {
   "home.widget.team.experience.description": "опыта",
   "home.widget.team.projects.metric": " ",
   "home.widget.team.projects.description": "проекты",
+  "home.widget.team.button": "Команда",
   "home.widget.offer.title": "Что я предлагаю",
   "home.widget.offer.description":
     "Я стараюсь гибко подходить к каждому проекту, учитывая его особенности и требования. Есть несколько основных вещей, которые я могу предложить.",

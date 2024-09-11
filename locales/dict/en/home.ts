@@ -13,6 +13,7 @@ export default {
   "home.widget.team.experience.description": "experience",
   "home.widget.team.projects.metric": " ",
   "home.widget.team.projects.description": "projects",
+  "home.widget.team.button": "Team",
   "home.widget.offer.title": "What i offer",
   "home.widget.offer.description":
     "I try to be flexible to each project, based on requirements. There is some basic things that i can provide.",
