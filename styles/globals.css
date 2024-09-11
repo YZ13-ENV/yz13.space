@@ -116,3 +116,33 @@
     display: block;
   }
 }
+
+.list-ul {
+  @apply list-none;
+
+  &>li {
+    @apply relative mb-2 pl-1 text-foreground/75;
+  }
+
+  &>li::before {
+    content: "–";
+    @apply text-secondary -left-3 absolute;
+  }
+
+}
+
+.list-ol {
+  @apply list-decimal;
+
+  &>li {
+    @apply relative mb-2 pl-1 font-light text-foreground;
+  }
+
+  &>li::before {
+    @apply text-secondary -left-3 absolute;
+  }
+}
+
+.list {
+  @apply m-2 ml-4 list-inside
+}
