@@ -3,6 +3,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   presets: [mono],
+  darkMode: ["class"],
   content: ["./components/**/*.{ts,tsx,mdx}", "./app/**/*.{ts,tsx,mdx}"],
   corePlugins: {
     preflight: true,
