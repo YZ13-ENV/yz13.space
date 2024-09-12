@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export default {
-  title: "Home",
+  title: "Changelog",
   alternates: {
-    canonical: "/home",
+    canonical: "/changelog",
   },
   openGraph: {
     type: "website",
@@ -13,7 +13,7 @@ export default {
     url: "https://yz13.space",
     title: "YZ13",
     images: {
-      url: "https://cdn.yz13.space/og/yz13/home.png",
+      url: "https://cdn.yz13.space/og/yz13/default.png",
       width: 1200,
       height: 630,
     },
@@ -26,7 +26,7 @@ export default {
     creator: "@YZ13_DEV",
     creatorId: "1794707806584446976",
     images: {
-      url: "https://cdn.yz13.space/og/yz13/home.png",
+      url: "https://cdn.yz13.space/og/yz13/default.png",
     },
   },
 } satisfies Metadata;

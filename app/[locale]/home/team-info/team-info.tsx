@@ -3,6 +3,9 @@ import { works } from "@/actions/works"
 import { getI18n } from "@/locales/server"
 import dayjs from "dayjs"
 import { TeamAvatars } from "./team-avatars"
+import { Button } from "@yz13/mono/components/button"
+import { ArrowRightIcon } from "lucide-react"
+import Link from "next/link"
 
 const TeamInfo = async () => {
   const now = dayjs()
@@ -21,16 +24,24 @@ const TeamInfo = async () => {
         <div className="w-full h-fit flex flex-col">
           <p className="text-sm text-foreground/60">{t("home.widget.team.text")}</p>
         </div>
-        <div className="w-full flex h-fit flex-row pb-3 gap-3">
-          <TeamAvatars className="w-fit" members={data} max={4} />
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">+{combinedExperience} {t("home.widget.team.experience.metric")}</span>
-            <span className="text-xs capitalize text-secondary">{t("home.widget.team.experience.description")}</span>
+        <div className="w-full flex h-fit items-center justify-between flex-row pb-3 gap-3">
+          <div className="flex items-center gap-3">
+            <TeamAvatars className="w-fit" members={data} max={4} />
+            <div className="flex flex-col gap-1">
+              <span className="text-sm text-foreground">+{combinedExperience} {t("home.widget.team.experience.metric")}</span>
+              <span className="text-xs capitalize text-secondary">{t("home.widget.team.experience.description")}</span>
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="text-sm text-foreground">+{worksCount} {t("home.widget.team.projects.metric")}</span>
+              <span className="text-xs capitalize text-secondary">{t("home.widget.team.projects.description")}</span>
+            </div>
           </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">+{worksCount} {t("home.widget.team.projects.metric")}</span>
-            <span className="text-xs capitalize text-secondary">{t("home.widget.team.projects.description")}</span>
-          </div>
+          <Button variant="secondary" className="gap-1.5" size="sm" asChild>
+            <Link href="/team">
+              {t("home.widget.team.button")}
+              <ArrowRightIcon size={14} />
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

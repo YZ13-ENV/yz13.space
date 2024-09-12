@@ -6,7 +6,16 @@ import { LogoHeader } from "@/components/header/logo"
 import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
+import { dynamicMetadata, Page } from "@/metadata"
 import { Separator } from "@yz13/mono/components/separator"
+import { Metadata } from "next"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = getCurrentLocale()
+  const page: Page = "changelog"
+  const metadata = dynamicMetadata(lang, page)
+  return metadata
+}
 
 const page = async () => {
   const lang = getCurrentLocale()

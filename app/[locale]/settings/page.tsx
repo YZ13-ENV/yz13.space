@@ -1,15 +1,23 @@
 import { Aside } from "@/components/container/aside"
-import { Checkbox } from "@yz13/mono/components/checkbox"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
 import { LogoHeader } from "@/components/header/logo"
 import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
+import { dynamicMetadata, Page } from "@/metadata"
+import { Checkbox } from "@yz13/mono/components/checkbox"
+import { Metadata } from "next"
+import { cn } from "yz13/cn"
 import { LanguageSettings } from "./language-settings"
 import { Info, Properties, Wrapper } from "./settings"
-import { cn } from "yz13/cn"
 
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = getCurrentLocale()
+  const page: Page = "settings"
+  const metadata = dynamicMetadata(lang, page)
+  return metadata
+}
 
 const page = async () => {
   const lang = getCurrentLocale()

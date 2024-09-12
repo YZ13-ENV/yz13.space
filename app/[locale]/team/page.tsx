@@ -7,8 +7,17 @@ import { LogoHeader } from "@/components/header/logo"
 import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
+import { dynamicMetadata, Page } from "@/metadata"
+import { Metadata } from "next"
 import Link from "next/link"
 import { cn } from "yz13/cn"
+
+export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
+  const lang = getCurrentLocale()
+  const page: Page = "team"
+  const metadata = dynamicMetadata(lang, page)
+  return metadata
+}
 
 type PageProps = {
   searchParams: {

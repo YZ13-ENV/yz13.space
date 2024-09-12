@@ -4,18 +4,15 @@ export default function (): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: [
-        "/journal",
-        "/journal?lang=ru",
-        "/journal?lang=en",
-        "/home",
-        "/home?lang=ru",
-        "/home?lang=en",
-        "/works",
-        "/works?lang=ru",
-        "/works?lang=en",
+      allow: ["/journal", "/home", "/works"],
+      disallow: [
+        "/",
+        "/settings",
+        "/changelog",
+        "/team",
+        "/services",
+        "/threads",
       ],
-      disallow: ["/", "/settings", "/services", "/threads"],
     },
     sitemap: "https://www.yz13.space/sitemap.xml",
   };

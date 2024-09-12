@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-export const journal: Metadata = {
+export default {
   title: "Journal",
   alternates: {
     canonical: "/journal",
@@ -29,4 +29,4 @@ export const journal: Metadata = {
       url: "https://cdn.yz13.space/og/yz13/journal.png",
     },
   },
-};
+} satisfies Metadata;
