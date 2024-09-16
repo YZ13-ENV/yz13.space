@@ -30,6 +30,8 @@ import { TeamInfo } from "./team-info/team-info"
 import { Input } from "@yz13/mono/components/input"
 import { SearchIcon } from "lucide-react"
 import { Button } from "@yz13/mono/components/button"
+import { logs } from "@/changelog/log-list"
+import { LastChangelog } from "./last-changelog"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -76,8 +78,9 @@ const page = async ({ searchParams }: Props) => {
               </div>
               */}
             </div>
-            <div className="flex items-center gap-2 px-2">
+            <div className="flex items-center justify-between gap-2 px-2">
               <LocalData lang={lang} />
+              <LastChangelog lang={lang} />
             </div>
           </div>
           <div className="w-full gap-6 xl:!h-64 h-fit flex xl:!flex-row flex-col xl:!items-center items-start">
@@ -117,7 +120,7 @@ const page = async ({ searchParams }: Props) => {
           <div className="flex flex-col gap-2">
             <div className="flex items-center h-9 gap-2">
               <Link
-                href="/journal"
+                href="/inspiration"
                 className="text-lg font-medium text-secondary hover:text-foreground transition-colors"
               >
                 Inspiration
