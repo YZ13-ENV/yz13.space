@@ -3,7 +3,7 @@ import { useCurrentLocale, useI18n } from "@/locales/client"
 import { Button } from "@yz13/mono/components/button"
 import { Separator } from "@yz13/mono/components/separator"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@yz13/mono/components/tooltip"
-import { BookUserIcon, Contact2Icon, ContactIcon, FolderCodeIcon, HomeIcon, NotebookTabsIcon, SettingsIcon, StickerIcon } from "lucide-react"
+import { BookUserIcon, FolderCodeIcon, HomeIcon, NotebookTabsIcon, SettingsIcon, SparklesIcon, StickerIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import json from "@/package.json"
@@ -18,6 +18,7 @@ const NavList = () => {
       <NavItem selected={pathname === "/home"} path="/home" label={t("nav.home")}><HomeIcon size={20} /></NavItem>
       <NavItem selected={pathname === "/works"} path="/works" label={t("nav.works")}><FolderCodeIcon size={20} /></NavItem>
       <NavItem selected={pathname === "/journal"} path="/journal" label={t("nav.journal")}><StickerIcon size={20} /></NavItem>
+      <NavItem selected={pathname === "/inspiration"} path="/inspiration" label={t("nav.inspiration")}><SparklesIcon size={20} /></NavItem>
       <Separator />
       <NavItem selected={pathname === "/team"} path="/team" label={t("nav.team")}><BookUserIcon size={20} /></NavItem>
       <NavItem selected={pathname === "/changelog"} path="/changelog" label={t("nav.changelog")}><NotebookTabsIcon size={20} /></NavItem>

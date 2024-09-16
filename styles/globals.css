@@ -6,7 +6,6 @@
 @tailwind utilities;
 
 :root {
-  --yz13-background: var(--yz13-neutral-100);
   --activity-lvl-0-bg: hsl(var(--yz13-background));
   --activity-lvl-0-border: hsl(var(--yz13-neutral-300));
   --activity-lvl-1-bg: hsl(var(--yz13-neutral-200));

@@ -36,12 +36,14 @@ const TeamInfo = async () => {
               <span className="text-xs capitalize text-secondary">{t("home.widget.team.projects.description")}</span>
             </div>
           </div>
+          {/*
           <Button variant="secondary" className="gap-1.5" size="sm" asChild>
             <Link href="/team">
               {t("home.widget.team.button")}
               <ArrowRightIcon size={14} />
             </Link>
           </Button>
+          */}
         </div>
       </div>
     </div>

@@ -8,9 +8,14 @@ import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { dynamicMetadata, Page } from "@/metadata"
+import { Skeleton } from "@yz13/mono/components/skeleton"
 import { Metadata } from "next"
 import Link from "next/link"
+import { Suspense } from "react"
 import { cn } from "yz13/cn"
+import { TeamInfo } from "../home/team-info/team-info"
+import { Separator } from "@yz13/mono/components/separator"
+import { UserActivity } from "../home/activity/activity-widget"
 
 export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -49,7 +54,21 @@ const page = async ({ searchParams }: PageProps) => {
           <NavList />
         </Aside>
         <Content className="space-y-4">
+
           <h1 className="text-4xl font-medium">{t("team.title")}</h1>
+          <div className="w-full flex lg:!flex-row flex-col">
+            <div className="w-full lg:!h-full h-fit gap-6  flex flex-col">
+              <Suspense fallback={<Skeleton className="rounded-xl w-full h-40" />}>
+                <TeamInfo />
+              </Suspense>
+              <Separator />
+              <Suspense fallback={<Skeleton className="rounded-xl w-full h-36" />}>
+                <UserActivity uid="d5f98156-1776-42da-8f20-686d6a1ae2a8" lang={lang} />
+              </Suspense>
+              <Separator />
+            </div>
+          </div>
+
           <div className="w-full flex flex-col relative">
             <div className="w-full h-fit grid md:!grid-cols-2 auto-rows-auto gap-4">
               {
