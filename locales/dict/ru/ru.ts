@@ -4,6 +4,7 @@ import id from "./dock.id";
 import dock_settings from "./dock.settings";
 import experience from "./experience";
 import home from "./home";
+import inspiraiton from "./inspiration";
 import journal from "./journal";
 import login from "./login";
 import nav from "./nav";
@@ -24,5 +25,6 @@ export default {
   ...weekday,
   ...settings,
   ...changelog,
-  ...team
+  ...team,
+  ...inspiraiton
 } as const;

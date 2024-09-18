@@ -3,6 +3,13 @@ import { Changelog } from "../types";
 
 export default [
   {
+    version: "1.2.4",
+    title: "Update 'Inspiration'",
+    description: "New page'Inspiration', design update for home page",
+    published_at: dayjs("2024-09-19").toISOString(),
+    lang: ["en"]
+  },
+  {
     version: "1.2.3",
     title: "Minor update",
     description: "New button with link to team page, added on home page",

@@ -4,6 +4,7 @@ import { Aside } from "@/components/container/aside"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
 import { DynamicImage } from "@/components/dynamic-image"
+import { Header } from "@/components/header/header"
 import { LogoHeader } from "@/components/header/logo"
 import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
@@ -50,15 +51,7 @@ const page = async ({ params, searchParams }: Props) => {
   const { content } = await compile(source)
   return (
     <>
-      <header className="flex px-6 mt-6 justify-between items-center">
-        <div className="flex items-center gap-2">
-          <LogoHeader className="size-9" />
-          <span className="text-2xl text-foreground font-pixel">YZ13</span>
-        </div>
-        <div className="flex items-center h-9">
-          <UserHeader size={36} lang={lang} />
-        </div>
-      </header>
+      <Header lang={lang} />
       <Main>
         <Aside>
           <NavList />
