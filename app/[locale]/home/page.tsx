@@ -11,7 +11,7 @@ import { Suspense } from "react"
 import { JournalLastFive } from "../journal/journal-last-five"
 import { LocalData } from "./local-data"
 import { LastChangelog } from "./last-changelog"
-import { InspirationGrid } from "../inspiration/inspiration-grid"
+import { InspirationGrid, InspirationGridSkeleton } from "../inspiration/inspiration-grid"
 import { TeamExperience } from "./team-info/team-experience"
 import { Header } from "@/components/header/header"
 import { Searchbar } from "../inspiration/search-bar"
@@ -89,7 +89,9 @@ const page = async ({ searchParams }: Props) => {
                 {t("inspiration.title")}
               </Link>
             </div>
-            <InspirationGrid lang={lang} max={9} />
+            <Suspense fallback={<InspirationGridSkeleton />}>
+              <InspirationGrid lang={lang} max={9} />
+            </Suspense>
           </div>
         </Content>
       </Main>

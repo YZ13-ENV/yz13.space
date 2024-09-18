@@ -3,9 +3,10 @@ import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
 import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
-import { InspirationGrid } from "./inspiration-grid"
+import { InspirationGrid, InspirationGridSkeleton } from "./inspiration-grid"
 import { Header } from "@/components/header/header"
 import { Searchbar } from "./search-bar"
+import { Suspense } from "react"
 
 
 const page = async () => {
@@ -25,7 +26,9 @@ const page = async () => {
             <div className="flex items-center justify-between gap-2 px-2">
             </div>
           </div>
-          <InspirationGrid lang={lang} />
+          <Suspense fallback={<InspirationGridSkeleton />}>
+            <InspirationGrid lang={lang} />
+          </Suspense>
         </Content>
       </Main>
     </>
