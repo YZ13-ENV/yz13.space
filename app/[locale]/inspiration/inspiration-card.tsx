@@ -22,7 +22,11 @@ const InspirationCard = ({ inspiration }: CardProps) => {
       <div className="w-full relative rounded-lg border aspect-video">
         <Image
           className="rounded-lg object-cover"
-          src={hasPreview && inspiration.previewPath ? getStorageItem("inspiration", inspiration?.previewPath) : inspiration.thumbnail}
+          src={
+            hasPreview && inspiration.previewPath
+              ? getStorageItem("inspiration", inspiration.previewPath)
+              : inspiration.thumbnail as string
+          }
           fill
           alt="cover"
         />

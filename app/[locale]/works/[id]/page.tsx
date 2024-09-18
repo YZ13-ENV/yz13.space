@@ -18,7 +18,6 @@ const page = async ({ params }: Props) => {
   const created_at = dayjs(data?.created_at).format("DD MMMM, YYYY")
   const isPublic = data?.public ?? false
   const link = data?.link
-  const noThumbnail = !data?.thumbnail
   return (
     <>
       <main className="space-y-6 w-full pt-36 px-6 pb-24">
@@ -41,10 +40,6 @@ const page = async ({ params }: Props) => {
             <time className="text-base text-secondary">{created_at}</time>
           </div>
         </div>
-        {
-          noThumbnail &&
-          <div className="w-full aspect-video"></div>
-        }
         <div className="max-w-lg w-full mx-auto space-y-2">
           <p>This is a work</p>
         </div>
