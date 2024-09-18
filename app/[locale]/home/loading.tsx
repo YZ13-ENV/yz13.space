@@ -16,25 +16,67 @@ const Loading = () => {
           <NavList />
         </Aside>
         <Content className="flex flex-col">
-          <div className="w-full gap-6 md:!h-64 h-fit flex md:!flex-row flex-col md:!items-center items-start">
-            <div className="lg:!w-1/4 md:!w-1/3 w-full md:!h-full h-fit space-y-3">
-              <Skeleton className="w-2/3 h-12 rounded-lg" />
+          <Skeleton className="w-full h-10 rounded-lg" />
+          <div className="w-full gap-6 h-fit flex md:!flex-row flex-col items-start">
+            <div className="xl:!w-1/2 w-full md:!h-full h-fit space-y-3">
+              <Skeleton className="w-2/3 h-7 rounded-lg" />
               <Skeleton className="w-1/3 h-6 rounded-lg" />
             </div>
-            <div className="lg:!w-3/4 md:!w-2/3 w-full md:!h-full h-fit space-y-3">
+            <div className="xl:!w-1/2 w-full md:!h-full h-fit space-y-3">
+              <Skeleton className="w-2/3 h-7 rounded-lg" />
               <Skeleton className="w-1/3 h-6 rounded-lg" />
-              <Skeleton className="w-1/2 h-6 rounded-lg" />
-              <Skeleton className="w-1/2 h-6 rounded-lg" />
-              <Skeleton className="w-1/2 h-6 rounded-lg" />
               <Skeleton className="w-1/2 h-6 rounded-lg" />
               <Skeleton className="w-1/2 h-6 rounded-lg" />
             </div>
           </div>
-          <div className="w-full flex lg:!flex-row flex-col">
-            <div className="w-full lg:!h-full h-fit gap-6  flex flex-col">
-              <Skeleton className="rounded-xl w-full h-40" />
-              <Skeleton className="rounded-xl w-full h-36" />
-              <Skeleton className="rounded-xl w-full h-96" />
+          <div className="flex flex-col gap-2">
+            <Skeleton className="h-7 w-1/4" />
+            <div className="w-full grid gap-4 lg:!grid-cols-3 sm:!grid-cols-2 grid-cols-1 auto-rows-auto">
+
+              <div className="flex flex-col gap-1 relative group/inspiration">
+                <Skeleton className="w-full rounded-lg aspect-video" />
+                <div className="flex gap-1 flex-col">
+                  <Skeleton className="w-1/2 h-4" />
+                  <Skeleton className="w-1/3 h-4" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 relative group/inspiration">
+                <Skeleton className="w-full rounded-lg aspect-video" />
+                <div className="flex gap-1 flex-col">
+                  <Skeleton className="w-1/2 h-4" />
+                  <Skeleton className="w-1/3 h-4" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 relative group/inspiration">
+                <Skeleton className="w-full rounded-lg aspect-video" />
+                <div className="flex gap-1 flex-col">
+                  <Skeleton className="w-1/2 h-4" />
+                  <Skeleton className="w-1/3 h-4" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 relative group/inspiration">
+                <Skeleton className="w-full rounded-lg aspect-video" />
+                <div className="flex gap-1 flex-col">
+                  <Skeleton className="w-1/2 h-4" />
+                  <Skeleton className="w-1/3 h-4" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 relative group/inspiration">
+                <Skeleton className="w-full rounded-lg aspect-video" />
+                <div className="flex gap-1 flex-col">
+                  <Skeleton className="w-1/2 h-4" />
+                  <Skeleton className="w-1/3 h-4" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 relative group/inspiration">
+                <Skeleton className="w-full rounded-lg aspect-video" />
+                <div className="flex gap-1 flex-col">
+                  <Skeleton className="w-1/2 h-4" />
+                  <Skeleton className="w-1/3 h-4" />
+                </div>
+              </div>
+
+
             </div>
           </div>
         </Content>

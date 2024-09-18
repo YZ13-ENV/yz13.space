@@ -3,8 +3,6 @@ import { UserAvatar } from "@/components/avatar-group/user-avatar"
 import { Aside } from "@/components/container/aside"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
-import { LogoHeader } from "@/components/header/logo"
-import { UserHeader } from "@/components/header/user"
 import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
 import { dynamicMetadata, Page } from "@/metadata"
@@ -16,6 +14,7 @@ import { cn } from "yz13/cn"
 import { TeamInfo } from "../home/team-info/team-info"
 import { Separator } from "@yz13/mono/components/separator"
 import { UserActivity } from "../home/activity/activity-widget"
+import { Header } from "@/components/header/header"
 
 export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -38,17 +37,7 @@ const page = async ({ searchParams }: PageProps) => {
   const data = all?.data
   return (
     <>
-      <header className="flex h-12 lg:!px-6 px-3 max-w-7xl mx-auto w-full justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-9 flex justify-center items-center">
-            <LogoHeader className="size-7" />
-          </div>
-          <span className="text-xl text-foreground font-pixel">YZ13</span>
-        </div>
-        <div className="flex items-center h-9">
-          <UserHeader size={28} lang={lang} />
-        </div>
-      </header>
+      <Header lang={lang} />
       <Main>
         <Aside>
           <NavList />

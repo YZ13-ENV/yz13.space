@@ -1,12 +1,10 @@
 import { Aside } from "@/components/container/aside"
 import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
+import { Header } from "@/components/header/header"
 import { NavList } from "@/components/nav/list"
 import { getCurrentLocale, getI18n } from "@/locales/server"
-import { InspirationGrid } from "./inspiration-grid"
-import { Header } from "@/components/header/header"
-import { Searchbar } from "./search-bar"
-
+import { Searchbar } from "../search-bar"
 
 const page = async () => {
   const lang = getCurrentLocale()
@@ -18,14 +16,13 @@ const page = async () => {
         <Aside>
           <NavList />
         </Aside>
-        <Content className="space-y-4">
-          <h1 className="text-4xl font-medium">{t("inspiration.title")}</h1>
+        <Content>
           <div className="flex flex-col w-full gap-2">
             <Searchbar />
-            <div className="flex items-center justify-between gap-2 px-2">
-            </div>
           </div>
-          <InspirationGrid lang={lang} />
+          <div className="w-full aspect-video flex items-center justify-center">
+            <span className="text-xs text-secondary">{t("inspiration.search.empty")}</span>
+          </div>
         </Content>
       </Main>
     </>
