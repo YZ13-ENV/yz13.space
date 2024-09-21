@@ -34,11 +34,11 @@ const LocalData = ({ className = "", lang = "en", children }: LocalDataProps) =>
   }, [typeof document])
   return (
     <div className={cn("w-full flex items-center flex-row gap-2", className)}>
-      <time className="text-sm w-[61px] text-center">{time}{ready && <span className="text-secondary">:{seconds}</span>}</time>
+      <time className="text-sm w-[32px] sm:!w-[61px] text-center">
+        {time}{ready && <span className="sm:!inline hidden text-secondary">:{seconds}</span>}
+      </time>
       <Separator orientation="vertical" className="h-3" />
       <time className="text-foreground/60 shrink-0 capitalize text-sm">{date}</time>
-      <Separator orientation="vertical" className="h-3" />
-      <span className="text-foreground/60 text-sm uppercase">{lang}</span>
       {children}
     </div>
   )

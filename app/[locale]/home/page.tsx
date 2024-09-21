@@ -15,6 +15,7 @@ import { InspirationGrid, InspirationGridSkeleton } from "../inspiration/inspira
 import { TeamExperience } from "./team-info/team-experience"
 import { Header } from "@/components/header/header"
 import { Searchbar } from "../inspiration/search-bar"
+import { Button } from "@yz13/mono/components/button"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -46,7 +47,7 @@ const page = async ({ searchParams }: Props) => {
               <LastChangelog lang={lang} />
             </div>
           </div>
-          <div className="w-full gap-6 h-fit flex sm:!flex-row flex-col sm:!items-center items-start">
+          <div className="w-full gap-6 h-fit flex sm:!flex-row flex-col items-start">
             <div className="xl:!w-1/2 w-full sm:!h-full h-fit space-y-3">
               <div className="flex items-center h-9 gap-2">
                 <Link
@@ -90,8 +91,15 @@ const page = async ({ searchParams }: Props) => {
               </Link>
             </div>
             <Suspense fallback={<InspirationGridSkeleton />}>
-              <InspirationGrid lang={lang} max={9} />
+              <InspirationGrid lang={lang} max={12} />
             </Suspense>
+            <div className="flex justify-center items-center mt-6">
+              <Button size="sm" variant="ghost" asChild>
+                <Link href="/inspiration">
+                  {t("inspiration.action.more")}
+                </Link>
+              </Button>
+            </div>
           </div>
         </Content>
       </Main>

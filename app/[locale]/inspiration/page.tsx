@@ -27,7 +27,7 @@ const page = async () => {
             </div>
           </div>
           <Suspense fallback={<InspirationGridSkeleton />}>
-            <InspirationGrid lang={lang} />
+            <InspirationGrid lang={lang} loader offset={12} />
           </Suspense>
         </Content>
       </Main>
