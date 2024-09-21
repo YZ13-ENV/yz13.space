@@ -1,3 +1,4 @@
+"use server"
 import { Locales } from "@/metadata/locales/server";
 import { Tables } from "yz13/supabase/database";
 

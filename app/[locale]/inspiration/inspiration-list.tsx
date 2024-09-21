@@ -24,9 +24,10 @@ const InspirationList = ({ offset: providedOffset = 0, lang = "en", data = [], l
     setLoading(true)
     try {
       const items = await inspirations(lang, offset)
-      const isEmpty = items.length === 0
+      console.log(items)
+      const isEmpty = items ? items.length === 0 : true
       if (!isEmpty) {
-        setList([...list, items])
+        setList([...list, ...items])
         setOffset(prev => prev + 12)
       } else setEnd(true)
       setLoading(false)

@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: [ "next-mdx-remote", "yz13", "@yz13/mono" ],
-  pageExtensions: [ "js", "jsx", "md", "mdx", "ts", "tsx" ],
+  transpilePackages: ["next-mdx-remote", "yz13", "@yz13/mono"],
   compress: true,
   cleanDistDir: true,
   experimental: {
-    optimizePackageImports: [ "react", "dayjs", "yz13", "@yz13/mono" ],
+    preloadEntriesOnStart: true,
+    optimizePackageImports: ["dayjs", "yz13", "@yz13/mono"],
     appDocumentPreloading: true,
     useEarlyImport: true,
     optimizeCss: true,

@@ -16,7 +16,13 @@ const Loading = () => {
           <NavList />
         </Aside>
         <Content className="flex flex-col">
-          <Skeleton className="w-full h-10 rounded-lg" />
+          <div className="flex flex-col w-full gap-2">
+            <Skeleton className="w-full h-10 rounded-lg" />
+            <div className="flex items-center justify-between gap-2 px-2">
+              <Skeleton className="h-5 w-1/3" />
+              <Skeleton className="h-5 w-1/3" />
+            </div>
+          </div>
           <div className="w-full gap-6 h-fit flex md:!flex-row flex-col items-start">
             <div className="xl:!w-1/2 w-full md:!h-full h-fit space-y-3">
               <Skeleton className="w-2/3 h-7 rounded-lg" />

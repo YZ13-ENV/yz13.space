@@ -9,7 +9,7 @@ const InspirationGrid = async ({ lang = "en", loader = false, offset = 0 }: { of
   const list = await inspirations(lang)
   return (
     <div className="w-full grid gap-4 lg:!grid-cols-3 sm:!grid-cols-2 grid-cols-1 auto-rows-auto">
-      <InspirationList data={list} loader={loader} />
+      <InspirationList data={list} loader={loader} offset={offset} />
     </div>
   )
 }
