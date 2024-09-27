@@ -3,6 +3,7 @@ import { Content } from "@/components/container/content"
 import { Main } from "@/components/container/main"
 import { Skeleton } from "@yz13/mono/components/skeleton"
 import { NavList } from "@/components/nav/list"
+import { WorksSkeleton } from "./works"
 
 const Loading = () => {
   return (
@@ -35,6 +36,12 @@ const Loading = () => {
               <Skeleton className="w-1/2 h-6 rounded-lg" />
             </div>
           </div>
+
+          <div className="flex flex-col gap-2">
+            <Skeleton className="h-7 w-1/4" />
+            <WorksSkeleton />
+          </div>
+
           <div className="flex flex-col gap-2">
             <Skeleton className="h-7 w-1/4" />
             <div className="w-full grid gap-4 lg:!grid-cols-3 sm:!grid-cols-2 grid-cols-1 auto-rows-auto">
