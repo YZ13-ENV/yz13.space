@@ -15,9 +15,7 @@ import { InspirationGrid, InspirationGridSkeleton } from "../inspiration/inspira
 import { TeamExperience } from "./team-info/team-experience"
 import { Header } from "@/components/header/header"
 import { Searchbar } from "../inspiration/search-bar"
-import { Button } from "@yz13/mono/components/button"
-import { GlobeIcon, PackageIcon, PanelTopIcon, SquareTerminalIcon } from "lucide-react"
-import { cn } from "yz13/cn"
+import { Works, WorksSkeleton } from "./works"
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const lang = getCurrentLocale()
@@ -92,50 +90,9 @@ const page = async ({ searchParams }: Props) => {
                 {t("works.title")}
               </Link>
             </div>
-            <div className="w-full grid sm:!grid-cols-3 grid-cols-1 auto-rows-auto gap-3">
-              <div
-                className={cn(
-                  "aspect-video relative group w-full h-full flex items-center justify-center rounded-xl border overflow-hidden",
-                  "hover:border-foreground hover:bg-yz-neutral-100",
-                  "cursor-pointer transition-colors *:transition-colors"
-                )}
-              >
-                <span className="capitalize text-base text-secondary group-hover:text-foreground absolute top-2.5 left-2.5">{t("works.work.type.website")}</span>
-                <PanelTopIcon
-                  strokeWidth={0.25}
-                  fill="hsl(var(--yz13-background)"
-                  className="text-yz-neutral-200 w-full h-full aspect-square absolute -right-1/3 top-1/4 group-hover:text-foreground"
-                />
-              </div>
-              <div
-                className={cn(
-                  "aspect-video relative group w-full h-full flex items-center justify-center rounded-xl border overflow-hidden",
-                  "hover:border-foreground hover:bg-yz-neutral-100",
-                  "cursor-pointer transition-colors *:transition-colors"
-                )}
-              >
-                <span className="capitalize text-base text-secondary group-hover:text-foreground absolute top-2.5 left-2.5">{t("works.work.type.package")}</span>
-                <PackageIcon
-                  strokeWidth={0.25}
-                  fill="hsl(var(--yz13-background)"
-                  className="text-yz-neutral-200 w-full h-full aspect-square absolute -right-1/3 top-1/4 group-hover:text-foreground"
-                />
-              </div>
-              <div
-                className={cn(
-                  "aspect-video relative group w-full h-full flex items-center justify-center rounded-xl border overflow-hidden",
-                  "hover:border-foreground hover:bg-yz-neutral-100",
-                  "cursor-pointer transition-colors *:transition-colors"
-                )}
-              >
-                <span className="capitalize text-base text-secondary group-hover:text-foreground absolute top-2.5 left-2.5">{t("works.work.type.service")}</span>
-                <GlobeIcon
-                  strokeWidth={0.25}
-                  fill="hsl(var(--yz13-background)"
-                  className="text-yz-neutral-200 w-full h-full aspect-square absolute -right-1/3 top-1/4 group-hover:text-foreground"
-                />
-              </div>
-            </div>
+            <Suspense fallback={<WorksSkeleton />}>
+              <Works lang={lang} />
+            </Suspense>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center h-9 gap-2">
