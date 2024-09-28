@@ -13,7 +13,7 @@ const TeamExperience = async ({ lang = 'en' }: { lang?: Locales }) => {
   const membersExperience = data ? data?.map(member => (year + 1) - (member["experience-from"] ?? 2024)) : []
   const combinedExperience = membersExperience.length ? membersExperience.reduce((a, b) => a + b) : 0
   const allWorks = await works()
-  const worksCount = allWorks?.data ? allWorks?.data.length : 0
+  const worksCount = allWorks ? allWorks.length : 0
   return (
     <div className="flex items-center gap-3">
       <TeamAvatars className="w-fit" members={data} max={4} />

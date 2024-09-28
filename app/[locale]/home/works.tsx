@@ -7,9 +7,10 @@ import { Skeleton } from "@yz13/mono/components/skeleton";
 const Works = async ({ lang = "en" }: { lang?: Locales }) => {
   const t = await getI18n()
   const allWorksResponse = await works()
-  const websites = (allWorksResponse?.data ?? []).filter(work => work.type === "website")
-  const packages = (allWorksResponse?.data ?? []).filter(work => work.type === "package")
-  const services = (allWorksResponse?.data ?? []).filter(work => work.type === "service")
+  const allWorks = allWorksResponse ?? []
+  const websites = (allWorks ?? []).filter(work => work.type === "website")
+  const packages = (allWorks ?? []).filter(work => work.type === "package")
+  const services = (allWorks ?? []).filter(work => work.type === "service")
   const websitesCount = websites.length
   const packagesCount = packages.length
   const servicesCount = services.length

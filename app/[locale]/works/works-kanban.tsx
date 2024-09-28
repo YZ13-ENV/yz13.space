@@ -16,7 +16,7 @@ type KanbanProps = {
 
 const WorksKanban = async ({ lang = "en" }: KanbanProps) => {
   const allWorksResponse = await works()
-  const allWorks = allWorksResponse?.data ?? []
+  const allWorks = allWorksResponse ?? []
   const types = uniq(allWorks.map(work => work.type))
   return (
     <div className="w-full flex items-start gap-3 py-3 px-1 overflow-x-auto no-scrollbar">
@@ -37,7 +37,7 @@ const WorksKanban = async ({ lang = "en" }: KanbanProps) => {
 }
 const WorksList = async ({ lang = "en" }: KanbanProps) => {
   const allWorksResponse = await works()
-  const allWorks = allWorksResponse?.data ?? []
+  const allWorks = allWorksResponse ?? []
   const types = uniq(allWorks.map(work => work.type))
   return (
     <>
