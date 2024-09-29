@@ -3,13 +3,13 @@ import { Button } from "@yz13/mono/components/button"
 import Link from "next/link"
 import { EmailForm } from "./email-form"
 
-type Props = {
+type PageProps = {
   searchParams: {
     lang?: string
     continue?: string
   }
 }
-const page = async ({ searchParams }: Props) => {
+const page = async ({ searchParams }: PageProps) => {
   const continueLink = searchParams.continue
   const backLink = "/login" + (continueLink ? `?continue=${continueLink}` : "")
   return (

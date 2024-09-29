@@ -15,8 +15,7 @@ const nextConfig = {
     parallelServerCompiles: true,
     parallelServerBuildTraces: true,
     serverMinification: true,
-    cssChunking: "loose",
-    swcMinify: true,
+    cssChunking: "loose"
   },
   images: {
     remotePatterns: [
