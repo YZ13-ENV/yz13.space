@@ -8,7 +8,7 @@ const page = () => {
       <PuzzleCanvas />
 
       <div className="max-w-xs w-full absolute bottom-4 left-4">
-        <Input placeholder="Enter message" />
+        <Input placeholder="Enter message" className="bg-background" />
       </div>
     </div>
   )
