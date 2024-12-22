@@ -1,1 +1,1 @@
-just app, where i show my projects
+in 2025 gonna be deprecated
