@@ -15,6 +15,7 @@ import localFont from "next/font/local";
 import { ReactNode, Suspense } from "react";
 import { cn } from "yz13/cn";
 import { Body } from "../_components/body";
+import {redirect} from "next/navigation";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -71,6 +72,7 @@ type LayoutProps = Readonly<{
 export default function RootLayout({ children, params }: LayoutProps) {
   const locale = params.locale;
   const isEN = locale === "en";
+  redirect("https://yz13.ru")
   return (
     <html
       lang={locale}
